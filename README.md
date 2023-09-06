@@ -1,14 +1,14 @@
-Praca Inżynierska
+**Praca Inżynierska**
 
-Tytuł: Opracowanie i implementacja wortalu internetowego
+**Tytuł:** Opracowanie i implementacja wortalu internetowego
 
-Promotor: dr inż. Marcin Sobota
+**Promotor:** dr inż. Marcin Sobota
 
-Autorzy: Radosław Terelak, Jakub Nowak, Kamil Plewnia
+**Autorzy:** Radosław Terelak, Jakub Nowak, Kamil Plewnia
 
 
-Warstwa Frontend to Angular + TypeScript
-Warstwa Backend to ..
+Warstwa Frontend to Angular + TypeScript  
+Warstwa Backend to ..  
 Baza danych to ..
 
 
