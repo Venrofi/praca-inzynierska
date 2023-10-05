@@ -9,3 +9,11 @@ $prefix: "mo-";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+// General
+@import "assets/styles/variables";
+@import "assets/styles/common";
+
+// Components
+@import "assets/styles/components/header.scss";
+@import "assets/styles/components/homepage.scss";
