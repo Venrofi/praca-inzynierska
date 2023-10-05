@@ -1,39 +1,44 @@
-<mat-toolbar class="d-flex justify-content-between py-5" *ngIf="isWideScreen; else mobileContent">
-  <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
+<mat-toolbar class="py-5 d-flex justify-content-center" *ngIf="isWideScreen; else mobileContent">
+  <div class="d-flex justify-content-between container-max-width">
+    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
 
-  <mat-form-field class="mt-4 w-50">
-    <mat-label>Search Community</mat-label>
-    <input matInput type="text">
-    <button matSuffix mat-icon-button aria-label="Clear">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <section class="d-flex justify-content-end align-items-center">
-    <button mat-icon-button aria-label="icon-button which opens new post creation">
-      <mat-icon>forum</mat-icon>
-    </button>
-
-    <button mat-flat-button color="primary">Login / Join</button>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
+    <mat-form-field class="mt-4 w-50">
+      <mat-label>Search Community</mat-label>
+      <input matInput type="text">
+      <button matSuffix mat-icon-button aria-label="Clear">
+        <mat-icon>search</mat-icon>
       </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
+    </mat-form-field>
+
+    <section class="d-flex justify-content-end align-items-center">
+      <button mat-icon-button aria-label="icon-button which opens new post creation">
+        <mat-icon>forum</mat-icon>
       </button>
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
+
+      <button mat-flat-button color="primary">
+        <mat-icon>person</mat-icon>
+        Login / Join
       </button>
-    </mat-menu>
-  </section>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+    </section>
+  </div>
 </mat-toolbar>
 
 <ng-template #mobileContent>
@@ -45,7 +50,10 @@
         <mat-icon>forum</mat-icon>
       </button>
 
-      <button mat-flat-button color="primary">Login / Join</button>
+      <button mat-flat-button color="primary">
+        <mat-icon>person</mat-icon>
+        Login / Join
+      </button>
 
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
