@@ -1,0 +1,14 @@
+app-homepage {
+  .homepage-wrapper {
+    background-color: chocolate;
+    height: 100%;
+  }
+  .content-toggle-group {
+    min-width: 300px;
+  }
+
+  .content-wrapper {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+}

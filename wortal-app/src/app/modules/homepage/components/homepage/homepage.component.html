@@ -1,1 +1,103 @@
-<h1>Welcome to Homepage!</h1>
+<div class="homepage-wrapper d-flex justify-content-center">
+  <div class="container-max-width d-flex justify-content-start flex-column p-3">
+
+    <div class="d-flex justify-content-between" [ngClass]="isWideScreen ? 'flex-row' : 'flex-column'">
+      <article class="content-wrapper">
+        <h1>Polecane dla Ciebie</h1>
+        <mat-tab-group class="user-select-none" animationDuration="1000ms">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              {{isWideScreen ? 'Dyskusje' : ''}}
+              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Dyskusje'}}">3p</mat-icon>
+            </ng-template>
+
+            Tabela postów 🤠
+            <!-- <mat-spinner></mat-spinner> -->
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              {{isWideScreen ? 'Radar Premier' : ''}}
+              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Radar Premier'}}">radar</mat-icon>
+            </ng-template>
+
+            Radar premier 🥵
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              {{isWideScreen ? 'Wydarzenia' : ''}}
+              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Wydarzenia'}}">event</mat-icon>
+            </ng-template>
+
+            Wydarzenia 😎
+          </mat-tab>
+        </mat-tab-group>
+      </article>
+      <aside [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
+        <mat-card class="mb-3" style="background-color: grey;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>O Nas</mat-card-title>
+              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
+              <img mat-card-lg-image src="assets/img/logo.svg">
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-3" style="background-color: grey;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Polecane Grupy</mat-card-title>
+              <mat-card-subtitle>Gdy zalogowany</mat-card-subtitle>
+              <img mat-card-lg-image src="assets/img/logo.svg">
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-3" style="background-color: grey;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najciekawsze Dyskusje</mat-card-title>
+              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
+              <img mat-card-lg-image src="assets/img/logo.svg">
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-3" style="background-color: grey;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najaktywniejsi Członkowie</mat-card-title>
+              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
+              <img mat-card-lg-image src="assets/img/logo.svg">
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-3" style="background-color: grey;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najpopularniejsi Artyści</mat-card-title>
+              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
+              <img mat-card-lg-image src="assets/img/logo.svg">
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          </mat-card-content>
+        </mat-card>
+      </aside>
+    </div>
+  </div>
+</div>
