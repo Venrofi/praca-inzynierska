@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { HeaderComponent } from './components/header/header.component';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -15,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatIconModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatMenuModule,
   ],
   exports: [
