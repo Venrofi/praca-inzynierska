@@ -1,6 +1,6 @@
 app-homepage {
   .homepage-wrapper {
-    background-color: chocolate;
+    background-image: linear-gradient(to bottom, #f2ecf5, #efe7f3, #ece3f1, #eadeef, #e7daed, #d5c5dc, #c3b0cb, #b19bbb, #8d7299, #6a4c78, #492758, #28023a);
     height: 100%;
   }
   .content-toggle-group {
@@ -9,6 +9,48 @@ app-homepage {
 
   .content-wrapper {
     flex-grow: 1;
-    margin-right: 1rem;
+    margin-right: 2rem;
   }
+
+  .mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+    --mat-tab-header-disabled-ripple-color: black;
+    --mat-tab-header-pagination-icon-color: black;
+    --mat-tab-header-inactive-label-text-color: black;
+    --mat-tab-header-inactive-focus-label-text-color: black;
+    --mat-tab-header-inactive-hover-label-text-color: black;
+
+  }
+
+  .mat-mdc-tab {
+    background-color: whitesmoke;
+  }
+
+  .mat-mdc-tab:first-child {
+    border-top-left-radius: 16px;
+  }
+
+  .mat-mdc-tab:last-child {
+    border-top-right-radius: 16px;
+  }
+
+  .side-card {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  @media (max-width: 1000px) {
+    .content-wrapper {
+      margin-right: 0;
+    }
+  }
+}
+
+:host ::ng-deep .mat-tab-label-active {
+  border-width: 9px;
+  border-style: solid;
+  border-color: orange;
 }

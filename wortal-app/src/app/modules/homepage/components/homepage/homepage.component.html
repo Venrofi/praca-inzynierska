@@ -11,7 +11,7 @@
               <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Dyskusje'}}">3p</mat-icon>
             </ng-template>
 
-            Tabela postów 🤠
+            <app-disscussion-list></app-disscussion-list>
             <!-- <mat-spinner></mat-spinner> -->
           </mat-tab>
           <mat-tab>
@@ -33,7 +33,82 @@
         </mat-tab-group>
       </article>
       <aside [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
-        <mat-card class="mb-3" style="background-color: grey;">
+        <mat-card class="side-card mb-3">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najciekawsze Dyskusje</mat-card-title>
+              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
+              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            <ul>
+              <li>TOP 1</li>
+              <li>TOP 2</li>
+              <li>TOP 3</li>
+              <li>TOP 4</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="side-card mb-3">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najaktywniejsi Członkowie</mat-card-title>
+              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
+              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            <ul>
+              <li>matius22</li>
+              <li>Venrofi</li>
+              <li>kubica_here</li>
+              <li>OsomOsom</li>
+              <li>małpka8</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="side-card mb-3">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Najpopularniejsi Artyści</mat-card-title>
+              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
+              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            <ul>
+              <li>Taco Hemingway</li>
+              <li>Kizo</li>
+              <li>Smolasty</li>
+              <li>Borixon</li>
+              <li>Quebonafide</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="side-card mb-3">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Polecane Grupy</mat-card-title>
+              <mat-card-subtitle>Gdy zalogowany</mat-card-subtitle>
+              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            <ul>
+              <li>Underground Rap Polska</li>
+              <li>Paluch Power Zone</li>
+              <li>Guzior Vibes Collective</li>
+              <li>Świat Według Taco</li>
+              <li>Fani Otsochodzi</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="side-card mb-3" style="color: black;">
           <mat-card-header>
             <mat-card-title-group>
               <mat-card-title>O Nas</mat-card-title>
@@ -41,60 +116,8 @@
               <img mat-card-lg-image src="assets/img/logo.svg">
             </mat-card-title-group>
           </mat-card-header>
-          <mat-card-content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="mb-3" style="background-color: grey;">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Polecane Grupy</mat-card-title>
-              <mat-card-subtitle>Gdy zalogowany</mat-card-subtitle>
-              <img mat-card-lg-image src="assets/img/logo.svg">
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="mb-3" style="background-color: grey;">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najciekawsze Dyskusje</mat-card-title>
-              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
-              <img mat-card-lg-image src="assets/img/logo.svg">
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="mb-3" style="background-color: grey;">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najaktywniejsi Członkowie</mat-card-title>
-              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
-              <img mat-card-lg-image src="assets/img/logo.svg">
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="mb-3" style="background-color: grey;">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najpopularniejsi Artyści</mat-card-title>
-              <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle>
-              <img mat-card-lg-image src="assets/img/logo.svg">
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, nesciunt pariatur fuga nulla fugiat dolores dignissimos explicabo voluptate quibusdam ducimus. Ad totam maxime adipisci quasi sit reprehenderit corrupti, voluptatibus, autem facilis eligendi voluptatum quia voluptates eum explicabo quidem velit dolores rem laboriosam beatae odit fuga, voluptate deserunt. Maxime, pariatur dolores.
+          <mat-card-content class="mt-3">
+            Jesteśmy zespołem oddanym scenie polskiego hip-hopu. Nasz wortal powstał z pasji do muzyki. Marzyliśmy o stworzeniu miejsca, gdzie fani hip-hopu mogą się spotkać, dyskutować o swoich ulubionych artystach, a także odkrywać nowe brzmienia. Chcemy, aby nasza platforma połączyła pasjonatów tej kultury i wspierała rozwój polskiej sceny hip-hopowej.
           </mat-card-content>
         </mat-card>
       </aside>
