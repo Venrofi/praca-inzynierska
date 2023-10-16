@@ -48,9 +48,3 @@ app-homepage {
     }
   }
 }
-
-:host ::ng-deep .mat-tab-label-active {
-  border-width: 9px;
-  border-style: solid;
-  border-color: orange;
-}

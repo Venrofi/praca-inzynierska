@@ -18,16 +18,23 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { DiscussionPostComponent } from './components/discussion-list/post/discussion-post.component';
+import { HomepageService } from './services/homepage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     HomepageComponent,
-    DiscussionListComponent
+    DiscussionPostComponent,
+    DiscussionListComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
+    HttpClientModule,
+
+    // Angular Material
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
@@ -42,8 +49,12 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTooltipModule,
   ],
   exports: [
-    HomepageComponent
+    HomepageComponent,
+    DiscussionPostComponent,
+    DiscussionListComponent
   ],
-  providers: [],
+  providers: [
+    HomepageService
+  ],
 })
 export class HomepageModule { }
