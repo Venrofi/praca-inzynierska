@@ -11,7 +11,7 @@ app-discussion-post {
     color: gray;
   }
 
-  .post-topic:hover, .post-author:hover {
+  .post-topic:hover, .post-author:hover, .post-header-image:hover, .post-title:hover {
     color: #000;
     cursor: pointer;
     text-decoration: underline;

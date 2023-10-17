@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { DiscussionPost } from '../../../homepage.model';
 
 @Component({
@@ -13,6 +13,16 @@ export class DiscussionPostComponent {
   @Output() topic = new EventEmitter<string>();
   @Output() authorProfile = new EventEmitter<string>();
   @Output() postModal = new EventEmitter<string>();
+
+  isWideScreen: boolean = window.innerWidth > 600;
+
+  dateType: string = 'short';
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isWideScreen = window.innerWidth > 600;
+    this.dateType = this.isWideScreen ? 'medium' : 'short';
+  }
 
   openTopicForum(topic: string) {
     this.topic.emit(topic);
@@ -30,3 +40,8 @@ export class DiscussionPostComponent {
   }
 
 }
+
+// TODO: Poprawić wygląd komponentu DiscussionPostComponent w widoku mobilnym:
+// - zmniejszyć czcionkę tytułu postu
+// - zmienić typ wyświetlanej daty na krótki
+// - może coś jeszcze 😋
