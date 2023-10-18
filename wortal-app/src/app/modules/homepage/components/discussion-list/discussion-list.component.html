@@ -1,12 +1,14 @@
-<ng-container *ngFor="let post of discussionList | async as list">
-  <app-discussion-post [post]="post"
+<ng-container *ngIf="discussionList | async as posts; else loading">
+  <app-discussion-post *ngFor="let post of posts"
+    [post]="post"
     (topic)="navigateToTopicForum($event)"
     (authorProfile)="navigateToAuthorProfile($event)"
     (postModal)="openPostModal(post)">
   </app-discussion-post>
 </ng-container>
 
-<div *ngIf="!discussionList" class="d-flex justify-content-center mt-5">
-  <mat-spinner diameter="50"></mat-spinner>
-</div>
-
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>

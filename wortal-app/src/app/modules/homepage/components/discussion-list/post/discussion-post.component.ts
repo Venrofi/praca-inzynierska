@@ -40,8 +40,3 @@ export class DiscussionPostComponent {
   }
 
 }
-
-// TODO: Poprawić wygląd komponentu DiscussionPostComponent w widoku mobilnym:
-// - zmniejszyć czcionkę tytułu postu
-// - zmienić typ wyświetlanej daty na krótki
-// - może coś jeszcze 😋

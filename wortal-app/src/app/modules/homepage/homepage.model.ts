@@ -1,11 +1,3 @@
-// W przyszłości dodać:
-// - pole comments: Comment[] zawierające wszystkie komentarze pod postem
-// - pole authorId: string zawierające id autora postu
-// - pole content: string zawierające treść postu
-// - pole tags: string[] zawierające tagi postu
-// - pole likes: number zawierające liczbę polubień postu
-
-
 export interface DiscussionPost {
   id: string;
   authorId?: string;
@@ -15,4 +7,39 @@ export interface DiscussionPost {
   author: string;
   creationTime: string;
   numberOfComments: number;
+}
+
+export interface DiscussionPostDetails extends DiscussionPost {
+  comments: Comment[];
+  content: string;
+}
+
+
+export interface Comment {
+  id: string;
+  authorId?: string;
+  authorAvatar: string;
+  content: string;
+}
+
+export interface PremiereAlbum {
+  id: string;
+  title: string;
+  artist: string;
+  cover: string;
+  releaseDate: string;
+}
+
+export interface PremiereAlbumDetails extends PremiereAlbum {
+  tracks: Track[];
+  description: string;
+  duration: string;
+  genre: string;
+  rating: number;
+}
+
+export interface Track {
+  id: string;
+  title: string;
+  duration: string;
 }

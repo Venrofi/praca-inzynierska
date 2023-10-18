@@ -14,14 +14,7 @@ export class DiscussionListComponent implements OnInit {
   constructor(private homepageService: HomepageService) { }
 
   ngOnInit(): void {
-    this.homepageService.getDiscussionList()
-      .pipe(
-        // TODO: remove delay
-        delay(1000),
-      )
-      .subscribe((discussionList: DiscussionPost[]) => {
-        this.discussionList = of(discussionList);
-      });
+    this.discussionList = this.homepageService.getDiscussionList();
   }
 
   navigateToTopicForum(topic: string) {

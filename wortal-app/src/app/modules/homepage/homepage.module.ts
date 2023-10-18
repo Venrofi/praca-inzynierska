@@ -21,12 +21,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DiscussionPostComponent } from './components/discussion-list/post/discussion-post.component';
 import { HomepageService } from './services/homepage.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PremiereListComponent } from './components/premiere-list/premiere-list.component';
+import { PremiereAlbumComponent } from './components/premiere-list/premiere-album/premiere-album.component';
 
 @NgModule({
   declarations: [
     HomepageComponent,
     DiscussionPostComponent,
     DiscussionListComponent,
+    PremiereListComponent,
+    PremiereAlbumComponent,
   ],
   imports: [
     CommonModule,

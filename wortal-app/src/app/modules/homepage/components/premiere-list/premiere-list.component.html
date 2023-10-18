@@ -1,0 +1,15 @@
+<ng-container *ngIf="premiereList | async as list; else loading">
+  <div class="d-flex flex-wrap" style="gap: 1rem; flex-grow: 1;">
+    <app-premiere-album *ngFor="let album of list"
+      [album]="album"
+      (artist)="navigateToArtistProfile($event)"
+      (albumModal)="openAlbumModal(album)">
+    </app-premiere-album>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>
