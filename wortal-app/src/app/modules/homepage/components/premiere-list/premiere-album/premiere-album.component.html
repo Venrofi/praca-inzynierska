@@ -1,15 +1,11 @@
-<mat-card class="album" color="accent">
+<mat-card class="album" color="accent" [style.background-image]="'url(' + album.cover + ')'">
   <mat-card-header class="album-header">
     <mat-card-title>
       <span class="album-title" (click)="openAlbumModal(album)">{{ album.title }}</span>
     </mat-card-title>
     <mat-card-subtitle class="album-info">
       <span class="album-artist" (click)="openArtistForum(album.artist)">{{ album.artist }}</span>
-      <span class="album-time">{{ album.releaseDate | date : dateType }}</span>
+      <span class="album-time">{{ album.releaseDate | date : 'shortDate' }}</span>
     </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="album-cover-image"
-    [style.background-image]="'url(' + album.cover + ')'"
-    (click)="openAlbumModal(album)">
-  </mat-card-content>
 </mat-card>

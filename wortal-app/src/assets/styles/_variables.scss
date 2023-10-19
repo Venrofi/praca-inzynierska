@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a theme.
+$primary: mat.define-palette(mat.$purple-palette);
+$accent: mat.define-palette(mat.$green-palette);
+
+$my-primary-50: map-get($primary, 50);
+$my-primary-100: map-get($primary, 100);
+$my-primary-200: map-get($primary, 200);
+$my-primary-300: map-get($primary, 300);
+$my-primary-400: map-get($primary, 400);
+$my-primary-500: map-get($primary, 500); // This is the main shade
+$my-primary-600: map-get($primary, 600);
+$my-primary-700: map-get($primary, 700);
+$my-primary-800: map-get($primary, 800);
+$my-primary-900: map-get($primary, 900);
+
+$my-accent-50: map-get($accent, 50);
+$my-accent-100: map-get($accent, 100);
+$my-accent-200: map-get($accent, 200);
+$my-accent-300: map-get($accent, 300);
+$my-accent-400: map-get($accent, 400);
+$my-accent-500: map-get($accent, 500); // This is the main shade
+$my-accent-600: map-get($accent, 600);
+$my-accent-700: map-get($accent, 700);
+$my-accent-800: map-get($accent, 800);
+$my-accent-900: map-get($accent, 900);

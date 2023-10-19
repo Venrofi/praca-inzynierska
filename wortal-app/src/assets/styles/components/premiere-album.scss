@@ -1,20 +1,28 @@
+@import "../variables";
+
+$border-radius: 16px;
+
 app-premiere-album {
   // Make the mat-card-header-text take up the full width of the card
   .mat-mdc-card-header-text {
-    // width: 100% !important;
+    width: 100% !important;
   }
 
   mat-card {
-    background-color: #f2f2f2 !important;
-    border-bottom-left-radius: 16px !important;
-    border-bottom-right-radius: 16px !important;
+    border-bottom-left-radius: $border-radius !important;
+    border-bottom-right-radius: $border-radius !important;
     box-shadow: none !important;
     margin-block: 1rem;
   }
 
-  .album{
+  .album {
     text-align: center;
-    flex-grow: 1;
+    height: 450px;
+  }
+
+  .album-header {
+    background: linear-gradient(to bottom, rgba(62, 23, 79, 0.9), transparent);
+    min-height: 100px;
   }
 
   .album-info {
@@ -23,24 +31,12 @@ app-premiere-album {
     gap: 1rem;
   }
 
-  .album-cover-image {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 300px;
-    // TODO: Fix width to be responsive
-    min-width: 350px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    cursor: pointer;
+  .album-title, .album-artist, .album-time {
+    color: white;
   }
 
-  .album-topic, .album-artist, .album-time {
-    color: gray;
-  }
-
-  .album-topic:hover, .album-artist:hover, .album-header-image:hover, .album-title:hover {
-    color: #000;
+  .album-title:hover, .album-artist:hover, .album-title:hover {
+    color: $my-accent-400;
     cursor: pointer;
     text-decoration: underline;
   }

@@ -15,12 +15,9 @@ export class PremiereAlbumComponent {
 
   isWideScreen: boolean = window.innerWidth > 600;
 
-  dateType: string = 'shortDate';
-
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     this.isWideScreen = window.innerWidth > 600;
-    this.dateType = this.isWideScreen ? 'mediumDate' : 'shortDate';
   }
 
   openArtistForum(artist: string) {

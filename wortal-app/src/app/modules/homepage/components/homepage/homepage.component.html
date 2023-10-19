@@ -2,7 +2,7 @@
   <div class="container-max-width d-flex justify-content-start flex-column p-3">
 
     <div class="d-flex justify-content-between" [ngClass]="isWideScreen ? 'flex-row' : 'flex-column'">
-      <article class="content-wrapper">
+      <article class="content-wrapper" [ngClass]="isWideScreen ? 'w-75' : 'w-100'">
         <h1>Polecane dla Ciebie</h1>
         <mat-tab-group class="user-select-none" animationDuration="1000ms">
           <mat-tab>

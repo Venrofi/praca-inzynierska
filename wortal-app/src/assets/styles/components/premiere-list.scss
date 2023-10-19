@@ -1,0 +1,25 @@
+app-premiere-list {
+  .list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1rem;
+  }
+
+  .list-item {
+    flex: 0 0 calc(33.33% - 1rem);
+  }
+
+  @media (max-width: 750px) {
+    .list-item {
+      flex-basis: calc(50% - 0.5rem);
+      row-gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .list-item {
+      flex-basis: 100%;
+    }
+  }
+}
