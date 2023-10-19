@@ -18,6 +18,9 @@ app-premiere-album {
   .album {
     text-align: center;
     height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .album-header {

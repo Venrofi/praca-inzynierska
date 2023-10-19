@@ -3,70 +3,70 @@
     "id": "1",
     "title": "Pierwsze wyjście z mroku",
     "artist": "Hades",
-    "cover": "https://picsum.photos/500/500",
+    "cover": "https://picsum.photos/500/700",
     "releaseDate": "2023-08-15"
   },
   {
     "id": "2",
     "title": "Witaj w klubie",
     "artist": "Tede",
-    "cover": "https://picsum.photos/501/501",
+    "cover": "https://picsum.photos/501/701",
     "releaseDate": "2023-08-21"
   },
   {
     "id": "3",
     "title": "Idioci i Ładni",
     "artist": "Kali",
-    "cover": "https://picsum.photos/502/502",
+    "cover": "https://picsum.photos/502/702",
     "releaseDate": "2023-08-18"
   },
   {
     "id": "4",
     "title": "Eklektyka",
     "artist": "Taco Hemingway",
-    "cover": "https://picsum.photos/503/503",
+    "cover": "https://picsum.photos/503/703",
     "releaseDate": "2023-08-25"
   },
   {
     "id": "5",
     "title": "Miliony dolarów",
     "artist": "Peja",
-    "cover": "https://picsum.photos/504/504",
+    "cover": "https://picsum.photos/504/704",
     "releaseDate": "2023-08-16"
   },
   {
     "id": "6",
     "title": "Bella",
     "artist": "Mata",
-    "cover": "https://picsum.photos/505/505",
+    "cover": "https://picsum.photos/505/705",
     "releaseDate": "2023-08-30"
   },
   {
     "id": "7",
     "title": "Jestem Bogiem",
     "artist": "Paktofonika",
-    "cover": "https://picsum.photos/506/506",
+    "cover": "https://picsum.photos/506/706",
     "releaseDate": "2023-08-22"
   },
   {
     "id": "8",
     "title": "B.O.R.",
     "artist": "Gural",
-    "cover": "https://picsum.photos/507/507",
+    "cover": "https://picsum.photos/507/707",
     "releaseDate": "2023-08-28"
   },
   {
     "id": "9",
     "title": "FV 2020",
     "artist": "Fisz Emade",
-    "cover": "https://picsum.photos/508/508",
+    "cover": "https://picsum.photos/508/708",
     "releaseDate": "2023-08-27"
   },
   {
     "id": "10",
     "title": "Silesia",
     "artist": "O.S.T.R.",
-    "cover": "https://picsum.photos/509/509",
+    "cover": "https://picsum.photos/509/709",
     "releaseDate": "2023-08-23"
   }
 ]
