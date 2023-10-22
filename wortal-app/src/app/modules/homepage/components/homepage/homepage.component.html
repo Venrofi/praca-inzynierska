@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between" [ngClass]="isWideScreen ? 'flex-row' : 'flex-column'">
       <article class="content-wrapper" [ngClass]="isWideScreen ? 'w-75' : 'w-100'">
         <h1>Polecane dla Ciebie</h1>
-        <mat-tab-group class="user-select-none" animationDuration="1000ms">
+        <mat-tab-group class="user-select-none" animationDuration="500ms">
           <mat-tab>
             <ng-template mat-tab-label>
               {{isWideScreen ? 'Dyskusje' : ''}}
@@ -27,11 +27,11 @@
               <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Wydarzenia'}}">event</mat-icon>
             </ng-template>
 
-            Wydarzenia 😎
+            <app-events-list></app-events-list>
           </mat-tab>
         </mat-tab-group>
       </article>
-      <aside [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
+      <aside class="mt-5" [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
         <mat-card class="side-card mb-3">
           <mat-card-header>
             <mat-card-title-group>

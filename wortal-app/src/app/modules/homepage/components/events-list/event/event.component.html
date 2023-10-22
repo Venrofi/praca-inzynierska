@@ -1,0 +1,14 @@
+<mat-expansion-panel class="expansion-panel">
+  <mat-expansion-panel-header class="p-5">
+    <mat-panel-title>
+      {{ event.title }}
+    </mat-panel-title>
+    <mat-panel-description class="d-flex flex-column">
+      <p>{{ event.date | date: 'medium' }}</p>
+      <p>{{ event.location }}</p>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>
+    {{ event.description }}
+  </p>
+</mat-expansion-panel>

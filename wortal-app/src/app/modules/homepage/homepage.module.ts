@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { DiscussionListComponent } from './components/discussion-list/discussion-list.component';
-import { SharedModule } from '../../shared/shared.module';
-
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from '../../shared/shared.module';
+import { DiscussionListComponent } from './components/discussion-list/discussion-list.component';
 import { DiscussionPostComponent } from './components/discussion-list/post/discussion-post.component';
-import { HomepageService } from './services/homepage.service';
-import { HttpClientModule } from '@angular/common/http';
-import { PremiereListComponent } from './components/premiere-list/premiere-list.component';
+import { EventComponent } from './components/events-list/event/event.component';
+import { EventsListComponent } from './components/events-list/events-list.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { PremiereAlbumComponent } from './components/premiere-list/premiere-album/premiere-album.component';
+import { PremiereListComponent } from './components/premiere-list/premiere-list.component';
+import { HomepageService } from './services/homepage.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { PremiereAlbumComponent } from './components/premiere-list/premiere-albu
     DiscussionListComponent,
     PremiereListComponent,
     PremiereAlbumComponent,
+    EventsListComponent,
+    EventComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,7 @@ import { PremiereAlbumComponent } from './components/premiere-list/premiere-albu
     MatButtonToggleModule,
     MatCardModule,
     MatDividerModule,
+    MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatMenuModule,

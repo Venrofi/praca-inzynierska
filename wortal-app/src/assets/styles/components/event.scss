@@ -1,0 +1,17 @@
+app-event {
+  mat-expansion-panel {
+    background-color: #f2f2f2 !important;
+    color: black !important;
+    border-radius: 0 !important;
+  }
+
+  mat-panel-title, mat-panel-description, mat-expansion-panel-header {
+    color: black !important;
+  }
+
+  .mat-expansion-panel-content {
+    background: linear-gradient(to top, rgba($my-accent-OG, 0.1), transparent);
+  }
+
+  --mat-expansion-header-indicator-color: #8531A9 !important;
+}

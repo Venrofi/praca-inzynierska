@@ -2,6 +2,8 @@
 
 @include mat.core();
 
+// Creating custom theme: https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors
+
 // Define a theme.
 $primary: mat.define-palette(mat.$purple-palette);
 $accent: mat.define-palette(mat.$green-palette);
@@ -16,6 +18,11 @@ $my-primary-600: map-get($primary, 600);
 $my-primary-700: map-get($primary, 700);
 $my-primary-800: map-get($primary, 800);
 $my-primary-900: map-get($primary, 900);
+$my-primary-A100: map-get($primary, A100);
+$my-primary-A200: map-get($primary, A200);
+$my-primary-A400: map-get($primary, A400);
+$my-primary-A700: map-get($primary, A700);
+$my-primary-OG: #8531A9;
 
 $my-accent-50: map-get($accent, 50);
 $my-accent-100: map-get($accent, 100);
@@ -27,3 +34,8 @@ $my-accent-600: map-get($accent, 600);
 $my-accent-700: map-get($accent, 700);
 $my-accent-800: map-get($accent, 800);
 $my-accent-900: map-get($accent, 900);
+$my-accent-A100: map-get($accent, A100);
+$my-accent-A200: map-get($accent, A200);
+$my-accent-A400: map-get($accent, A400);
+$my-accent-A700: map-get($accent, A700);
+$my-accent-OG: #60DC9F;
