@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, delay } from 'rxjs';
-import { DiscussionPost, Event, PremiereAlbum } from '../homepage.model';
+import { DiscussionPost, Event, HomepageSideRecommendations, PremiereAlbum } from '../homepage.model';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -21,5 +21,7 @@ export class HomepageService {
     return this.http.get<Event[]>('assets/data/events.json').pipe(delay(1000));
   }
 
+  getSideRecommendations(): Observable<HomepageSideRecommendations> {
+    return this.http.get<any>('assets/data/side-recommendations.json').pipe(delay(1000));
+  }
 }
-

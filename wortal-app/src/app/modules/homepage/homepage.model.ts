@@ -52,3 +52,21 @@ export interface Event {
   location: string;
   cover: string;
 }
+
+export interface HomepageSideRecommendations {
+  topDiscussions: Recommendation;
+  topArtists: Recommendation;
+  topMembers: Recommendation;
+  topGroups: Recommendation;
+}
+
+export interface Recommendation {
+  title: string;
+  link: string;
+  content: RecommendationContent[];
+}
+
+export interface RecommendationContent {
+  id: string;
+  label: string;
+}

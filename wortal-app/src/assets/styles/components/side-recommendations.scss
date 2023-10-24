@@ -1,0 +1,20 @@
+app-side-recommendations {
+
+  .recommendation-list {
+    padding: 0 1rem;
+
+    ul {
+      list-style-position: outside;
+    }
+  }
+
+  .recommendation-label {
+    text-decoration: none;
+    color: black;
+  }
+
+  .recommendation-label:hover {
+    color: $my-primary-OG;
+    text-decoration: underline;
+  }
+}

@@ -25,6 +25,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { PremiereAlbumComponent } from './components/premiere-list/premiere-album/premiere-album.component';
 import { PremiereListComponent } from './components/premiere-list/premiere-list.component';
 import { HomepageService } from './services/homepage.service';
+import { SideRecommendationsComponent } from './components/side-recommendations/side-recommendations.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -35,12 +37,14 @@ import { HomepageService } from './services/homepage.service';
     PremiereAlbumComponent,
     EventsListComponent,
     EventComponent,
+    SideRecommendationsComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
 
     // Angular Material
     MatButtonModule,

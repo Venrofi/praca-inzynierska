@@ -31,83 +31,14 @@
           </mat-tab>
         </mat-tab-group>
       </article>
-      <aside class="mt-5" [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
-        <mat-card class="side-card mb-3">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najciekawsze Dyskusje</mat-card-title>
-              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
-              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            <ul>
-              <li>TOP 1</li>
-              <li>TOP 2</li>
-              <li>TOP 3</li>
-              <li>TOP 4</li>
-            </ul>
-          </mat-card-content>
-        </mat-card>
+      <aside *ngIf="sideRecommendations | async as recommendations; else loading"
+        class="mt-5" [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
+        <app-side-recommendations [recommendation]="recommendations.topDiscussions" [type]="'DISCUSSIONS'"></app-side-recommendations>
+        <app-side-recommendations [recommendation]="recommendations.topMembers" [type]="'MEMBERS'"></app-side-recommendations>
+        <app-side-recommendations [recommendation]="recommendations.topArtists" [type]="'ARTISTS'"></app-side-recommendations>
+        <app-side-recommendations [recommendation]="recommendations.topGroups" [type]="'GROUPS'"></app-side-recommendations>
 
         <mat-card class="side-card mb-3">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najaktywniejsi Członkowie</mat-card-title>
-              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
-              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            <ul>
-              <li>matius22</li>
-              <li>Venrofi</li>
-              <li>kubica_here</li>
-              <li>OsomOsom</li>
-              <li>małpka8</li>
-            </ul>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="side-card mb-3">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Najpopularniejsi Artyści</mat-card-title>
-              <!-- <mat-card-subtitle>Hip-Hop Hub</mat-card-subtitle> -->
-              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            <ul>
-              <li>Taco Hemingway</li>
-              <li>Kizo</li>
-              <li>Smolasty</li>
-              <li>Borixon</li>
-              <li>Quebonafide</li>
-            </ul>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="side-card mb-3">
-          <mat-card-header>
-            <mat-card-title-group>
-              <mat-card-title>Polecane Grupy</mat-card-title>
-              <mat-card-subtitle>Gdy zalogowany</mat-card-subtitle>
-              <!-- <img mat-card-lg-image src="assets/img/logo.svg"> -->
-            </mat-card-title-group>
-          </mat-card-header>
-          <mat-card-content>
-            <ul>
-              <li>Underground Rap Polska</li>
-              <li>Paluch Power Zone</li>
-              <li>Guzior Vibes Collective</li>
-              <li>Świat Według Taco</li>
-              <li>Fani Otsochodzi</li>
-            </ul>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="side-card mb-3" style="color: black;">
           <mat-card-header>
             <mat-card-title-group>
               <mat-card-title>O Nas</mat-card-title>
@@ -123,3 +54,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5" [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-template>

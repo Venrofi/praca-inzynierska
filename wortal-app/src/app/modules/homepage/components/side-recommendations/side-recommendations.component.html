@@ -1,0 +1,14 @@
+<mat-card class="side-card mb-3">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title class="recommendation-title">{{ recommendation.title }}</mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <ul class="recommendation-list">
+      <li *ngFor="let item of recommendation.content">
+        <a [routerLink]="recommendation.link + '/' + item.id" class="recommendation-label">{{ item.label }}</a>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>
