@@ -1,0 +1,40 @@
+
+<div mat-dialog-title class="position-relative d-flex justify-content-center">
+  <h2 class="mt-2">Witaj! 🤠</h2>
+  <button mat-icon-button mat-dialog-close class="dialog-close-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="mat-typography">
+  <mat-button-toggle-group [(ngModel)]="authType" class="d-flex justify-content-center" name="authType" aria-label="Authentication Type">
+    <mat-button-toggle value="LOGIN" class="w-50">Zaloguj się</mat-button-toggle>
+    <mat-button-toggle value="REGISTER" class="w-50">Dołącz</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div [ngSwitch]="authType">
+    <form *ngSwitchCase="'LOGIN'" #loginForm="ngForm" class="d-flex flex-column mt-3">
+      <mat-form-field>
+        <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="loginCredentials.username" name="username" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Hasło" [(ngModel)]="loginCredentials.password" name="password" type="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button (click)="authenticate()" [disabled]="!loginForm.valid" color="accent">Zaloguj się</button>
+    </form>
+
+    <form *ngSwitchCase="'REGISTER'" #registerForm="ngForm" class="d-flex flex-column mt-3">
+      <mat-form-field>
+        <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="registerCredentials.username" name="username" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Hasło" [(ngModel)]="registerCredentials.password" name="password" type="password" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="E-mail" [(ngModel)]="registerCredentials.email" name="email" required>
+      </mat-form-field>
+
+      <button mat-raised-button (click)="register()" [disabled]="!registerForm.valid" color="accent">Utwórz konto</button>
+    </form>
+  </div>
+</mat-dialog-content>
