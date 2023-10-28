@@ -1,6 +1,6 @@
-<mat-toolbar class="py-5 d-flex justify-content-center" *ngIf="isWideScreen; else mobileContent">
+<mat-toolbar class="d-flex justify-content-center py-5" *ngIf="isWideScreen; else mobileContent">
   <div class="d-flex justify-content-between container-max-width">
-    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
+    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" (click)="goToHomepage()">
 
     <mat-form-field class="mt-4 w-50" color="accent">
       <mat-label>Wyszukaj w społeczności..</mat-label>
@@ -15,69 +15,37 @@
         <mat-icon>forum</mat-icon>
       </button>
 
-      <button mat-flat-button color="primary" (click)="openAuthenticationDialog()">
+      <button mat-flat-button [color]="member ? 'accent' : 'primary'" (click)="memberButtonAction()">
         <mat-icon>person</mat-icon>
-        Zaloguj / Dołącz
+        {{ member?.username || 'Zaloguj / Dołącz' }}
       </button>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>event</mat-icon>
-          <span>Wydarzenia</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>groups</mat-icon>
-          <span>Grupy</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>person_search</mat-icon>
-          <span>Członkowie</span>
-        </button>
-      </mat-menu>
+      <app-header-side-menu [memberAuthenticated]="!!member" (memberLogout)="memberLogout()"></app-header-side-menu>
     </section>
   </div>
 </mat-toolbar>
 
 <ng-template #mobileContent>
   <mat-toolbar class="d-flex justify-content-between py-5">
-    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
+    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" (click)="goToHomepage()">
 
     <section class="d-flex justify-content-end align-items-center">
-      <button mat-icon-button aria-label="Example icon-button with a menu">
+      <button mat-icon-button>
         <mat-icon>forum</mat-icon>
       </button>
 
-      <button mat-flat-button color="primary">
+      <button mat-flat-button [color]="member ? 'accent' : 'primary'" (click)="memberButtonAction()">
         <mat-icon>person</mat-icon>
-        Login / Join
+        {{ member?.username || 'Zaloguj / Dołącz' }}
       </button>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-      </mat-menu>
+      <app-header-side-menu [memberAuthenticated]="!!member" (memberLogout)="memberLogout()"></app-header-side-menu>
     </section>
   </mat-toolbar>
 
   <mat-toolbar class="d-flex justify-content-center mobile-search-bar">
     <mat-form-field class="mt-4 w-100">
-      <mat-label>Search Community</mat-label>
+      <mat-label>Wyszukaj w społeczności..</mat-label>
       <input matInput type="text">
       <button matSuffix mat-icon-button aria-label="Clear">
         <mat-icon>search</mat-icon>

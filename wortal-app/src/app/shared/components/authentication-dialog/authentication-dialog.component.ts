@@ -33,7 +33,7 @@ export class AuthenticationDialogComponent implements OnInit {
     console.log(response);
 
     if (response.success) {
-      this.dialogRef.close();
+      this.dialogRef.close(response.userID);
     }
   }
 

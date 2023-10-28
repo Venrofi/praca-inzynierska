@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, delay, map, of } from 'rxjs';
+import { Member } from './core.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +12,21 @@ export class AuthService {
     {
       username: 'admin',
       password: 'admin',
-      role: 'admin'
+      id: '1'
     },
     {
       username: 'user',
       password: 'user',
-      role: 'member'
+      id: '2'
     },
     {
       username: 'moderator',
       password: 'moderator',
-      role: 'moderator'
+      id: '3'
     }
   ];
+
+  constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
     // Regex for password validation
@@ -35,8 +40,7 @@ export class AuthService {
     //   };
     // }
 
-    // Check if the user exists
-    const user = this.users.find((u) => u.username === username);
+    const user = this.users.find((user) => user.username === username);
     if (!user) {
       return { success: false, message: 'User does not exist' };
     }
@@ -46,9 +50,8 @@ export class AuthService {
       return { success: false, message: 'Password is incorrect' };
     }
 
-    // Set the logged in user
-    this.setLoggedInUser(user);
-    return { success: true, message: 'Logged in successfully' };
+    this.setLoggedInUser(user.id);
+    return { success: true, message: 'Logged in successfully', userID: this.getLoggedInUser() };
   }
 
   logout() {
@@ -57,17 +60,26 @@ export class AuthService {
   }
 
   isAuthenticatedUser(): boolean {
-    // Check if the user is logged in
     return !!this.getLoggedInUser();
   }
 
-  private setLoggedInUser(user: any): void {
-    localStorage.setItem('user', JSON.stringify(user));
+  getAuthenticatedUserInformation(userID: string): Observable<Member | undefined> {
+    if (!this.isAuthenticatedUser()) return of(undefined);
+
+    return this.http.get<Member[]>('assets/data/users.json')
+      .pipe(
+        map((users) => users.find((user) => user.id === userID)),
+        delay(500)
+      );
   }
 
-  private getLoggedInUser(): any {
+  private setLoggedInUser(userID: string): void {
+    localStorage.setItem('user', userID);
+  }
+
+  private getLoggedInUser(): string | null {
     const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    return user ? user : null;
   }
 
   private clearLoggedInUser(): void {

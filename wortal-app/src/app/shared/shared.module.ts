@@ -11,10 +11,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
+import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    HeaderSideMenuComponent,
     AuthenticationDialogComponent,
   ],
   imports: [
@@ -31,6 +33,7 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     HeaderComponent,
+    HeaderSideMenuComponent,
     AuthenticationDialogComponent,
   ],
 })

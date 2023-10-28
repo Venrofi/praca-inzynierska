@@ -6,6 +6,7 @@ import { AuthGuard } from './core/authentication.guard';
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'member', canActivate: [AuthGuard], loadChildren: () => import('./modules/member/member.module').then(m => m.MemberModule) },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

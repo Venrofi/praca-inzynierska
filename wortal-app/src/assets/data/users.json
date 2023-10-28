@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "username": "Admin Akademia",
+    "email": "admin@akademia.pl",
+    "groups": [],
+    "role": "ADMIN",
+    "posts": [],
+    "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": "2",
+    "username": "radoter100",
+    "email": "radoter100@polsl.pl",
+    "groups": [],
+    "role": "USER",
+    "posts": [],
+    "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  },
+  {
+    "id": "3",
+    "username": "moderator",
+    "email": "moderator@hiphophub.pl",
+    "groups": [],
+    "role": "MODERATOR",
+    "posts": [],
+    "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+  }
+]
