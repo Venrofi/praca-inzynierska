@@ -1,10 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { of, switchMap } from 'rxjs';
+import { StoreModel } from 'src/app/app-state.model';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Member } from 'src/app/core/core.model';
+import * as memberActions from '../../../store/member/member.actions';
 import { AuthenticationDialogComponent } from '../authentication-dialog/authentication-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +24,13 @@ export class HeaderComponent implements OnInit {
 
   member: Member | undefined;
 
-  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) { }
+  constructor(
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<StoreModel>,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
     const userID = localStorage.getItem('user');
@@ -47,6 +57,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.member = undefined;
     this.router.navigateByUrl('/');
+    this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end' });
   }
 
   openAuthenticationDialog(): void {
@@ -60,10 +71,17 @@ export class HeaderComponent implements OnInit {
 
         return of(undefined);
       })
-    ).subscribe(user => this.member = user);
+    ).subscribe(user => {
+      this.member = user;
+      this.store.dispatch(memberActions.update({ member: user as Member }));
+      this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
+    });
   }
 
   getMemberInformation(userID: string): void {
-    this.authService.getAuthenticatedUserInformation(userID).subscribe(user => this.member = user);
+    this.authService.getAuthenticatedUserInformation(userID).subscribe(user => {
+      this.member = user;
+      this.store.dispatch(memberActions.update({ member: user as Member }));
+    });
   }
 }

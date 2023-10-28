@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberComponent } from './components/member/member.component';
 import { MemberRoutingModule } from './member-routing.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [MemberComponent],
@@ -16,6 +17,9 @@ import { MemberRoutingModule } from './member-routing.module';
     FormsModule,
     HttpClientModule,
     RouterModule,
+
+    // Angular Material
+    MatProgressSpinnerModule,
   ],
   exports: [MemberComponent]
 })

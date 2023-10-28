@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HeaderComponent } from './components/header/header.component';
 import { AuthenticationDialogComponent } from './components/authentication-dialog/authentication-dialog.component';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 
 @NgModule({
@@ -22,6 +23,8 @@ import { HeaderSideMenuComponent } from './components/header/side-menu/header-si
   imports: [
     CommonModule,
     FormsModule,
+
+    // Angular Material
     MatButtonModule,
     MatInputModule,
     MatIconModule,
@@ -30,6 +33,7 @@ import { HeaderSideMenuComponent } from './components/header/side-menu/header-si
     MatMenuModule,
     MatDialogModule,
     MatButtonToggleModule,
+    MatSnackBarModule,
   ],
   exports: [
     HeaderComponent,

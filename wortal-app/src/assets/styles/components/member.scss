@@ -1,0 +1,29 @@
+app-member {
+  .member-wrapper {
+    background-color: #ece3f1;
+    min-height: 100vh;
+  }
+
+  .member-main-info {
+    min-width: 500px;
+    // background-color: $my-primary-100;
+    // backdrop-filter: blur(5px);
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .member-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    border: 5px solid $my-primary-OG;
+    background-size: cover;
+    background-position: center;
+  }
+}
