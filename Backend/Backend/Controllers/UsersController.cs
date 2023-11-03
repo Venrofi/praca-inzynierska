@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Backend.Models;
-using Backend.Context;
+using Backend.Core.Entities;
+using Backend.Data.Context;
 
 namespace Backend.Controllers
 {
