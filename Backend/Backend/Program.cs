@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using Backend.Context;
+using Backend.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = builder.Configuration.GetConnectionString("HipHopHub");
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<UserContext>(options =>
-    options.UseInMemoryDatabase("UserList"));
+    options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
+  //  options.UseInMemoryDatabase("UserList"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
