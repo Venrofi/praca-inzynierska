@@ -9,6 +9,14 @@ namespace Backend.Context
         {
 
         }
-        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<User> Users { get; set; } //= null!;
+        public DbSet<Post> Posts { get; set; } //= null!;
+        public DbSet<Discussion> Discussions { get; set; }
+        public DbSet<Group> Groups { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
