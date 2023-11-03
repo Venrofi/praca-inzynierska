@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Models
+namespace Backend.Context
 {
     public class UserContext : DbContext
     {
