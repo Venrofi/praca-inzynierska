@@ -38,6 +38,11 @@ export class HeaderComponent implements OnInit {
     if (userID) {
       this.getMemberInformation(userID);
     }
+
+    this.store.subscribe(store => {
+      this.member = store.app.member;
+    });
+
   }
 
   goToHomepage(): void {
@@ -55,7 +60,7 @@ export class HeaderComponent implements OnInit {
 
   memberLogout(): void {
     this.authService.logout();
-    this.member = undefined;
+    this.store.dispatch(memberActions.update({ member: undefined }));
     this.router.navigateByUrl('/');
     this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end' });
   }
@@ -68,19 +73,18 @@ export class HeaderComponent implements OnInit {
         if (userID) {
           return this.authService.getAuthenticatedUserInformation(userID);
         }
-
         return of(undefined);
       })
     ).subscribe(user => {
-      this.member = user;
-      this.store.dispatch(memberActions.update({ member: user as Member }));
-      this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
+      if(user) {
+        this.store.dispatch(memberActions.update({ member: user as Member }));
+        this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
+      }
     });
   }
 
   getMemberInformation(userID: string): void {
     this.authService.getAuthenticatedUserInformation(userID).subscribe(user => {
-      this.member = user;
       this.store.dispatch(memberActions.update({ member: user as Member }));
     });
   }

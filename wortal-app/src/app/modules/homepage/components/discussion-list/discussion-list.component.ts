@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DiscussionPost } from '../../homepage.model';
 import { HomepageService } from '../../services/homepage.service';
+import { AuthService } from "../../../../core/authentication.service";
 
 @Component({
   selector: 'app-discussion-list',
@@ -11,10 +12,19 @@ export class DiscussionListComponent implements OnInit {
 
   discussionList!: Observable<DiscussionPost[]>;
 
-  constructor(private homepageService: HomepageService) { }
+  constructor(private homepageService: HomepageService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.discussionList = this.homepageService.getDiscussionList();
+
+    this.authService.loginSuccess.subscribe(() => {
+      const userID = this.authService.getLoggedInUser() || undefined;
+      this.discussionList = this.homepageService.getDiscussionList(userID);
+    });
+
+    this.authService.logoutSuccess.subscribe(() => {
+      this.discussionList = this.homepageService.getDiscussionList();
+    });
   }
 
   navigateToTopicForum(topic: string) {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, delay, map, of } from 'rxjs';
+import { delay, map, Observable, of, Subject } from 'rxjs';
 import { Member } from './core.model';
 
 @Injectable({
@@ -26,7 +26,21 @@ export class AuthService {
     }
   ];
 
+  private loginSuccessSubject = new Subject<void>();
+  private logoutActionSubject = new Subject<void>();
+
+  loginSuccess = this.loginSuccessSubject.asObservable();
+  logoutSuccess = this.logoutActionSubject.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  notifyLoginSuccess() {
+    this.loginSuccessSubject.next();
+  }
+
+  notifyLogout() {
+    this.logoutActionSubject.next();
+  }
 
   login(username: string, password: string) {
     // Regex for password validation
@@ -51,11 +65,13 @@ export class AuthService {
     }
 
     this.setLoggedInUser(user.id);
+    this.notifyLoginSuccess();
     return { success: true, message: 'Logged in successfully', userID: this.getLoggedInUser() };
   }
 
   logout() {
     this.clearLoggedInUser();
+    this.notifyLogout();
     return { success: true, message: 'Logged out successfully' };
   }
 
@@ -73,13 +89,12 @@ export class AuthService {
       );
   }
 
-  private setLoggedInUser(userID: string): void {
-    localStorage.setItem('user', userID);
+  getLoggedInUser(): string | null {
+    return localStorage.getItem('user');
   }
 
-  private getLoggedInUser(): string | null {
-    const user = localStorage.getItem('user');
-    return user ? user : null;
+  private setLoggedInUser(userID: string): void {
+    localStorage.setItem('user', userID);
   }
 
   private clearLoggedInUser(): void {

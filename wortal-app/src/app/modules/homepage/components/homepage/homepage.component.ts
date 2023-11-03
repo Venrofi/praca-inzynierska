@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { HomepageService } from '../../services/homepage.service';
 import { HomepageSideRecommendations } from '../../homepage.model';
 import { Observable } from 'rxjs';
+import { AuthService } from "../../../../core/authentication.service";
 
 @Component({
   selector: 'app-homepage',
@@ -18,10 +19,19 @@ export class HomepageComponent implements OnInit {
     this.isWideScreen = window.innerWidth > 1000;
   }
 
-  constructor(private homepageService: HomepageService) { }
+  constructor(private homepageService: HomepageService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.sideRecommendations = this.homepageService.getSideRecommendations();
+
+    this.authService.loginSuccess.subscribe(() => {
+      const userID = this.authService.getLoggedInUser() || undefined;
+      this.sideRecommendations = this.homepageService.getSideRecommendations(userID);
+    });
+
+    this.authService.logoutSuccess.subscribe(() => {
+      this.sideRecommendations = this.homepageService.getSideRecommendations();
+    });
   }
 
 }

@@ -8,20 +8,20 @@ export class HomepageService {
 
   constructor(private http: HttpClient) { }
 
-  // TODO: remove delays
-  getDiscussionList(): Observable<DiscussionPost[]> {
+  // TODO: remove delays, add userID as a query parameter
+  getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
     return this.http.get<DiscussionPost[]>('assets/data/discussion-posts.json').pipe(delay(1000));
   }
 
-  getPremiereList(): Observable<PremiereAlbum[]> {
+  getPremiereList(userID?: string): Observable<PremiereAlbum[]> {
     return this.http.get<PremiereAlbum[]>('assets/data/premiere-albums.json').pipe(delay(1000));
   }
 
-  getEventList(): Observable<Event[]> {
+  getEventList(userID?: string): Observable<Event[]> {
     return this.http.get<Event[]>('assets/data/events.json').pipe(delay(1000));
   }
 
-  getSideRecommendations(): Observable<HomepageSideRecommendations> {
+  getSideRecommendations(userID?: string): Observable<HomepageSideRecommendations> {
     return this.http.get<any>('assets/data/side-recommendations.json').pipe(delay(1000));
   }
 }
