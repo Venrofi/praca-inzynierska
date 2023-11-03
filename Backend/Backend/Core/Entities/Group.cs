@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Models
+namespace Backend.Core.Entities
 {
     public class Group
     {
@@ -11,6 +11,6 @@ namespace Backend.Models
         [Required]
         public bool Open { get; set; }
 
-        public List<User> Users { get; set; }
+        public List<User>? Users { get; set; }
     }
 }
