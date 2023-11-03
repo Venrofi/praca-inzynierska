@@ -6,7 +6,7 @@ var connectionString = builder.Configuration.GetConnectionString("HipHopHub");
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<UserContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
   //  options.UseInMemoryDatabase("UserList"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
