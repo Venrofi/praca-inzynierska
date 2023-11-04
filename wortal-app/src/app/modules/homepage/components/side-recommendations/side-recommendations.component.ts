@@ -14,6 +14,9 @@ export class SideRecommendationsComponent {
 
   @Input() type!: RecommendationType;
 
+  @Input()
+  activeLinks = true;
+
   mapRouterLink(): string[] {
     switch (this.type) {
       case "DISCUSSIONS": {

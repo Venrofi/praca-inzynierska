@@ -19,7 +19,7 @@ export class HomepageComponent implements OnInit {
     this.isWideScreen = window.innerWidth > 1000;
   }
 
-  constructor(private homepageService: HomepageService, private authService: AuthService) { }
+  constructor(private homepageService: HomepageService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.sideRecommendations = this.homepageService.getSideRecommendations();
