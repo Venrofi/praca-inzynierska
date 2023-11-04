@@ -7,7 +7,7 @@
   <mat-card-content>
     <ul class="recommendation-list">
       <li *ngFor="let item of recommendation.content">
-        <a [routerLink]="recommendation.link + '/' + item.id" class="recommendation-label">{{ item.label }}</a>
+        <a [routerLink]="mapRouterLink()" [queryParams]="{ id: item.id }" class="recommendation-label">{{ item.label }}</a>
       </li>
     </ul>
   </mat-card-content>

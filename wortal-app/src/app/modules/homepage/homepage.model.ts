@@ -62,7 +62,6 @@ export interface HomepageSideRecommendations {
 
 export interface Recommendation {
   title: string;
-  link: string;
   content: RecommendationContent[];
 }
 

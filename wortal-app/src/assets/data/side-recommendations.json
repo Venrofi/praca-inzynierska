@@ -1,21 +1,16 @@
 {
   "topDiscussions": {
     "title": "Najlepsze Dyskusje",
-    "link": "/forum",
     "content": [
-      { "id": "artist_id/1", "label": "Nowa fala w polskim hip-hopie" },
-      { "id": "artist_id/2", "label": "Czy rap to tylko muzyka?" },
-      {
-        "id": "artist_id/3",
-        "label": "Teksty w hip-hopie - analiza i interpretacja"
-      },
-      { "id": "artist_id/4", "label": "Polskie bitwy freestyle'owe" },
-      { "id": "artist_id/5", "label": "Rapowe klasyki - nasze ulubione utwory" }
+      { "id": "1", "label": "Nowa fala w polskim hip-hopie" },
+      { "id": "2", "label": "Czy rap to tylko muzyka?" },
+      { "id": "3", "label": "Teksty w hip-hopie - analiza i interpretacja" },
+      { "id": "4", "label": "Polskie bitwy freestyle'owe" },
+      { "id": "5", "label": "Rapowe klasyki - nasze ulubione utwory" }
     ]
   },
   "topArtists": {
     "title": "Najpopularniejsi Artyści",
-    "link": "/forum",
     "content": [
       { "id": "1", "label": "Quebonafide" },
       { "id": "2", "label": "Taco Hemingway" },
@@ -26,7 +21,6 @@
   },
   "topMembers": {
     "title": "Najaktywniejsi Członkowie",
-    "link": "/members",
     "content": [
       { "id": "1", "label": "matius22" },
       { "id": "2", "label": "Venrofi" },
@@ -37,7 +31,6 @@
   },
   "topGroups": {
     "title": "Polecane Grupy",
-    "link": "/groups",
     "content": [
       { "id": "1", "label": "Polscy Rap Geniusze" },
       { "id": "2", "label": "Graffiti Art Lovers" },
