@@ -1,5 +1,5 @@
 <div *ngIf="member | async as member; else loading" class="p-3 member-wrapper">
-  <div class="container-max-width d-flex justify-content-center align-items-center flex-column p-3">
+  <div class="container-max-width member-container p-3">
     <!-- <p>{{ member | json }}</p> -->
     <main class="member-main-info">
       <img [src]="member.avatar" class="member-avatar">
@@ -15,6 +15,6 @@
 
 <ng-template #loading>
   <div class="d-flex justify-content-center mt-5">
-    <mat-spinner diameter="50"></mat-spinner>
+    <mat-spinner [diameter]="50"></mat-spinner>
   </div>
 </ng-template>
