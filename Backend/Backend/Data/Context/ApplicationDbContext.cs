@@ -10,7 +10,7 @@ namespace Backend.Data.Context
 
         }
 
-        public DbSet<User> Users { get; set; } //= null!;
+        public DbSet<User> Users => Set<User>();
         public DbSet<Comment> Comments { get; set; } //= null!;
         public DbSet<DiscussionPost> DiscossionPosts { get; set; }
         public DbSet<DiscussionPostDetails> DiscossionPostsDetails { get; set; }
