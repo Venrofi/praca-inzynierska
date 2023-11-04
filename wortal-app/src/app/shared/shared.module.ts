@@ -15,6 +15,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
+import { GroupProfileComponent } from './components/group-profile/group-profile.component';
+import { DiscussionPostDetailsComponent } from './components/discussion-post-details/discussion-post-details.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     HeaderSideMenuComponent,
     AuthenticationDialogComponent,
     UserProfileComponent,
+    ArtistProfileComponent,
+    GroupProfileComponent,
+    DiscussionPostDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +50,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     HeaderSideMenuComponent,
     AuthenticationDialogComponent,
     UserProfileComponent,
+    ArtistProfileComponent,
+    GroupProfileComponent,
   ],
 })
 export class SharedModule { }
