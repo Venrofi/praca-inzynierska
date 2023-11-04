@@ -13,12 +13,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthenticationDialogComponent } from './components/authentication-dialog/authentication-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     HeaderSideMenuComponent,
     AuthenticationDialogComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -34,11 +37,13 @@ import { HeaderSideMenuComponent } from './components/header/side-menu/header-si
     MatDialogModule,
     MatButtonToggleModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     HeaderComponent,
     HeaderSideMenuComponent,
     AuthenticationDialogComponent,
+    UserProfileComponent,
   ],
 })
 export class SharedModule { }

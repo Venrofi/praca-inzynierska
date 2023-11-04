@@ -12,17 +12,17 @@ export class AuthService {
     {
       username: 'admin',
       password: 'admin',
-      id: '1'
+      id: '001'
     },
     {
       username: 'user',
       password: 'user',
-      id: '2'
+      id: '002'
     },
     {
       username: 'moderator',
       password: 'moderator',
-      id: '3'
+      id: '003'
     }
   ];
 
@@ -31,8 +31,6 @@ export class AuthService {
 
   loginSuccess = this.loginSuccessSubject.asObservable();
   logoutSuccess = this.logoutActionSubject.asObservable();
-
-  constructor(private http: HttpClient) { }
 
   notifyLoginSuccess() {
     this.loginSuccessSubject.next();
@@ -77,16 +75,6 @@ export class AuthService {
 
   isAuthenticatedUser(): boolean {
     return !!this.getLoggedInUser();
-  }
-
-  getAuthenticatedUserInformation(userID: string): Observable<Member | undefined> {
-    if (!this.isAuthenticatedUser()) return of(undefined);
-
-    return this.http.get<Member[]>('assets/data/users.json')
-      .pipe(
-        map((users) => users.find((user) => user.id === userID)),
-        delay(500)
-      );
   }
 
   getLoggedInUser(): string | null {

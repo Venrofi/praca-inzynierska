@@ -1,6 +1,6 @@
 export interface DiscussionPost {
   id: string;
-  authorId?: string;
+  authorId: string;
   authorAvatar: string;
   topic: string;
   title: string;
@@ -17,7 +17,7 @@ export interface DiscussionPostDetails extends DiscussionPost {
 
 export interface Comment {
   id: string;
-  authorId?: string;
+  authorId: string;
   authorAvatar: string;
   content: string;
 }

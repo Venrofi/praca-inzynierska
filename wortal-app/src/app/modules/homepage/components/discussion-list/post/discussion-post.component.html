@@ -12,7 +12,7 @@
     </mat-card-title>
     <mat-card-subtitle class="mt-1 d-flex justify-content-between w-100"
       [ngClass]="isWideScreen ? 'flex-row align-items-center' : 'flex-column'">
-      <span class="post-author" (click)="openAuthorProfile(post.author)">{{ post.author }}</span>
+      <span class="post-author" (click)="openAuthorProfile(post.authorId)">{{ post.author }}</span>
 
       <div class="post-additional-info" [ngClass]="isWideScreen ? '' : 'my-1 pb-2'">
         <span class="post-time">{{ post.creationTime | date : dateType }}</span>
