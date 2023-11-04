@@ -12,10 +12,10 @@ namespace Backend.Core.Entities
 
        // [Required]
         //[DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         //[Required]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         //[Required]
         //[DataType(DataType.Password)]
@@ -31,7 +31,7 @@ namespace Backend.Core.Entities
 
 
         //[Required]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
 
         //[Required]
         public Roles Role { get; set; } = Roles.USER;
