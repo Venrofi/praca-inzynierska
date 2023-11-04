@@ -1,19 +1,30 @@
 export interface DiscussionPost {
   id: string;
-  authorId: string;
-  authorAvatar: string;
-  topic: string;
+  author: DiscussionPostAuthor;
+  topic: DiscussionPostTopic;
   title: string;
-  author: string;
   creationTime: string;
   numberOfComments: number;
 }
+
+export interface DiscussionPostAuthor {
+  id: string;
+  name: string;
+  avatar: string;
+}
+
+export interface DiscussionPostTopic {
+  id: string;
+  name: string;
+  type: DiscussionPostType;
+}
+
+export type DiscussionPostType = 'ARTIST' | 'GROUP';
 
 export interface DiscussionPostDetails extends DiscussionPost {
   comments: Comment[];
   content: string;
 }
-
 
 export interface Comment {
   id: string;

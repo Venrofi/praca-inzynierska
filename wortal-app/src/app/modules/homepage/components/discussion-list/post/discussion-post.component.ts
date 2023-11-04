@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { DiscussionPost } from '../../../homepage.model';
+import { DiscussionPost, DiscussionPostTopic } from '../../../homepage.model';
 
 @Component({
   selector: 'app-discussion-post',
@@ -10,9 +10,10 @@ export class DiscussionPostComponent {
 
   @Input() post!: DiscussionPost;
 
-  @Output() topic = new EventEmitter<string>();
+  @Output() topic = new EventEmitter<DiscussionPostTopic>();
   @Output() authorProfile = new EventEmitter<string>();
   @Output() postModal = new EventEmitter<string>();
+  @Output() postDetails = new EventEmitter<string>();
 
   isWideScreen: boolean = window.innerWidth > 600;
 
@@ -24,19 +25,20 @@ export class DiscussionPostComponent {
     this.dateType = this.isWideScreen ? 'medium' : 'short';
   }
 
-  openTopicForum(topic: string) {
+  openTopicForum() {
+    const topic = this.post.topic;
     this.topic.emit(topic);
-    return `/forum/${topic}`;
   }
 
-  openAuthorProfile(author: string) {
-    this.authorProfile.emit(author);
-    return `/user/${author}`;
+  openAuthorProfile() {
+    this.authorProfile.emit(this.post.author.id);
   }
 
-  openPostModal(post: DiscussionPost) {
-    this.postModal.emit(post.id);
-    return `/forum/${post.topic}/${post.id}`;
+  openPostModal() {
+    this.postModal.emit(this.post.id);
   }
 
+  openPostDetails() {
+    this.postDetails.emit(this.post.id);
+  }
 }
