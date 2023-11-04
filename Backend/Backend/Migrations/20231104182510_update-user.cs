@@ -6,45 +6,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class userupdate : Migration
+    public partial class updateuser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
+            migrationBuilder.DropColumn(
                 name: "Password",
-                table: "Users",
-                newName: "VerificationToken");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "UserName",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: false);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: false);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Avatar",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: false);
+                table: "Users");
 
             migrationBuilder.AddColumn<byte[]>(
                 name: "PasswordHash",
@@ -77,6 +46,12 @@ namespace Backend.Migrations
                 table: "Users",
                 type: "datetime2",
                 nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "VerificationToken",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         /// <inheritdoc />
@@ -102,34 +77,16 @@ namespace Backend.Migrations
                 name: "VerificationTime",
                 table: "Users");
 
-            migrationBuilder.RenameColumn(
+            migrationBuilder.DropColumn(
                 name: "VerificationToken",
-                table: "Users",
-                newName: "Password");
+                table: "Users");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "UserName",
+            migrationBuilder.AddColumn<string>(
+                name: "Password",
                 table: "Users",
                 type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Avatar",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                nullable: false,
+                defaultValue: "");
         }
     }
 }
