@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { noop, Observable } from 'rxjs';
 import { DiscussionPost } from '../../homepage.model';
 import { HomepageService } from '../../services/homepage.service';
 import { AuthService } from "../../../../core/authentication.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-discussion-list',
@@ -12,7 +13,7 @@ export class DiscussionListComponent implements OnInit {
 
   discussionList!: Observable<DiscussionPost[]>;
 
-  constructor(private homepageService: HomepageService, private authService: AuthService) { }
+  constructor(private homepageService: HomepageService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.discussionList = this.homepageService.getDiscussionList();
@@ -32,7 +33,7 @@ export class DiscussionListComponent implements OnInit {
   }
 
   navigateToAuthorProfile(author: string) {
-    console.log(`Navigate to author profile at: /user/${author}`);
+    this.router.navigate(['/user'], { queryParams: { id: author } }).catch(noop);
   }
 
   openPostModal(post: DiscussionPost) {

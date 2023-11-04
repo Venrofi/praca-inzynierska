@@ -15,5 +15,4 @@ export class MemberComponent {
   constructor(private store: Store<StoreModel>) {
     this.member = this.store.select(state => state.app.member);
   }
-
 }

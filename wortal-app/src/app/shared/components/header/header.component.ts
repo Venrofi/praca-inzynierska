@@ -9,6 +9,7 @@ import { Member } from 'src/app/core/core.model';
 import * as memberActions from '../../../store/member/member.actions';
 import { AuthenticationDialogComponent } from '../authentication-dialog/authentication-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from "../../../core/user.service";
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private store: Store<StoreModel>,
     private snackBar: MatSnackBar,
@@ -71,7 +73,7 @@ export class HeaderComponent implements OnInit {
     authDialogRef.afterClosed().pipe(
       switchMap(userID => {
         if (userID) {
-          return this.authService.getAuthenticatedUserInformation(userID);
+          return this.userService.getAuthenticatedUserInformation(userID);
         }
         return of(undefined);
       })
@@ -84,7 +86,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getMemberInformation(userID: string): void {
-    this.authService.getAuthenticatedUserInformation(userID).subscribe(user => {
+    this.userService.getAuthenticatedUserInformation(userID).subscribe(user => {
       this.store.dispatch(memberActions.update({ member: user as Member }));
     });
   }

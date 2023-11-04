@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "001",
     "username": "Admin Akademia",
     "email": "admin@akademia.pl",
     "groups": [],
@@ -9,7 +9,7 @@
     "avatar": "https://picsum.photos/200/200"
   },
   {
-    "id": "2",
+    "id": "002",
     "username": "radoter100",
     "email": "radoter100@polsl.pl",
     "groups": [],
@@ -18,12 +18,48 @@
     "avatar": "https://picsum.photos/200/201"
   },
   {
-    "id": "3",
+    "id": "003",
     "username": "moderator",
     "email": "moderator@hiphophub.pl",
     "groups": [],
     "role": "MODERATOR",
     "posts": [],
     "avatar": "https://picsum.photos/200/202"
+  },
+  {
+    "id": "1",
+    "username": "HipHopHead123",
+    "email": "hiphophead@hiphophub.pl",
+    "groups": [],
+    "role": "USER",
+    "posts": [],
+    "avatar": "https://picsum.photos/200/203"
+  },
+  {
+    "id": "2",
+    "username": "RapLover88",
+    "email": "rapLover88@hiphophub.pl",
+    "groups": [],
+    "role": "USER",
+    "posts": [],
+    "avatar": "https://picsum.photos/200/204"
+  },
+  {
+    "id": "3",
+    "username": "TacoFanatic",
+    "email": "tacoFanatic@hiphophub.pl",
+    "groups": [],
+    "role": "USER",
+    "posts": [],
+    "avatar": "https://picsum.photos/200/205"
+  },
+  {
+    "id": "4",
+    "username": "RapExplorer77",
+    "email": "rapExplorer77@hiphophub.pl",
+    "groups": [],
+    "role": "USER",
+    "posts": [],
+    "avatar": "https://picsum.photos/200/205"
   }
 ]
