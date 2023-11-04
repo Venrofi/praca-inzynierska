@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { noop, Observable } from "rxjs";
 import { PremiereAlbum } from "../../homepage.model";
 import { HomepageService } from "../../services/homepage.service";
 import { AuthService } from "../../../../core/authentication.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-premiere-list",
@@ -11,7 +12,7 @@ import { AuthService } from "../../../../core/authentication.service";
 export class PremiereListComponent implements OnInit {
   premiereList!: Observable<PremiereAlbum[]>;
 
-  constructor(private homepageService: HomepageService, private authService: AuthService) { }
+  constructor(private homepageService: HomepageService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.premiereList = this.homepageService.getPremiereList();
@@ -27,7 +28,7 @@ export class PremiereListComponent implements OnInit {
   }
 
   navigateToArtistProfile(artist: string) {
-    console.log(`Navigate to author profile at: /forum/${artist}`);
+    this.router.navigate(['/artist'], { queryParams: { id: artist } }).catch(noop);
   }
 
   openAlbumModal(album: PremiereAlbum) {

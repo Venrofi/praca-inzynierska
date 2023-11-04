@@ -3,6 +3,7 @@
     "id": "1",
     "title": "Pierwsze wyjście z mroku",
     "artist": "Hades",
+    "artistId": "1",
     "cover": "https://picsum.photos/500/700",
     "releaseDate": "2023-08-15"
   },
@@ -10,6 +11,7 @@
     "id": "2",
     "title": "Witaj w klubie",
     "artist": "Tede",
+    "artistId": "2",
     "cover": "https://picsum.photos/501/701",
     "releaseDate": "2023-08-21"
   },
@@ -17,6 +19,7 @@
     "id": "3",
     "title": "Idioci i Ładni",
     "artist": "Kali",
+    "artistId": "3",
     "cover": "https://picsum.photos/502/702",
     "releaseDate": "2023-08-18"
   },
@@ -24,6 +27,7 @@
     "id": "4",
     "title": "Eklektyka",
     "artist": "Taco Hemingway",
+    "artistId": "4",
     "cover": "https://picsum.photos/503/703",
     "releaseDate": "2023-08-25"
   },
@@ -31,6 +35,7 @@
     "id": "5",
     "title": "Miliony dolarów",
     "artist": "Peja",
+    "artistId": "5",
     "cover": "https://picsum.photos/504/704",
     "releaseDate": "2023-08-16"
   },
@@ -38,6 +43,7 @@
     "id": "6",
     "title": "Bella",
     "artist": "Mata",
+    "artistId": "6",
     "cover": "https://picsum.photos/505/705",
     "releaseDate": "2023-08-30"
   },
@@ -45,6 +51,7 @@
     "id": "7",
     "title": "Jestem Bogiem",
     "artist": "Paktofonika",
+    "artistId": "7",
     "cover": "https://picsum.photos/506/706",
     "releaseDate": "2023-08-22"
   },
@@ -52,6 +59,7 @@
     "id": "8",
     "title": "B.O.R.",
     "artist": "Gural",
+    "artistId": "8",
     "cover": "https://picsum.photos/507/707",
     "releaseDate": "2023-08-28"
   },
@@ -59,6 +67,7 @@
     "id": "9",
     "title": "FV 2020",
     "artist": "Fisz Emade",
+    "artistId": "9",
     "cover": "https://picsum.photos/508/708",
     "releaseDate": "2023-08-27"
   },
@@ -66,6 +75,7 @@
     "id": "10",
     "title": "Silesia",
     "artist": "O.S.T.R.",
+    "artistId": "10",
     "cover": "https://picsum.photos/509/709",
     "releaseDate": "2023-08-23"
   }

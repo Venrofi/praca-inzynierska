@@ -26,6 +26,7 @@ export interface PremiereAlbum {
   id: string;
   title: string;
   artist: string;
+  artistId: string;
   cover: string;
   releaseDate: string;
 }

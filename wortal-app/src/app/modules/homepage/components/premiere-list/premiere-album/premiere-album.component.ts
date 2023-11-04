@@ -20,14 +20,12 @@ export class PremiereAlbumComponent {
     this.isWideScreen = window.innerWidth > 600;
   }
 
-  openArtistForum(artist: string) {
-    this.artist.emit(artist);
-    return `/forum/${artist}`;
+  openArtistForum() {
+    this.artist.emit(this.album.artistId);
   }
 
-  openAlbumModal(album: PremiereAlbum) {
-    this.albumModal.emit(album.id);
-    return `/forum/${album.artist}/${album.id}`;
+  openAlbumModal() {
+    this.albumModal.emit(this.album.id);
   }
 
 }
