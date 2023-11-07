@@ -37,6 +37,7 @@ namespace Backend.Controllers
                 PasswordSalt = passwordSalt,
                 VerificationToken = CreateRandomToken()
             };
+            user.Role = Core.Entities.User.Roles.USER;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
