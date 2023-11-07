@@ -19,6 +19,8 @@ namespace Backend.Data.Context
         public DbSet<PremiereAlbum> PremiereAlbums { get; set; }
         public DbSet<PremiereAlbumDetails> PremiereAlbumDetails { get; set; }
         public DbSet<Track> Tracks { get; set; }
+        public DbSet<ArtistProfile> ArtistsProfiles { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }  
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

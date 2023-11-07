@@ -14,6 +14,15 @@ namespace Backend.Core.Entities
         public string Topic { get; set; }
 
         [Required]
+        public TopicTypes TopicType { get; set; }
+
+        public enum TopicTypes
+        {
+            Artist,
+            Group
+        }
+
+        [Required]
         public DateTime CreationTime { get; set; }
 
         [Required]

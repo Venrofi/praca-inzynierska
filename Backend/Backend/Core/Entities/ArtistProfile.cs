@@ -7,5 +7,6 @@
         public string Name { get; set; }
 
         //public DiscussionPost DiscussionPost { get; set; }
+        public List<PremiereAlbum>? Albums { get; set; } 
     }
 }
