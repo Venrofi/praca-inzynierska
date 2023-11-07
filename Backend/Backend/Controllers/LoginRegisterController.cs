@@ -35,9 +35,9 @@ namespace Backend.Controllers
                 Email = request.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                VerificationToken = CreateRandomToken()
+                VerificationToken = CreateRandomToken(),
+                UserType = _context.UserTypes.Where(ut => ut.UserTypeId == Guid.Parse("C3CD69CA-52F0-4A43-93C2-70433A8086F7")).FirstOrDefault()
             };
-            user.Role = Core.Entities.User.Roles.USER;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

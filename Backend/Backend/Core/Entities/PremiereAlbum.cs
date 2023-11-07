@@ -21,5 +21,7 @@ namespace Backend.Core.Entities
 
         public PremiereAlbumDetails? PremiereAlbumDetails { get; set; }
         //public Guid? PremiereAlbumDetailsId { get; set; }
+        public Guid ArtistProfileId { get; set; }
+        public ArtistProfile ArtistProfile { get; set; }
     }
 }

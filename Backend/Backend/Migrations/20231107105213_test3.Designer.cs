@@ -4,6 +4,7 @@ using Backend.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20231107105213_test3")]
+    partial class test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,11 +281,11 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("ResetTokenExpiration")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserTypeId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("VerificationTime")
                         .HasColumnType("datetime2");
@@ -292,24 +295,7 @@ namespace Backend.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("UserTypeId");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
-                {
-                    b.Property<Guid>("UserTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserTypeId");
-
-                    b.ToTable("UserTypes");
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -397,17 +383,6 @@ namespace Backend.Migrations
                     b.Navigation("PremiereAlbumDetails");
                 });
 
-            modelBuilder.Entity("Backend.Core.Entities.User", b =>
-                {
-                    b.HasOne("Backend.Core.Entities.UserType", "UserType")
-                        .WithMany("Users")
-                        .HasForeignKey("UserTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserType");
-                });
-
             modelBuilder.Entity("GroupUser", b =>
                 {
                     b.HasOne("Backend.Core.Entities.Group", null)
@@ -452,11 +427,6 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Core.Entities.User", b =>
                 {
                     b.Navigation("DiscussionPosts");
-                });
-
-            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

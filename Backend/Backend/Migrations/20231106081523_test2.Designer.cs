@@ -4,6 +4,7 @@ using Backend.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20231106081523_test2")]
+    partial class test2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.Core.Entities.ArtistProfile", b =>
-                {
-                    b.Property<Guid>("ArtistProfileId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ArtistProfileId");
-
-                    b.ToTable("ArtistsProfiles");
-                });
 
             modelBuilder.Entity("Backend.Core.Entities.Comment", b =>
                 {
@@ -81,9 +69,6 @@ namespace Backend.Migrations
                     b.Property<string>("Topic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TopicType")
-                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -174,9 +159,6 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ArtistProfileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Cover")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -190,8 +172,6 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PremiereAlbumId");
-
-                    b.HasIndex("ArtistProfileId");
 
                     b.ToTable("PremiereAlbums");
                 });
@@ -278,11 +258,11 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("ResetTokenExpiration")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserTypeId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("VerificationTime")
                         .HasColumnType("datetime2");
@@ -292,24 +272,7 @@ namespace Backend.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("UserTypeId");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
-                {
-                    b.Property<Guid>("UserTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserTypeId");
-
-                    b.ToTable("UserTypes");
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -366,17 +329,6 @@ namespace Backend.Migrations
                     b.Navigation("DiscussionPost");
                 });
 
-            modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
-                {
-                    b.HasOne("Backend.Core.Entities.ArtistProfile", "ArtistProfile")
-                        .WithMany("Albums")
-                        .HasForeignKey("ArtistProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ArtistProfile");
-                });
-
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbumDetails", b =>
                 {
                     b.HasOne("Backend.Core.Entities.PremiereAlbum", "PremiereAlbum")
@@ -397,17 +349,6 @@ namespace Backend.Migrations
                     b.Navigation("PremiereAlbumDetails");
                 });
 
-            modelBuilder.Entity("Backend.Core.Entities.User", b =>
-                {
-                    b.HasOne("Backend.Core.Entities.UserType", "UserType")
-                        .WithMany("Users")
-                        .HasForeignKey("UserTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserType");
-                });
-
             modelBuilder.Entity("GroupUser", b =>
                 {
                     b.HasOne("Backend.Core.Entities.Group", null)
@@ -421,11 +362,6 @@ namespace Backend.Migrations
                         .HasForeignKey("UsersUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Backend.Core.Entities.ArtistProfile", b =>
-                {
-                    b.Navigation("Albums");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPost", b =>
@@ -452,11 +388,6 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Core.Entities.User", b =>
                 {
                     b.Navigation("DiscussionPosts");
-                });
-
-            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

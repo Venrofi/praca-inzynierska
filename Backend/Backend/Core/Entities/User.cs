@@ -7,20 +7,10 @@ namespace Backend.Core.Entities
 {
     public class User
     {
-        //[Required]
         public Guid UserId { get; set; }
-
-       // [Required]
-        //[DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
-
-        //[Required]
         public string? UserName { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Password)]
-        //[StringLength(15, ErrorMessage = "Your Password is limited to {2} to {1} characters", MinimumLength = 6)]
-        // public string Password { get; set; }
+        public string? Avatar { get; set; }
 
         public byte[] PasswordHash { get; set; } = new byte[32];
         public byte[] PasswordSalt { get; set; } = new byte[32];
@@ -29,22 +19,13 @@ namespace Backend.Core.Entities
         public string? PasswordResetToken { get; set; }
         public DateTime? ResetTokenExpiration { get; set; }
 
-
-        //[Required]
-        public string? Avatar { get; set; }
-
-        //[Required]
-        public Roles Role { get; set; } = Roles.USER;
-
-        public enum Roles
-        {
-            ADMIN,
-            USER,
-            MODERATOR
-        }
-
-        //public List<Comment> Comments { get; set; }
+        
+        //TO DODAC??? bo teraz komentarze maja usera, ale user nie ma komentarzy xd
+        //public List<Comment>? Comments { get; set; }                      //<=====
         public List<DiscussionPost>? DiscussionPosts { get; set; }
         public List<Group>? Groups { get; set; }
+
+        public Guid UserTypeId { get; set; }
+        public UserType UserType { get; set; }
     }
 }
