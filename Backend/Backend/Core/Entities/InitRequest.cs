@@ -2,13 +2,5 @@
 {
     public class InitRequest
     {
-        //GetBestDiscussions
-
-        //GetBestArtists
-
-        //GetBestUsers
-
-        //GetRecommendedGroups
-
     }
 }

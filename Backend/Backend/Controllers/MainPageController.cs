@@ -11,6 +11,12 @@ namespace Backend.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        #region Init
+
+        #endregion
+
+        #region MainPageLists
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DiscussionPost>>> GetDiscussionsList()
         {
@@ -40,5 +46,7 @@ namespace Backend.Controllers
             }
             return await _context.PremiereAlbums.OrderByDescending(dp => dp.ReleaseDate).ToListAsync();
         }
+
+        #endregion
     }
 }
