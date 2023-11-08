@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231107155323_test4")]
+    [Migration("20231108104908_test4")]
     partial class test4
     {
         /// <inheritdoc />
@@ -71,8 +71,14 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ArtistProfileId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("GroupId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfComments")
                         .HasColumnType("int");
@@ -92,6 +98,10 @@ namespace Backend.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("DiscussionPostId");
+
+                    b.HasIndex("ArtistProfileId");
+
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("UserId");
 
@@ -265,6 +275,7 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -282,6 +293,7 @@ namespace Backend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserTypeId")
@@ -337,7 +349,7 @@ namespace Backend.Migrations
                         .HasForeignKey("DiscussionPostDetailsId");
 
                     b.HasOne("Backend.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -349,11 +361,23 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPost", b =>
                 {
+                    b.HasOne("Backend.Core.Entities.ArtistProfile", "ArtistProfile")
+                        .WithMany("DiscussionPosts")
+                        .HasForeignKey("ArtistProfileId");
+
+                    b.HasOne("Backend.Core.Entities.Group", "Group")
+                        .WithMany("DiscussionPosts")
+                        .HasForeignKey("GroupId");
+
                     b.HasOne("Backend.Core.Entities.User", "User")
                         .WithMany("DiscussionPosts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ArtistProfile");
+
+                    b.Navigation("Group");
 
                     b.Navigation("User");
                 });
@@ -429,6 +453,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Core.Entities.ArtistProfile", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("DiscussionPosts");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPost", b =>
@@ -440,6 +466,11 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPostDetails", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.Group", b =>
+                {
+                    b.Navigation("DiscussionPosts");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
@@ -454,6 +485,8 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Core.Entities.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("DiscussionPosts");
                 });
 
