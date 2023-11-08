@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.Core.Entities
+namespace Backend.Core.Requests
 {
     public class UserRegisterRequest
     {
