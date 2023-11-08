@@ -1,4 +1,5 @@
 ﻿using Backend.Core.Entities;
+using Backend.Core.Requests;
 using Backend.Data.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Backend.Controllers
         {
             _context = context;
         }
-
+        
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
@@ -36,7 +37,7 @@ namespace Backend.Controllers
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 VerificationToken = CreateRandomToken(),
-                UserType = _context.UserTypes.Where(ut => ut.UserTypeId == Guid.Parse("C3CD69CA-52F0-4A43-93C2-70433A8086F7")).FirstOrDefault()
+                UserType = _context.UserTypes.Where(ut => ut.Description == "USER").FirstOrDefault()
             };
 
             _context.Users.Add(user);
