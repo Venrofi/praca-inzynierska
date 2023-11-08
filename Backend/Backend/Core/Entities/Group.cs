@@ -11,6 +11,10 @@ namespace Backend.Core.Entities
         [Required]
         public bool Open { get; set; }
 
+        //add tags...
+
         public List<User>? Users { get; set; }
+
+        public List<DiscussionPost>? DiscussionPosts { get; set; }
     }
 }
