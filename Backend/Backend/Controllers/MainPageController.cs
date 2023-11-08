@@ -1,5 +1,6 @@
 ﻿using Backend.Core.Entities;
 using Backend.Data.Context;
+using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,17 +20,17 @@ namespace Backend.Controllers
 
         #region Init
         [HttpGet("get-top-discussions")]
-        public async Task<ActionResult<IEnumerable<DiscussionPost>>> GetTopDiscussions()
+        public async Task<ActionResult<IEnumerable<string>>> GetTopDiscussions()
         {
             if (_context.DiscossionPosts == null)
             {
                 return NotFound();
             }
-            return await _context.DiscossionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).ToListAsync();
+            return await _context.DiscossionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => dp.Title).ToListAsync();
         }
 
-        [HttpGet("get-top-artists")]
-        public async Task<ActionResult<IEnumerable<ArtistProfile>>> GetTopArtists()
+        [HttpGet("get-top-artists-string")]
+        public async Task<ActionResult<IEnumerable<string>>> GetTopArtists()
         {
             if (_context.ArtistsProfiles == null)
                 return NotFound();
@@ -37,7 +38,7 @@ namespace Backend.Controllers
             if (_context.DiscossionPosts == null)
                 return NotFound();
 
-            var artistsPosts = _context.DiscossionPosts.Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist).ToList();
+            /*var artistsPosts = _context.DiscossionPosts.Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist).ToList();
             var topArtists = artistsPosts.GroupBy(ap => ap.Topic).Select(n => new
             {
                 Name = n.Key,
@@ -46,9 +47,10 @@ namespace Backend.Controllers
 
             var list = (from profiles in _context.ArtistsProfiles
                         join artist in topArtists on profiles.Name equals artist.Name
-                        select profiles).ToListAsync();
+                        select profiles.Name).ToListAsync();*/
 
-            return await list;
+            return await _context.ArtistsProfiles.Where(ap => ap.DiscussionPosts != null).OrderBy(ap => ap.DiscussionPosts.Count).Select(ap => ap.Name).Take(5).ToArrayAsync();
+
         }
 
         [HttpGet("get-top-users")]
@@ -58,19 +60,37 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
-            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).ToListAsync();
+            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Take(5).ToListAsync();
         }
 
-        [HttpGet("get-top-users-test-string")]
+        [HttpGet("get-top-users-string")]
         public async Task<ActionResult<IEnumerable<string>>> GetTopUsersTestString()
         {
             if (_context.Users == null)
             {
                 return NotFound();
             }
-            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Select(u => u.UserName).ToListAsync();
+            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Select(u => u.UserName).Take(5).ToListAsync();
         }
 
+        [HttpGet("get-recommended-groups-for-user-string")]
+        public async Task<ActionResult<IEnumerable<string>>> GetRecommendedGroupsForUser(Guid userId)
+        {
+            if (_context.Groups == null)
+            {
+                return NotFound();
+            }
+
+            //na podstawie czego? ilosc uzytkownikow w grupie, ilosc postow/komentarzy w grupie, AI do recomendacji xd
+            GroupsRecommendationAlgorithm gra = new GroupsRecommendationAlgorithm(_context);
+            var user = _context.Users.Where(u => u.UserId == userId).FirstOrDefault();
+            var recommendedList = gra.GetRecommendedGroups(user);
+            var list = (from groupt in _context.Groups
+                       join listgroup in recommendedList on groupt.Name equals listgroup.Name
+                       select groupt.Name).ToListAsync();
+
+            return await list;
+        }
         #endregion
 
         #region MainPageLists
