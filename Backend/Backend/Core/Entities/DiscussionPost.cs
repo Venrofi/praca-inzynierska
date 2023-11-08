@@ -28,13 +28,14 @@ namespace Backend.Core.Entities
         [Required]
         public int NumberOfComments { get; set; }
 
-        //[Required]
-        //[DataType(DataType.MultilineText)]
-        //public string InitialText { get; set; }
-
         public User User { get; set; }
         public Guid UserId { get; set; }
-        //public List<Comment> Comments { get; set; }
         public DiscussionPostDetails DiscussionPostDetails { get; set; }
+
+        public Group? Group { get; set; }
+        public Guid? GroupId { get; set; }
+
+        public ArtistProfile? ArtistProfile { get; set; }
+        public Guid? ArtistProfileId { get; set; }
     }
 }
