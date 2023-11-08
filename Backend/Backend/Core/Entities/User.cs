@@ -19,9 +19,7 @@ namespace Backend.Core.Entities
         public string? PasswordResetToken { get; set; }
         public DateTime? ResetTokenExpiration { get; set; }
 
-        
-        //TO DODAC??? bo teraz komentarze maja usera, ale user nie ma komentarzy xd
-        //public List<Comment>? Comments { get; set; }                      //<=====
+        public List<Comment>? Comments { get; set; }
         public List<DiscussionPost>? DiscussionPosts { get; set; }
         public List<Group>? Groups { get; set; }
 
