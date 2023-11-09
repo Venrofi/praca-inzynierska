@@ -15,6 +15,7 @@ namespace Backend.Controllers {
 
         #region FieldsToRandomize
         private string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", "White 2115", "Deys" };
+        private string[] albums = new string[] { "Atypowy", "Mandarynki", "Czarny Swing", "Hulanki", "Szkoła 81", "Brawurowo i pusto", "Dziki i nietoperze", "Coś więcej niż muzyka", "Trzecie rzeczy", "Szum" };
         private string[] locations = new string[] { "Warszawa", "Poznań", "Rybnik", "Gdańsk", "Bydgoszcz", "Ustrzyki Dolne", "Łodź", "Szczecin", "Radom", "Włocławek" };
         private string[] desc = new string[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo dolor nisl, quis viverra odio auctor vel.",
             "Aliquam dapibus arcu et mi tristique ornare semper sollicitudin nulla.",
@@ -22,12 +23,18 @@ namespace Backend.Controllers {
             "Pellentesque vel justo vitae ante egestas molestie.",
             "Nam malesuada felis quis magna ultrices, at vestibulum augue tempor.",
             "Duis nec tortor sagittis ante feugiat posuere." };
+        private string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" }; 
         #endregion
 
         public ATestController(ApplicationDbContext context) {
             _context = context;
             r = new Random();
         }
+
+        #region FastDataBase
+        //script for fast create records in blank database
+
+        #endregion
 
         /*[HttpPost("fast-artist-profile")]
         public async Task<IActionResult> FastArtistProfile() {
@@ -61,11 +68,6 @@ namespace Backend.Controllers {
             //return Ok($"New artist profile was created.");
         }
  
-        #endregion
-
-        #region FastDataBase
-        //script for fast create records in blank database
-
         #endregion
 
         #region FastRegister
@@ -357,6 +359,48 @@ namespace Backend.Controllers {
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
             return Ok($"New comment was created.");
+        }
+        #endregion
+
+        #region FastPremiereAlbum
+        [HttpPost("fast-premiere-album")]
+        public async Task<IActionResult> FastPremiereAlbum() {
+            if (!_context.ArtistsProfiles.Any())
+                return BadRequest("Missing artists profiles in database.");
+            Guid guid = Guid.NewGuid();
+            int artistIndex = r.Next(0, _context.ArtistsProfiles.Count() - 1);
+            var artist = _context.ArtistsProfiles.ToList().ElementAt(artistIndex);
+
+            var pa = new PremiereAlbum {
+                PremiereAlbumId = guid,
+                Title = albums[r.Next(0, albums.Length - 1)],
+                Artist = authors[r.Next(0, authors.Length - 1)],
+                Cover = "",
+                ReleaseDate = DateTime.Now,
+                PremiereAlbumDetails = new PremiereAlbumDetails(),
+                ArtistProfile = artist,
+                ArtistProfileId = artist.ArtistProfileId
+            };
+            pa.PremiereAlbumDetails = CreatePremiereAlbumDetails(pa);
+            _context.PremiereAlbums.Add(pa);
+            _context.PremiereAlbumDetails.Add(pa.PremiereAlbumDetails);
+            await _context.SaveChangesAsync();
+            return Ok($"New premiere album was created.");
+        }
+
+        private PremiereAlbumDetails CreatePremiereAlbumDetails(PremiereAlbum pa) {
+            Guid guid = Guid.NewGuid();
+            var pad = new PremiereAlbumDetails {
+                PremiereAlbumDetailsId = guid,
+                Description = desc[r.Next(0, desc.Length - 1)],
+                Duration = $"{r.Next(0, 6)}{r.Next(0, 10)}:{r.Next(0, 7)}{r.Next(0, 10)}",
+                Genre = genres[r.Next(0, genres.Length - 1)],
+                Rating = r.NextDouble() * 10,
+                PremiereAlbum = pa,
+                PremiereAlbumId = pa.PremiereAlbumId,
+                Tracks = new List<Track>()
+            };
+            return pad;
         }
         #endregion
     }
