@@ -1,4 +1,5 @@
-﻿using Backend.Core.Entities;
+﻿using Azure.Core;
+using Backend.Core.Entities;
 using Backend.Core.Requests;
 using Backend.Data.Context;
 using Microsoft.AspNetCore.Identity;
@@ -9,15 +10,29 @@ using System.Security.Cryptography;
 namespace Backend.Controllers {
     public class ATestController : ControllerBase {
         private readonly ApplicationDbContext _context;
+        private Random r;
 
-        public ATestController(ApplicationDbContext context)
-        {
+        #region FieldsToRandomize
+        private string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", "White 2115", "Deys" };
+        private string[] locations = new string[] { "Warszawa", "Poznań", "Rybnik", "Gdańsk", "Bydgoszcz", "Ustrzyki Dolne", "Łodź", "Szczecin", "Radom", "Włocławek" };
+        private string[] desc = new string[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo dolor nisl, quis viverra odio auctor vel.",
+            "Aliquam dapibus arcu et mi tristique ornare semper sollicitudin nulla.",
+            "Nunc dapibus, risus nec vehicula eleifend, arcu erat aliquet lectus, non gravida ligula quam id quam.",
+            "Pellentesque vel justo vitae ante egestas molestie.",
+            "Nam malesuada felis quis magna ultrices, at vestibulum augue tempor.",
+            "Duis nec tortor sagittis ante feugiat posuere." };
+        #endregion
+
+        public ATestController(ApplicationDbContext context) {
             _context = context;
+            r = new Random();
         }
+
+        #region FastRegister
 
         [HttpPost("fast-register-100-users")]
         public async Task<IActionResult> FastRegister100Users() {
-            for(int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100; i++) {
                 FastRegister();
             }
             return Ok("100 users was created");
@@ -55,6 +70,8 @@ namespace Backend.Controllers {
 
             return Ok($"user: {user.UserName}, email: {user.Email} created");
         }
+
+        #endregion
 
         #region FastUserTypes
 
@@ -108,6 +125,56 @@ namespace Backend.Controllers {
 
         #endregion
 
+        #region FastEvents
+        [HttpPost("fast-event")]
+        public async Task<IActionResult> FastEvent() {
+            Guid guid = Guid.NewGuid();
+
+            
+
+            var eventt = new Event {
+                EventId = guid,
+                Title = $"{authors[r.Next(0, authors.Length - 1)]} - nowy koncert!",
+                Description = $"{desc[r.Next(0, desc.Length - 1)]}",
+                Date = DateTime.Now,
+                Location = $"{locations[r.Next(0, locations.Length - 1)]}",
+                Cover = ""
+            };
+
+            _context.Events.Add(eventt);
+            await _context.SaveChangesAsync();
+            return Ok($"New event was created, {authors.Length - 1}, {locations.Length - 1}");
+        }
+        #endregion
+
+        #region FastArtistProfile
+        [HttpPost("fast-artist-profile")]
+        public async Task<IActionResult> FastArtistProfile() {
+            Guid guid = Guid.NewGuid();           
+            string name = string.Empty;
+            int i = 0;
+            do {
+                if (i == (authors.Length - 1))
+                    break;
+                name = authors[i];
+                i++;
+            } while (_context.ArtistsProfiles.Any(x => x.Name == name));
+            if(name == string.Empty || _context.ArtistsProfiles.Any(x => x.Name == name))
+                return BadRequest("There are non-use authors name");
+
+            var artistProfile = new ArtistProfile {
+                ArtistProfileId = guid,
+                Name = name,
+                Albums = new List<PremiereAlbum>(),
+                DiscussionPosts = new List<DiscussionPost>()
+            };
+
+            _context.ArtistsProfiles.Add(artistProfile);
+            await _context.SaveChangesAsync();
+            return Ok($"New artist profile was created. {i}");
+        }
+        #endregion
+
         #region LoginRegisterFunctions
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) {
             using (var hmac = new HMACSHA512()) {
@@ -115,6 +182,7 @@ namespace Backend.Controllers {
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }   
         }
+
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) {
             using (var hmac = new HMACSHA512(passwordSalt)) {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
