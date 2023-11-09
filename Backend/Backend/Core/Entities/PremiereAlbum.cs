@@ -19,7 +19,7 @@ namespace Backend.Core.Entities
         [Required]
         public string ReleaseDate { get; set; }
 
-        public PremiereAlbumDetails? PremiereAlbumDetails { get; set; }
+        public PremiereAlbumDetails PremiereAlbumDetails { get; set; }
         //public Guid? PremiereAlbumDetailsId { get; set; }
         public Guid ArtistProfileId { get; set; }
         public ArtistProfile ArtistProfile { get; set; }
