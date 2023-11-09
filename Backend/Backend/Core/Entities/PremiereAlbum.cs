@@ -17,7 +17,7 @@ namespace Backend.Core.Entities
         public string Cover { get; set; }
 
         [Required]
-        public string ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         public PremiereAlbumDetails PremiereAlbumDetails { get; set; }
         //public Guid? PremiereAlbumDetailsId { get; set; }
