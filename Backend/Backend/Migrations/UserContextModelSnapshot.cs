@@ -102,7 +102,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DiscossionPosts");
+                    b.ToTable("DiscussionPosts");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPostDetails", b =>
@@ -123,7 +123,7 @@ namespace Backend.Migrations
                     b.HasIndex("DiscussionPostId")
                         .IsUnique();
 
-                    b.ToTable("DiscossionPostsDetails");
+                    b.ToTable("DiscussionPostsDetails");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.Event", b =>
@@ -172,6 +172,21 @@ namespace Backend.Migrations
                     b.HasKey("GroupId");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.GroupTag", b =>
+                {
+                    b.Property<Guid>("GroupTagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TagName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GroupTagId");
+
+                    b.ToTable("GroupTag");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
@@ -238,6 +253,21 @@ namespace Backend.Migrations
                     b.ToTable("PremiereAlbumDetails");
                 });
 
+            modelBuilder.Entity("Backend.Core.Entities.Profanities", b =>
+                {
+                    b.Property<Guid>("ProfanitiesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProfanitiesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProfanitiesId");
+
+                    b.ToTable("Profanities");
+                });
+
             modelBuilder.Entity("Backend.Core.Entities.Track", b =>
                 {
                     b.Property<Guid>("TrackId")
@@ -248,7 +278,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PremiereAlbumDetailsId")
+                    b.Property<Guid>("PremiereAlbumDetailsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -322,6 +352,21 @@ namespace Backend.Migrations
                     b.HasKey("UserTypeId");
 
                     b.ToTable("UserTypes");
+                });
+
+            modelBuilder.Entity("GroupGroupTag", b =>
+                {
+                    b.Property<Guid>("GroupTagsGroupTagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupsGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GroupTagsGroupTagId", "GroupsGroupId");
+
+                    b.HasIndex("GroupsGroupId");
+
+                    b.ToTable("GroupGroupTag");
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -416,7 +461,9 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Core.Entities.PremiereAlbumDetails", "PremiereAlbumDetails")
                         .WithMany("Tracks")
-                        .HasForeignKey("PremiereAlbumDetailsId");
+                        .HasForeignKey("PremiereAlbumDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PremiereAlbumDetails");
                 });
@@ -430,6 +477,21 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("UserType");
+                });
+
+            modelBuilder.Entity("GroupGroupTag", b =>
+                {
+                    b.HasOne("Backend.Core.Entities.GroupTag", null)
+                        .WithMany()
+                        .HasForeignKey("GroupTagsGroupTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Core.Entities.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -472,7 +534,8 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
                 {
-                    b.Navigation("PremiereAlbumDetails");
+                    b.Navigation("PremiereAlbumDetails")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbumDetails", b =>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231106081523_test2")]
+    [Migration("20231109104137_test2")]
     partial class test2
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Backend.Core.Entities.ArtistProfile", b =>
+                {
+                    b.Property<Guid>("ArtistProfileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArtistProfileId");
+
+                    b.ToTable("ArtistsProfiles");
+                });
 
             modelBuilder.Entity("Backend.Core.Entities.Comment", b =>
                 {
@@ -56,8 +71,14 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ArtistProfileId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("GroupId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfComments")
                         .HasColumnType("int");
@@ -70,14 +91,21 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TopicType")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("DiscussionPostId");
 
+                    b.HasIndex("ArtistProfileId");
+
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("DiscossionPosts");
+                    b.ToTable("DiscussionPosts");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPostDetails", b =>
@@ -98,7 +126,7 @@ namespace Backend.Migrations
                     b.HasIndex("DiscussionPostId")
                         .IsUnique();
 
-                    b.ToTable("DiscossionPostsDetails");
+                    b.ToTable("DiscussionPostsDetails");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.Event", b =>
@@ -149,6 +177,21 @@ namespace Backend.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("Backend.Core.Entities.GroupTag", b =>
+                {
+                    b.Property<Guid>("GroupTagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TagName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GroupTagId");
+
+                    b.ToTable("GroupTag");
+                });
+
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
                 {
                     b.Property<Guid>("PremiereAlbumId")
@@ -158,6 +201,9 @@ namespace Backend.Migrations
                     b.Property<string>("Artist")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ArtistProfileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cover")
                         .IsRequired()
@@ -172,6 +218,8 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PremiereAlbumId");
+
+                    b.HasIndex("ArtistProfileId");
 
                     b.ToTable("PremiereAlbums");
                 });
@@ -208,6 +256,21 @@ namespace Backend.Migrations
                     b.ToTable("PremiereAlbumDetails");
                 });
 
+            modelBuilder.Entity("Backend.Core.Entities.Profanities", b =>
+                {
+                    b.Property<Guid>("ProfanitiesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProfanitiesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProfanitiesId");
+
+                    b.ToTable("Profanities");
+                });
+
             modelBuilder.Entity("Backend.Core.Entities.Track", b =>
                 {
                     b.Property<Guid>("TrackId")
@@ -218,7 +281,7 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PremiereAlbumDetailsId")
+                    b.Property<Guid>("PremiereAlbumDetailsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -242,6 +305,7 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -258,11 +322,12 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("ResetTokenExpiration")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("VerificationTime")
                         .HasColumnType("datetime2");
@@ -272,7 +337,39 @@ namespace Backend.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("UserTypeId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
+                {
+                    b.Property<Guid>("UserTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserTypeId");
+
+                    b.ToTable("UserTypes");
+                });
+
+            modelBuilder.Entity("GroupGroupTag", b =>
+                {
+                    b.Property<Guid>("GroupTagsGroupTagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupsGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GroupTagsGroupTagId", "GroupsGroupId");
+
+                    b.HasIndex("GroupsGroupId");
+
+                    b.ToTable("GroupGroupTag");
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -297,7 +394,7 @@ namespace Backend.Migrations
                         .HasForeignKey("DiscussionPostDetailsId");
 
                     b.HasOne("Backend.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -309,11 +406,23 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPost", b =>
                 {
+                    b.HasOne("Backend.Core.Entities.ArtistProfile", "ArtistProfile")
+                        .WithMany("DiscussionPosts")
+                        .HasForeignKey("ArtistProfileId");
+
+                    b.HasOne("Backend.Core.Entities.Group", "Group")
+                        .WithMany("DiscussionPosts")
+                        .HasForeignKey("GroupId");
+
                     b.HasOne("Backend.Core.Entities.User", "User")
                         .WithMany("DiscussionPosts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ArtistProfile");
+
+                    b.Navigation("Group");
 
                     b.Navigation("User");
                 });
@@ -327,6 +436,17 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("DiscussionPost");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
+                {
+                    b.HasOne("Backend.Core.Entities.ArtistProfile", "ArtistProfile")
+                        .WithMany("Albums")
+                        .HasForeignKey("ArtistProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArtistProfile");
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbumDetails", b =>
@@ -344,9 +464,37 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Core.Entities.PremiereAlbumDetails", "PremiereAlbumDetails")
                         .WithMany("Tracks")
-                        .HasForeignKey("PremiereAlbumDetailsId");
+                        .HasForeignKey("PremiereAlbumDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PremiereAlbumDetails");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.User", b =>
+                {
+                    b.HasOne("Backend.Core.Entities.UserType", "UserType")
+                        .WithMany("Users")
+                        .HasForeignKey("UserTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserType");
+                });
+
+            modelBuilder.Entity("GroupGroupTag", b =>
+                {
+                    b.HasOne("Backend.Core.Entities.GroupTag", null)
+                        .WithMany()
+                        .HasForeignKey("GroupTagsGroupTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Core.Entities.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GroupUser", b =>
@@ -364,6 +512,13 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Core.Entities.ArtistProfile", b =>
+                {
+                    b.Navigation("Albums");
+
+                    b.Navigation("DiscussionPosts");
+                });
+
             modelBuilder.Entity("Backend.Core.Entities.DiscussionPost", b =>
                 {
                     b.Navigation("DiscussionPostDetails")
@@ -375,9 +530,15 @@ namespace Backend.Migrations
                     b.Navigation("Comments");
                 });
 
+            modelBuilder.Entity("Backend.Core.Entities.Group", b =>
+                {
+                    b.Navigation("DiscussionPosts");
+                });
+
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbum", b =>
                 {
-                    b.Navigation("PremiereAlbumDetails");
+                    b.Navigation("PremiereAlbumDetails")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Backend.Core.Entities.PremiereAlbumDetails", b =>
@@ -387,7 +548,14 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Core.Entities.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("DiscussionPosts");
+                });
+
+            modelBuilder.Entity("Backend.Core.Entities.UserType", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
