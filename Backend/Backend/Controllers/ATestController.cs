@@ -335,5 +335,29 @@ namespace Backend.Controllers {
             return dpd;
         }
         #endregion
+
+        #region FastComment
+        [HttpPost("fast-comment")]
+        public async Task<IActionResult> FastComment() {
+            Guid guid = Guid.NewGuid();
+            int userIndex = r.Next(0, _context.Users.Count() - 1);
+            var user = _context.Users.ToList().ElementAt(userIndex);
+            int dpIndex = r.Next(0, _context.DiscussionPostsDetails.Count() - 1);
+            var dpd = _context.DiscussionPostsDetails.ToList().ElementAt(dpIndex);
+
+            var comment = new Comment {
+                CommentId = guid,
+                Content = desc[r.Next(0, desc.Length - 1)],
+                User = user,
+                UserId = user.UserId,
+                DiscussionPostDetails = dpd,
+                DiscussionPostDetailsId = dpd.DiscussionPostDetailsId
+            };
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+            return Ok($"New comment was created.");
+        }
+        #endregion
     }
 }
