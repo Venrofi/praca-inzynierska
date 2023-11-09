@@ -19,7 +19,7 @@ namespace Backend.Core.Entities
         [Required]
         public double Rating { get; set; }
 
-        public PremiereAlbum? PremiereAlbum { get; set; }
+        public PremiereAlbum PremiereAlbum { get; set; }
         public Guid PremiereAlbumId { get; set; }
 
         public List<Track>? Tracks { get; set; }
