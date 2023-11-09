@@ -250,7 +250,7 @@ namespace Backend.Controllers {
             Group group = null;
             ArtistProfile ap = null;
 
-            int groupOrArtistTopic = r.Next(0, 1);
+            int groupOrArtistTopic = r.Next(0, 2);
             if (groupOrArtistTopic == 0) {
                 //group
                 int index = r.Next(0, _context.Groups.Count() - 1);
