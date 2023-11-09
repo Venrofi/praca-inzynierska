@@ -28,6 +28,12 @@ namespace Backend.Controllers {
             r = new Random();
         }
 
+        /*[HttpPost("fast-artist-profile")]
+        public async Task<IActionResult> FastArtistProfile() {
+            Guid guid = Guid.NewGuid();
+            return Ok($"New artist profile was created. {i}");
+        }*/
+
         #region FastRegister
 
         [HttpPost("fast-register-100-users")]
@@ -170,6 +176,36 @@ namespace Backend.Controllers {
             };
 
             _context.ArtistsProfiles.Add(artistProfile);
+            await _context.SaveChangesAsync();
+            return Ok($"New artist profile was created. {i}");
+        }
+        #endregion
+
+        #region FastGroup
+        [HttpPost("fast-group")]
+        public async Task<IActionResult> FastGroup() {
+            Guid guid = Guid.NewGuid();
+            string name = string.Empty;
+            int i = 0;
+            do {
+                if (i == (authors.Length - 1))
+                    break;
+                name = authors[i];
+                i++;
+            } while (_context.Groups.Any(g => g.Name == name + "-fans"));
+            if (name == string.Empty || _context.Groups.Any(g => g.Name == name + "-fans"))
+                return BadRequest("There are non-use authors name");
+
+            var group = new Group {
+                GroupId = guid,
+                Name = name + "-fans",
+                Open = true,
+                Users = new List<User>(),
+                DiscussionPosts = new List<DiscussionPost>(),
+                GroupTags = new List<GroupTag>()
+            };
+
+            _context.Groups.Add(group);
             await _context.SaveChangesAsync();
             return Ok($"New artist profile was created. {i}");
         }
