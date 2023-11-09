@@ -22,11 +22,11 @@ namespace Backend.Controllers
         [HttpGet("get-top-discussions")]
         public async Task<ActionResult<IEnumerable<string>>> GetTopDiscussions()
         {
-            if (_context.DiscossionPosts == null)
+            if (_context.DiscussionPosts == null)
             {
                 return NotFound();
             }
-            return await _context.DiscossionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => dp.Title).ToListAsync();
+            return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => dp.Title).ToListAsync();
         }
 
         [HttpGet("get-top-artists-string")]
@@ -35,7 +35,7 @@ namespace Backend.Controllers
             if (_context.ArtistsProfiles == null)
                 return NotFound();
 
-            if (_context.DiscossionPosts == null)
+            if (_context.DiscussionPosts == null)
                 return NotFound();
 
             /*var artistsPosts = _context.DiscossionPosts.Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist).ToList();
@@ -102,7 +102,7 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
-            return await _context.DiscossionPosts.OrderByDescending(d => d.CreationTime).ToListAsync();
+            return await _context.DiscussionPosts.OrderByDescending(d => d.CreationTime).ToListAsync();
         }
 
         [HttpGet("get-events")]

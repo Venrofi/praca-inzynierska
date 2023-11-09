@@ -31,8 +31,15 @@ namespace Backend.Controllers {
         /*[HttpPost("fast-artist-profile")]
         public async Task<IActionResult> FastArtistProfile() {
             Guid guid = Guid.NewGuid();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
             return Ok($"New artist profile was created. {i}");
         }*/
+
+        #region FastDataBase
+        //script for fast create records in blank database
+
+        #endregion
 
         #region FastRegister
 
@@ -207,7 +214,7 @@ namespace Backend.Controllers {
 
             _context.Groups.Add(group);
             await _context.SaveChangesAsync();
-            return Ok($"New artist profile was created. {i}");
+            return Ok($"New group was created. {i}");
         }
         #endregion
 
@@ -228,6 +235,75 @@ namespace Backend.Controllers {
 
         private string CreateRandomToken() {
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+        }
+        #endregion
+
+        #region FastDiscussionPostAndDetails
+        [HttpPost("fast-discussion-post")]
+        public async Task<IActionResult> FastDiscusisonPost() {
+            Guid guid = Guid.NewGuid();
+            var title = string.Empty;
+            var topic = string.Empty;
+            var topicType = DiscussionPost.TopicTypes.Group;
+            int userIndex = r.Next(0, _context.Users.Count() - 1);
+            var user = _context.Users.ToList().ElementAt(userIndex);
+            Group group = null;
+            ArtistProfile ap = null;
+
+            int groupOrArtistTopic = r.Next(0, 1);
+            if (groupOrArtistTopic == 0) {
+                //group
+                int index = r.Next(0, _context.Groups.Count() - 1);
+                title = $"{_context.Groups.ToList().ElementAt(index).Name} - dyskusja.";
+                topic = $"{_context.Groups.ToList().ElementAt(index).Name}";
+                group = _context.Groups.ToList().ElementAt(index);
+            }
+            else {
+                //artist
+                int index = r.Next(0, _context.ArtistsProfiles.Count() - 1);
+                title = $"{_context.ArtistsProfiles.ToList().ElementAt(index).Name} - dyskusja.";
+                topic = $"{_context.ArtistsProfiles.ToList().ElementAt(index).Name}";
+                topicType = DiscussionPost.TopicTypes.Artist;
+                ap = _context.ArtistsProfiles.ToList().ElementAt(index);
+            }
+
+            var dp = new DiscussionPost {
+                DiscussionPostId = guid,
+                Title = title,
+                Topic = topic,
+                TopicType = topicType,
+                CreationTime = DateTime.Now,
+                User = user,
+                UserId = user.UserId,
+                DiscussionPostDetails = new DiscussionPostDetails(),
+                Group = group,
+                GroupId = group?.GroupId,
+                ArtistProfile = ap,
+                ArtistProfileId = ap?.ArtistProfileId
+            };
+            dp.DiscussionPostDetails = CreateDiscussionPostDetails(dp);
+
+            _context.DiscussionPosts.Add(dp);
+            _context.DiscussionPostsDetails.Add(dp.DiscussionPostDetails);
+            await _context.SaveChangesAsync();
+            return Ok($"New discussion post was created. \n DiscussionPostId {dp.DiscussionPostId}" +
+                $"\n Title {dp.Title}\n Topic {dp.Topic}\n TopicType {dp.TopicType}\n {dp.CreationTime}\n User {dp.User.UserName}" +
+                $"\n UserId {dp.UserId}\n Group {dp.Group?.Name}\n ArtistProfile {dp.ArtistProfile?.Name}" +
+                $"\n\n DiscussionPostDetails\n DiscussionPostDetailsId {dp.DiscussionPostDetails.DiscussionPostDetailsId}" +
+                $"\n Content {dp.DiscussionPostDetails.Content}\n DiscussionPost {dp.Title}\n DiscussionPostId {dp.DiscussionPostDetails.DiscussionPostId}" +
+                $"\n Comments {dp.DiscussionPostDetails.Comments?.Count}");
+        }
+
+        private DiscussionPostDetails CreateDiscussionPostDetails(DiscussionPost dp) {           
+            Guid guid = Guid.NewGuid();
+            var dpd = new DiscussionPostDetails {
+                DiscussionPostDetailsId = guid,
+                Content = desc[r.Next(0, desc.Length - 1)],
+                DiscussionPost = dp,
+                DiscussionPostId = dp.DiscussionPostId,
+                Comments = new List<Comment>()
+            };
+            return dpd;
         }
         #endregion
     }

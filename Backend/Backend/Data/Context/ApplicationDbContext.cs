@@ -12,8 +12,8 @@ namespace Backend.Data.Context
 
         public DbSet<User> Users => Set<User>();
         public DbSet<Comment> Comments { get; set; } //= null!;
-        public DbSet<DiscussionPost> DiscossionPosts { get; set; }
-        public DbSet<DiscussionPostDetails> DiscossionPostsDetails { get; set; }
+        public DbSet<DiscussionPost> DiscussionPosts { get; set; }
+        public DbSet<DiscussionPostDetails> DiscussionPostsDetails { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<PremiereAlbum> PremiereAlbums { get; set; }
