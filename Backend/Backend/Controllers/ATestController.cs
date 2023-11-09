@@ -26,7 +26,13 @@ namespace Backend.Controllers {
         [HttpPost("fast-register")]
         public async Task<IActionResult> FastRegister() {
             if (!(_context.UserTypes.Where(ut => ut.Description == "USER").Any())) {
-                FastUserType();
+                FastUserTypeUser();
+            }
+            if (!(_context.UserTypes.Where(ut => ut.Description == "ADMIN").Any())) {
+                FastUserTypeAdmin();
+            }
+            if (!(_context.UserTypes.Where(ut => ut.Description == "MODERATOR").Any())) {
+                FastUserTypeModerator();
             }
 
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
@@ -50,8 +56,10 @@ namespace Backend.Controllers {
             return Ok($"user: {user.UserName}, email: {user.Email} created");
         }
 
-        [HttpPost("fast-user-type")]
-        public async Task<IActionResult> FastUserType() {
+        #region FastUserTypes
+
+        [HttpPost("fast-user-type-user")]
+        public async Task<IActionResult> FastUserTypeUser() {
             if (_context.UserTypes.Where(ut => ut.Description == "USER").Any())
                 return BadRequest("USER is already in database");
             Guid guid = Guid.NewGuid();
@@ -65,6 +73,40 @@ namespace Backend.Controllers {
             await _context.SaveChangesAsync();
             return Ok("UserType USER was created");
         }
+
+        [HttpPost("fast-user-type-admin")]
+        public async Task<IActionResult> FastUserTypeAdmin() {
+            if (_context.UserTypes.Where(ut => ut.Description == "ADMIN").Any())
+                return BadRequest("USER is already in database");
+            Guid guid = Guid.NewGuid();
+
+            var userType = new UserType {
+                UserTypeId = guid,
+                Description = "ADMIN",
+            };
+
+            _context.UserTypes.Add(userType);
+            await _context.SaveChangesAsync();
+            return Ok("UserType ADMIN was created");
+        }
+
+        [HttpPost("fast-user-type-moderator")]
+        public async Task<IActionResult> FastUserTypeModerator() {
+            if (_context.UserTypes.Where(ut => ut.Description == "MODERATOR").Any())
+                return BadRequest("USER is already in database");
+            Guid guid = Guid.NewGuid();
+
+            var userType = new UserType {
+                UserTypeId = guid,
+                Description = "MODERATOR",
+            };
+
+            _context.UserTypes.Add(userType);
+            await _context.SaveChangesAsync();
+            return Ok("UserType MODERATOR was created");
+        }
+
+        #endregion
 
         #region LoginRegisterFunctions
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt) {
