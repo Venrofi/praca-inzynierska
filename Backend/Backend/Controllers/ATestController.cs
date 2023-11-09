@@ -2,6 +2,7 @@
 using Backend.Core.Entities;
 using Backend.Core.Requests;
 using Backend.Data.Context;
+using Backend.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,32 @@ namespace Backend.Controllers {
             await _context.SaveChangesAsync();
             return Ok($"New artist profile was created. {i}");
         }*/
+
+        #region ProfanitiesTest
+        [HttpPost("profanity-test")]
+        public async Task<IActionResult> ProfanityTest(UserLoginRequest ulr) {
+            ProfanitySearchAlgorithm psa = new ProfanitySearchAlgorithm(_context);
+
+            if (!_context.Profanities.Any()) {
+                psa.LoadBadWords();
+            }
+            await _context.SaveChangesAsync();
+
+            string words = string.Join("|", _context.Profanities.Select(p => p.ProfanitiesName));
+            words = words.Remove(words.Length - 1);
+            //return Ok(words);
+            //zmiana 0 na o, 3 na e, ó na o itd...
+            //tolowercase
+            //jak rozwiazac problem ze spacjami, myslikami, podlogami? usuneicie tych znaków mocno ogranicza algorytm podczas przeszukiwania np komentarzy
+            if (psa.HasBadWords(ulr.Username))
+                return Ok("Wystapil wulgaryzm");
+            else
+                return Ok("Bez wulgaryzmu");
+
+            //return Ok($"New artist profile was created.");
+        }
+ 
+        #endregion
 
         #region FastDataBase
         //script for fast create records in blank database
@@ -241,6 +268,8 @@ namespace Backend.Controllers {
         #region FastDiscussionPostAndDetails
         [HttpPost("fast-discussion-post")]
         public async Task<IActionResult> FastDiscusisonPost() {
+            if (!_context.Users.Any() || !_context.Groups.Any() || !_context.ArtistsProfiles.Any())
+                return BadRequest("Missing users, groups or artists profiles in database.");
             Guid guid = Guid.NewGuid();
             var title = string.Empty;
             var topic = string.Empty;
