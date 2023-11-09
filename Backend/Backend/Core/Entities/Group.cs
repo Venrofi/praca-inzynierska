@@ -16,5 +16,7 @@ namespace Backend.Core.Entities
         public List<User>? Users { get; set; }
 
         public List<DiscussionPost>? DiscussionPosts { get; set; }
+
+        public List<GroupTag>? GroupTags { get; set; }
     }
 }
