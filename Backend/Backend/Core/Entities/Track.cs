@@ -14,6 +14,6 @@ namespace Backend.Core.Entities
         public string Duration { get; set; }
 
         public PremiereAlbumDetails PremiereAlbumDetails { get; set;}
-        public Guid? PremiereAlbumDetailsId { get; set; }
+        public Guid PremiereAlbumDetailsId { get; set; }
     }
 }
