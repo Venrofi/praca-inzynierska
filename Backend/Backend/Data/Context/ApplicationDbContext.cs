@@ -21,6 +21,7 @@ namespace Backend.Data.Context
         public DbSet<Track> Tracks { get; set; }
         public DbSet<ArtistProfile> ArtistsProfiles { get; set; }
         public DbSet<UserType> UserTypes { get; set; }  
+        public DbSet<Profanities> Profanities { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
