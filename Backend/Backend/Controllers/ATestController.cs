@@ -14,16 +14,17 @@ namespace Backend.Controllers {
         private Random r;
 
         #region FieldsToRandomize
-        private string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", "White 2115", "Deys" };
-        private string[] albums = new string[] { "Atypowy", "Mandarynki", "Czarny Swing", "Hulanki", "Szkoła 81", "Brawurowo i pusto", "Dziki i nietoperze", "Coś więcej niż muzyka", "Trzecie rzeczy", "Szum" };
-        private string[] locations = new string[] { "Warszawa", "Poznań", "Rybnik", "Gdańsk", "Bydgoszcz", "Ustrzyki Dolne", "Łodź", "Szczecin", "Radom", "Włocławek" };
-        private string[] desc = new string[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo dolor nisl, quis viverra odio auctor vel.",
+        private readonly string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", "White 2115", "Deys" };
+        private readonly string[] albums = new string[] { "Atypowy", "Mandarynki", "Czarny Swing", "Hulanki", "Szkoła 81", "Brawurowo i pusto", "Dziki i nietoperze", "Coś więcej niż muzyka", "Trzecie rzeczy", "Szum" };
+        private readonly string[] locations = new string[] { "Warszawa", "Poznań", "Rybnik", "Gdańsk", "Bydgoszcz", "Ustrzyki Dolne", "Łodź", "Szczecin", "Radom", "Włocławek" };
+        private readonly string[] desc = new string[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo dolor nisl, quis viverra odio auctor vel.",
             "Aliquam dapibus arcu et mi tristique ornare semper sollicitudin nulla.",
             "Nunc dapibus, risus nec vehicula eleifend, arcu erat aliquet lectus, non gravida ligula quam id quam.",
             "Pellentesque vel justo vitae ante egestas molestie.",
             "Nam malesuada felis quis magna ultrices, at vestibulum augue tempor.",
             "Duis nec tortor sagittis ante feugiat posuere." };
-        private string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" }; 
+        private readonly string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" };
+        private readonly string[] tracks = new string[] { "Dorosłość", "Wakacje", "Czarne ciuchy", "Ostatni ninja", "Popiół", "Ukryty w mieście krzyk", "Françoise Hardy", "BFF", "Szklanki", "Mandarynki" };
         #endregion
 
         public ATestController(ApplicationDbContext context) {
@@ -401,6 +402,41 @@ namespace Backend.Controllers {
                 Tracks = new List<Track>()
             };
             return pad;
+        }
+        #endregion
+
+        #region FastTrack
+        [HttpPost("fast-25-tracks")]
+        public async Task<IActionResult> Fast25Tracks() {
+            for (int i = 0; i < 25; i++) {
+                FastTrack();
+            }
+            return Ok("25 track was created, or not heh : - )");
+        }
+
+        [HttpPost("fast-track")]
+        public async Task<IActionResult> FastTrack() {
+            Guid guid = Guid.NewGuid();
+            int albumDetailsIndex = r.Next(0, _context.PremiereAlbumDetails.Count() - 1);
+            var albumDetails = _context.PremiereAlbumDetails.ToList().ElementAt(albumDetailsIndex);
+            string title = string.Empty;
+            if (albumDetails.Tracks == null)
+                albumDetails.Tracks = new List<Track>();
+            title = tracks[r.Next(0, tracks.Length - 1)];
+
+            if (_context.Tracks.Where(pad => pad.PremiereAlbumDetailsId == albumDetails.PremiereAlbumDetailsId).Any(t => t.Title == title))
+                return BadRequest("Track already exist in this album");
+
+            var track = new Track {
+                TrackId = guid,
+                Title = title,
+                Duration = $"0{r.Next(0, 10)}:{r.Next(0, 7)}{r.Next(0, 10)}",
+                PremiereAlbumDetails = albumDetails,
+                PremiereAlbumDetailsId = albumDetails.PremiereAlbumDetailsId
+            };
+            _context.Tracks.Add(track);
+            await _context.SaveChangesAsync();
+            return Ok($"New track was created.");
         }
         #endregion
     }
