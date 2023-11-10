@@ -51,13 +51,13 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.UserName == request.Username).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest("User not found!");
+                return BadRequest(new { success = false, message = "User not found!" });
             if (user.VerificationTime == null)
-                return BadRequest("User is not verified!");
+                return BadRequest(new { success = false, message = "User is not verified!" });
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest("Wrong password!");
+                return BadRequest(new { success = false, message = "Wrong password!" });
 
-            return Ok("Successfully logged in!");
+            return Ok(new { success = true, message = "Login successful", userID = user.UserId }); //TODO: Generate userSessionToken?
         }
 
         [HttpPost("verify")]
