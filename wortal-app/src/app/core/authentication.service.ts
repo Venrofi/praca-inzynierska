@@ -1,33 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, map, Observable, of, Subject } from 'rxjs';
-import { Member } from './core.model';
+import { Observable, Subject } from 'rxjs';
+import { LoginRequest, LoginResponse } from './api.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private users: any[] = [
-    {
-      username: 'admin',
-      password: 'admin',
-      id: '001'
-    },
-    {
-      username: 'user',
-      password: 'user',
-      id: '002'
-    },
-    {
-      username: 'moderator',
-      password: 'moderator',
-      id: '003'
-    }
-  ];
+  private API_ROOT = 'https://localhost:7145/api';
 
   private loginSuccessSubject = new Subject<void>();
   private logoutActionSubject = new Subject<void>();
+
+  constructor(private http: HttpClient) { }
 
   loginSuccess = this.loginSuccessSubject.asObservable();
   logoutSuccess = this.logoutActionSubject.asObservable();
@@ -40,37 +26,13 @@ export class AuthService {
     this.logoutActionSubject.next();
   }
 
-  login(username: string, password: string) {
-    // Regex for password validation
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/;
-
-    // Check if the password is valid
-    // if (!passwordRegex.test(password)) {
-    //   return {
-    //     success: false,
-    //     message: 'Password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character'
-    //   };
-    // }
-
-    const user = this.users.find((user) => user.username === username);
-    if (!user) {
-      return { success: false, message: 'User does not exist' };
-    }
-
-    // Check if the password is correct
-    if (user.password !== password) {
-      return { success: false, message: 'Password is incorrect' };
-    }
-
-    this.setLoggedInUser(user.id);
-    this.notifyLoginSuccess();
-    return { success: true, message: 'Logged in successfully', userID: this.getLoggedInUser() };
+  login(credentials: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.API_ROOT}/LoginRegister/login`, credentials);
   }
 
   logout() {
     this.clearLoggedInUser();
     this.notifyLogout();
-    return { success: true, message: 'Logged out successfully' };
   }
 
   isAuthenticatedUser(): boolean {
@@ -81,11 +43,11 @@ export class AuthService {
     return localStorage.getItem('user');
   }
 
-  private setLoggedInUser(userID: string): void {
+  setLoggedInUser(userID: string): void {
     localStorage.setItem('user', userID);
   }
 
-  private clearLoggedInUser(): void {
+  clearLoggedInUser(): void {
     localStorage.removeItem('user');
   }
 }

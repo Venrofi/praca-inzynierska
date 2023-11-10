@@ -7,6 +7,7 @@
 // Define a theme.
 $primary: mat.define-palette(mat.$purple-palette);
 $accent: mat.define-palette(mat.$green-palette);
+$warn: mat.define-palette(mat.$red-palette);
 
 $my-primary-50: map-get($primary, 50);
 $my-primary-100: map-get($primary, 100);
@@ -39,3 +40,19 @@ $my-accent-A200: map-get($accent, A200);
 $my-accent-A400: map-get($accent, A400);
 $my-accent-A700: map-get($accent, A700);
 $my-accent-OG: #60DC9F;
+
+$my-warn-50: map-get($warn, 50);
+$my-warn-100: map-get($warn, 100);
+$my-warn-200: map-get($warn, 200);
+$my-warn-300: map-get($warn, 300);
+$my-warn-400: map-get($warn, 400);
+$my-warn-500: map-get($warn, 500); // This is the main shade
+$my-warn-600: map-get($warn, 600);
+$my-warn-700: map-get($warn, 700);
+$my-warn-800: map-get($warn, 800);
+$my-warn-900: map-get($warn, 900);
+$my-warn-A100: map-get($warn, A100);
+$my-warn-A200: map-get($warn, A200);
+$my-warn-A400: map-get($warn, A400);
+$my-warn-A700: map-get($warn, A700);
+$my-warn-OG: #FF0000;

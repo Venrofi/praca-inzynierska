@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/authentication.service';
 
 @Component({
@@ -14,7 +15,11 @@ export class AuthenticationDialogComponent implements OnInit {
 
   authType: 'LOGIN' | 'REGISTER' = 'LOGIN';
 
-  constructor(private authService: AuthService, private dialogRef: MatDialogRef<AuthenticationDialogComponent>) { }
+  constructor(
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<AuthenticationDialogComponent>,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
     this.loginCredentials = {
@@ -29,12 +34,35 @@ export class AuthenticationDialogComponent implements OnInit {
   }
 
   authenticate(): void {
-    const response = this.authService.login(this.loginCredentials.username, this.loginCredentials.password);
-    console.log(response);
-
-    if (response.success) {
-      this.dialogRef.close(response.userID);
-    }
+    this.authService.login(this.loginCredentials).subscribe({
+      next: (response) => {
+        console.log('Login attempt..', response.code);
+        this.authService.setLoggedInUser(response.userID);
+        this.authService.notifyLoginSuccess();
+        this.dialogRef.close(response.userID);
+      },
+      error: (response) => {
+        console.log('Login failed..', response.error.code);
+        switch (response.error.code) {
+          case 'not-found': {
+            this.snackBar.open('Użytkownik nie istnieje!', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-error'] });
+            break;
+          }
+          case 'user-not-verified': {
+            this.snackBar.open('Użytkownik nie został zweryfikowany!', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-error'] });
+            break;
+          }
+          case 'wrong-password': {
+            this.snackBar.open('Niepoprawne hasło!', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-error'] });
+            break;
+          }
+          default: {
+            this.snackBar.open('Nieznany błąd!', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-error'] });
+            break;
+          }
+        }
+      }
+    });
   }
 
   register(): void {

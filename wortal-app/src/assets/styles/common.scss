@@ -10,3 +10,9 @@
 .container-center {
   margin: 0 auto;
 }
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #f44336;;
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-snack-bar-button-color: black;
+}
