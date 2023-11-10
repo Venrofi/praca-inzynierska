@@ -51,13 +51,13 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.UserName == request.Username).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest(new { success = false, message = "User not found!" });
+                return BadRequest(new { code = "not-found" });
             if (user.VerificationTime == null)
-                return BadRequest(new { success = false, message = "User is not verified!" });
+                return BadRequest(new { code = "user-not-verified" });
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest(new { success = false, message = "Wrong password!" });
+                return BadRequest(new { code = "wrong-password" });
 
-            return Ok(new { success = true, message = "Login successful", userID = user.UserId }); //TODO: Generate userSessionToken?
+            return Ok(new { code = "success", userID = user.UserId }); //TODO: Generate userSessionToken?
         }
 
         [HttpPost("verify")]
