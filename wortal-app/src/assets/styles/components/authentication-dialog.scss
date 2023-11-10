@@ -10,4 +10,15 @@ app-authentication-dialog {
     color: white !important;
     background-color: $my-primary-OG !important;
   }
+
+  .password-input {
+    position: relative;
+  }
+
+  .password-input-visibility {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 5px;
+  }
 }

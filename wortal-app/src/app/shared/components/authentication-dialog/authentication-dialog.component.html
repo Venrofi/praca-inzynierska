@@ -17,7 +17,14 @@
         <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="loginCredentials.username" name="username" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Hasło" [(ngModel)]="loginCredentials.password" name="password" type="password" required>
+        <input matInput placeholder="Hasło"
+          [(ngModel)]="loginCredentials.password"
+          [type]="confirmPasswordVisible ? 'text' : 'password'"
+          class="password-input" name="password" required>
+        <button *ngIf="loginCredentials.password" mat-icon-button class="password-input-visibility"
+          (click)="loginPasswordVisible = !loginPasswordVisible">
+          <mat-icon>{{ loginPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
       </mat-form-field>
 
       <button mat-raised-button (click)="authenticate()" [disabled]="!loginForm.valid" color="accent">Zaloguj się</button>
@@ -27,14 +34,32 @@
       <mat-form-field>
         <input matInput placeholder="Nazwa użytkownika" [(ngModel)]="registerCredentials.username" name="username" required>
       </mat-form-field>
+      <mat-form-field class="d-flex">
+        <input matInput placeholder="Hasło"
+          [(ngModel)]="registerCredentials.password"
+          [type]="passwordVisible ? 'text' : 'password'"
+          class="password-input" name="password" required>
+          <button *ngIf="registerCredentials.password" mat-icon-button class="password-input-visibility" (click)="passwordVisible = !passwordVisible">
+            <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+      </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Hasło" [(ngModel)]="registerCredentials.password" name="password" type="password" required>
+        <input matInput placeholder="Powtórz hasło"
+          [(ngModel)]="registerCredentials.confirmPassword"
+          [type]="confirmPasswordVisible ? 'text' : 'password'"
+          class="password-input" name="password" required>
+        <button *ngIf="registerCredentials.confirmPassword" mat-icon-button class="password-input-visibility"
+          (click)="confirmPasswordVisible = !confirmPasswordVisible">
+          <mat-icon>{{ confirmPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="E-mail" [(ngModel)]="registerCredentials.email" name="email" required>
       </mat-form-field>
 
-      <button mat-raised-button (click)="register()" [disabled]="!registerForm.valid" color="accent">Utwórz konto</button>
+      <ngx-recaptcha2 [siteKey]="captchaKey" [useGlobalDomain]="false" [(ngModel)]="reCaptcha" name="reCaptcha"></ngx-recaptcha2>
+
+      <button mat-raised-button (click)="register()" [disabled]="!registerForm.valid && !reCaptcha" color="accent">Utwórz konto</button>
     </form>
   </div>
 </mat-dialog-content>

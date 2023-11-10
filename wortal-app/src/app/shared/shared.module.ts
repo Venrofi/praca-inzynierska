@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
 import { GroupProfileComponent } from './components/group-profile/group-profile.component';
 import { DiscussionPostDetailsComponent } from './components/discussion-post-details/discussion-post-details.component';
+import { NgxCaptchaModule } from "ngx-captcha";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,9 @@ import { DiscussionPostDetailsComponent } from './components/discussion-post-det
     MatButtonToggleModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+
+    // ReCaptcha
+    NgxCaptchaModule,
   ],
   exports: [
     HeaderComponent,
