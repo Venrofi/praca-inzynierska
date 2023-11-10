@@ -23,9 +23,9 @@ namespace Backend.Controllers
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
             if (_context.Users.Any(x => x.Email == request.Email))
-                return BadRequest("This e-mail is already in use!");
+                return BadRequest(new { code = "email-already-used" });
             if (_context.Users.Any(x => x.UserName == request.Username))
-                return BadRequest("This nickname is already in use!");
+                return BadRequest(new { code = "username-already-used" });
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
