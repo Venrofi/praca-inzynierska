@@ -43,7 +43,7 @@ namespace Backend.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User created!");
+            return Ok(new { code = "success", userID = user.UserId });
         }
 
         [HttpPost("login")]
@@ -65,26 +65,25 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.VerificationToken == token).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest("Invalid token!");
+                return BadRequest(new { code = "not-found"});
 
             user.VerificationTime = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return Ok("User verified!");
+            return Ok(new { code = "success", userID = user.UserId });
         }
 
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(string email)
-        {
+        public async Task<IActionResult> ForgotPassword(string email) {
             var user = await _context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest("User not found!");
+                return BadRequest(new { code = "not-found" });
 
             user.PasswordResetToken = CreateRandomToken();
             user.ResetTokenExpiration = DateTime.Now.AddHours(1);
             await _context.SaveChangesAsync();
 
-            return Ok("You have 1 hour to reset your password!");
+            return Ok(new { code = "sixty-minutes-for-reset"});
         }
 
         [HttpPost("reset-password")]
@@ -92,7 +91,7 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.PasswordResetToken == request.Token).FirstOrDefaultAsync();
             if (user == null || user.ResetTokenExpiration < DateTime.Now)
-                return BadRequest("Invalid token!");
+                return BadRequest(new { code = "invalid-token"});
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
@@ -102,7 +101,7 @@ namespace Backend.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok("Password has been changed!");
+            return Ok(new { code = "password-changed", userID = user.UserId});
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
