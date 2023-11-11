@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
         return of(undefined);
       })
     ).subscribe(user => {
-      if(user) {
+      if (user) {
         this.store.dispatch(memberActions.update({ member: user as Member }));
         this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
       }

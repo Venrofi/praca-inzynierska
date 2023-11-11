@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/authentication.service';
@@ -24,6 +25,8 @@ export class AuthenticationDialogComponent implements OnInit {
   passwordVisible = false;
 
   confirmPasswordVisible = false;
+
+  @ViewChild('registerForm') registerForm!: NgForm;
 
   constructor(
     private authService: AuthService,
@@ -108,6 +111,49 @@ export class AuthenticationDialogComponent implements OnInit {
         }
       }
     });
+  }
+
+  onPasswordChange(): void {
+    const confirmPasswordControl = this.registerForm.controls['passwordRegisterConfirm'];
+
+    if (!confirmPasswordControl) return;
+
+    if (confirmPasswordControl.dirty && confirmPasswordControl.value) {
+      if (this.registerCredentials.password !== this.registerCredentials.confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordMissmatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  onConfirmPasswordChange(): void {
+    const confirmPasswordControl = this.registerForm.controls['passwordRegisterConfirm'];
+
+    if (!confirmPasswordControl) return;
+
+    if (confirmPasswordControl.dirty && confirmPasswordControl.value) {
+      if (this.registerCredentials.password !== this.registerCredentials.confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordMissmatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  onEmailChange(): void {
+    const emailControl = this.registerForm.controls['email'];
+
+    if (!emailControl) return;
+
+    if (emailControl.dirty && emailControl.value) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(emailControl.value)) {
+        emailControl.setErrors({ invalidEmail: true });
+      } else {
+        emailControl.setErrors(null);
+      }
+    }
   }
 
 }
