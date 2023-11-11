@@ -43,7 +43,7 @@ namespace Backend.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User created!");
+            return Ok(new { code = "register-success", verificationToken = user.VerificationToken }); //TODO: Send VerificationToken via email?
         }
 
         [HttpPost("login")]
@@ -57,7 +57,7 @@ namespace Backend.Controllers
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest(new { code = "wrong-password" });
 
-            return Ok(new { code = "success", userID = user.UserId }); //TODO: Generate userSessionToken?
+            return Ok(new { code = "login-success", userID = user.UserId }); //TODO: Generate userSessionToken?
         }
 
         [HttpPost("verify")]
@@ -65,12 +65,12 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.VerificationToken == token).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest("Invalid token!");
+                return BadRequest(new { code = "wrong-token" });
 
             user.VerificationTime = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return Ok("User verified!");
+            return Ok(new { code = "verify-success" });
         }
 
         [HttpPost("forgot-password")]
