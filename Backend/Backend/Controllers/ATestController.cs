@@ -450,13 +450,26 @@ namespace Backend.Controllers {
             int groupIndex = r.Next(0, _context.Groups.Count());
             var group = _context.Groups.ToList().ElementAt(groupIndex);
 
+            if(user == null)
+                return BadRequest(new { code = "user-not-found" });
+            if(group == null)
+                return BadRequest(new { code = "group-not-found"});
             //check if user is in group
+            if (group.Users == null)
+                group.Users = new List<User>();
+            if (user.Groups == null)
+                user.Groups = new List<Group>();
+            //if (group.Users.Contains(user))
+            //    return BadRequest(new { code = "user-already-in-group"});
+            if (group.Users.Where(u => u.UserId == user.UserId) != null)
+                return BadRequest(new { code = "user-already-in-group"});
+
             _context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
             _context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
 
             //_context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Ok($"New artist profile was created.");
+            return Ok(new { code = "success"});
         }
         #endregion
     }
