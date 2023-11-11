@@ -446,9 +446,9 @@ namespace Backend.Controllers {
         [HttpPost("fast-add-user-to-group")]
         public async Task<IActionResult> FastAddUserToGroup() {
             int userIndex = r.Next(0, _context.Users.Count());
-            var user = _context.Users.ToList().ElementAt(userIndex);
+            var user = _context.Users.Include(u => u.Groups).ToList().ElementAt(userIndex);
             int groupIndex = r.Next(0, _context.Groups.Count());
-            var group = _context.Groups.ToList().ElementAt(groupIndex);
+            var group = _context.Groups.Include(g => g.Users).ToList().ElementAt(groupIndex);
 
             if(user == null)
                 return BadRequest(new { code = "user-not-found" });
@@ -461,11 +461,17 @@ namespace Backend.Controllers {
                 user.Groups = new List<Group>();
             //if (group.Users.Contains(user))
             //    return BadRequest(new { code = "user-already-in-group"});
-            if (group.Users.Where(u => u.UserId == user.UserId) != null)
-                return BadRequest(new { code = "user-already-in-group"});
+            if (group.Users.Any(u => u.UserId == user.UserId))
+                return BadRequest(new { code = "user-already-in-group" });
+            if (user.Groups.Any(g => g.GroupId == group.GroupId))
+                return BadRequest(new { code = "user-already-in-group" });
 
-            _context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
-            _context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
+            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
+            group.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            user.Groups.Add(group);
+            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
 
             //_context.Users.Add(user);
             await _context.SaveChangesAsync();
