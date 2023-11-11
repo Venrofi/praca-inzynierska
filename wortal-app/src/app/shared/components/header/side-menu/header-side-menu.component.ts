@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Member } from 'src/app/core/core.model';
 
 @Component({
   selector: 'app-header-side-menu',
@@ -13,7 +12,14 @@ export class HeaderSideMenuComponent {
   @Output()
   memberLogout = new EventEmitter<boolean>();
 
+  @Output()
+  memberAuthenticate = new EventEmitter<boolean>();
+
   onMemberLogout(): void {
     this.memberLogout.emit(true);
+  }
+
+  onAuthenticateMember(): void {
+    this.memberAuthenticate.emit(true);
   }
 }
