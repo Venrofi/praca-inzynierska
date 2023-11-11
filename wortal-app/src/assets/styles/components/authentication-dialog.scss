@@ -1,5 +1,9 @@
 app-authentication-dialog {
 
+  .mat-mdc-dialog-content {
+    max-height: 80vh;
+  }
+
   .dialog-close-icon {
     position: absolute;
     top: 0;

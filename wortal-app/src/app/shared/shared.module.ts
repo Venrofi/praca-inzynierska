@@ -19,6 +19,7 @@ import { ArtistProfileComponent } from './components/artist-profile/artist-profi
 import { GroupProfileComponent } from './components/group-profile/group-profile.component';
 import { DiscussionPostDetailsComponent } from './components/discussion-post-details/discussion-post-details.component';
 import { NgxCaptchaModule } from "ngx-captcha";
+import { VerificationDialogComponent } from './components/verification-dialog/verification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgxCaptchaModule } from "ngx-captcha";
     ArtistProfileComponent,
     GroupProfileComponent,
     DiscussionPostDetailsComponent,
+    VerificationDialogComponent,
   ],
   imports: [
     CommonModule,

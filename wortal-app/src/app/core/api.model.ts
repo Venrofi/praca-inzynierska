@@ -3,8 +3,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
-  code: string;
+export interface LoginResponse extends BasicResponse {
   userID: string;
 }
 
@@ -15,6 +14,10 @@ export interface RegisterRequest {
   email: string;
 }
 
-export interface RegisterResponse {
+export interface RegisterResponse extends BasicResponse {
+  verificationToken: string;
+}
+
+export interface BasicResponse {
   code: string;
 }

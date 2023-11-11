@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './api.model';
+import { BasicResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './api.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,12 @@ export class AuthService {
 
   register(credentials: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.API_ROOT}/LoginRegister/register`, credentials);
+  }
+
+  verify(verificationToken: string): Observable<BasicResponse> {
+    const params = new HttpParams().set('token', verificationToken);
+
+    return this.http.post<BasicResponse>(`${this.API_ROOT}/LoginRegister/verify`, null, { params });
   }
 
   logout() {

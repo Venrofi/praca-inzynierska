@@ -10,6 +10,7 @@ import * as memberActions from '../../../store/member/member.actions';
 import { AuthenticationDialogComponent } from '../authentication-dialog/authentication-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from "../../../core/user.service";
+import { VerificationDialogComponent } from '../verification-dialog/verification-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -67,6 +68,10 @@ export class HeaderComponent implements OnInit {
     this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end' });
   }
 
+  memberAuthenticate(): void {
+    this.dialog.open(VerificationDialogComponent, { width: '90vw', maxWidth: '500px' });
+  }
+
   openAuthenticationDialog(): void {
     const authDialogRef = this.dialog.open(AuthenticationDialogComponent, { width: '90vw', maxWidth: '500px' });
 
@@ -78,7 +83,7 @@ export class HeaderComponent implements OnInit {
         return of(undefined);
       })
     ).subscribe(user => {
-      if(user) {
+      if (user) {
         this.store.dispatch(memberActions.update({ member: user as Member }));
         this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
       }

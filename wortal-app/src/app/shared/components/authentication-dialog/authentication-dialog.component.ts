@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/authentication.service';
+import { VerificationDialogComponent } from '../verification-dialog/verification-dialog.component';
 
 @Component({
   selector: 'app-authentication-dialog',
@@ -25,9 +27,12 @@ export class AuthenticationDialogComponent implements OnInit {
 
   confirmPasswordVisible = false;
 
+  @ViewChild('registerForm') registerForm!: NgForm;
+
   constructor(
     private authService: AuthService,
     private dialogRef: MatDialogRef<AuthenticationDialogComponent>,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) { }
 
@@ -80,6 +85,9 @@ export class AuthenticationDialogComponent implements OnInit {
     this.authService.register(this.registerCredentials).subscribe({
       next: (response) => {
         console.log('Register attempt..', response);
+        this.dialogRef.close();
+        this.snackBar.open('Rejestracja pomyślna!', 'OK', { duration: 3000, horizontalPosition: 'center', panelClass: ['snackbar-success'] });
+        this.dialog.open(VerificationDialogComponent, { width: '90vw', maxWidth: '500px', data: { verificationToken: response.verificationToken } });
       },
       error: (response) => {
         console.log('Register failed..', response.error);
@@ -108,6 +116,49 @@ export class AuthenticationDialogComponent implements OnInit {
         }
       }
     });
+  }
+
+  onPasswordChange(): void {
+    const confirmPasswordControl = this.registerForm.controls['passwordRegisterConfirm'];
+
+    if (!confirmPasswordControl) return;
+
+    if (confirmPasswordControl.dirty && confirmPasswordControl.value) {
+      if (this.registerCredentials.password !== this.registerCredentials.confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordMissmatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  onConfirmPasswordChange(): void {
+    const confirmPasswordControl = this.registerForm.controls['passwordRegisterConfirm'];
+
+    if (!confirmPasswordControl) return;
+
+    if (confirmPasswordControl.dirty && confirmPasswordControl.value) {
+      if (this.registerCredentials.password !== this.registerCredentials.confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordMissmatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  onEmailChange(): void {
+    const emailControl = this.registerForm.controls['email'];
+
+    if (!emailControl) return;
+
+    if (emailControl.dirty && emailControl.value) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(emailControl.value)) {
+        emailControl.setErrors({ invalidEmail: true });
+      } else {
+        emailControl.setErrors(null);
+      }
+    }
   }
 
 }

@@ -18,7 +18,7 @@ namespace Backend.Controllers
         {
             _context = context;
         }
-        
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
@@ -43,7 +43,7 @@ namespace Backend.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { code = "success", userID = user.UserId });
+            return Ok(new { code = "register-success", verificationToken = user.VerificationToken }); //TODO: Send VerificationToken via email?
         }
 
         [HttpPost("login")]
@@ -57,7 +57,7 @@ namespace Backend.Controllers
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest(new { code = "wrong-password" });
 
-            return Ok(new { code = "success", userID = user.UserId }); //TODO: Generate userSessionToken?
+            return Ok(new { code = "login-success", userID = user.UserId }); //TODO: Generate userSessionToken?
         }
 
         [HttpPost("verify")]
@@ -65,16 +65,17 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.VerificationToken == token).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest(new { code = "not-found"});
+                return BadRequest(new { code = "wrong-token" });
 
             user.VerificationTime = DateTime.Now;
             await _context.SaveChangesAsync();
 
-            return Ok(new { code = "success", userID = user.UserId });
+            return Ok(new { code = "verify-success" });
         }
 
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(string email) {
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
             var user = await _context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
             if (user == null)
                 return BadRequest(new { code = "not-found" });
@@ -83,7 +84,7 @@ namespace Backend.Controllers
             user.ResetTokenExpiration = DateTime.Now.AddHours(1);
             await _context.SaveChangesAsync();
 
-            return Ok(new { code = "sixty-minutes-for-reset"});
+            return Ok(new { code = "sixty-minutes-for-reset" });
         }
 
         [HttpPost("reset-password")]
@@ -91,7 +92,7 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.PasswordResetToken == request.Token).FirstOrDefaultAsync();
             if (user == null || user.ResetTokenExpiration < DateTime.Now)
-                return BadRequest(new { code = "invalid-token"});
+                return BadRequest(new { code = "invalid-token" });
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
@@ -101,12 +102,12 @@ namespace Backend.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { code = "password-changed", userID = user.UserId});
+            return Ok(new { code = "password-changed", userID = user.UserId });
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512())
+            using (var hmac = new HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
