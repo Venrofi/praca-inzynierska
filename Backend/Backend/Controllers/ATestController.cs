@@ -121,7 +121,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-user-type-user")]
         public async Task<IActionResult> FastUserTypeUser() {
             if (_context.UserTypes.Where(ut => ut.Description == "USER").Any())
-                return BadRequest("USER is already in database");
+                return BadRequest(new { code = "user-type-already-in-database" });
             Guid guid = Guid.NewGuid();
 
             var userType = new UserType {
@@ -137,7 +137,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-user-type-admin")]
         public async Task<IActionResult> FastUserTypeAdmin() {
             if (_context.UserTypes.Where(ut => ut.Description == "ADMIN").Any())
-                return BadRequest("USER is already in database");
+                return BadRequest(new { code = "user-type-already-in-database" });
             Guid guid = Guid.NewGuid();
 
             var userType = new UserType {
@@ -153,7 +153,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-user-type-moderator")]
         public async Task<IActionResult> FastUserTypeModerator() {
             if (_context.UserTypes.Where(ut => ut.Description == "MODERATOR").Any())
-                return BadRequest("USER is already in database");
+                return BadRequest(new { code = "user-type-already-in-database" });
             Guid guid = Guid.NewGuid();
 
             var userType = new UserType {
@@ -172,8 +172,6 @@ namespace Backend.Controllers {
         [HttpPost("fast-event")]
         public async Task<IActionResult> FastEvent() {
             Guid guid = Guid.NewGuid();
-
-            
 
             var eventt = new Event {
                 EventId = guid,
@@ -203,7 +201,7 @@ namespace Backend.Controllers {
                 i++;
             } while (_context.ArtistsProfiles.Any(x => x.Name == name));
             if(name == string.Empty || _context.ArtistsProfiles.Any(x => x.Name == name))
-                return BadRequest("There are non-use authors name");
+                return BadRequest(new { code = "no-free-artists" });
 
             var artistProfile = new ArtistProfile {
                 ArtistProfileId = guid,
@@ -231,7 +229,7 @@ namespace Backend.Controllers {
                 i++;
             } while (_context.Groups.Any(g => g.Name == name + "-fans"));
             if (name == string.Empty || _context.Groups.Any(g => g.Name == name + "-fans"))
-                return BadRequest("There are non-use authors name");
+                return BadRequest(new { code = "no-free-artists" });
 
             var group = new Group {
                 GroupId = guid,
@@ -272,12 +270,12 @@ namespace Backend.Controllers {
         [HttpPost("fast-discussion-post")]
         public async Task<IActionResult> FastDiscusisonPost() {
             if (!_context.Users.Any() || !_context.Groups.Any() || !_context.ArtistsProfiles.Any())
-                return BadRequest("Missing users, groups or artists profiles in database.");
+                return BadRequest(new { code = "missing-users-groups-artists" });
             Guid guid = Guid.NewGuid();
             var title = string.Empty;
             var topic = string.Empty;
             var topicType = DiscussionPost.TopicTypes.Group;
-            int userIndex = r.Next(0, _context.Users.Count() - 1);
+            int userIndex = r.Next(0, _context.Users.Count());
             var user = _context.Users.ToList().ElementAt(userIndex);
             Group group = null;
             ArtistProfile ap = null;
@@ -285,14 +283,14 @@ namespace Backend.Controllers {
             int groupOrArtistTopic = r.Next(0, 2);
             if (groupOrArtistTopic == 0) {
                 //group
-                int index = r.Next(0, _context.Groups.Count() - 1);
+                int index = r.Next(0, _context.Groups.Count());
                 title = $"{_context.Groups.ToList().ElementAt(index).Name} - dyskusja.";
                 topic = $"{_context.Groups.ToList().ElementAt(index).Name}";
                 group = _context.Groups.ToList().ElementAt(index);
             }
             else {
                 //artist
-                int index = r.Next(0, _context.ArtistsProfiles.Count() - 1);
+                int index = r.Next(0, _context.ArtistsProfiles.Count());
                 title = $"{_context.ArtistsProfiles.ToList().ElementAt(index).Name} - dyskusja.";
                 topic = $"{_context.ArtistsProfiles.ToList().ElementAt(index).Name}";
                 topicType = DiscussionPost.TopicTypes.Artist;
@@ -343,9 +341,9 @@ namespace Backend.Controllers {
         [HttpPost("fast-comment")]
         public async Task<IActionResult> FastComment() {
             Guid guid = Guid.NewGuid();
-            int userIndex = r.Next(0, _context.Users.Count() - 1);
+            int userIndex = r.Next(0, _context.Users.Count());
             var user = _context.Users.ToList().ElementAt(userIndex);
-            int dpIndex = r.Next(0, _context.DiscussionPostsDetails.Count() - 1);
+            int dpIndex = r.Next(0, _context.DiscussionPostsDetails.Count());
             var dpd = _context.DiscussionPostsDetails.ToList().ElementAt(dpIndex);
 
             var comment = new Comment {
@@ -357,8 +355,12 @@ namespace Backend.Controllers {
                 DiscussionPostDetailsId = dpd.DiscussionPostDetailsId
             };
 
+            var dp = _context.DiscussionPosts.Where(dp => dp.DiscussionPostDetails == dpd).FirstOrDefault();
+            if (dp != null)
+                dp.NumberOfComments++;
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
+
             return Ok($"New comment was created.");
         }
         #endregion
@@ -367,9 +369,9 @@ namespace Backend.Controllers {
         [HttpPost("fast-premiere-album")]
         public async Task<IActionResult> FastPremiereAlbum() {
             if (!_context.ArtistsProfiles.Any())
-                return BadRequest("Missing artists profiles in database.");
+                return BadRequest(new { code = "any-artist-in-database" });
             Guid guid = Guid.NewGuid();
-            int artistIndex = r.Next(0, _context.ArtistsProfiles.Count() - 1);
+            int artistIndex = r.Next(0, _context.ArtistsProfiles.Count());
             var artist = _context.ArtistsProfiles.ToList().ElementAt(artistIndex);
 
             var pa = new PremiereAlbum {
@@ -417,7 +419,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-track")]
         public async Task<IActionResult> FastTrack() {
             Guid guid = Guid.NewGuid();
-            int albumDetailsIndex = r.Next(0, _context.PremiereAlbumDetails.Count() - 1);
+            int albumDetailsIndex = r.Next(0, _context.PremiereAlbumDetails.Count());
             var albumDetails = _context.PremiereAlbumDetails.ToList().ElementAt(albumDetailsIndex);
             string title = string.Empty;
             if (albumDetails.Tracks == null)
@@ -425,7 +427,7 @@ namespace Backend.Controllers {
             title = tracks[r.Next(0, tracks.Length - 1)];
 
             if (_context.Tracks.Where(pad => pad.PremiereAlbumDetailsId == albumDetails.PremiereAlbumDetailsId).Any(t => t.Title == title))
-                return BadRequest("Track already exist in this album");
+                return BadRequest(new { code = "track-already-in-album" });
 
             var track = new Track {
                 TrackId = guid,
@@ -437,6 +439,37 @@ namespace Backend.Controllers {
             _context.Tracks.Add(track);
             await _context.SaveChangesAsync();
             return Ok($"New track was created.");
+        }
+        #endregion
+
+        #region FastAddUserToGroup
+        [HttpPost("fast-add-user-to-group")]
+        public async Task<IActionResult> FastAddUserToGroup() {
+            int userIndex = r.Next(0, _context.Users.Count());
+            var user = _context.Users.ToList().ElementAt(userIndex);
+            int groupIndex = r.Next(0, _context.Groups.Count());
+            var group = _context.Groups.ToList().ElementAt(groupIndex);
+
+            if(user == null)
+                return BadRequest(new { code = "user-not-found" });
+            if(group == null)
+                return BadRequest(new { code = "group-not-found"});
+            //check if user is in group
+            if (group.Users == null)
+                group.Users = new List<User>();
+            if (user.Groups == null)
+                user.Groups = new List<Group>();
+            //if (group.Users.Contains(user))
+            //    return BadRequest(new { code = "user-already-in-group"});
+            if (group.Users.Where(u => u.UserId == user.UserId) != null)
+                return BadRequest(new { code = "user-already-in-group"});
+
+            _context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
+            _context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
+
+            //_context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return Ok(new { code = "success"});
         }
         #endregion
     }

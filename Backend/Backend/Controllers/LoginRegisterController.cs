@@ -18,7 +18,7 @@ namespace Backend.Controllers
         {
             _context = context;
         }
-        
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterRequest request)
         {
@@ -78,13 +78,13 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest("User not found!");
+                return BadRequest(new { code = "not-found" });
 
             user.PasswordResetToken = CreateRandomToken();
             user.ResetTokenExpiration = DateTime.Now.AddHours(1);
             await _context.SaveChangesAsync();
 
-            return Ok("You have 1 hour to reset your password!");
+            return Ok(new { code = "sixty-minutes-for-reset" });
         }
 
         [HttpPost("reset-password")]
@@ -92,7 +92,7 @@ namespace Backend.Controllers
         {
             var user = await _context.Users.Where(x => x.PasswordResetToken == request.Token).FirstOrDefaultAsync();
             if (user == null || user.ResetTokenExpiration < DateTime.Now)
-                return BadRequest("Invalid token!");
+                return BadRequest(new { code = "invalid-token" });
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
@@ -102,12 +102,12 @@ namespace Backend.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok("Password has been changed!");
+            return Ok(new { code = "password-changed", userID = user.UserId });
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512())
+            using (var hmac = new HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
