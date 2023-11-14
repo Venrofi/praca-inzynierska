@@ -27,17 +27,17 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.API_ROOT}/LoginRegister/login`, credentials);
+    return this.http.post<LoginResponse>(`${this.API_ROOT}/Authentication/login`, credentials);
   }
 
   register(credentials: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.API_ROOT}/LoginRegister/register`, credentials);
+    return this.http.post<RegisterResponse>(`${this.API_ROOT}/Authentication/register`, credentials);
   }
 
   verify(verificationToken: string): Observable<BasicResponse> {
     const params = new HttpParams().set('token', verificationToken);
 
-    return this.http.post<BasicResponse>(`${this.API_ROOT}/LoginRegister/verify`, null, { params });
+    return this.http.post<BasicResponse>(`${this.API_ROOT}/Authentication/verify`, null, { params });
   }
 
   logout() {
@@ -49,8 +49,8 @@ export class AuthService {
     return !!this.getLoggedInUser();
   }
 
-  getLoggedInUser(): string | null {
-    return localStorage.getItem('user');
+  getLoggedInUser(): string | undefined {
+    return localStorage.getItem('user') || undefined;
   }
 
   setLoggedInUser(userID: string): void {

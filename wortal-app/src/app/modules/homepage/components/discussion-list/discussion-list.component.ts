@@ -16,10 +16,11 @@ export class DiscussionListComponent implements OnInit {
   constructor(private homepageService: HomepageService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.discussionList = this.homepageService.getDiscussionList();
+    const userID = this.authService.getLoggedInUser();
+    this.discussionList = this.homepageService.getDiscussionList(userID);
 
     this.authService.loginSuccess.subscribe(() => {
-      const userID = this.authService.getLoggedInUser() || undefined;
+      const userID = this.authService.getLoggedInUser();
       this.discussionList = this.homepageService.getDiscussionList(userID);
     });
 

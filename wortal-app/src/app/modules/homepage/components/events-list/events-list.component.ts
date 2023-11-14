@@ -15,10 +15,11 @@ export class EventsListComponent implements OnInit {
   constructor(private homepageService: HomepageService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.eventsList = this.homepageService.getEventList();
+    const userID = this.authService.getLoggedInUser();
+    this.eventsList = this.homepageService.getEventList(userID);
 
     this.authService.loginSuccess.subscribe(() => {
-      const userID = this.authService.getLoggedInUser() || undefined;
+      const userID = this.authService.getLoggedInUser();
       this.eventsList = this.homepageService.getEventList(userID);
     });
 

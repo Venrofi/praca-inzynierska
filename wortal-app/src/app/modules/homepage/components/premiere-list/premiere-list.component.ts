@@ -15,10 +15,11 @@ export class PremiereListComponent implements OnInit {
   constructor(private homepageService: HomepageService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.premiereList = this.homepageService.getPremiereList();
+    const userID = this.authService.getLoggedInUser();
+    this.premiereList = this.homepageService.getPremiereList(userID);
 
     this.authService.loginSuccess.subscribe(() => {
-      const userID = this.authService.getLoggedInUser() || undefined;
+      const userID = this.authService.getLoggedInUser();
       this.premiereList = this.homepageService.getPremiereList(userID);
     });
 

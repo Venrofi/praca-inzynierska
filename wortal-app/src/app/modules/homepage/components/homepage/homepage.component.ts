@@ -22,10 +22,11 @@ export class HomepageComponent implements OnInit {
   constructor(private homepageService: HomepageService, public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.sideRecommendations = this.homepageService.getSideRecommendations();
+    const userID = this.authService.getLoggedInUser();
+    this.sideRecommendations = this.homepageService.getSideRecommendations(userID);
 
     this.authService.loginSuccess.subscribe(() => {
-      const userID = this.authService.getLoggedInUser() || undefined;
+      const userID = this.authService.getLoggedInUser();
       this.sideRecommendations = this.homepageService.getSideRecommendations(userID);
     });
 
