@@ -24,3 +24,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export const API_ROOT = 'https://localhost:7145/api';

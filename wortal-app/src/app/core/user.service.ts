@@ -3,13 +3,12 @@ import { AuthService } from "./authentication.service";
 import { map, Observable, of } from "rxjs";
 import { Member } from "./core.model";
 import { HttpClient } from "@angular/common/http";
+import { API_ROOT } from "../app-routing.module";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  private API_ROOT = 'https://localhost:7145/api';
 
   constructor(private authService: AuthService, private http: HttpClient) { }
   getAuthenticatedUserInformation(userID: string): Observable<Member | undefined> {
@@ -19,7 +18,7 @@ export class UserService {
   }
 
   getUserInformation(userID: string): Observable<Member | undefined> {
-    return this.http.get<any>(`${this.API_ROOT}/Users/${userID}`).pipe(
+    return this.http.get<any>(`${API_ROOT}/Users/${userID}`).pipe(
       map(data => {
         const randomAvatarSize = Math.floor(Math.random() * 200 + 200); // returns a random number between 200 and 400
         return {
