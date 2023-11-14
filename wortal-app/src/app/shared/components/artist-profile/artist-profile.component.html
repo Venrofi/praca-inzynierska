@@ -1,1 +1,27 @@
-<p>artist-profile works!</p>
+<div *ngIf="artist | async as artist; else loading" class="p-3 artist-wrapper">
+  <div class="container-max-width artist-container p-3">
+    <!-- <p>{{ artist | json }}</p> -->
+    <main class="artist-main-info">
+      <img [src]="artist.avatar" class="artist-avatar">
+      <h1>{{ artist.name }}</h1>
+    </main>
+    <section>
+      <p>Opis: {{ artist.description }}</p>
+      <p>Liczba fanów: {{ artist.fans.length }}</p>
+    </section>
+    <section>
+      <p>Albumy:</p>
+      <ul>
+        <li *ngFor="let album of artist.albums">
+          <span>{{ album.title }} - {{ album.releaseDate | date }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>

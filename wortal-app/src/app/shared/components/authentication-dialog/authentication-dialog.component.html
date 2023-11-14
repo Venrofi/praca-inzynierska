@@ -34,6 +34,7 @@
 
       <button mat-raised-button (click)="authenticate()" [disabled]="!loginForm.valid" color="accent">Zaloguj się</button>
     </form>
+    <!-- TODO: Add 'forgotPassword' / 'resetPassword' functionality -->
 
     <form *ngSwitchCase="'REGISTER'" #registerForm="ngForm" class="d-flex flex-column mt-3">
       <mat-form-field>

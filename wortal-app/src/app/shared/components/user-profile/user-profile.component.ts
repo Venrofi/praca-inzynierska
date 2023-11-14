@@ -10,10 +10,9 @@ import { UserService } from "../../../core/user.service";
 })
 export class UserProfileComponent implements OnInit {
 
-  @Input()
   user!: Observable<Member | undefined>;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {}
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.user = this.route.queryParams.pipe(
