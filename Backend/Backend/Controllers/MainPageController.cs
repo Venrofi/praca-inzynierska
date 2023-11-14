@@ -83,7 +83,7 @@ namespace Backend.Controllers
 
         #region MainPageLists
 
-        [HttpGet("get-discussions")]
+        [HttpGet("discussion-posts")]
         public async Task<ActionResult<IEnumerable<DiscussionPost>>> GetDiscussionsList()
         {
             if (_context.Events == null)
@@ -93,7 +93,7 @@ namespace Backend.Controllers
             return await _context.DiscussionPosts.OrderByDescending(d => d.CreationTime).ToListAsync();
         }
 
-        [HttpGet("get-events")]
+        [HttpGet("events")]
         public async Task<ActionResult<IEnumerable<Event>>> GetEventsList()
         {
             if (_context.Events == null)
@@ -103,7 +103,7 @@ namespace Backend.Controllers
             return await _context.Events.OrderByDescending(e=>e.Date).ToListAsync();
         }
 
-        [HttpGet("get-premiers")]
+        [HttpGet("premiere-albums")]
         public async Task<ActionResult<IEnumerable<PremiereAlbum>>> GetPremiersList()
         {
             if (_context.PremiereAlbums == null)
