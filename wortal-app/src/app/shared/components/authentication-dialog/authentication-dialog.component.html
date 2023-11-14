@@ -22,7 +22,7 @@
       <mat-form-field>
         <input matInput placeholder="Hasło"
           [(ngModel)]="loginCredentials.password"
-          [type]="confirmPasswordVisible ? 'text' : 'password'"
+          [type]="loginPasswordVisible ? 'text' : 'password'"
           class="password-input" name="passwordLogin" #passwordLogin="ngModel" required>
         <button *ngIf="loginCredentials.password"
           (click)="loginPasswordVisible = !loginPasswordVisible"

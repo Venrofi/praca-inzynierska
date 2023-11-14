@@ -8,7 +8,7 @@
     <section>
       <p>E-mail: {{ member.email }}</p>
       <p>Rola: {{ member.role }}</p>
-      <p>Liczba postów: {{ member.posts.length }}</p>
+      <p>Liczba postów: {{ member?.posts?.length || 0 }}</p>
     </section>
   </div>
 </div>
