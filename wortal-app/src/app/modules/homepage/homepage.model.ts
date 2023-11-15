@@ -1,3 +1,5 @@
+import { BaseWortalElement, BaseWortalUser, Track } from "src/app/core/core.model";
+
 export interface DiscussionPost {
   id: string;
   author: DiscussionPostAuthor;
@@ -7,15 +9,20 @@ export interface DiscussionPost {
   numberOfComments: number;
 }
 
+// DiscussionPostAuthor:
+// - can be created by a Member of a Group (author has name)
+// - can be added by a moderator/admin about an Artist (author has no name and it's hidden)
 export interface DiscussionPostAuthor {
   id: string;
-  name: string;
+  name?: string;
   avatar: string;
 }
 
-export interface DiscussionPostTopic {
-  id: string;
-  name: string;
+// DiscussionPostTopic:
+// - can be about an Artist (type is ARTIST, name is ArtistName and it's ID)
+// - can be about a Group (type is GROUP, name is GroupName and it's ID)
+// - DiscussionPosts from a Group can only be vibile to Members of that Group (we can add a public/private flag to the Group in the future)
+export interface DiscussionPostTopic extends BaseWortalElement {
   type: DiscussionPostType;
 }
 
@@ -26,18 +33,17 @@ export interface DiscussionPostDetails extends DiscussionPost {
   content: string;
 }
 
+// Comment:
+// - can be created by a Member on a DiscussionPost of any type
 export interface Comment {
-  id: string;
-  authorId: string;
-  authorAvatar: string;
+  author: BaseWortalUser;
   content: string;
 }
 
 export interface PremiereAlbum {
   id: string;
   title: string;
-  artist: string;
-  artistId: string;
+  artist: BaseWortalElement;
   cover: string;
   releaseDate: string;
 }
@@ -50,21 +56,6 @@ export interface PremiereAlbumDetails extends PremiereAlbum {
   rating: number;
 }
 
-export interface Track {
-  id: string;
-  title: string;
-  duration: string;
-}
-
-export interface Event {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  cover: string;
-}
-
 export interface HomepageSideRecommendations {
   topDiscussions: Recommendation;
   topArtists: Recommendation;
@@ -74,10 +65,5 @@ export interface HomepageSideRecommendations {
 
 export interface Recommendation {
   title: string;
-  content: RecommendationContent[];
-}
-
-export interface RecommendationContent {
-  id: string;
-  label: string;
+  content: BaseWortalElement[];
 }
