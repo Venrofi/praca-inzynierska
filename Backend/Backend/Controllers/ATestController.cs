@@ -30,6 +30,7 @@ namespace Backend.Controllers {
         public ATestController(ApplicationDbContext context) {
             _context = context;
             r = new Random();
+
         }
 
         #region FastDataBase
