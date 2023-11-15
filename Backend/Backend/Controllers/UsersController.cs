@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Core.Entities;
 using Backend.Data.Context;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Controllers
 {
@@ -48,6 +49,35 @@ namespace Backend.Controllers
             }
 
             return user;
+        }
+
+        // GET: api/Users/5
+        [HttpGet("Get-basic-user-{id}")]
+        public async Task<ActionResult<object>> GetBasicUser(Guid id) {
+            //todo
+            //id, username, email, groups, role, posts, avatar
+            if (_context.Users == null) {
+                return NotFound();
+            }
+            var user = await _context.Users.FindAsync(id);
+            var resUser = _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u=>u.UserType).Where(u => u == user).FirstOrDefault();
+
+            if (user == null) {
+                return NotFound();
+            }
+
+            var res = new { 
+                Id = resUser.UserId,
+                UserName = resUser.UserName,
+                Email = resUser.Email,
+                Groups = resUser.Groups.Select(g=>new {g.GroupId, g.Name }),
+                Role = resUser.UserType.Description,
+                Posts = resUser.DiscussionPosts.Select(dp=>new { dp.DiscussionPostId, dp.Title}),
+                Avatar = ""
+            };
+
+
+            return res;
         }
 
         // PUT: api/Users/5
