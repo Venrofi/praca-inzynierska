@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Event } from '../../../homepage.model';
+import { Event } from 'src/app/core/core.model';
 
 
 @Component({

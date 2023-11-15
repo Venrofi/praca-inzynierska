@@ -17,7 +17,7 @@
 
       <button mat-flat-button [color]="member ? 'accent' : 'primary'" (click)="memberButtonAction()">
         <mat-icon>person</mat-icon>
-        {{ member?.username || 'Zaloguj / Dołącz' }}
+        {{ member?.name || 'Zaloguj / Dołącz' }}
       </button>
 
       <app-header-side-menu [memberAuthenticated]="!!member" (memberLogout)="memberLogout()" (memberAuthenticate)="memberAuthenticate()"></app-header-side-menu>
@@ -36,7 +36,7 @@
 
       <button mat-flat-button [color]="member ? 'accent' : 'primary'" (click)="memberButtonAction()">
         <mat-icon>person</mat-icon>
-        {{ member?.username || 'Zaloguj / Dołącz' }}
+        {{ member?.name || 'Zaloguj / Dołącz' }}
       </button>
 
       <app-header-side-menu [memberAuthenticated]="!!member" (memberLogout)="memberLogout()"></app-header-side-menu>

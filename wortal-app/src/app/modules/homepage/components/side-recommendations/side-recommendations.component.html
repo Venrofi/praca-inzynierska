@@ -10,7 +10,7 @@
         <a [ngClass]="activeLinks ? 'recommendation-label' : 'inactive-recommendation-label'"
            [routerLink]="activeLinks ? mapRouterLink() : null"
            [queryParams]="{ id: item.id }">
-          {{ item.label }}
+          {{ item.name }}
         </a>
       </li>
     </ul>

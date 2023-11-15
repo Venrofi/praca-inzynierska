@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Event } from '../../homepage.model';
 import { HomepageService } from '../../services/homepage.service';
 import { AuthService } from "../../../../core/authentication.service";
+import { Event } from 'src/app/core/core.model';
 
 
 @Component({

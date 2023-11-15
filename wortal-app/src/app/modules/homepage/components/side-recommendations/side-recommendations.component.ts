@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Recommendation } from '../../homepage.model';
-import { noop } from "rxjs";
 
 
 @Component({

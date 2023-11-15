@@ -4,7 +4,7 @@
       <span class="album-title" (click)="openAlbumModal()">{{ album.title }}</span>
     </mat-card-title>
     <mat-card-subtitle class="album-info">
-      <span class="album-artist" (click)="openArtistForum()">{{ album.artist }}</span>
+      <span class="album-artist" (click)="openArtistForum()">{{ album.artist.name }}</span>
       <span class="album-time">{{ album.releaseDate | date : 'shortDate' }}</span>
     </mat-card-subtitle>
   </mat-card-header>

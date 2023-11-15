@@ -2,18 +2,18 @@
   <div class="container-max-width artist-container p-3">
     <!-- <p>{{ artist | json }}</p> -->
     <main class="artist-main-info">
-      <img [src]="artist.avatar" class="artist-avatar">
+      <img [src]="artist.image" class="artist-avatar">
       <h1>{{ artist.name }}</h1>
     </main>
     <section>
       <p>Opis: {{ artist.description }}</p>
-      <p>Liczba fanów: {{ artist.fans.length }}</p>
+      <p>Liczba fanów: {{ artist.followers.length }}</p>
     </section>
     <section>
       <p>Albumy:</p>
       <ul>
         <li *ngFor="let album of artist.albums">
-          <span>{{ album.title }} - {{ album.releaseDate | date }}</span>
+          <span>{{ album.name }} - {{ album.releaseDate | date }}</span>
         </li>
       </ul>
     </section>

@@ -21,7 +21,7 @@ export class PremiereAlbumComponent {
   }
 
   openArtistForum() {
-    this.artist.emit(this.album.artistId);
+    this.artist.emit(this.album.artist.id);
   }
 
   openAlbumModal() {
