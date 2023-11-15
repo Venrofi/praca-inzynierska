@@ -16,12 +16,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 // Components
 @import "assets/styles/components/header.scss";
-@import "assets/styles/components/homepage.scss";
-@import "assets/styles/components/side-recommendations.scss";
-@import "assets/styles/components/discussion-post.scss";
-@import "assets/styles/components/premiere-album.scss";
-@import "assets/styles/components/premiere-list.scss";
-@import "assets/styles/components/event.scss";
-@import "assets/styles/components/authentication-dialog.scss";
-@import "assets/styles/components/verification-dialog.scss";
 @import "assets/styles/components/member.scss";
+
+// Authentication
+@import "assets/styles/components/authentication/authentication-dialog.scss";
+@import "assets/styles/components/authentication/verification-dialog.scss";
+@import "assets/styles/components/authentication/forgot-password-dialog.scss";
+@import "assets/styles/components/authentication/reset-password-dialog.scss";
+
+// Homepage
+@import "assets/styles/components/homepage/homepage.scss";
+@import "assets/styles/components/homepage/side-recommendations.scss";
+@import "assets/styles/components/homepage/discussion-post.scss";
+@import "assets/styles/components/homepage/premiere-album.scss";
+@import "assets/styles/components/homepage/premiere-list.scss";
+@import "assets/styles/components/homepage/event.scss";

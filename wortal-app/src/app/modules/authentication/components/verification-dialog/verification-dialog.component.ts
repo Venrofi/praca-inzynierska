@@ -11,7 +11,6 @@ export class VerificationDialogComponent {
 
   @Input({ required: true }) verificationToken!: string;
 
-
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<VerificationDialogComponent>,

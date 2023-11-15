@@ -7,10 +7,10 @@ import { StoreModel } from 'src/app/app-state.model';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Member } from 'src/app/core/core.model';
 import * as memberActions from '../../../store/member/member.actions';
-import { AuthenticationDialogComponent } from '../authentication-dialog/authentication-dialog.component';
+import { AuthenticationDialogComponent } from '../../../modules/authentication/components/authentication-dialog/authentication-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from "../../../core/user.service";
-import { VerificationDialogComponent } from '../verification-dialog/verification-dialog.component';
+import { VerificationDialogComponent } from '../../../modules/authentication/components/verification-dialog/verification-dialog.component';
 
 @Component({
   selector: 'app-header',
