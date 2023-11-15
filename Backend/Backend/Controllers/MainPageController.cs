@@ -4,6 +4,7 @@ using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
+using System.Runtime.Intrinsics.Arm;
 
 namespace Backend.Controllers
 {
@@ -130,13 +131,22 @@ namespace Backend.Controllers
         #region MainPageLists
 
         [HttpGet("discussion-posts")]
-        public async Task<ActionResult<IEnumerable<DiscussionPost>>> GetDiscussionsList()
+        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsList()
         {
-            if (_context.Events == null)
+            if (_context.DiscussionPosts == null)
             {
                 return NotFound();
             }
-            return await _context.DiscussionPosts.OrderByDescending(d => d.CreationTime).ToListAsync();
+
+            return await _context.DiscussionPosts.OrderByDescending(d => d.CreationTime).Select(d => new {
+                id = d.DiscussionPostId,
+                author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar },
+                //topic = d.TopicType.ToString(),
+                topic = new { id = d.GroupId, name = d.Topic, type = d.TopicType.ToString() },
+                title = d.Title,
+                creationTime = d.CreationTime,
+                numberOfComments = d.NumberOfComments
+            }).ToListAsync();
         }
 
         [HttpGet("events")]
@@ -146,6 +156,19 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
+
+            /* return {
+                        id: event.eventId,
+                        name: event.title,
+                        image: event.cover,
+                        date: event.date,
+                        location: event.location,
+                        description: event.description,
+                        promoter: [],
+                        participants: [],
+                      };*/
+
+            
             return await _context.Events.OrderByDescending(e=>e.Date).ToListAsync();
         }
 
@@ -156,6 +179,16 @@ namespace Backend.Controllers
             {
                 return NotFound();
             }
+            /*return {
+                        id: album.premiereAlbumId,
+                        title: album.title,
+                        artist: {
+                          id: album.artistProfileId,
+                          name: album.artist,
+                        },
+                        cover: album.cover || `https://picsum.photos/${randomCoverSize}/${randomCoverSize * 2}`,
+                        releaseDate: album.releaseDate,
+                      };*/
             return await _context.PremiereAlbums.OrderByDescending(dp => dp.ReleaseDate).ToListAsync();
         }
 
