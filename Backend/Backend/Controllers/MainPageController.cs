@@ -20,14 +20,20 @@ namespace Backend.Controllers
 
         #region InitSideRecommendations
         [HttpGet("get-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetSideRecommendations() {
+        public async Task<ActionResult<object>> GetSideRecommendations() {
             if (_context.DiscussionPosts == null) {
                 return NotFound();
             }
             //SideRecommendations new {TopDiscussions, TopArtists, TopUsers, RecommendedGroups}
-            
+            object sideRecommendations = new { 
+                TopDiscussions = new { title = "Najlepsze dyskusje" ,content = await GetDiscussionsForSideRecommendations() },
+                TopArtists = new { title = "Najpopularniejsi artyści", content = await GetArtistsForSideRecommendations() },
+                TopUsers = new { title = "Najbardziej aktywni", content = await GetUsersForSideRecommendations() },
+                //RecommendedGroups = await GetGroupsForSideRecommendations(null)
+            };
+
             //todo
-            return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => new { dp.DiscussionPostId, dp.Title, dp.NumberOfComments }).ToListAsync();
+            return sideRecommendations;
         }
 
         [HttpGet("get-discussions-for-side-recommendations")]
@@ -43,7 +49,7 @@ namespace Backend.Controllers
             }
 
             //todo
-            return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => new { dp.DiscussionPostId, dp.Title, dp.NumberOfComments}).ToListAsync();
+            return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => new { dp.DiscussionPostId, dp.Title}).ToListAsync();
         }
 
         [HttpGet("get-artists-for-side-recommendations")]
@@ -60,7 +66,7 @@ namespace Backend.Controllers
                 return NotFound();
 
             //todo
-            return await _context.ArtistsProfiles.Where(ap => ap.DiscussionPosts != null).OrderByDescending(ap => ap.DiscussionPosts.Count).Select(ap => new { ap.ArtistProfileId, ap.Name, ap.DiscussionPosts.Count}).Take(5).ToArrayAsync();
+            return await _context.ArtistsProfiles.Where(ap => ap.DiscussionPosts != null).OrderByDescending(ap => ap.DiscussionPosts.Count).Select(ap => new { ap.ArtistProfileId, ap.Name}).Take(5).ToArrayAsync();
 
         }
 
@@ -88,11 +94,11 @@ namespace Backend.Controllers
             }
 
             //todo
-            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Select(u => new {u.UserId, u.UserName, u.DiscussionPosts.Count }).Take(5).ToListAsync();
+            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Select(u => new {u.UserId, u.UserName}).Take(5).ToListAsync();
         }
 
         [HttpGet("get-groups-for-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetGroupsForSideRecommendations(Guid userId)
+        public async Task<ActionResult<IEnumerable<object>>> GetGroupsForSideRecommendations(Guid? userId)
         {
             //TopDiscussions {new {title = "Polecane grupy", content = new {
             //id = id,
