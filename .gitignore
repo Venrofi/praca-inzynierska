@@ -31,6 +31,7 @@ project.lock.json
 .DS_Store
 *.pyc
 nupkg/
+/Backend/Backend/Migrations
 
 # Visual Studio Code
 .vscode/
