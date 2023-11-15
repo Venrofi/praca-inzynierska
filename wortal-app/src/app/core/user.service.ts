@@ -23,12 +23,16 @@ export class UserService {
         const randomAvatarSize = Math.floor(Math.random() * 200 + 200); // returns a random number between 200 and 400
         return {
           id: data.userId,
-          username: data.userName,
+          name: data.userName,
+          avatar: data.avatar || `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`,
+          bio: 'Opis profilu użytkownika..',
           email: data.email,
+          posts: data.discussionPosts || [],
           groups: data.groups,
-          role: "USER",
-          posts: data.discussionPosts,
-          avatar: data.avatar || `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`
+          joinedGroups: [],
+          attendedEvents: [],
+          followedArtists: [],
+          role: "USER"
         };
       })
     ); //TODO: Add error handling, currently data returned from server is not in Member format
