@@ -32,6 +32,8 @@
         <mat-error>Proszę podać hasło.</mat-error>
       </mat-form-field>
 
+      <p class="forgot-password-label">Nie pamiętam hasła..</p>
+
       <button mat-raised-button (click)="authenticate()" [disabled]="!loginForm.valid" color="accent">Zaloguj się</button>
     </form>
     <!-- TODO: Add 'forgotPassword' / 'resetPassword' functionality -->

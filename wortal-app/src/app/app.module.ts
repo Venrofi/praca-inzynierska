@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/enviroments/enviroment';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { environment } from 'src/enviroments/enviroment';
     BrowserAnimationsModule,
     SharedModule,
     HomepageModule,
+    AuthenticationModule,
     StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
