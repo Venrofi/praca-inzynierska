@@ -1,9 +1,12 @@
 ﻿using Backend.Core.Entities;
 using Backend.Core.Requests;
 using Backend.Data.Context;
+using Backend.Services;
+using MailKit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System.Security.Cryptography;
 
 namespace Backend.Controllers
@@ -13,10 +16,12 @@ namespace Backend.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailService;
 
-        public AuthenticationController(ApplicationDbContext context)
+        public AuthenticationController(ApplicationDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -42,7 +47,7 @@ namespace Backend.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
+            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "TEST", Body = "TEST BODY" });
             return Ok(new { code = "register-success", verificationToken = user.VerificationToken }); //TODO: Send VerificationToken via email?
         }
 
@@ -104,7 +109,13 @@ namespace Backend.Controllers
 
             return Ok(new { code = "password-changed", userID = user.UserId });
         }
+        [HttpPost("send-verification-email")]
+        public IActionResult SendEmail(EmailRequest request)
+        {
+            _emailService.SendEmail(request);
+            return Ok();
 
+        }
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
