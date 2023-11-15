@@ -18,26 +18,48 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        #region Init
-        [HttpGet("get-top-discussions")]
-        public async Task<ActionResult<IEnumerable<object>>> GetTopDiscussions()
+        #region InitSideRecommendations
+        [HttpGet("get-side-recommendations")]
+        public async Task<ActionResult<IEnumerable<object>>> GetSideRecommendations() {
+            if (_context.DiscussionPosts == null) {
+                return NotFound();
+            }
+            //SideRecommendations new {TopDiscussions, TopArtists, TopUsers, RecommendedGroups}
+            
+            //todo
+            return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => new { dp.DiscussionPostId, dp.Title, dp.NumberOfComments }).ToListAsync();
+        }
+
+        [HttpGet("get-discussions-for-side-recommendations")]
+        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsForSideRecommendations()
         {
+            //TopDiscussions {new {title = "Najlepsze posty", content = new {
+            //id = id,
+            //label = string // nazwa postu, artysty, itp
+            //}}}
             if (_context.DiscussionPosts == null)
             {
                 return NotFound();
             }
+
+            //todo
             return await _context.DiscussionPosts.Where(dp => dp.NumberOfComments > 0).OrderByDescending(dp => dp.NumberOfComments).Select(dp => new { dp.DiscussionPostId, dp.Title, dp.NumberOfComments}).ToListAsync();
         }
 
-        [HttpGet("get-top-artists-string")]
-        public async Task<ActionResult<IEnumerable<object>>> GetTopArtists()
+        [HttpGet("get-artists-for-side-recommendations")]
+        public async Task<ActionResult<IEnumerable<object>>> GetArtistsForSideRecommendations()
         {
+            //TopDiscussions {new {title = "Najlepsi artyści", content = new {
+            //id = id,
+            //label = string // nazwa postu, artysty, itp
+            //}}}
             if (_context.ArtistsProfiles == null)
                 return NotFound();
 
             if (_context.DiscussionPosts == null)
                 return NotFound();
 
+            //todo
             return await _context.ArtistsProfiles.Where(ap => ap.DiscussionPosts != null).OrderByDescending(ap => ap.DiscussionPosts.Count).Select(ap => new { ap.ArtistProfileId, ap.Name, ap.DiscussionPosts.Count}).Take(5).ToArrayAsync();
 
         }
@@ -53,19 +75,29 @@ namespace Backend.Controllers
             return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Take(5).ToListAsync();
         }*/
 
-        [HttpGet("get-top-users-object")]
-        public async Task<ActionResult<IEnumerable<object>>> GetTopUsersTestObject()
+        [HttpGet("get-users-for-side-recommendations")]
+        public async Task<ActionResult<IEnumerable<object>>> GetUsersForSideRecommendations()
         {
+            //TopDiscussions {new {title = "Najlepsi użytkownicy", content = new {
+            //id = id,
+            //label = string // nazwa postu, artysty, itp
+            //}}}
             if (_context.Users == null)
             {
                 return NotFound();
             }
+
+            //todo
             return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Select(u => new {u.UserId, u.UserName, u.DiscussionPosts.Count }).Take(5).ToListAsync();
         }
 
-        [HttpGet("get-recommended-groups-for-user-object")]
-        public async Task<ActionResult<IEnumerable<object>>> GetRecommendedGroupsForUser(Guid userId)
+        [HttpGet("get-groups-for-side-recommendations")]
+        public async Task<ActionResult<IEnumerable<object>>> GetGroupsForSideRecommendations(Guid userId)
         {
+            //TopDiscussions {new {title = "Polecane grupy", content = new {
+            //id = id,
+            //label = string // nazwa postu, artysty, itp
+            //}}}
             if (_context.Groups == null)
                 return NotFound();
 
@@ -77,6 +109,7 @@ namespace Backend.Controllers
                         join listgroup in recommendedList on groupt.Name equals listgroup.Name
                         select new { groupt.GroupId, groupt.Name }).ToListAsync();
 
+            //todo?
             return await list;
         }
         #endregion
