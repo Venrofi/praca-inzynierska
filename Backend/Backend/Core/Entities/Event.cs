@@ -21,5 +21,21 @@ namespace Backend.Core.Entities
 
         [Required]
         public string Cover { get; set; }
+
+        [Required]
+        public PromotorType Promotor { get; set; }
+
+        public enum PromotorType {
+            Artist,
+            Group
+        }
+
+        public List<User>? Participants { get; set; }
+
+        public Group? Group { get; set; }
+        public Guid? GroupId { get; set; }
+
+        public ArtistProfile? ArtistProfile { get; set; }
+        public Guid? ArtistProfileId { get; set; }
     }
 }
