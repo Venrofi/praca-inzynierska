@@ -10,35 +10,10 @@ export class HomepageService {
 
   constructor(private http: HttpClient) { }
 
-  // TODO: remove delays, add userID as a query parameter
   getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<any>(`${API_ROOT}/MainPage/discussion-posts`, { params }).pipe(
-      map(data => {
-        return data.map((post: any) => {
-          const randomAvatarSize = Math.floor(Math.random() * 200 + 200); // returns a random number between 200 and 400
-          return {
-            id: post.discussionPostId,
-            author: {
-              id: post.userId,
-              name: post?.user?.name || post.topicType === 1 ? 'małpka8' : undefined,
-              avatar: post.authorAvatar || `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`,
-            },
-            topic: {
-              id: post.groupId,
-              name: post.topic,
-              type: post.topicType === 1 ? 'GROUP' : 'ARTIST',
-            },
-            title: post.title,
-            creationTime: post.creationTime,
-            numberOfComments: post.numberOfComments,
-          };
-        });
-      }) // TODO: Fix mapping, currently data returned from server is not in DiscussionPost format, NO AUTHOR NAME!, NO TOPIC TYPE!
-    );
-
-    // return this.http.get<DiscussionPost[]>('assets/data/discussion-posts.json').pipe(delay(1000));
+    return this.http.get<any>(`${API_ROOT}/MainPage/discussion-posts`, { params });
   }
 
   getPremiereList(userID?: string): Observable<PremiereAlbum[]> {
