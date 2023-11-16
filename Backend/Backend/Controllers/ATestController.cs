@@ -6,7 +6,9 @@ using Backend.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using System.Security.Cryptography;
+using static Backend.Core.Entities.DiscussionPost;
 
 namespace Backend.Controllers {
     public class ATestController : ControllerBase {
@@ -193,13 +195,39 @@ namespace Backend.Controllers {
         public async Task<IActionResult> FastEvent() {
             Guid guid = Guid.NewGuid();
 
+            var promotortype = Event.PromotorType.Group;
+            Group group = null;
+            ArtistProfile ap = null;
+            string title = "";
+            int groupOrArtistTopic = r.Next(0, 2);
+            if (groupOrArtistTopic == 0) {
+                //group
+                int index = r.Next(0, _context.Groups.Count());
+                group = _context.Groups.ToList().ElementAt(index);
+                title = "[G] "+group.Name + " - spotkanie";
+            }
+            else {
+                //artist
+                int index = r.Next(0, _context.ArtistsProfiles.Count());
+                promotortype = Event.PromotorType.Artist;
+                ap = _context.ArtistsProfiles.ToList().ElementAt(index);
+                title = "[A] " + ap.Name + " - spotkanie";
+            }
+
+
             var eventt = new Event {
                 EventId = guid,
-                Title = $"{authors[r.Next(0, authors.Length - 1)]} - nowy koncert!",
+                Title = title,
                 Description = $"{desc[r.Next(0, desc.Length - 1)]}",
                 Date = DateTime.Now,
                 Location = $"{locations[r.Next(0, locations.Length - 1)]}",
-                Cover = ""
+                Cover = "",
+                Promotor = promotortype,
+                Participants = new List<User>(),
+                Group = group,
+                GroupId = group?.GroupId,
+                ArtistProfile = ap,
+                ArtistProfileId = ap?.ArtistProfileId
             };
 
             _context.Events.Add(eventt);
