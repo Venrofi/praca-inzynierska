@@ -47,8 +47,8 @@ namespace Backend.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "TEST", Body = "TEST BODY" });
-            return Ok(new { code = "register-success", verificationToken = user.VerificationToken }); //TODO: Send VerificationToken via email?
+            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "Welcome to HipHopHub!", Body = "Register token: " + user.VerificationToken });
+            return Ok(new { code = "register-success"}); //TODO: Send VerificationToken via email?
         }
 
         [HttpPost("login")]
@@ -88,6 +88,7 @@ namespace Backend.Controllers
             user.PasswordResetToken = CreateRandomToken();
             user.ResetTokenExpiration = DateTime.Now.AddHours(1);
             await _context.SaveChangesAsync();
+            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "Reset your password!", Body = "Reset token: " + user.PasswordResetToken });
 
             return Ok(new { code = "sixty-minutes-for-reset" });
         }
