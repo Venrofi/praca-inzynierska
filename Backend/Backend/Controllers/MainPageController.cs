@@ -4,6 +4,7 @@ using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
+using Microsoft.IdentityModel.Tokens;
 using System.Runtime.Intrinsics.Arm;
 
 namespace Backend.Controllers
@@ -150,26 +151,23 @@ namespace Backend.Controllers
         }
 
         [HttpGet("events")]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEventsList()
+        public async Task<ActionResult<IEnumerable<object>>> GetEventsList()
         {
             if (_context.Events == null)
             {
                 return NotFound();
             }
 
-            /* return {
-                        id: event.eventId,
-                        name: event.title,
-                        image: event.cover,
-                        date: event.date,
-                        location: event.location,
-                        description: event.description,
-                        promoter: [],
-                        participants: [],
-                      };*/
-
-            
-            return await _context.Events.OrderByDescending(e=>e.Date).ToListAsync();
+            return await _context.Events.Include(e=>e.Participants).OrderByDescending(e=>e.Date).Select(e => new {
+                id = e.EventId,
+                name = e.Title,
+                image = e.Cover,
+                date = e.Date,
+                location = e.Location,
+                description = e.Description,
+                promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
+                participants = e.Participants.Select(p => new { id = p.UserId, name = p.UserName })
+            }).ToListAsync();
         }
 
         [HttpGet("premiere-albums")]
