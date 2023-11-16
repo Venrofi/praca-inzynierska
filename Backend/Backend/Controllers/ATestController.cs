@@ -35,7 +35,26 @@ namespace Backend.Controllers {
 
         #region FastDataBase
         //script for fast create records in blank database
+        [HttpPost("fast-database")]
+        public async Task<IActionResult> FastDataBase() {
 
+            await FastRegister100Users();
+            for(int i = 0; i < 10; i++) {
+                await FastArtistProfile();
+                await FastGroup();
+                await FastPremiereAlbum();
+            }
+            await Fast25Tracks();
+            for (int i = 0; i < 5; i++) {
+                await FastDiscusisonPost();
+            }
+            for(int i = 0; i < 15; i++) {
+                await FastComment();
+                await FastAddUserToGroup();
+            }
+
+            return Ok($"New artist profile was created.");
+        }
         #endregion
 
         /*[HttpPost("fast-artist-profile")]
@@ -77,7 +96,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-register-100-users")]
         public async Task<IActionResult> FastRegister100Users() {
             for (int i = 0; i < 100; i++) {
-                FastRegister();
+                await FastRegister();
             }
             return Ok("100 users was created");
         }
@@ -85,13 +104,13 @@ namespace Backend.Controllers {
         [HttpPost("fast-register")]
         public async Task<IActionResult> FastRegister() {
             if (!(_context.UserTypes.Where(ut => ut.Description == "USER").Any())) {
-                FastUserTypeUser();
+                await FastUserTypeUser();
             }
             if (!(_context.UserTypes.Where(ut => ut.Description == "ADMIN").Any())) {
-                FastUserTypeAdmin();
+                await FastUserTypeAdmin();
             }
             if (!(_context.UserTypes.Where(ut => ut.Description == "MODERATOR").Any())) {
-                FastUserTypeModerator();
+                await FastUserTypeModerator();
             }
 
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
@@ -412,7 +431,7 @@ namespace Backend.Controllers {
         [HttpPost("fast-25-tracks")]
         public async Task<IActionResult> Fast25Tracks() {
             for (int i = 0; i < 25; i++) {
-                FastTrack();
+                await FastTrack();
             }
             return Ok("25 track was created, or not heh : - )");
         }
