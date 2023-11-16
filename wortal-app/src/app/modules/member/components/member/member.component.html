@@ -2,13 +2,29 @@
   <div class="container-max-width member-container p-3">
     <!-- <p>{{ member | json }}</p> -->
     <main class="member-main-info">
-      <img [src]="member.avatar" class="member-avatar">
+      <img [src]="member.avatar || generateRandomAvatar()" class="member-avatar">
       <h1>{{ member.name }}</h1>
+      <p>{{ member.bio }}</p>
     </main>
     <section>
       <p>E-mail: {{ member.email }}</p>
       <p>Rola: {{ member.role }}</p>
       <p>Liczba postów: {{ member?.posts?.length || 0 }}</p>
+      <p>
+        <!-- TODO: Add link to see Group details (visible only for authenticated users)  -->
+        Grupy ({{ member.joinedGroups.length }}):
+        <span *ngFor="let group of member.joinedGroups">{{ group.name + ", " }}</span>
+      </p>
+      <p>
+        <!-- TODO: Add link to see Event details  -->
+        Wydarzenia ({{ member.attendedEvents.length }}):
+        <span *ngFor="let event of member.attendedEvents">{{ event.name + ", " }}</span>
+      </p>
+      <p>
+        <!-- TODO: Add link to see Artist details  -->
+        Artyści ({{ member.followedArtists.length }}):
+        <span *ngFor="let artist of member.followedArtists">{{ artist.name + ", " }}</span>
+      </p>
     </section>
   </div>
 </div>

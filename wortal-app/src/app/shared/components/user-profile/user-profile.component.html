@@ -2,7 +2,7 @@
   <div class="container-max-width member-container p-3">
     <!-- <p>{{ member | json }}</p> -->
     <main class="member-main-info">
-      <img [src]="member.avatar" class="member-avatar">
+      <img [src]="member.avatar || generateRandomAvatar()" class="member-avatar">
       <h1>{{ member.name }}</h1>
     </main>
     <section>

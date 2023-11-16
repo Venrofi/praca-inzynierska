@@ -15,4 +15,10 @@ export class MemberComponent {
   constructor(private store: Store<StoreModel>) {
     this.member = this.store.select(state => state.app.member);
   }
+
+  generateRandomAvatar(): string {
+    const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
+
+    return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;
+  }
 }
