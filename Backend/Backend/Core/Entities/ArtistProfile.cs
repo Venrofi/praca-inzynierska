@@ -8,7 +8,8 @@
 
         //public DiscussionPost DiscussionPost { get; set; }
         public List<PremiereAlbum>? Albums { get; set; } 
-
         public List<DiscussionPost>? DiscussionPosts { get; set; }
+        public List<Event>? OrganizedEvents { get; set; }
+        public List<User>? Followers { get; set; }
     }
 }
