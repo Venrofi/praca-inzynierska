@@ -23,7 +23,7 @@ namespace Backend.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("Get-basic-user-{id}")]
+        [HttpGet("basic-user-information")]
         public async Task<ActionResult<object>> GetBasicUser(Guid id) {
             //todo
             //id, username, email, groups, role, posts, avatar
@@ -39,12 +39,15 @@ namespace Backend.Controllers
 
             var res = new { 
                 Id = resUser.UserId,
-                UserName = resUser.UserName,
+                Name = resUser.UserName,
+                Avatar = resUser.Avatar,
+                Bio = "", // TODO: Add Bio field!
                 Email = resUser.Email,
-                Groups = resUser.Groups.Select(g=>new {g.GroupId, g.Name }),
-                Role = resUser.UserType.Description,
                 Posts = resUser.DiscussionPosts.Select(dp=>new { dp.DiscussionPostId, dp.Title}),
-                Avatar = ""
+                JoinedGroups = resUser.Groups.Select(g=>new {g.GroupId, g.Name }),
+                AttendedEvents = new List<object>(), // TODO: SELECT AttenededEvents 
+                FollowedArtists = new List<object>(), // TODO: SELECT FollowedArtists
+                Role = resUser.UserType.Description,
             };
 
 

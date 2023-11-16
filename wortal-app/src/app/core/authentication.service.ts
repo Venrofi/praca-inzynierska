@@ -39,6 +39,12 @@ export class AuthService {
     return this.http.post<BasicResponse>(`${API_ROOT}/Authentication/verify`, null, { params });
   }
 
+  forgotPassword(email: string): Observable<BasicResponse> {
+    const params = new HttpParams().set('email', email);
+
+    return this.http.post<BasicResponse>(`${API_ROOT}/Authentication/forgot-password`, null, { params });
+  }
+
   logout() {
     this.clearLoggedInUser();
     this.notifyLogout();

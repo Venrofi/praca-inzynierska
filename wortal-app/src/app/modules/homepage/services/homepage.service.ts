@@ -22,13 +22,13 @@ export class HomepageService {
             id: post.discussionPostId,
             author: {
               id: post.userId,
-              name: post.user ? post.user.name : 'małpka8',
+              name: post?.user?.name || post.topicType === 1 ? 'małpka8' : undefined,
               avatar: post.authorAvatar || `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`,
             },
             topic: {
               id: post.groupId,
               name: post.topic,
-              type: post.topicType === 1 ? 'ARTIST' : 'GROUP',
+              type: post.topicType === 1 ? 'GROUP' : 'ARTIST',
             },
             title: post.title,
             creationTime: post.creationTime,
