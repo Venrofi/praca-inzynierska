@@ -526,5 +526,42 @@ namespace Backend.Controllers {
             return Ok(new { code = "success"});
         }
         #endregion
+
+        #region FastAddUserToEvent
+        [HttpPost("fast-add-user-to-event")]
+        public async Task<IActionResult> FastAddUserToEvent() {
+            int userIndex = r.Next(0, _context.Users.Count());
+            var user = _context.Users.Include(u => u.Groups).ToList().ElementAt(userIndex);
+            int eventtIndex = r.Next(0, _context.Events.Count());
+            var eventt = _context.Events.Include(g => g.Participants).ToList().ElementAt(eventtIndex);
+
+            if (user == null)
+                return BadRequest(new { code = "user-not-found" });
+            if (eventt == null)
+                return BadRequest(new { code = "group-not-found" });
+            //check if user is in group
+            if (eventt.Participants == null)
+                eventt.Participants = new List<User>();
+            if (user.ParticipatedEvents == null)
+                user.ParticipatedEvents = new List<Event>();
+            //if (group.Users.Contains(user))
+            //    return BadRequest(new { code = "user-already-in-group"});
+            if (eventt.Participants.Any(u => u.UserId == user.UserId))
+                return BadRequest(new { code = "user-already-in-group" });
+            if (user.ParticipatedEvents.Any(g => g.EventId == eventt.EventId))
+                return BadRequest(new { code = "user-already-in-event" });
+
+            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
+            eventt.Participants.Add(user);
+            await _context.SaveChangesAsync();
+
+            user.ParticipatedEvents.Add(eventt);
+            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
+
+            //_context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return Ok(new { code = "success" });
+        }
+        #endregion
     }
 }
