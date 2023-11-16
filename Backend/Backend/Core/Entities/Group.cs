@@ -18,5 +18,7 @@ namespace Backend.Core.Entities
         public List<DiscussionPost>? DiscussionPosts { get; set; }
 
         public List<GroupTag>? GroupTags { get; set; }
+
+        public List<Event>? OrganizedEvents { get; set; }
     }
 }
