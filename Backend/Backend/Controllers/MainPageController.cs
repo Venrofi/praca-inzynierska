@@ -143,7 +143,7 @@ namespace Backend.Controllers
                 id = d.DiscussionPostId,
                 author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar },
                 //topic = d.TopicType.ToString(),
-                topic = new { id = d.GroupId, name = d.Topic, type = d.TopicType.ToString() },
+                topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString() },
                 title = d.Title,
                 creationTime = d.CreationTime,
                 numberOfComments = d.NumberOfComments
