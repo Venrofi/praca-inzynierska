@@ -15,6 +15,8 @@ export class ForgotPasswordDialogComponent {
 
   accountEmail!: string;
 
+  isProcessing = false;
+
   constructor(
     private authService: AuthService,
     private dialogRef: MatDialogRef<AuthenticationDialogComponent>,
@@ -37,13 +39,19 @@ export class ForgotPasswordDialogComponent {
   }
 
   forgotPassword(): void {
+    if (this.isProcessing) return;
+
+    this.isProcessing = true;
+
     this.authService.forgotPassword(this.accountEmail).subscribe({
       next: (response) => {
         console.log('Forgot password attempt..', response.code);
         this.dialogRef.close();
+        this.isProcessing = false;
         this.snackBar.open('Na wskazany adres e-mail został wysłany link do utworzenia nowego hasła.', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-success'] });
       },
       error: (response) => {
+        this.isProcessing = false;
         console.log('Forgot password attempt..', response.code);
         this.snackBar.open('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.', 'OK', { horizontalPosition: 'center', duration: 3000, panelClass: ['snackbar-error'] });
       },

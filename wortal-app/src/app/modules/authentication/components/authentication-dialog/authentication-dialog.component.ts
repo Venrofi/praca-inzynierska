@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/authentication.service';
-import { VerificationDialogComponent } from '../verification-dialog/verification-dialog.component';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-authentication-dialog',
@@ -26,6 +26,8 @@ export class AuthenticationDialogComponent implements OnInit {
   passwordVisible = false;
 
   confirmPasswordVisible = false;
+
+  isProcessing = false;
 
   @ViewChild('registerForm') registerForm!: NgForm;
 
@@ -82,15 +84,19 @@ export class AuthenticationDialogComponent implements OnInit {
   }
 
   register(): void {
+    if (this.isProcessing) return;
+
+    this.isProcessing = true;
     this.authService.register(this.registerCredentials).subscribe({
       next: (response) => {
         console.log('Register attempt..', response);
         this.dialogRef.close();
-        this.snackBar.open('Rejestracja pomyślna!', 'OK', { duration: 3000, horizontalPosition: 'center', panelClass: ['snackbar-success'] });
-        this.dialog.open(VerificationDialogComponent, { width: '90vw', maxWidth: '500px', data: { verificationToken: response.verificationToken } });
+        this.isProcessing = false;
+        this.snackBar.open('Rejestracja pomyślna! Sprawdź pocztę pod wskazanym adresem e-mail w celu weryfikacji konta.', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-success'] });
       },
       error: (response) => {
         console.log('Register failed..', response.error);
+        this.isProcessing = false;
 
         switch (response.error.code) {
           case 'username-already-used': {
@@ -116,6 +122,11 @@ export class AuthenticationDialogComponent implements OnInit {
         }
       }
     });
+  }
+
+  forgotPassword(): void {
+    this.dialogRef.close();
+    this.dialog.open(ForgotPasswordDialogComponent, { width: '90vw', maxWidth: '500px' });
   }
 
   onPasswordChange(): void {

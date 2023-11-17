@@ -18,6 +18,12 @@ export interface RegisterResponse extends BasicResponse {
   verificationToken: string;
 }
 
+export interface ResetPasswordRequest {
+  token: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export interface BasicResponse {
   code: string;
 }

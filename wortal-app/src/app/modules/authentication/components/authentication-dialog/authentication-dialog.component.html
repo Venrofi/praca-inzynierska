@@ -32,11 +32,10 @@
         <mat-error>Proszę podać hasło.</mat-error>
       </mat-form-field>
 
-      <p class="forgot-password-label">Nie pamiętam hasła..</p>
+      <p class="forgot-password-label" (click)="forgotPassword()">Nie pamiętam hasła..</p>
 
       <button mat-raised-button (click)="authenticate()" [disabled]="!loginForm.valid" color="accent">Zaloguj się</button>
     </form>
-    <!-- TODO: Add 'forgotPassword' / 'resetPassword' functionality -->
 
     <form *ngSwitchCase="'REGISTER'" #registerForm="ngForm" class="d-flex flex-column mt-3">
       <mat-form-field>
@@ -89,7 +88,11 @@
 
       <ngx-recaptcha2 [(ngModel)]="reCaptcha" [siteKey]="captchaKey" [useGlobalDomain]="false" class="mt-2 mb-4" name="reCaptcha" required></ngx-recaptcha2>
 
-      <button mat-raised-button (click)="register()" [disabled]="!registerForm.valid" color="accent">Utwórz konto</button>
+      <button mat-raised-button (click)="!isProcessing && register()" [disabled]="!registerForm.valid || isProcessing" color="accent">Utwórz konto</button>
+
+      <div *ngIf="isProcessing" class="d-flex justify-content-center mt-3 w-100">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </div>
     </form>
   </div>
 </mat-dialog-content>

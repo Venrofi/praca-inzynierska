@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BasicResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './api.model';
+import { BasicResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, ResetPasswordRequest } from './api.model';
 import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
@@ -44,6 +44,10 @@ export class AuthService {
     const params = new HttpParams().set('email', email);
 
     return this.http.post<BasicResponse>(`${this.API_ROOT}/Authentication/forgot-password`, null, { params });
+  }
+
+  resetPassword(resetData: ResetPasswordRequest): Observable<BasicResponse> {
+    return this.http.post<BasicResponse>(`${this.API_ROOT}/Authentication/reset-password`, resetData);
   }
 
   logout() {
