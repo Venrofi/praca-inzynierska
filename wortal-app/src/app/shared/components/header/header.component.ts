@@ -10,7 +10,7 @@ import * as memberActions from '../../../store/member/member.actions';
 import { AuthenticationDialogComponent } from '../../../modules/authentication/components/authentication-dialog/authentication-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from "../../../core/user.service";
-import { VerificationDialogComponent } from '../../../modules/authentication/components/verification-dialog/verification-dialog.component';
+import { AccountVerificationComponent } from '../../../modules/authentication/components/account-verification/account-verification.component';
 
 @Component({
   selector: 'app-header',
@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
   }
 
   memberAuthenticate(): void {
-    this.dialog.open(VerificationDialogComponent, { width: '90vw', maxWidth: '500px' });
+    this.dialog.open(AccountVerificationComponent, { width: '90vw', maxWidth: '500px' });
   }
 
   openAuthenticationDialog(): void {

@@ -10,11 +10,7 @@
     <mat-icon>person_search</mat-icon>
     <span>Członkowie</span>
   </button>
-  <button mat-menu-item *ngIf="!memberAuthenticated" (click)="onAuthenticateMember()">
-    <mat-icon>person</mat-icon>
-    <span>Zweryfikuj konto</span>
-  </button>
-  <button mat-menu-item [disabled]="!memberAuthenticated" (click)="onMemberLogout()">
+  <button mat-menu-item *ngIf="memberAuthenticated" (click)="onMemberLogout()">
     <mat-icon>logout</mat-icon>
     <span>Wyloguj</span>
   </button>

@@ -20,7 +20,10 @@
         {{ member?.name || 'Zaloguj / Dołącz' }}
       </button>
 
-      <app-header-side-menu [memberAuthenticated]="!!member" (memberLogout)="memberLogout()" (memberAuthenticate)="memberAuthenticate()"></app-header-side-menu>
+      <app-header-side-menu [memberAuthenticated]="!!member"
+        (memberLogout)="memberLogout()"
+        (memberAuthenticate)="memberAuthenticate()">
+      </app-header-side-menu>
     </section>
   </div>
 </mat-toolbar>
