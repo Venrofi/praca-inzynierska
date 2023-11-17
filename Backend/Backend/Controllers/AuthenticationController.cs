@@ -47,8 +47,21 @@ namespace Backend.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "Welcome to HipHopHub!", Body = "Register token: " + user.VerificationToken });
-            return Ok(new { code = "register-success"}); //TODO: Send VerificationToken via email?
+
+            string verificationLink = CreateAccountVerificationLink(user.VerificationToken);
+            string emailBody = $"Cześć <b>{user.UserName}</b>,<br/><br/>"
+                             + $"Cieszymy się że dołączyłeś do Naszej społeczności!<br/><br/>"
+                             + $"Kliknij w link aby potwierdzić utworzenie nowego konta: <b><a href=\"{verificationLink}\">Zweryfikuj konto</a></b> <br/><br/>"
+                             + $"Miłego dnia,<br/> <b>HipHopHub Team</b>";
+
+
+            _emailService.SendEmail(new EmailRequest
+            { 
+                Receiver = user.Email, 
+                Subject = "Witamy na wortalu HipHopHub!", 
+                Body = emailBody,
+            });
+            return Ok(new { code = "register-success"});
         }
 
         [HttpPost("login")]
@@ -88,7 +101,21 @@ namespace Backend.Controllers
             user.PasswordResetToken = CreateRandomToken();
             user.ResetTokenExpiration = DateTime.Now.AddHours(1);
             await _context.SaveChangesAsync();
-            _emailService.SendEmail(new EmailRequest { Receiver = user.Email, Subject = "Reset your password!", Body = "Reset token: " + user.PasswordResetToken });
+
+            string resetLink = CreatePasswordResetLink(user.PasswordResetToken);
+            string formattedExpiration = DateTime.Now.AddHours(1).ToString("HH:mm:ss dd.MM.yyyy");
+            string emailBody = $"Cześć <b>{user.UserName}</b>,<br/><br/>"
+                             + $"Doszły nas słuchy, że chcesz zmienić swoje hasło. Jeśli to nie Ty wykonałeś próbę resetu hasła zignoruj tą wiadomość.<br/><br/>"
+                             + $"Kliknij w link aby ustawić nowe hasło: <b><a href=\"{resetLink}\">Zmień hasło</a></b> <br/><br/>"
+                             + $"Link wygaśnie: <b>{formattedExpiration}</b> <br/><br/>"
+                             + $"Miłego dnia,<br/> <b>HipHopHub Team</b>";
+
+            _emailService.SendEmail(new EmailRequest
+            {
+                Receiver = user.Email,
+                Subject = "Zmiana hasła dla konta na wortalu HipHopHub",
+                Body = emailBody
+            });
 
             return Ok(new { code = "sixty-minutes-for-reset" });
         }
@@ -137,6 +164,22 @@ namespace Backend.Controllers
         private string CreateRandomToken()
         {
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+        }
+
+        private string CreateAccountVerificationLink(string verificationToken)
+        {
+            string baseUrl = "https://hip-hop-hub.netlify.app";
+            string verificationLink = $"{baseUrl}/verify-account?token={verificationToken}";
+
+            return verificationLink;
+        }
+
+        private string CreatePasswordResetLink(string resetToken)
+        {
+            string baseUrl = "https://hip-hop-hub.netlify.app";
+            string resetLink = $"{baseUrl}/new-password?token={resetToken}";
+
+            return resetLink;
         }
     }
 }
