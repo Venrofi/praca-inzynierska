@@ -11,6 +11,12 @@
   margin: 0 auto;
 }
 
+.dialog-close-icon {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}
+
 .snackbar-error {
   --mdc-snackbar-container-color: #f44336;;
   --mdc-snackbar-supporting-text-color: white;

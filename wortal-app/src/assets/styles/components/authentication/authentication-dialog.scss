@@ -4,12 +4,6 @@ app-authentication-dialog {
     max-height: 80vh;
   }
 
-  .dialog-close-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
   .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
     color: white !important;
     background-color: $my-primary-OG !important;
