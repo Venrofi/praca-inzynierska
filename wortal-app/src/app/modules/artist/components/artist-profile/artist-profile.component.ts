@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Artist, Member } from 'src/app/core/core.model';
-import { ArtistService } from '../../services/artist.service';
+import { ArtistService } from '../../../../shared/services/artist.service';
 
 @Component({
   selector: 'app-artist-profile',

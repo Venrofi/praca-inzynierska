@@ -8,21 +8,19 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
 import { DiscussionPostDetailsComponent } from './components/discussion-post-details/discussion-post-details.component';
-import { GroupProfileComponent } from './components/group-profile/group-profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     HeaderSideMenuComponent,
     UserProfileComponent,
-    ArtistProfileComponent,
-    GroupProfileComponent,
     DiscussionPostDetailsComponent,
+    EventDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,8 +39,6 @@ import { UserProfileComponent } from "./components/user-profile/user-profile.com
     HeaderComponent,
     HeaderSideMenuComponent,
     UserProfileComponent,
-    ArtistProfileComponent,
-    GroupProfileComponent,
   ],
 })
 export class SharedModule { }
