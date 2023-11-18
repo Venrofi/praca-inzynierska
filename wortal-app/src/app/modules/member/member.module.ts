@@ -7,9 +7,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberComponent } from './components/member/member.component';
 import { MemberRoutingModule } from './member-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MembersListComponent } from './components/members-list/members-list.component';
 
 @NgModule({
-  declarations: [MemberComponent],
+  declarations: [MemberComponent, MembersListComponent],
   imports: [
     CommonModule,
     MemberRoutingModule,

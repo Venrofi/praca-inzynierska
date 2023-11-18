@@ -9,12 +9,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GroupProfileComponent } from './components/group-profile/group-profile.component';
 import { GroupRoutingModule } from './group-routing.module';
+import { GroupsListComponent } from './components/groups-list/groups-list.component';
 
 
 
 @NgModule({
   declarations: [
     GroupProfileComponent,
+    GroupsListComponent,
   ],
   imports: [
     CommonModule,

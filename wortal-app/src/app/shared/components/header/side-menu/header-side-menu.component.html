@@ -6,11 +6,11 @@
     <mat-icon>library_music</mat-icon>
     <span>Artyści</span>
   </button>
-  <button mat-menu-item [disabled]="!memberAuthenticated">
+  <button mat-menu-item routerLink="/group/list" [disabled]="!memberAuthenticated">
     <mat-icon>groups</mat-icon>
     <span>Grupy</span>
   </button>
-  <button mat-menu-item [disabled]="!memberAuthenticated">
+  <button mat-menu-item routerLink="/member/list" [disabled]="!memberAuthenticated">
     <mat-icon>person_search</mat-icon>
     <span>Członkowie</span>
   </button>
