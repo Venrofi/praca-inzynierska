@@ -44,22 +44,7 @@ export class HomepageService {
   getEventList(userID?: string): Observable<Event[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<any>(`${this.API_ROOT}/MainPage/events`, { params }).pipe(
-      map(data => {
-        return data.map((event: any) => {
-          return {
-            id: event.eventId,
-            name: event.title,
-            image: event.cover,
-            date: event.date,
-            location: event.location,
-            description: event.description,
-            promoter: [],
-            participants: [],
-          };
-        });
-      }) //TODO: Fix mapping, currently data returned from server is not in Event format
-    );
+    return this.http.get<any>(`${this.API_ROOT}/MainPage/events`, { params });
   }
 
   getSideRecommendations(userID?: string): Observable<HomepageSideRecommendations> {
