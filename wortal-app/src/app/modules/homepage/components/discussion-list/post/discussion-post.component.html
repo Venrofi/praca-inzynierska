@@ -16,7 +16,9 @@
 
       <div class="post-additional-info" [ngClass]="isWideScreen ? '' : 'my-1 pb-2'">
         <span class="post-time">{{ post.creationTime | date : dateType }}</span>
-        <button mat-flat-button color="accent" class="post-comments" (click)="openPostModal()">
+        <button mat-flat-button color="accent"
+          (click)="authService.isAuthenticatedUser() && openPostModal()"
+          [ngClass]="!authService.isAuthenticatedUser() ? 'post-comments-button--disabled' : 'post-comments-button'">
           <mat-icon>mode_comment</mat-icon>
           {{ post.numberOfComments || '0' }}
         </button>

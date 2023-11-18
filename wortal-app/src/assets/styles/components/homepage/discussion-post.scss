@@ -22,9 +22,14 @@ app-discussion-post {
     gap: 1rem;
   }
 
-  .post-comments {
+  .post-comments-button, .post-comments-button--disabled {
     border-radius: 25px;
     height: 2rem;
+  }
+
+  .post-comments-button--disabled {
+    background-color: $my-accent-100 !important;
+    pointer-events: none;
   }
 
   // Make the mat-card-header-text take up the full width of the card

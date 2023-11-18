@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { DiscussionPost, DiscussionPostTopic } from '../../../homepage.model';
+import { AuthService } from 'src/app/core/authentication.service';
 
 @Component({
   selector: 'app-discussion-post',
@@ -24,6 +25,8 @@ export class DiscussionPostComponent {
     this.isWideScreen = window.innerWidth > 600;
     this.dateType = this.isWideScreen ? 'medium' : 'short';
   }
+
+  constructor(public authService: AuthService) { }
 
   openTopicForum() {
     const topic = this.post.topic;
