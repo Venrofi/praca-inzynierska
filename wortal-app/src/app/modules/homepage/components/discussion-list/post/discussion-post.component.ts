@@ -13,6 +13,7 @@ export class DiscussionPostComponent {
 
   @Output() topic = new EventEmitter<DiscussionPostTopic>();
   @Output() authorProfile = new EventEmitter<string>();
+  @Output() artistProfile = new EventEmitter<string>();
   @Output() postModal = new EventEmitter<string>();
   @Output() postDetails = new EventEmitter<string>();
 
@@ -35,6 +36,10 @@ export class DiscussionPostComponent {
 
   openAuthorProfile() {
     this.authorProfile.emit(this.post.author.id);
+  }
+
+  openArtistProfile() {
+    this.artistProfile.emit(this.post.topic.id);
   }
 
   openPostModal() {

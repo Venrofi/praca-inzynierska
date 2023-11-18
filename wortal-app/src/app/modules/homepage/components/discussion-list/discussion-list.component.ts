@@ -50,6 +50,10 @@ export class DiscussionListComponent implements OnInit {
     this.router.navigate(['/user'], { queryParams: { id: author } }).catch(noop);
   }
 
+  navigateToArtistProfile(artist: string) {
+    this.router.navigate(['/artist'], { queryParams: { id: artist } }).catch(noop);
+  }
+
   openPostModal(post: DiscussionPost) {
     console.log(`Open post modal/details at: /forum/${post.topic.name}/${post.id}`);
   }

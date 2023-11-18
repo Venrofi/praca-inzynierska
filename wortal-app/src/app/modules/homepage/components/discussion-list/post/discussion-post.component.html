@@ -2,7 +2,7 @@
   <mat-card-header class="post-header">
     <div mat-card-avatar class="post-header-image"
       [style.background-image]="'url(' + (post.author.avatar || generateRandomAvatar()) + ')'"
-      (click)="post.topic.type === 'GROUP' && openAuthorProfile()">
+      (click)="post.topic.type === 'GROUP' ? openAuthorProfile() : openArtistProfile()">
     </div>
     <mat-card-subtitle (click)="openTopicForum()">
       <span class="post-topic">{{ post.topic.name }}</span>
@@ -12,7 +12,9 @@
     </mat-card-title>
     <mat-card-subtitle class="mt-1 d-flex justify-content-between w-100"
       [ngClass]="isWideScreen ? 'flex-row align-items-center' : 'flex-column'">
-      <span class="post-author" (click)="post.topic.type === 'GROUP' && openAuthorProfile()">{{ post.topic.type === 'GROUP' ? post.author.name : '' }}</span>
+      <span class="post-author" (click)="post.topic.type === 'GROUP' ? openAuthorProfile() : openArtistProfile()">
+        {{ post.topic.type === 'GROUP' ? post.author.name : '' }}
+      </span>
 
       <div class="post-additional-info" [ngClass]="isWideScreen ? '' : 'my-1 pb-2'">
         <span class="post-time">{{ post.creationTime | date : dateType }}</span>
