@@ -2,6 +2,10 @@
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/artist/list">
+    <mat-icon>library_music</mat-icon>
+    <span>Artyści</span>
+  </button>
   <button mat-menu-item [disabled]="!memberAuthenticated">
     <mat-icon>groups</mat-icon>
     <span>Grupy</span>

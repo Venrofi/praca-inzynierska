@@ -10,13 +10,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ArtistRoutingModule } from './artist-routing.module';
 import { AlbumDetailsComponent } from './components/album-details/album-details.component';
 import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
-
-
+import { ArtistsListComponent } from './components/artists-list/artists-list.component';
 
 @NgModule({
   declarations: [
     AlbumDetailsComponent,
     ArtistProfileComponent,
+    ArtistsListComponent,
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,8 @@
     </mat-form-field>
 
     <section class="d-flex justify-content-end align-items-center">
-      <button mat-icon-button aria-label="icon-button which opens new post creation" matTooltip="Stwórz nowy post">
+      <button mat-icon-button *ngIf="!!member"
+      aria-label="icon-button which opens new post creation" matTooltip="Stwórz nowy post">
         <mat-icon>forum</mat-icon>
       </button>
 

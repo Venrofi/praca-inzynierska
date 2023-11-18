@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EventDetailsComponent } from './components/event-details/event-details.
   ],
   imports: [
     CommonModule,
+    RouterModule,
 
     // Angular Material
     MatButtonModule,
