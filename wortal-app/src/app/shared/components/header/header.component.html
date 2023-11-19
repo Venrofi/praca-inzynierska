@@ -1,6 +1,8 @@
 <mat-toolbar class="d-flex justify-content-center py-5" *ngIf="isWideScreen; else mobileContent">
   <div class="d-flex justify-content-between container-max-width">
-    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" (click)="goToHomepage()">
+    <a href="/">
+      <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
+    </a>
 
     <mat-form-field class="mt-4 w-50" color="accent">
       <mat-label>Wyszukaj w społeczności..</mat-label>
@@ -31,7 +33,9 @@
 
 <ng-template #mobileContent>
   <mat-toolbar class="d-flex justify-content-between py-5">
-    <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" (click)="goToHomepage()">
+    <a href="/">
+      <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo">
+    </a>
 
     <section class="d-flex justify-content-end align-items-center">
       <button mat-icon-button>

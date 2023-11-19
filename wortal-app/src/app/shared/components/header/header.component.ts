@@ -45,11 +45,6 @@ export class HeaderComponent implements OnInit {
     this.store.subscribe(store => {
       this.member = store.app.member;
     });
-
-  }
-
-  goToHomepage(): void {
-    this.router.navigateByUrl('/');
   }
 
   memberButtonAction(): void {
