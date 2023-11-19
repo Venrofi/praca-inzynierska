@@ -1,32 +1,50 @@
-<div *ngIf="member | async as member; else loading" class="p-3 member-wrapper">
-  <div class="container-max-width member-container p-3">
-    <!-- <p>{{ member | json }}</p> -->
-    <main class="member-main-info">
-      <img [src]="member.avatar || generateRandomAvatar()" class="member-avatar">
-      <h1>{{ member.name }}</h1>
-      <p>{{ member.bio }}</p>
-    </main>
-    <section>
-      <p>E-mail: {{ member.email }}</p>
-      <p>Rola: {{ member.role }}</p>
-      <p>Liczba postów: {{ member?.posts?.length || 0 }}</p>
-      <p>
-        <!-- TODO: Add link to see Group details (visible only for authenticated users)  -->
-        Grupy ({{ member.joinedGroups.length }}):
-        <span *ngFor="let group of member.joinedGroups">{{ group.name + ", " }}</span>
-      </p>
-      <p>
-        <!-- TODO: Add link to see Event details  -->
-        Wydarzenia ({{ member.attendedEvents.length }}):
-        <span *ngFor="let event of member.attendedEvents">{{ event.name + ", " }}</span>
-      </p>
-      <p>
-        <!-- TODO: Add link to see Artist details  -->
-        Artyści ({{ member.followedArtists.length }}):
-        <span *ngFor="let artist of member.followedArtists">{{ artist.name + ", " }}</span>
-      </p>
-    </section>
-  </div>
+<div *ngIf="member | async as member; else loading" class="container-max-width member-container p-3">
+  <mat-card class="member-card">
+    <mat-card-header class="d-flex container-center p-3 member-header">
+      <div class="container-center">
+        <img [src]="member.avatar || generateRandomAvatar()" class="member-avatar">
+      </div>
+      <section class="member-main-info" aria-label="Member main information">
+        <div class="d-flex justify-content-between">
+          <article>
+            <mat-card-title>{{ member.name }}</mat-card-title>
+            <app-text-with-icon icon="person" [text]="member.role"></app-text-with-icon>
+            <app-text-with-icon icon="mail" [text]="member.email"></app-text-with-icon>
+          </article>
+          <div>
+            <button mat-icon-button matTooltip="Edytuj profil"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+        <article class="mt-2" aria-label="Member description">
+          <p>{{ member.bio || "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quos doloremque soluta pariatur sunt optio modi accusamus beatae laborum voluptatibus totam dignissimos, architecto nam voluptate fuga consequuntur ipsam perspiciatis? In quisquam tenetur, ratione quam adipisci assumenda? Sequi dignissimos amet deserunt totam repellendus temporibus eveniet libero, quidem cumque, repudiandae cum aut." }}</p>
+        </article>
+      </section>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider style="background-color: lightgray;"></mat-divider>
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
+      </mat-card-title>
+      <section class="d-flex flex-column" style="gap: 1rem;">
+        <span>Liczba postów: {{ member?.posts?.length || 0 }}</span>
+
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Groups joined by the member">
+          <span>Grupy ({{ member.joinedGroups.length }}):</span>
+          <a *ngFor="let group of member.joinedGroups" routerLink="../group" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+        </article>
+
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Events attened by the member">
+          <span>Wydarzenia ({{ member.attendedEvents.length }}):</span>
+          <a *ngFor="let event of member.attendedEvents" routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+        </article>
+
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Artists followed by the member">
+          <span>Grupy ({{ member.followedArtists.length }}):</span>
+          <a *ngFor="let artist of member.joinedGroups" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+        </article>
+      </section>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <ng-template #loading>

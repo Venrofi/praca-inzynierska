@@ -14,6 +14,7 @@ import { HeaderSideMenuComponent } from './components/header/side-menu/header-si
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { RouterModule } from '@angular/router';
+import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
     UserProfileComponent,
     DiscussionPostDetailsComponent,
     EventDetailsComponent,
+    TextWithIconComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,9 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     HeaderSideMenuComponent,
     UserProfileComponent,
+    DiscussionPostDetailsComponent,
+    EventDetailsComponent,
+    TextWithIconComponent,
   ],
 })
 export class SharedModule { }

@@ -8,6 +8,10 @@ import { MemberComponent } from './components/member/member.component';
 import { MemberRoutingModule } from './member-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MembersListComponent } from './components/members-list/members-list.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [MemberComponent, MembersListComponent],
@@ -21,6 +25,10 @@ import { MembersListComponent } from './components/members-list/members-list.com
 
     // Angular Material
     MatProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   exports: [MemberComponent]
 })
