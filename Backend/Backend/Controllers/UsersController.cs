@@ -30,23 +30,22 @@ namespace Backend.Controllers
             if (_context.Users == null) {
                 return NotFound();
             }
-            var user = await _context.Users.FindAsync(id);
-            var resUser = _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u=>u.UserType).Where(u => u == user).FirstOrDefault();
+            var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == id).FirstOrDefaultAsync();
 
-            if (user == null) {
+            if (resUser == null) {
                 return NotFound();
             }
 
-            var res = new { 
+            var res = new {
                 Id = resUser.UserId,
                 Name = resUser.UserName,
                 Avatar = resUser.Avatar,
                 Bio = "", // TODO: Add Bio field!
                 Email = resUser.Email,
-                Posts = resUser.DiscussionPosts.Select(dp=>new { dp.DiscussionPostId, dp.Title}),
-                JoinedGroups = resUser.Groups.Select(g=>new {g.GroupId, g.Name }),
-                AttendedEvents = new List<object>(), // TODO: SELECT AttenededEvents 
-                FollowedArtists = new List<object>(), // TODO: SELECT FollowedArtists
+                Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
+                JoinedGroups = resUser.Groups.Select(g => new { id = g.GroupId, name = g.Name }),
+                AttendedEvents = resUser.ParticipatedEvents.Select(pe => new { id = pe.EventId, name = pe.Title }),
+                FollowedArtists = resUser.FollowedArtists.Select(fa => new { id = fa.ArtistProfileId, name = fa.Name }),
                 Role = resUser.UserType.Description,
             };
 
