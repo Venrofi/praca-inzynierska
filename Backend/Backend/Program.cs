@@ -14,13 +14,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEmailService, EmailService>();
-/*builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("LocalAngularApp",
             builder => builder.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader());
-});*/
+});
 
 var app = builder.Build();
 //builder.Services.AddSwaggerGen();
@@ -35,7 +35,10 @@ var app = builder.Build();
     });
 //}
 
-//app.UseCors("LocalAngularApp");
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("LocalAngularApp");
+}
 
 app.UseHttpsRedirection();
 
