@@ -15,6 +15,8 @@ import { UserProfileComponent } from "./components/user-profile/user-profile.com
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { RouterModule } from '@angular/router';
 import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.
     MatMenuModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatDividerModule,
   ],
   exports: [
     HeaderComponent,

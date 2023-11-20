@@ -29,19 +29,6 @@ app-member, app-user-profile {
     display: none;
   }
 
-  .member-main-info {
-    // min-width: 500px;
-    // // background-color: $my-primary-100;
-    // // backdrop-filter: blur(5px);
-    // border-bottom-left-radius: $border-radius;
-    // border-bottom-right-radius: $border-radius;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // gap: 1rem;
-  }
-
   .member-avatar {
     width: 200px;
     height: 200px;
@@ -50,5 +37,15 @@ app-member, app-user-profile {
     border: 5px solid $my-primary-OG;
     background-size: cover;
     background-position: center;
+  }
+
+  a, a:visited {
+    text-decoration: none;
+    color: $my-primary-OG;
+  }
+
+  a:hover, a:active, a:focus {
+    text-decoration: underline;
+    color: $my-accent-OG;
   }
 }
