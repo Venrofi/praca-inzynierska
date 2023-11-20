@@ -11,6 +11,7 @@ namespace Backend.Core.Entities
         public string Email { get; set; }
         public string UserName { get; set; }
         public string? Avatar { get; set; }
+        public string? Bio { get; set; }
 
         public byte[] PasswordHash { get; set; } = new byte[32];
         public byte[] PasswordSalt { get; set; } = new byte[32];
