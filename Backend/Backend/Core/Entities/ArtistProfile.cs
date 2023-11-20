@@ -5,6 +5,7 @@
         public Guid ArtistProfileId { get; set; }
 
         public string Name { get; set; }
+        public string? Description { get; set; }
 
         //public DiscussionPost DiscussionPost { get; set; }
         public List<PremiereAlbum>? Albums { get; set; } 
