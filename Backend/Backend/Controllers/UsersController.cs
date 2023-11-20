@@ -23,7 +23,7 @@ namespace Backend.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("basic-user-information")]
+        [HttpGet("basic-user{id}")]
         public async Task<ActionResult<object>> GetBasicUser(Guid id) {
             //todo
             //id, username, email, groups, role, posts, avatar
