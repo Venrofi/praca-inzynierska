@@ -36,7 +36,7 @@
         <app-side-recommendations [recommendation]="recommendations.topDiscussions" [type]="'DISCUSSIONS'"></app-side-recommendations>
         <app-side-recommendations [recommendation]="recommendations.topArtists" [type]="'ARTISTS'"></app-side-recommendations>
         <app-side-recommendations [recommendation]="recommendations.topMembers" [type]="'MEMBERS'" [activeLinks]="authService.isAuthenticatedUser()"></app-side-recommendations>
-        <app-side-recommendations *ngIf="authService.isAuthenticatedUser()" [recommendation]="recommendations.topGroups" [type]="'GROUPS'"></app-side-recommendations>
+        <app-side-recommendations *ngIf="authService.isAuthenticatedUser()" [recommendation]="recommendations.recommendedGroups" [type]="'GROUPS'"></app-side-recommendations>
 
         <mat-card class="side-card mb-3">
           <mat-card-header>

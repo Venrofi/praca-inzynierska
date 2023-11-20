@@ -28,4 +28,10 @@ export class PremiereAlbumComponent {
     this.albumModal.emit(this.album.id);
   }
 
+  generateRandomCover(): string {
+    const randomCoverSize = Math.floor(Math.random() * 200 + 500); // returns a random number between 500 and 700
+
+    return `https://picsum.photos/${randomCoverSize}/${randomCoverSize}`;
+  }
+
 }

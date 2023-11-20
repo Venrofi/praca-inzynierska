@@ -1,4 +1,4 @@
-<mat-card class="album" color="accent" [style.background-image]="'url(' + album.cover + ')'">
+<mat-card class="album" color="accent" [style.background-image]="'url(' + (album.cover || generateRandomCover()) + ')'">
   <mat-card-header class="album-header">
     <mat-card-title>
       <span class="album-title" (click)="openAlbumModal()">{{ album.title }}</span>

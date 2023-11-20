@@ -60,7 +60,7 @@ export interface HomepageSideRecommendations {
   topDiscussions: Recommendation;
   topArtists: Recommendation;
   topMembers: Recommendation;
-  topGroups: Recommendation;
+  recommendedGroups: Recommendation;
 }
 
 export interface Recommendation {
