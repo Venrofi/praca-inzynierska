@@ -35,10 +35,7 @@ var app = builder.Build();
     });
 //}
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseCors("LocalAngularApp");
-}
+app.UseCors("LocalAngularApp");
 
 app.UseHttpsRedirection();
 
