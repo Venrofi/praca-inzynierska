@@ -27,6 +27,9 @@ namespace Backend.Controllers {
             "Duis nec tortor sagittis ante feugiat posuere." };
         private readonly string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" };
         private readonly string[] tracks = new string[] { "Dorosłość", "Wakacje", "Czarne ciuchy", "Ostatni ninja", "Popiół", "Ukryty w mieście krzyk", "Françoise Hardy", "BFF", "Szklanki", "Mandarynki" };
+        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SłowoWBit", 
+            "BityINuty", "RebelRymów", "FlowMagik", "PolskiRapGenius", "SzaleńczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne", 
+            "RymyRozładowane", "BitowaBrawura", "PolskiFlowMaster", "RapowaRewolucja", "BitowyPatriota", "RymyRealne", "HipHopHermetyk" };
         #endregion
 
         public ATestController(ApplicationDbContext context) {
@@ -121,12 +124,16 @@ namespace Backend.Controllers {
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
 
             Guid guid = Guid.NewGuid();
+            int index = r.Next(0, nicknames.Length);
+            var name = nicknames[index] + "-" + guid.ToString("N").Substring(0, 5);
+            var mail = name + "@example.com";
+            int bioIndex = r.Next(0, desc.Length);
 
             var user = new User {
                 UserId = guid,
-                UserName = guid.ToString("N"),
-                Bio = "",
-                Email = guid.ToString("N") + "@example.com",
+                UserName = name,
+                Bio = desc[bioIndex],
+                Email = mail,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 VerificationToken = CreateRandomToken(),
@@ -222,9 +229,9 @@ namespace Backend.Controllers {
             var eventt = new Event {
                 EventId = guid,
                 Title = title,
-                Description = $"{desc[r.Next(0, desc.Length - 1)]}",
+                Description = $"{desc[r.Next(0, desc.Length)]}",
                 Date = DateTime.Now,
-                Location = $"{locations[r.Next(0, locations.Length - 1)]}",
+                Location = $"{locations[r.Next(0, locations.Length)]}",
                 Cover = "",
                 Promotor = promotortype,
                 Participants = new List<User>(),
@@ -258,7 +265,7 @@ namespace Backend.Controllers {
             var artistProfile = new ArtistProfile {
                 ArtistProfileId = guid,
                 Name = name,
-                Description = "",
+                Description = desc[r.Next(0, desc.Length)],
                 Albums = new List<PremiereAlbum>(),
                 DiscussionPosts = new List<DiscussionPost>()
             };
@@ -288,7 +295,7 @@ namespace Backend.Controllers {
                 GroupId = guid,
                 Name = name + "-fans",
                 Open = false,
-                Description = "",
+                Description = desc[r.Next(0, desc.Length)],
                 Users = new List<User>(),
                 DiscussionPosts = new List<DiscussionPost>(),
             };
