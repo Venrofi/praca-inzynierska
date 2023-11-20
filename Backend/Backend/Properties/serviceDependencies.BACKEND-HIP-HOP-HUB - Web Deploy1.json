@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/BACKEND-HIP-HOP-HUB/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsHipHopHubDb_7F7F6CDB79",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/hiphophubserver/databases/HipHopHubDB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:HipHopHubDb",
+      "dynamicId": null
+    }
+  }
+}
