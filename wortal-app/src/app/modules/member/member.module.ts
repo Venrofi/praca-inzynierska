@@ -3,15 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedMaterialModule } from 'src/app/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberComponent } from './components/member/member.component';
-import { MemberRoutingModule } from './member-routing.module';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MembersListComponent } from './components/members-list/members-list.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
+import { MemberRoutingModule } from './member-routing.module';
 
 @NgModule({
   declarations: [MemberComponent, MembersListComponent],
@@ -22,13 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
     FormsModule,
     HttpClientModule,
     RouterModule,
-
-    // Angular Material
-    MatProgressSpinnerModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatDividerModule,
+    SharedMaterialModule,
   ],
   exports: [MemberComponent]
 })

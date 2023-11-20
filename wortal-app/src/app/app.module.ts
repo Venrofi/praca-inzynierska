@@ -13,6 +13,7 @@ import { appReducer } from './store/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/enviroments/enviroment';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { SharedMaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    SharedMaterialModule,
     SharedModule,
     HomepageModule,
     AuthenticationModule,
