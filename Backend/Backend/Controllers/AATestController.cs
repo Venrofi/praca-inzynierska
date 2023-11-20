@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using static Backend.Core.Entities.DiscussionPost;
 
 namespace Backend.Controllers {
-    public class ATestController : ControllerBase {
+    public class AATestController : ControllerBase {
         private readonly ApplicationDbContext _context;
         private Random r;
 
@@ -32,7 +32,7 @@ namespace Backend.Controllers {
             "RymyRozładowane", "BitowaBrawura", "PolskiFlowMaster", "RapowaRewolucja", "BitowyPatriota", "RymyRealne", "HipHopHermetyk" };
         #endregion
 
-        public ATestController(ApplicationDbContext context) {
+        public AATestController(ApplicationDbContext context) {
             _context = context;
             r = new Random();
 
