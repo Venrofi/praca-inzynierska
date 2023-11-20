@@ -45,14 +45,17 @@ namespace Backend.Controllers {
                 await FastArtistProfile();
                 await FastGroup();
                 await FastPremiereAlbum();
+                await FastEvent();
             }
             await Fast25Tracks();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 15; i++) {
                 await FastDiscusisonPost();
             }
-            for(int i = 0; i < 15; i++) {
+            for(int i = 0; i < 25; i++) {
                 await FastComment();
                 await FastAddUserToGroup();
+                await FastAddUserToEvent();
+                await FastUserFollowArtist();
             }
 
             return Ok($"New artist profile was created.");
@@ -122,6 +125,7 @@ namespace Backend.Controllers {
             var user = new User {
                 UserId = guid,
                 UserName = guid.ToString("N"),
+                Bio = "",
                 Email = guid.ToString("N") + "@example.com",
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
@@ -254,6 +258,7 @@ namespace Backend.Controllers {
             var artistProfile = new ArtistProfile {
                 ArtistProfileId = guid,
                 Name = name,
+                Description = "",
                 Albums = new List<PremiereAlbum>(),
                 DiscussionPosts = new List<DiscussionPost>()
             };
@@ -282,10 +287,10 @@ namespace Backend.Controllers {
             var group = new Group {
                 GroupId = guid,
                 Name = name + "-fans",
-                Open = true,
+                Open = false,
+                Description = "",
                 Users = new List<User>(),
                 DiscussionPosts = new List<DiscussionPost>(),
-                GroupTags = new List<GroupTag>()
             };
 
             _context.Groups.Add(group);
@@ -425,7 +430,7 @@ namespace Backend.Controllers {
             var pa = new PremiereAlbum {
                 PremiereAlbumId = guid,
                 Title = albums[r.Next(0, albums.Length - 1)],
-                Artist = authors[r.Next(0, authors.Length - 1)],
+                Artist = artist.Name,
                 Cover = "",
                 ReleaseDate = DateTime.Now,
                 PremiereAlbumDetails = new PremiereAlbumDetails(),
@@ -538,7 +543,7 @@ namespace Backend.Controllers {
             if (user == null)
                 return BadRequest(new { code = "user-not-found" });
             if (eventt == null)
-                return BadRequest(new { code = "group-not-found" });
+                return BadRequest(new { code = "event-not-found" });
             //check if user is in group
             if (eventt.Participants == null)
                 eventt.Participants = new List<User>();
@@ -547,7 +552,7 @@ namespace Backend.Controllers {
             //if (group.Users.Contains(user))
             //    return BadRequest(new { code = "user-already-in-group"});
             if (eventt.Participants.Any(u => u.UserId == user.UserId))
-                return BadRequest(new { code = "user-already-in-group" });
+                return BadRequest(new { code = "user-already-in-event" });
             if (user.ParticipatedEvents.Any(g => g.EventId == eventt.EventId))
                 return BadRequest(new { code = "user-already-in-event" });
 
@@ -563,5 +568,53 @@ namespace Backend.Controllers {
             return Ok(new { code = "success" });
         }
         #endregion
-    }
+
+        #region FastUserFollowArtist
+        [HttpPost("fast-user-follow-artist")]
+        public async Task<IActionResult> FastUserFollowArtist() {
+            int userIndex = r.Next(0, _context.Users.Count());
+            var user = _context.Users.Include(u => u.FollowedArtists).ToList().ElementAt(userIndex);
+            int artistIndex = r.Next(0, _context.ArtistsProfiles.Count());
+            var artist = _context.ArtistsProfiles.Include(g => g.Followers).ToList().ElementAt(artistIndex);
+
+            if (user == null)
+                return BadRequest(new { code = "user-not-found" });
+            if (artist == null)
+                return BadRequest(new { code = "artist-not-found" });
+            //check if user is in group
+            if (artist.Followers == null)
+                artist.Followers = new List<User>();
+            if (user.FollowedArtists == null)
+                user.FollowedArtists = new List<ArtistProfile>();
+            //if (group.Users.Contains(user))
+            //    return BadRequest(new { code = "user-already-in-group"});
+            if (artist.Followers.Any(u => u.UserId == user.UserId))
+                return BadRequest(new { code = "user-already-in-artist" });
+            if (user.FollowedArtists.Any(g => g.ArtistProfileId == artist.ArtistProfileId))
+                return BadRequest(new { code = "user-already-in-artist" });
+
+            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
+            artist.Followers.Add(user);
+            await _context.SaveChangesAsync();
+
+            user.FollowedArtists.Add(artist);
+            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
+
+            //_context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return Ok(new { code = "success" });
+        }
+        #endregion
+
+        #region GetUsersWithGroupsAndArtists
+        [HttpGet("get-users-with-groups-and-artists")]
+        public async Task<ActionResult<IEnumerable<Guid>>> GetUsersWithGroupsAndArtsits() {
+            return await _context.Users
+                .Where(u => u.Groups.Any(g=> g.DiscussionPosts.Any()))
+                .Where(u => u.FollowedArtists.Any(a => a.DiscussionPosts.Any()))
+                .Select(g => g.UserId)
+                .ToListAsync();
+        }
+            #endregion
+        }
 }
