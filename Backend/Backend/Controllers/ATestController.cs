@@ -27,8 +27,8 @@ namespace Backend.Controllers {
             "Duis nec tortor sagittis ante feugiat posuere." };
         private readonly string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" };
         private readonly string[] tracks = new string[] { "Dorosłość", "Wakacje", "Czarne ciuchy", "Ostatni ninja", "Popiół", "Ukryty w mieście krzyk", "Françoise Hardy", "BFF", "Szklanki", "Mandarynki" };
-        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SłowoWBit", 
-            "BityINuty", "RebelRymów", "FlowMagik", "PolskiRapGenius", "SzaleńczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne", 
+        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SlowoWBit", 
+            "BityINuty", "RebelRymow", "FlowMagik", "PolskiRapGenius", "SzalenczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne", 
             "RymyRozładowane", "BitowaBrawura", "PolskiFlowMaster", "RapowaRewolucja", "BitowyPatriota", "RymyRealne", "HipHopHermetyk" };
         #endregion
 
@@ -124,9 +124,8 @@ namespace Backend.Controllers {
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
 
             Guid guid = Guid.NewGuid();
-            int index = r.Next(0, nicknames.Length);
-            var name = nicknames[index] + "-" + guid.ToString("N").Substring(0, 5);
-            var mail = name + "@example.com";
+            var name = nicknames[r.Next(0, nicknames.Length)] + "-" + guid.ToString("N").Substring(0, 5);
+            var mail = name.ToLower() + "@example.com";
             int bioIndex = r.Next(0, desc.Length);
 
             var user = new User {
