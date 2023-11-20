@@ -16,8 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("LocalAngularApp",
-            builder => builder.WithOrigins("http://localhost:4200")
+    options.AddPolicy("EnableAngularApp",
+            builder => builder.WithOrigins("http://localhost:4200", "https://hip-hop-hub.netlify.app")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -35,7 +35,7 @@ var app = builder.Build();
     });
 //}
 
-app.UseCors("LocalAngularApp");
+app.UseCors("EnableAngularApp");
 
 app.UseHttpsRedirection();
 
