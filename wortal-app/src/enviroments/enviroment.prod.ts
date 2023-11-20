@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.example.com', // API base URL for production
-  // Add other production-specific variables here
+  apiBaseUrl: 'https://backend-hip-hop-hub.azurewebsites.net/api',
 };
