@@ -11,13 +11,12 @@ namespace Backend.Core.Entities
         [Required]
         public bool Open { get; set; }
 
-        //add tags...
+        [Required]
+        public string? Description { get; set; }
 
         public List<User>? Users { get; set; }
 
         public List<DiscussionPost>? DiscussionPosts { get; set; }
-
-        public List<GroupTag>? GroupTags { get; set; }
 
         public List<Event>? OrganizedEvents { get; set; }
     }
