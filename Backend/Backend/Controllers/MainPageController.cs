@@ -1,4 +1,5 @@
 ﻿using Backend.Core.Entities;
+using Backend.Core.Requests;
 using Backend.Data.Context;
 using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -22,172 +23,178 @@ namespace Backend.Controllers
 
         #region InitSideRecommendations
         [HttpGet("side-recommendations")]
-        public async Task<ActionResult<object>> GetSideRecommendations() {
-            if (_context.DiscussionPosts == null) {
-                return NotFound();
-            }
-            //SideRecommendations new {TopDiscussions, TopArtists, TopUsers, RecommendedGroups}
-            object sideRecommendations = new { 
-                TopDiscussions = new { title = "Najlepsze dyskusje" , content = await GetDiscussionsForSideRecommendations() },
-                TopArtists = new { title = "Najpopularniejsi artyści", content = await GetArtistsForSideRecommendations() },
-                TopMembers = new { title = "Najbardziej aktywni", content = await GetUsersForSideRecommendations() },
-                //RecommendedGroups = await GetGroupsForSideRecommendations(null)
-            };
-
-            //todo
-            return sideRecommendations;
-        }
-
-        [HttpGet("get-discussions-for-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsForSideRecommendations()
-        {
-            if (_context.DiscussionPosts == null)
-            {
+        public async Task<ActionResult<object>> GetSideRecommendations(Guid? userId) {
+            if (_context.DiscussionPosts == null || _context.ArtistsProfiles == null || _context.Users == null || _context.Groups == null) {
                 return NotFound();
             }
 
-            //todo
-            return await _context.DiscussionPosts
+            User user = null;
+            if (userId != null) {
+                user = await _context.Users.FindAsync(userId);
+            }
+
+            DateTime today = DateTime.Now;
+            int daysToLastMonday = ((int)today.DayOfWeek - (int)DayOfWeek.Monday + 7) % 7;
+            DateTime lastMonday = today.AddDays(-daysToLastMonday);
+
+            var topDiscussions = await _context.DiscussionPosts
+                .Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist)
                 .Where(dp => dp.NumberOfComments > 0)
+                .Where(dp => dp.CreationTime >= lastMonday)
                 .OrderByDescending(dp => dp.NumberOfComments)
                 .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title })
                 .Take(5)
                 .ToListAsync();
-        }
 
-        [HttpGet("get-artists-for-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetArtistsForSideRecommendations()
-        {
-            if (_context.ArtistsProfiles == null)
-                return NotFound();
-
-            if (_context.DiscussionPosts == null)
-                return NotFound();
-
-            //todo
-            return await _context.ArtistsProfiles
+            var topArtists = await _context.ArtistsProfiles
                 .Where(ap => ap.DiscussionPosts != null)
-                .OrderByDescending(ap => ap.DiscussionPosts.Count)
+                .OrderByDescending(ap => ap.DiscussionPosts.Count(dp => dp.CreationTime >= lastMonday))
                 .Select(ap => new { id = ap.ArtistProfileId, name = ap.Name })
                 .Take(5)
                 .ToArrayAsync();
 
-        }
-
-        /*[HttpGet("get-top-users")]
-        public async Task<ActionResult<IEnumerable<User>>> GetTopUsers()
-        {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            //todo sort by number of posts in week maybe
-            return await _context.Users.Where(u => u.DiscussionPosts != null).OrderByDescending(u => u.DiscussionPosts.Count).Take(5).ToListAsync();
-        }*/
-
-        [HttpGet("get-users-for-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetUsersForSideRecommendations()
-        {
-            //TopDiscussions {new {title = "Najlepsi użytkownicy", content = new {
-            //id = id,
-            //label = string // nazwa postu, artysty, itp
-            //}}}
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-
-            //todo
-            return await _context.Users
+            var topMembers = await _context.Users
                 .Where(u => u.DiscussionPosts != null)
-                .OrderByDescending(u => u.DiscussionPosts.Count)
+                .OrderByDescending(u => u.DiscussionPosts.Count(dp=>dp.CreationTime >= lastMonday))
                 .Select(u => new { id = u.UserId, name = u.UserName })
                 .Take(5)
                 .ToListAsync();
-        }
 
-        [HttpGet("get-groups-for-side-recommendations")]
-        public async Task<ActionResult<IEnumerable<object>>> GetGroupsForSideRecommendations(Guid? userId)
-        {
-            //TopDiscussions {new {title = "Polecane grupy", content = new {
-            //id = id,
-            //label = string // nazwa postu, artysty, itp
-            //}}}
-            if (_context.Groups == null)
-                return NotFound();
+            var recommendedGroups = await _context.Groups
+                .Where(g => g.DiscussionPosts != null)
+                .OrderByDescending(g => g.DiscussionPosts.Count(dp => dp.CreationTime >= lastMonday))
+                .Select(gr => new { id = gr.GroupId, name = gr.Name })
+                .Take(5)
+                .ToListAsync();
 
-            //na podstawie czego? ilosc uzytkownikow w grupie, ilosc postow/komentarzy w grupie, AI do recomendacji xd
-            GroupsRecommendationAlgorithm gra = new GroupsRecommendationAlgorithm(_context);
-            var user = _context.Users.Where(u => u.UserId == userId).FirstOrDefault();
-            var recommendedList = gra.GetRecommendedGroups(user);
-            var list = (from groupt in _context.Groups
-                        join listgroup in recommendedList on groupt.Name equals listgroup.Name
-                        select new { groupt.GroupId, groupt.Name }).ToListAsync();
+            //SideRecommendations new {TopDiscussions, TopArtists, TopUsers, RecommendedGroups}
+            object sideRecommendations = new { 
+                TopDiscussions = new { title = "Najlepsze dyskusje" , content = topDiscussions },
+                TopArtists = new { title = "Najpopularniejsi artyści", content = topArtists },
+                TopMembers = new { title = "Najbardziej aktywni", content = topMembers },
+                RecommendedGroups = new { title = "Polecane grupy", content = recommendedGroups }
+            };
 
-            //todo?
-            return await list;
+            return sideRecommendations;
         }
         #endregion
 
         #region MainPageLists
 
         [HttpGet("discussion-posts")]
-        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsList()
+        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsList(Guid? userId)
         {
             if (_context.DiscussionPosts == null)
-            {
-                return NotFound();
+                return NotFound(new { code = "posts-not-found"});
+
+            User user = null;
+            if (userId != null) {
+                user = await _context.Users.FindAsync(userId);
+                if(user == null) 
+                    return NotFound(new { code = "user-not-found"});
+                return await _context.DiscussionPosts.Include(d => d.ArtistProfile).Include(d => d.Group)
+                    .Where(d => d.Group.Users.Contains(user) || d.ArtistProfile.Followers.Contains(user))
+                    .OrderByDescending(d => d.CreationTime)
+                    .Select(d => new {
+                        id = d.DiscussionPostId,
+                        author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar},
+                        topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
+                        title = d.Title,
+                        creationTime = d.CreationTime,
+                        numberOfComments = d.NumberOfComments
+                    }).ToListAsync();
             }
 
-            return await _context.DiscussionPosts.OrderByDescending(d => d.CreationTime).Select(d => new {
-                id = d.DiscussionPostId,
-                author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar },
-                //topic = d.TopicType.ToString(),
-                topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
-                title = d.Title,
-                creationTime = d.CreationTime,
-                numberOfComments = d.NumberOfComments
-            }).ToListAsync();
+            return await _context.DiscussionPosts.Where(d => d.TopicType == DiscussionPost.TopicTypes.Artist)
+                .OrderByDescending(d => d.CreationTime)
+                .Select(d => new {
+                    id = d.DiscussionPostId,
+                    author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar },
+                    topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
+                    title = d.Title,
+                    creationTime = d.CreationTime,
+                    numberOfComments = d.NumberOfComments
+                }).ToListAsync();
         }
 
         [HttpGet("events")]
-        public async Task<ActionResult<IEnumerable<object>>> GetEventsList()
+        public async Task<ActionResult<IEnumerable<object>>> GetEventsList(Guid? userId)
         {
             if (_context.Events == null)
-            {
-                return NotFound();
+                return NotFound(new { code = "events-not-found"});
+
+            User user = null;
+            if (userId != null) {
+                user = await _context.Users.FindAsync(userId);
+                if (user == null)
+                    return NotFound(new { code = "user-not-found" });
+                return await _context.Events.Include(e => e.Participants)
+                    .OrderByDescending(e => e.Participants.Contains(user))
+                    .ThenBy(e=>e.Date)
+                    .Select(e => new {
+                        id = e.EventId,
+                        name = e.Title,
+                        image = e.Cover,
+                        date = e.Date,
+                        location = e.Location,
+                        description = e.Description,
+                        promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
+                        participants = e.Participants.Select(p => new { id = p.UserId, name = p.UserName })
+                }).ToListAsync();
             }
 
-            return await _context.Events.Include(e=>e.Participants).OrderByDescending(e=>e.Date).Select(e => new {
-                id = e.EventId,
-                name = e.Title,
-                image = e.Cover,
-                date = e.Date,
-                location = e.Location,
-                description = e.Description,
-                promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
-                participants = e.Participants.Select(p => new { id = p.UserId, name = p.UserName })
+            return await _context.Events.Include(e=>e.Participants)
+                .OrderByDescending(e=>e.Date)
+                .Select(e => new {
+                    id = e.EventId,
+                    name = e.Title,
+                    image = e.Cover,
+                    date = e.Date,
+                    location = e.Location,
+                    description = e.Description,
+                    promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
+                    participants = e.Participants.Select(p => new { id = p.UserId, name = p.UserName })
             }).ToListAsync();
         }
 
         [HttpGet("premiere-albums")]
-        public async Task<ActionResult<IEnumerable<PremiereAlbum>>> GetPremiersList()
+        public async Task<ActionResult<IEnumerable<object>>> GetPremiersList(Guid? userId)
         {
             if (_context.PremiereAlbums == null)
-            {
-                return NotFound();
-            }
-            /*return {
-                        id: album.premiereAlbumId,
-                        title: album.title,
-                        artist: {
-                          id: album.artistProfileId,
-                          name: album.artist,
+                return NotFound(new { code = "premiere-albums-not-found"});
+
+            User user = null;
+            if (userId != null) {
+                user = await _context.Users.FindAsync(userId);
+                if (user == null)
+                    return NotFound(new { code = "user-not-found" });
+                return await _context.PremiereAlbums.Include(p => p.ArtistProfile)
+                    .OrderByDescending(p => p.ArtistProfile.Followers.Contains(user))
+                    .ThenBy(p => p.ReleaseDate)
+                    .Select(p => new {
+                        id = p.PremiereAlbumId,
+                        title = p.Title,
+                        artist = new {
+                            id = p.ArtistProfileId,
+                            name = p.ArtistProfile.Name
                         },
-                        cover: album.cover || `https://picsum.photos/${randomCoverSize}/${randomCoverSize * 2}`,
-                        releaseDate: album.releaseDate,
-                      };*/
-            return await _context.PremiereAlbums.OrderByDescending(dp => dp.ReleaseDate).ToListAsync();
+                        cover = p.Cover,
+                        releaseDate = p.ReleaseDate
+                }).ToListAsync();
+            }
+
+            return await _context.PremiereAlbums.Include(p => p.ArtistProfile)
+                .OrderByDescending(p => p.ReleaseDate)
+                .Select(p => new {
+                    id = p.PremiereAlbumId,
+                    title = p.Title,
+                    artist = new {
+                        id = p.ArtistProfileId,
+                        name = p.ArtistProfile.Name
+                    },
+                    cover = p.Cover,
+                    releaseDate = p.ReleaseDate
+            }).ToListAsync();
         }
 
         #endregion
