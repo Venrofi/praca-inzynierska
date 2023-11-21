@@ -627,5 +627,36 @@ namespace Backend.Controllers {
                 .ToListAsync();
         }
         #endregion
+
+        #region GetUserWithAllHisGroupsArtistsEvents
+
+        /* 
+         SELECT u.UserId, u.UserName, ap.Name, g.Name, e.Title FROM dbo.Users u 
+            left join dbo.ArtistProfileUser apu on apu.FollowersUserId = u.UserId
+            left join dbo.ArtistsProfiles ap on ap.ArtistProfileId = apu.FollowedArtistsArtistProfileId
+            left join dbo.GroupUser gu on gu.UsersUserId = u.UserId
+            left join dbo.Groups g on g.GroupId = gu.GroupsGroupId
+            left join dbo.EventUser eu on eu.ParticipantsUserId = u.UserId
+            left join dbo.Events e on e.EventId = eu.ParticipatedEventsEventId
+            WHERE u.UserId = ''
+         */
+
+        [HttpGet("get-users-with-all-his-groups-artists-events")]
+        public async Task<ActionResult<object>> GetUsersWithAllHisGroupsArtistsEvents(Guid userId) {
+            return await _context.Users
+                .Include(u => u.Groups)
+                .Include(u => u.FollowedArtists)
+                .Include(u => u.ParticipatedEvents)
+                .Where(u => u.UserId == userId)
+                .Select(u => new {
+                    id = u.UserId,
+                    name = u.UserName,
+                    groups = u.Groups.Select(g => g.Name),
+                    artists = u.FollowedArtists.Select(a => a.Name),
+                    events = u.ParticipatedEvents.Select(e=>e.Title)
+                })
+                .FirstOrDefaultAsync();
+        }
+        #endregion
     }
 }
