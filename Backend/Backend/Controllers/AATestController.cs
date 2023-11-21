@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
+using Org.BouncyCastle.Tls.Crypto.Impl.BC;
 using System.Security.Cryptography;
-using static Backend.Core.Entities.DiscussionPost;
 
 namespace Backend.Controllers {
     public class AATestController : ControllerBase {
@@ -27,8 +27,8 @@ namespace Backend.Controllers {
             "Duis nec tortor sagittis ante feugiat posuere." };
         private readonly string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" };
         private readonly string[] tracks = new string[] { "Dorosłość", "Wakacje", "Czarne ciuchy", "Ostatni ninja", "Popiół", "Ukryty w mieście krzyk", "Françoise Hardy", "BFF", "Szklanki", "Mandarynki" };
-        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SlowoWBit", 
-            "BityINuty", "RebelRymow", "FlowMagik", "PolskiRapGenius", "SzalenczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne", 
+        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SlowoWBit",
+            "BityINuty", "RebelRymow", "FlowMagik", "PolskiRapGenius", "SzalenczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne",
             "RymyRozładowane", "BitowaBrawura", "PolskiFlowMaster", "RapowaRewolucja", "BitowyPatriota", "RymyRealne", "HipHopHermetyk" };
         #endregion
 
@@ -44,7 +44,7 @@ namespace Backend.Controllers {
         public async Task<IActionResult> FastDataBase() {
 
             await FastRegister100Users();
-            for(int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 await FastArtistProfile();
                 await FastGroup();
                 await FastPremiereAlbum();
@@ -54,7 +54,7 @@ namespace Backend.Controllers {
             for (int i = 0; i < 15; i++) {
                 await FastDiscusisonPost();
             }
-            for(int i = 0; i < 25; i++) {
+            for (int i = 0; i < 25; i++) {
                 await FastComment();
                 await FastAddUserToGroup();
                 await FastAddUserToEvent();
@@ -96,7 +96,7 @@ namespace Backend.Controllers {
 
             //return Ok($"New artist profile was created.");
         }
- 
+
         #endregion
 
         #region FastRegister
@@ -214,7 +214,7 @@ namespace Backend.Controllers {
                 //group
                 int index = r.Next(0, _context.Groups.Count());
                 group = _context.Groups.ToList().ElementAt(index);
-                title = "[G] "+group.Name + " - spotkanie";
+                title = "[G] " + group.Name + " - spotkanie";
             }
             else {
                 //artist
@@ -249,7 +249,7 @@ namespace Backend.Controllers {
         #region FastArtistProfile
         [HttpPost("fast-artist-profile")]
         public async Task<IActionResult> FastArtistProfile() {
-            Guid guid = Guid.NewGuid();           
+            Guid guid = Guid.NewGuid();
             string name = string.Empty;
             int i = 0;
             do {
@@ -258,13 +258,14 @@ namespace Backend.Controllers {
                 name = authors[i];
                 i++;
             } while (_context.ArtistsProfiles.Any(x => x.Name == name));
-            if(name == string.Empty || _context.ArtistsProfiles.Any(x => x.Name == name))
+            if (name == string.Empty || _context.ArtistsProfiles.Any(x => x.Name == name))
                 return BadRequest(new { code = "no-free-artists" });
 
             var artistProfile = new ArtistProfile {
                 ArtistProfileId = guid,
                 Name = name,
                 Description = desc[r.Next(0, desc.Length)],
+                Image = "",
                 Albums = new List<PremiereAlbum>(),
                 DiscussionPosts = new List<DiscussionPost>()
             };
@@ -295,6 +296,7 @@ namespace Backend.Controllers {
                 Name = name + "-fans",
                 Open = false,
                 Description = desc[r.Next(0, desc.Length)],
+                Image = "",
                 Users = new List<User>(),
                 DiscussionPosts = new List<DiscussionPost>(),
             };
@@ -310,7 +312,7 @@ namespace Backend.Controllers {
             using (var hmac = new HMACSHA512()) {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }   
+            }
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt) {
@@ -383,7 +385,7 @@ namespace Backend.Controllers {
                 $"\n Comments {dp.DiscussionPostDetails.Comments?.Count}");
         }
 
-        private DiscussionPostDetails CreateDiscussionPostDetails(DiscussionPost dp) {           
+        private DiscussionPostDetails CreateDiscussionPostDetails(DiscussionPost dp) {
             Guid guid = Guid.NewGuid();
             var dpd = new DiscussionPostDetails {
                 DiscussionPostDetailsId = guid,
@@ -455,7 +457,7 @@ namespace Backend.Controllers {
             var pad = new PremiereAlbumDetails {
                 PremiereAlbumDetailsId = guid,
                 Description = desc[r.Next(0, desc.Length - 1)],
-                Duration = $"{r.Next(0, 6)}{r.Next(0, 10)}:{r.Next(0, 7)}{r.Next(0, 10)}",
+                Duration = TimeSpan.FromMinutes(0),
                 Genre = genres[r.Next(0, genres.Length - 1)],
                 Rating = r.NextDouble() * 10,
                 PremiereAlbum = pa,
@@ -491,11 +493,14 @@ namespace Backend.Controllers {
             var track = new Track {
                 TrackId = guid,
                 Title = title,
-                Duration = $"0{r.Next(0, 10)}:{r.Next(0, 7)}{r.Next(0, 10)}",
+                Duration = TimeSpan.FromMinutes(r.Next(0, 5)).Add(TimeSpan.FromSeconds(r.Next(0, 60))),
                 PremiereAlbumDetails = albumDetails,
                 PremiereAlbumDetailsId = albumDetails.PremiereAlbumDetailsId
             };
+
             _context.Tracks.Add(track);
+            await _context.SaveChangesAsync();
+            albumDetails.Duration += track.Duration;
             await _context.SaveChangesAsync();
             return Ok($"New track was created.");
         }
@@ -509,10 +514,10 @@ namespace Backend.Controllers {
             int groupIndex = r.Next(0, _context.Groups.Count());
             var group = _context.Groups.Include(g => g.Users).ToList().ElementAt(groupIndex);
 
-            if(user == null)
+            if (user == null)
                 return BadRequest(new { code = "user-not-found" });
-            if(group == null)
-                return BadRequest(new { code = "group-not-found"});
+            if (group == null)
+                return BadRequest(new { code = "group-not-found" });
             //check if user is in group
             if (group.Users == null)
                 group.Users = new List<User>();
@@ -534,7 +539,7 @@ namespace Backend.Controllers {
 
             //_context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Ok(new { code = "success"});
+            return Ok(new { code = "success" });
         }
         #endregion
 
@@ -616,11 +621,11 @@ namespace Backend.Controllers {
         [HttpGet("get-users-with-groups-and-artists")]
         public async Task<ActionResult<IEnumerable<Guid>>> GetUsersWithGroupsAndArtsits() {
             return await _context.Users
-                .Where(u => u.Groups.Any(g=> g.DiscussionPosts.Any()))
+                .Where(u => u.Groups.Any(g => g.DiscussionPosts.Any()))
                 .Where(u => u.FollowedArtists.Any(a => a.DiscussionPosts.Any()))
                 .Select(g => g.UserId)
                 .ToListAsync();
         }
-            #endregion
-        }
+        #endregion
+    }
 }
