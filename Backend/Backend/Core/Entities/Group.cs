@@ -4,15 +4,11 @@ namespace Backend.Core.Entities
 {
     public class Group
     {
-        [Required]
         public Guid GroupId { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public bool Open { get; set; }
-
-        [Required]
         public string? Description { get; set; }
+        public string? Image { get; set; }
 
         public List<User>? Users { get; set; }
 
