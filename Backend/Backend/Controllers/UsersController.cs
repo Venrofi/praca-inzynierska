@@ -23,14 +23,12 @@ namespace Backend.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("basic-user{id}")]
-        public async Task<ActionResult<object>> GetBasicUser(Guid id) {
-            //todo
-            //id, username, email, groups, role, posts, avatar
+        [HttpGet("basic-user")]
+        public async Task<ActionResult<object>> GetBasicUser(Guid userId) {
             if (_context.Users == null) {
                 return NotFound();
             }
-            var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == id).FirstOrDefaultAsync();
+            var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == userId).FirstOrDefaultAsync();
 
             if (resUser == null) {
                 return NotFound();
@@ -40,14 +38,14 @@ namespace Backend.Controllers
                 Id = resUser.UserId,
                 Name = resUser.UserName,
                 Avatar = resUser.Avatar,
-                Bio = resUser.Bio, // TODO: Add Bio field!
+                Bio = resUser.Bio,
                 Email = resUser.Email,
                 Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
                 JoinedGroups = resUser.Groups.Select(g => new { id = g.GroupId, name = g.Name }),
                 AttendedEvents = resUser.ParticipatedEvents.Select(pe => new { id = pe.EventId, name = pe.Title }),
                 FollowedArtists = resUser.FollowedArtists.Select(fa => new { id = fa.ArtistProfileId, name = fa.Name }),
                 Role = resUser.UserType.Description,
-                AccountDays = resUser.VerificationTime.HasValue ? (DateTime.UtcNow.Day - resUser.VerificationTime.Value.Day) : 0
+                AccountDays = (resUser.VerificationTime.HasValue) ? ((DateTime.UtcNow.Day - resUser.VerificationTime.Value.Day) > 0 ? (DateTime.UtcNow.Day - resUser.VerificationTime.Value.Day) : 0) : 0
             };
 
 
