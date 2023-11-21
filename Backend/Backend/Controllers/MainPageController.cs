@@ -130,6 +130,8 @@ namespace Backend.Controllers
                     return NotFound(new { code = "user-not-found" });
                 return await _context.Events.Include(e => e.Participants)
                     .OrderByDescending(e => e.Participants.Contains(user))
+                    .ThenByDescending(e => e.Group.Users.Contains(user))
+                    .ThenByDescending(e=> e.ArtistProfile.Followers.Contains(user))                   
                     .ThenBy(e=>e.Date)
                     .Select(e => new {
                         id = e.EventId,
