@@ -39,8 +39,8 @@
         </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artists followed by the member">
-          <span>Grupy ({{ member.followedArtists.length }}):</span>
-          <a *ngFor="let artist of member.joinedGroups" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+          <span>Artyści ({{ member.followedArtists.length }}):</span>
+          <a *ngFor="let artist of member.followedArtists" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
         </article>
       </section>
     </mat-card-content>
