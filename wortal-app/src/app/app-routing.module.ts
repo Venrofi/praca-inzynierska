@@ -11,8 +11,8 @@ import { EventDetailsComponent } from './shared/components/event-details/event-d
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'member', canActivate: [AuthGuard], loadChildren: () => import('./modules/member/member.module').then(m => m.MemberModule) },
+  { path: 'group', canActivate: [AuthGuard], loadChildren: () => import('./modules/group/group.module').then(m => m.GroupModule) },
   { path: 'artist', loadChildren: () => import('./modules/artist/artist.module').then(m => m.ArtistModule) },
-  { path: 'group', loadChildren: () => import('./modules/group/group.module').then(m => m.GroupModule) },
   { path: 'event', component: EventDetailsComponent }, // TODO: Change to a module?
   { path: 'user', component: UserProfileComponent },
   { path: 'new-password', component: ResetPasswordComponent },

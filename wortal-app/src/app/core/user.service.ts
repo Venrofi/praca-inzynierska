@@ -19,8 +19,8 @@ export class UserService {
   }
 
   getUserInformation(userID: string): Observable<Member | undefined> {
-    const params = new HttpParams().set('id', userID);
+    const params = new HttpParams().set('userId', userID);
 
-    return this.http.get<any>(`${this.API_ROOT}/Users/basic-user-information`, { params }); //TODO: Add error handling
+    return this.http.get<any>(`${this.API_ROOT}/Users/basic-user`, { params }); //TODO: Add error handling
   }
 }
