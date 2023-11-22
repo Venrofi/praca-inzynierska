@@ -24,11 +24,11 @@ namespace Backend.Controllers
 
         // GET: api/Users/5
         [HttpGet("basic-user")]
-        public async Task<ActionResult<object>> GetBasicUser(Guid userId) {
+        public async Task<ActionResult<object>> GetBasicUser(Guid id) {
             if (_context.Users == null) {
                 return NotFound();
             }
-            var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == userId).FirstOrDefaultAsync();
+            var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == id).FirstOrDefaultAsync();
 
             if (resUser == null) {
                 return NotFound();
