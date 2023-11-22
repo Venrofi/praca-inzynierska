@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Tests.Controllers
 {
-    internal class ListControllerTests
+    public class ListControllerTests
     {
     }
 }
