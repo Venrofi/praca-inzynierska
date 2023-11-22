@@ -49,10 +49,4 @@ export class DiscussionPostComponent {
   openPostDetails() {
     this.postDetails.emit(this.post.id);
   }
-
-  generateRandomAvatar(): string {
-    const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
-
-    return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;
-  }
 }

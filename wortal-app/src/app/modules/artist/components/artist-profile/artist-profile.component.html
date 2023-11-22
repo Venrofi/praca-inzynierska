@@ -1,23 +1,70 @@
-<div *ngIf="artist | async as artist; else loading" class="p-3 artist-wrapper">
-  <div class="container-max-width artist-container p-3">
-    <!-- <p>{{ artist | json }}</p> -->
-    <main class="artist-main-info">
-      <img [src]="artist.image" class="artist-avatar">
-      <h1>{{ artist.name }}</h1>
-    </main>
-    <section>
-      <p>Opis: {{ artist.description }}</p>
-      <p>Liczba fanów: {{ artist.followers.length }}</p>
-    </section>
-    <section>
-      <p>Albumy:</p>
-      <ul>
-        <li *ngFor="let album of artist.albums">
-          <span>{{ album.name }} - {{ album.releaseDate | date }}</span>
-        </li>
-      </ul>
-    </section>
-  </div>
+<div *ngIf="artist; else loading" class="container-max-width artist-container p-3">
+  <mat-card class="artist-card">
+    <mat-card-header class="d-flex container-center p-3 artist-header">
+      <div class="container-center">
+        <img [src]="artist.image" class="artist-image">
+      </div>
+      <section aria-label="Artist main information">
+        <div class="d-flex justify-content-between align-items-center">
+          <article>
+            <mat-card-title>{{ artist.name }}</mat-card-title>
+            <!-- TODO: We can add more information about the artist - for example, his real name, date of birth, etc. -->
+            <!-- <app-text-with-icon icon="person" [text]="member.role"></app-text-with-icon> -->
+          </article>
+          <div>
+            <button mat-icon-button [matTooltip]="artistFollowed ? 'Obserwujesz' : 'Obserwuj'" (click)="!artistFollowed && followArtist(artist.id)">
+              <mat-icon class="follow-icon">{{artistFollowed ? 'star' : 'star_half'}}</mat-icon>
+            </button>
+          </div>
+        </div>
+        <article class="mt-2" aria-label="Artist description">
+          <p>{{ artist.description || "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quos doloremque soluta pariatur sunt optio modi accusamus beatae laborum voluptatibus totam dignissimos, architecto nam voluptate fuga consequuntur ipsam perspiciatis? In quisquam tenetur, ratione quam adipisci assumenda? Sequi dignissimos amet deserunt totam repellendus temporibus eveniet libero, quidem cumque, repudiandae cum aut." }}</p>
+        </article>
+      </section>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider class="mt-2" style="background-color: lightgray;"></mat-divider>
+
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
+      </mat-card-title>
+      <section class="d-flex flex-column" style="gap: 1rem;">
+        <span>Liczba postów: {{ artist.discussionPosts.length || 0 }}</span>
+
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist events">
+          <span>Wydarzenia ({{ artist.events.length }}):</span>
+          <a *ngFor="let event of artist.events" routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+        </article>
+
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist followers">
+          <span>Obserwujący ({{ artist.followers.length }}):</span>
+          <a *ngFor="let artist of artist.followers" routerLink="../user" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+        </article>
+      </section>
+
+      <mat-divider class="mt-4" style="background-color: lightgray;"></mat-divider>
+
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="album" text="Albumy"></app-text-with-icon>
+      </mat-card-title>
+      <section>
+        <div class="artist-albums-container">
+          <mat-card *ngFor="let album of artist.albums" class="artist-album" color="accent"
+            (click)="openAlbumModal(album.id)"
+            [style.background-image]="'url(' + album.cover + ')'">
+            <mat-card-header class="artist-album-header">
+              <mat-card-title>
+                <span class="artist-album-title" >{{ album.name }}</span>
+              </mat-card-title>
+              <mat-card-subtitle class="artist-album-info">
+                <span class="artist-album-time">{{ album.releaseDate | date : 'shortDate' }}</span>
+              </mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <ng-template #loading>

@@ -32,6 +32,11 @@ export interface Artist extends BaseWortalElement {
   discussionPosts: BaseWortalElement[]; // Discussion posts about the Artist
 }
 
+export interface ArtistList extends BaseWortalElement {
+  image: string;
+  rank: string;
+}
+
 export interface ArtistAlbum extends BaseWortalElement {
   cover: string;
   releaseDate: string;
@@ -57,6 +62,11 @@ export interface Group extends BaseWortalElement {
   events: BaseWortalElement[]; // Events created by the Group
   members: BaseWortalElement[]; // Members that joined the Group
   discussionPosts: BaseWortalElement[]; // Discussion posts created by the Group
+}
+
+export interface GroupList extends BaseWortalElement {
+  image: string;
+  rank: string;
 }
 
 

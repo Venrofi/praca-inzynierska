@@ -2,7 +2,7 @@
   <mat-card class="member-card">
     <mat-card-header class="d-flex container-center p-3 member-header">
       <div class="container-center">
-        <img [src]="member.avatar || generateRandomAvatar()" class="member-avatar">
+        <img [src]="member.avatar" class="member-avatar">
       </div>
       <section aria-label="Member main information">
         <article class="d-flex flex-column">
@@ -34,8 +34,8 @@
         </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artists followed by the member">
-          <span>Grupy ({{ member.followedArtists.length }}):</span>
-          <a *ngFor="let artist of member.joinedGroups" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+          <span>Artyści ({{ member.followedArtists.length }}):</span>
+          <a *ngFor="let artist of member.followedArtists" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
         </article>
       </section>
     </mat-card-content>
