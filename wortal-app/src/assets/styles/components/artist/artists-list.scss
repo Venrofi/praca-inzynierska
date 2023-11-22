@@ -1,50 +1,49 @@
-table {
-  width: 100%;
-}
-
-tr.example-element-row:not(.example-expanded-row):hover {
-  background-color: $my-primary-OG !important;
-}
-
-tr.example-element-row:not(.example-expanded-row):active {
-  background-color: $my-primary-OG !important;
-}
-
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-.filter-field {
-  --mdc-filled-text-field-container-color: white !important;
-  --mdc-filled-text-field-input-text-color: rgba(0,0,0, 0.8) !important;
-  --mdc-filled-text-field-label-text-color: rgba(0,0,0, 0.8) !important;
-  --mdc-filled-text-field-input-text-placeholder-color: rgba(0,0,0, 0.5) !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-.mat-mdc-form-field-bottom-align, .mat-mdc-form-field-subscript-wrapper {
-  display: none !important;
-}
-
-.artist-id-cell {
-  width: 25%;
-}
-
-.artist-content-cell {
-  width: 75%;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
+app-artists-list {
+  table {
+    width: 100%;
   }
-}
 
-.artist-image {
-  max-width: 50px;
-  max-height: 100px;
-  border-radius: 50%;
-  margin-right: 1rem;
-  margin-block: 1rem;
+  tr.artist-row:hover, tr.artist-row:active {
+    background-color: $my-primary-OG !important;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-mdc-paginator-page-size-label {
+    min-width: fit-content;
+  }
+
+  .filter-field {
+    --mdc-filled-text-field-container-color: white !important;
+    --mdc-filled-text-field-input-text-color: rgba(0,0,0, 0.8) !important;
+    --mdc-filled-text-field-label-text-color: rgba(0,0,0, 0.8) !important;
+    --mdc-filled-text-field-input-text-placeholder-color: rgba(0,0,0, 0.5) !important;
+  }
+
+  .artist-rank-cell {
+    width: 25%;
+  }
+
+  .artist-content-cell {
+    width: 75%;
+
+    & > span, & > img {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .artist-image {
+    max-width: 50px;
+    max-height: 100px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-block: 1rem;
+  }
 }
