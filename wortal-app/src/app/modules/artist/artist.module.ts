@@ -6,6 +6,7 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
 import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
 import { ArtistsListComponent } from './components/artists-list/artists-list.component';
 import { ArtistService } from "./services/artist.service";
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ArtistService } from "./services/artist.service";
     CommonModule,
     ArtistRoutingModule,
     SharedMaterialModule,
+    SharedModule,
   ],
   providers: [
     ArtistService,
