@@ -23,17 +23,12 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-//builder.Services.AddSwaggerGen();
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST");
-        //c.RoutePrefix = string.Empty;
-    });
-//}
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+   c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST");
+   c.RoutePrefix = string.Empty;
+});
 
 app.UseCors("EnableAngularApp");
 
