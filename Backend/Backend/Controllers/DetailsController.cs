@@ -17,7 +17,7 @@ namespace Backend.Controllers {
         #region Artist
 
         [HttpGet("artist")]
-        public async Task<ActionResult<object>> GetArtistDetails(Guid artistId) {
+        public async Task<ActionResult<object>> GetArtistDetails(Guid id) {
 
             if (_context.ArtistsProfiles == null) {
                 return NotFound();
@@ -28,7 +28,7 @@ namespace Backend.Controllers {
                 .Include(a => a.DiscussionPosts)
                 .Include(a => a.Followers)
                 .Include(a => a.Albums)
-                .Where(a => a.ArtistProfileId == artistId).FirstOrDefaultAsync();
+                .Where(a => a.ArtistProfileId == id).FirstOrDefaultAsync();
 
             if (resArtist == null) {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace Backend.Controllers {
 
         #region Group
         [HttpGet("group")]
-        public async Task<ActionResult<object>> GetGroupDetails(Guid groupId) {
+        public async Task<ActionResult<object>> GetGroupDetails(Guid id) {
             /*// GROUP
                 export interface Group extends BaseWortalElement {
                   image: string;
@@ -65,7 +65,7 @@ namespace Backend.Controllers {
                 return NotFound();
             }
 
-            var group = await _context.Groups.Include(g => g.OrganizedEvents).Include(g => g.Users).Include(g => g.DiscussionPosts).Where(g => g.GroupId == groupId).FirstOrDefaultAsync();
+            var group = await _context.Groups.Include(g => g.OrganizedEvents).Include(g => g.Users).Include(g => g.DiscussionPosts).Where(g => g.GroupId == id).FirstOrDefaultAsync();
 
             if (group == null) {
                 return NotFound();
@@ -92,7 +92,7 @@ namespace Backend.Controllers {
 
         #region Event
         [HttpGet("event")]
-        public async Task<ActionResult<object>> GetEventDetails(Guid eventId) {
+        public async Task<ActionResult<object>> GetEventDetails(Guid id) {
             if (_context.Events == null) {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Backend.Controllers {
                 .Include(e => e.Participants)
                 .Include(e => e.Group)
                 .Include(e => e.ArtistProfile)
-                .Where(e => e.EventId == eventId).FirstOrDefaultAsync();
+                .Where(e => e.EventId == id).FirstOrDefaultAsync();
             if (eventt == null) {
                 return NotFound();
             }
@@ -128,7 +128,7 @@ namespace Backend.Controllers {
 
         #region Discussion
         [HttpGet("discussion")]
-        public async Task<ActionResult<object>> GetDiscussionDetails(Guid discussionId) {
+        public async Task<ActionResult<object>> GetDiscussionDetails(Guid id) {
             if (_context.DiscussionPosts == null || _context.DiscussionPostsDetails == null) {
                 return NotFound();
             }
@@ -177,10 +177,10 @@ namespace Backend.Controllers {
                 .Include(dp => dp.User)
                 .Include(dp => dp.ArtistProfile)
                 .Include(dp => dp.Group)
-                .Where(dp => dp.DiscussionPostId == discussionId).FirstOrDefaultAsync();
+                .Where(dp => dp.DiscussionPostId == id).FirstOrDefaultAsync();
 
             var details = await _context.DiscussionPostsDetails
-                .Where(dpd => dpd.DiscussionPostId == discussionId).FirstOrDefaultAsync();
+                .Where(dpd => dpd.DiscussionPostId == id).FirstOrDefaultAsync();
             var comments = await _context.Comments
                 .Include(c => c.User)
                 .Where(c => c.DiscussionPostDetailsId == details.DiscussionPostDetailsId).ToListAsync();
@@ -232,11 +232,11 @@ namespace Backend.Controllers {
 
         #region Album
         [HttpGet("album")]
-        public async Task<ActionResult<object>> GetAlbumDetails(Guid albumId) {
+        public async Task<ActionResult<object>> GetAlbumDetails(Guid id) {
             if (_context.PremiereAlbums == null || _context.PremiereAlbumDetails == null) {
                 return NotFound();
             }
-            var details = await _context.PremiereAlbumDetails.Include(pad => pad.PremiereAlbum).Include(pad => pad.Tracks).Where(pad => pad.PremiereAlbumId == albumId).FirstOrDefaultAsync();
+            var details = await _context.PremiereAlbumDetails.Include(pad => pad.PremiereAlbum).Include(pad => pad.Tracks).Where(pad => pad.PremiereAlbumId == id).FirstOrDefaultAsync();
 
             if (details == null) {
                 return NotFound();
