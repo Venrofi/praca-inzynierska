@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AuthService } from "./authentication.service";
-import { Observable, of } from "rxjs";
+import { Observable, map, of } from "rxjs";
 import { Member } from "./core.model";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "src/enviroments/enviroment";
@@ -21,6 +21,19 @@ export class UserService {
   getUserInformation(userID: string): Observable<Member | undefined> {
     const params = new HttpParams().set('userId', userID);
 
-    return this.http.get<any>(`${this.API_ROOT}/Users/basic-user`, { params }); //TODO: Add error handling
+    return this.http.get<Member>(`${this.API_ROOT}/Users/basic-user`, { params }).pipe(
+      map((member: Member) => {
+        return {
+          ...member,
+          avatar: this.generateRandomAvatar(),
+        }
+      })
+    ); //TODO: Add error handling
+  }
+
+  private generateRandomAvatar(): string {
+    const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
+
+    return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;
   }
 }
