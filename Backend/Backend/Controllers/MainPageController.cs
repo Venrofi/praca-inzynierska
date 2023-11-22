@@ -23,14 +23,16 @@ namespace Backend.Controllers
 
         #region InitSideRecommendations
         [HttpGet("side-recommendations")]
-        public async Task<ActionResult<object>> GetSideRecommendations(Guid? userId) {
+        public async Task<ActionResult<object>> GetSideRecommendations(Guid? id) {
             if (_context.DiscussionPosts == null || _context.ArtistsProfiles == null || _context.Users == null || _context.Groups == null) {
                 return NotFound();
             }
 
             User user = null;
-            if (userId != null) {
-                user = await _context.Users.FindAsync(userId);
+            if (id != null) {
+                user = await _context.Users.FindAsync(id);
+                if (user == null)
+                    return NotFound(new { code = "user-not-found" });
             }
 
             DateTime today = DateTime.Now;
@@ -82,14 +84,14 @@ namespace Backend.Controllers
         #region MainPageLists
 
         [HttpGet("discussion-posts")]
-        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsList(Guid? userId)
+        public async Task<ActionResult<IEnumerable<object>>> GetDiscussionsList(Guid? id)
         {
             if (_context.DiscussionPosts == null)
                 return NotFound(new { code = "posts-not-found"});
 
             User user = null;
-            if (userId != null) {
-                user = await _context.Users.FindAsync(userId);
+            if (id != null) {
+                user = await _context.Users.FindAsync(id);
                 if(user == null) 
                     return NotFound(new { code = "user-not-found"});
                 return await _context.DiscussionPosts.Include(d => d.ArtistProfile).Include(d => d.Group)
@@ -118,14 +120,14 @@ namespace Backend.Controllers
         }
 
         [HttpGet("events")]
-        public async Task<ActionResult<IEnumerable<object>>> GetEventsList(Guid? userId)
+        public async Task<ActionResult<IEnumerable<object>>> GetEventsList(Guid? id)
         {
             if (_context.Events == null)
                 return NotFound(new { code = "events-not-found"});
 
             User user = null;
-            if (userId != null) {
-                user = await _context.Users.FindAsync(userId);
+            if (id != null) {
+                user = await _context.Users.FindAsync(id);
                 if (user == null)
                     return NotFound(new { code = "user-not-found" });
                 return await _context.Events.Include(e => e.Participants)
@@ -160,14 +162,14 @@ namespace Backend.Controllers
         }
 
         [HttpGet("premiere-albums")]
-        public async Task<ActionResult<IEnumerable<object>>> GetPremiersList(Guid? userId)
+        public async Task<ActionResult<IEnumerable<object>>> GetPremiersList(Guid? id)
         {
             if (_context.PremiereAlbums == null)
                 return NotFound(new { code = "premiere-albums-not-found"});
 
             User user = null;
-            if (userId != null) {
-                user = await _context.Users.FindAsync(userId);
+            if (id != null) {
+                user = await _context.Users.FindAsync(id);
                 if (user == null)
                     return NotFound(new { code = "user-not-found" });
                 return await _context.PremiereAlbums.Include(p => p.ArtistProfile)
