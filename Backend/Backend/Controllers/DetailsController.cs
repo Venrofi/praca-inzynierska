@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Runtime.Intrinsics.Arm;
 
 namespace Backend.Controllers {
+    [Route("api/[controller]")]
+    [ApiController]
     public class DetailsController :ControllerBase {
         private readonly ApplicationDbContext _context;
 
