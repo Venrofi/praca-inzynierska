@@ -27,7 +27,7 @@ export class GroupService {
   }
 
   getGroupInformation(groupID: string) {
-    const params = new HttpParams().set('groupId', groupID);
+    const params = new HttpParams().set('id', groupID);
 
     return this.http.get<Group>(`https://backend-hip-hop-hub.azurewebsites.net/group`, { params })
       .pipe(

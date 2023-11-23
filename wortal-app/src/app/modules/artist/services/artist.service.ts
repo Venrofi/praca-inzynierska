@@ -27,7 +27,7 @@ export class ArtistService {
   }
 
   getArtistInformation(artistID: string) {
-    const params = new HttpParams().set('artistId', artistID);
+    const params = new HttpParams().set('id', artistID);
 
     return this.http.get<Artist>(`https://backend-hip-hop-hub.azurewebsites.net/artist`, { params })
       .pipe(
