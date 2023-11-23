@@ -48,11 +48,11 @@ export class GroupProfileComponent implements OnInit {
           this.groupMember = true;
 
           // Update local state
-          this.group.members.push({ id: this.member?.id, name: this.member?.name });
-          this.member.joinedGroups.push({ id: this.group.id, name: this.group.name });
+          this.group.members = [...this.group.members, { id: this.member.id, name: this.member.name }];
 
           // Update global store state
-          this.store.dispatch(memberActions.update({ member: this.member }));
+          const joinedGroups = [...this.member.joinedGroups, { id: this.group.id, name: this.group.name }];
+          this.store.dispatch(memberActions.update({ member: { ...this.member, joinedGroups } }));
 
           this.snackBar.open('Dołączyłeś do tej grupy!', 'OK', {
             duration: 3000,
