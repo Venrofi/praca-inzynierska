@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ListController : ControllerBase {
         private readonly ApplicationDbContext _context;
 
