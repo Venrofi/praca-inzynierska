@@ -48,4 +48,9 @@ app-member, app-user-profile {
     text-decoration: underline;
     color: $my-accent-OG;
   }
+
+  .member-stat-title {
+    width: 20%;
+    min-width: 110px;
+  }
 }

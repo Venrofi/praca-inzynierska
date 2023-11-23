@@ -12,7 +12,9 @@
           </article>
           <div>
             <button mat-icon-button [matTooltip]="groupMember ? 'Należysz' : 'Dołącz'" (click)="!groupMember && joinGroup(group.id)">
-              <mat-icon class="join-icon">{{groupMember ? 'person_check' : 'person_add'}}</mat-icon>
+              <mat-icon class="join-icon" [style.color]="groupMember ? 'initial' : 'black !important'">
+                {{ groupMember ? 'person_check' : 'person_add' }}
+              </mat-icon>
             </button>
           </div>
         </div>
@@ -28,16 +30,42 @@
         <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
       </mat-card-title>
       <section class="d-flex flex-column" style="gap: 1rem;">
-        <span>Liczba postów: {{ group.discussionPosts.length || 0 }}</span>
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Posts created by the member">
+          <span class="group-stat-title">Dyskusje ({{ group.discussionPosts.length || 0 }}):</span>
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-column">
+              <ng-container *ngFor="let post of group.discussionPosts | slice:0:5">
+                <a routerLink="../discussion" [queryParams]="{ id: post.id }">{{ post.name }}</a>
+              </ng-container>
+              <ng-container *ngIf="group.discussionPosts.length > 5">
+                oraz {{ group.discussionPosts.length - 5 }} innych..
+              </ng-container>
+            </div>
+          </div>
+        </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Group events">
-          <span>Wydarzenia ({{ group.events.length }}):</span>
-          <a *ngFor="let event of group.events" routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+          <span class="group-stat-title">Wydarzenia ({{ group.events.length || 0 }}):</span>
+          <div class="d-flex flex-column">
+            <ng-container *ngFor="let event of group.events | slice:0:5">
+              <a routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+            </ng-container>
+            <ng-container *ngIf="group.events.length > 5">
+              oraz {{ group.events.length - 5 }} innych..
+            </ng-container>
+          </div>
         </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Group members">
-          <span>Czonkowie ({{ group.members.length }}):</span>
-          <a *ngFor="let group of group.members" routerLink="../user" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+          <span class="group-stat-title">Czonkowie ({{ group.members.length || 0 }}):</span>
+          <div class="d-flex flex-column">
+            <ng-container *ngFor="let group of group.members | slice:0:5">
+              <a routerLink="../user" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+            </ng-container>
+            <ng-container *ngIf="group.members.length > 5">
+              oraz {{ group.members.length - 5 }} innych..
+            </ng-container>
+          </div>
         </article>
       </section>
     </mat-card-content>

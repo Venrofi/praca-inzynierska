@@ -51,6 +51,11 @@ app-artist-profile {
     color: $my-accent-OG;
   }
 
+  .artist-stat-title {
+    width: 20%;
+    min-width: 110px;
+  }
+
   // ALBUM
 
   $border-radius: 16px;

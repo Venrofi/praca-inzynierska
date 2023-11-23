@@ -13,7 +13,7 @@ export interface BaseWortalUser extends BaseWortalElement {
 export interface Member extends BaseWortalUser {
   bio: string;
   email: string;
-  posts: string[];
+  posts: BaseWortalElement[];
   joinedGroups: BaseWortalElement[]; // Groups joined by the Member
   attendedEvents: BaseWortalElement[]; // Events attended by the Member
   followedArtists: BaseWortalElement[]; // Artists followed by the Member
