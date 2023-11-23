@@ -1,0 +1,53 @@
+app-group-profile {
+  .group-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .group-card {
+    background-color: white;
+    max-width: 800px;
+    padding: 1rem 1rem 3rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
+    .mat-mdc-card-header-text {
+      display: none;
+    }
+  }
+
+  .group-header {
+    gap: 2rem;
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .group-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 0 2rem;
+    margin: 0 auto;
+    border: 5px solid $my-primary-OG;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .join-icon {
+    color: $my-primary-OG !important;
+  }
+
+  a, a:visited {
+    text-decoration: none;
+    color: $my-primary-OG;
+  }
+
+  a:hover, a:active, a:focus {
+    text-decoration: underline;
+    color: $my-accent-OG;
+  }
+}

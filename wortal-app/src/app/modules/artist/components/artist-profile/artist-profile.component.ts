@@ -42,7 +42,7 @@ export class ArtistProfileComponent implements OnInit {
   }
 
   openAlbumModal(albumId: string) {
-    console.log(albumId);
+    console.log(`Open album #${albumId}`); // TODO: Implement AlbumModal
   }
 
   followArtist(artistId: string) {
@@ -65,7 +65,7 @@ export class ArtistProfileComponent implements OnInit {
           });
         }
       },
-      error: (error) => {
+      error: () => {
         this.snackBar.open('Wystąpił błąd podczas próby zaobserwowania tego artysty!', 'OK', {
           duration: 3000,
           horizontalPosition: 'end',
@@ -74,10 +74,4 @@ export class ArtistProfileComponent implements OnInit {
       }
     });
   } // TODO: Add error handling and toast notifications!
-
-  generateRandomCover(): string {
-    const randomCoverSize = Math.floor(Math.random() * 200 + 500); // returns a random number between 500 and 700
-
-    return `https://picsum.photos/${randomCoverSize}/${randomCoverSize}`;
-  }
 }
