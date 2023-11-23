@@ -51,8 +51,6 @@ export class ArtistService {
     const userId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('artistId', artistID).set('userId', userId);
 
-    console.log(params);
-
     return this.http.post(`https://backend-hip-hop-hub.azurewebsites.net/follow`, {}, { params }); // TODO: Wrong API endpoint address!
   }
 

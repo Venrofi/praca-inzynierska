@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -27,7 +27,6 @@ export class ArtistsListComponent implements OnInit {
       this.sort.direction = 'asc';
       this.artistData.paginator = this.paginator;
       this.artistData.sort = this.sort;
-
     });
   }
 
