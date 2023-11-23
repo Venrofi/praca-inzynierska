@@ -40,7 +40,7 @@ namespace Backend.Controllers {
                 name = resArtist.Name,
                 image = resArtist.Image,
                 description = resArtist.Description,
-                albums = resArtist.Albums.Select(a => new { cover = a.Cover, releaseDate = a.ReleaseDate}),
+                albums = resArtist.Albums.Select(a => new { id = a.PremiereAlbumId, name = a.Title, cover = a.Cover, releaseDate = a.ReleaseDate}),
                 events = resArtist.OrganizedEvents.Select(e => new { id = e.EventId, name = e.Title }),
                 followers = resArtist.Followers.Select(f => new { id = f.UserId, name = f.UserName}),
                 discussionPosts = resArtist.DiscussionPosts.Select(d => new { id = d.DiscussionPostId, name = d.Title })
