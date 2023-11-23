@@ -27,7 +27,7 @@ export class ArtistService {
   }
 
   getArtistInformation(artistID: string) {
-    const params = new HttpParams().set('artistId', artistID);
+    const params = new HttpParams().set('id', artistID);
 
     return this.http.get<Artist>(`https://backend-hip-hop-hub.azurewebsites.net/artist`, { params })
       .pipe(
@@ -50,8 +50,6 @@ export class ArtistService {
   followArtist(artistID: string) {
     const userId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('artistId', artistID).set('userId', userId);
-
-    console.log(params);
 
     return this.http.post(`https://backend-hip-hop-hub.azurewebsites.net/follow`, {}, { params }); // TODO: Wrong API endpoint address!
   }

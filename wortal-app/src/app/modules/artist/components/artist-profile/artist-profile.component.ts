@@ -42,7 +42,10 @@ export class ArtistProfileComponent implements OnInit {
   }
 
   openAlbumModal(albumId: string) {
-    console.log(albumId);
+    console.log(`Open album #${albumId}`);
+
+    // TODO:
+    // 1. Add Album Modal Component
   }
 
   followArtist(artistId: string) {
@@ -52,11 +55,11 @@ export class ArtistProfileComponent implements OnInit {
           this.artistFollowed = true;
 
           // Update local state
-          this.artist.followers.push({ id: this.member?.id, name: this.member?.name });
-          this.member.followedArtists.push({ id: this.artist.id, name: this.artist.name });
+          this.artist.followers = [...this.artist.followers, { id: this.member.id, name: this.member.name }];
 
           // Update global store state
-          this.store.dispatch(memberActions.update({ member: this.member }));
+          const followedArtists = [...this.member.joinedGroups, { id: this.artist.id, name: this.artist.name }];
+          this.store.dispatch(memberActions.update({ member: { ...this.member, followedArtists } }));
 
           this.snackBar.open('Zaobserwowałeś tego artystę!', 'OK', {
             duration: 3000,
@@ -65,7 +68,7 @@ export class ArtistProfileComponent implements OnInit {
           });
         }
       },
-      error: (error) => {
+      error: () => {
         this.snackBar.open('Wystąpił błąd podczas próby zaobserwowania tego artysty!', 'OK', {
           duration: 3000,
           horizontalPosition: 'end',
@@ -74,10 +77,4 @@ export class ArtistProfileComponent implements OnInit {
       }
     });
   } // TODO: Add error handling and toast notifications!
-
-  generateRandomCover(): string {
-    const randomCoverSize = Math.floor(Math.random() * 200 + 500); // returns a random number between 500 and 700
-
-    return `https://picsum.photos/${randomCoverSize}/${randomCoverSize}`;
-  }
 }

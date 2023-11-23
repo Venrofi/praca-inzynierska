@@ -26,21 +26,32 @@
         <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
       </mat-card-title>
       <section class="d-flex flex-column" style="gap: 1rem;">
-        <span>Liczba postów: {{ member?.posts?.length || 0 }}</span>
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Posts created by the member">
+          <span class="member-stat-title">Dyskusje ({{ member.posts.length || 0 }}):</span>
+          <div class="d-flex flex-column">
+            <a *ngFor="let post of member.posts" routerLink="../discussion" [queryParams]="{ id: post.id }">{{ post.name }}</a>
+          </div>
+        </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Groups joined by the member">
-          <span>Grupy ({{ member.joinedGroups.length }}):</span>
-          <a *ngFor="let group of member.joinedGroups" routerLink="../group" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+          <span class="member-stat-title">Grupy ({{ member.joinedGroups.length }}):</span>
+          <div class="d-flex flex-column">
+            <a *ngFor="let group of member.joinedGroups" routerLink="../group" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+          </div>
         </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Events attened by the member">
-          <span>Wydarzenia ({{ member.attendedEvents.length }}):</span>
-          <a *ngFor="let event of member.attendedEvents" routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+          <span class="member-stat-title">Wydarzenia ({{ member.attendedEvents.length }}):</span>
+          <div class="d-flex flex-column">
+            <a *ngFor="let event of member.attendedEvents" routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
+          </div>
         </article>
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artists followed by the member">
-          <span>Artyści ({{ member.followedArtists.length }}):</span>
-          <a *ngFor="let artist of member.followedArtists" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+          <span class="member-stat-title">Artyści ({{ member.followedArtists.length }}):</span>
+          <div class="d-flex flex-column">
+            <a *ngFor="let artist of member.followedArtists" routerLink="../artist" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
+          </div>
         </article>
       </section>
     </mat-card-content>
