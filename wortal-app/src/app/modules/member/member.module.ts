@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberComponent } from './components/member/member.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MemberRoutingModule } from './member-routing.module';
+import { MemberService } from './services/member.service';
 
 @NgModule({
   declarations: [MemberComponent, MembersListComponent],
@@ -20,6 +21,7 @@ import { MemberRoutingModule } from './member-routing.module';
     RouterModule,
     SharedMaterialModule,
   ],
-  exports: [MemberComponent]
+  exports: [MemberComponent],
+  providers: [MemberService]
 })
 export class MemberModule { }

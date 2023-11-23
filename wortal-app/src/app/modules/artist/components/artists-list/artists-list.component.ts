@@ -11,7 +11,7 @@ import { ArtistService } from "../../services/artist.service";
 })
 export class ArtistsListComponent implements OnInit {
   displayedColumns: string[] = ['rank', 'name'];
-  artistData!: MatTableDataSource<ArtistList>;
+  artistsData!: MatTableDataSource<ArtistList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -20,22 +20,22 @@ export class ArtistsListComponent implements OnInit {
 
   ngOnInit() {
     this.artistService.getArtistsList().subscribe((artists: ArtistList[]) => {
-      this.artistData = new MatTableDataSource<ArtistList>(artists);
+      this.artistsData = new MatTableDataSource<ArtistList>(artists);
       this.cdr.detectChanges();
 
       this.sort.active = 'rank';
       this.sort.direction = 'asc';
-      this.artistData.paginator = this.paginator;
-      this.artistData.sort = this.sort;
+      this.artistsData.paginator = this.paginator;
+      this.artistsData.sort = this.sort;
     });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.artistData.filter = filterValue.trim().toLowerCase();
+    this.artistsData.filter = filterValue.trim().toLowerCase();
 
-    if (this.artistData.paginator) {
-      this.artistData.paginator.firstPage();
+    if (this.artistsData.paginator) {
+      this.artistsData.paginator.firstPage();
     }
   }
 }

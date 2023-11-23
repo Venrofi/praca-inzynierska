@@ -1,0 +1,49 @@
+app-members-list {
+  table {
+    width: 100%;
+  }
+
+  tr.member-row:hover, tr.member-row:active {
+    background-color: $my-primary-OG !important;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-mdc-paginator-page-size-label {
+    min-width: fit-content;
+  }
+
+  .filter-field {
+    --mdc-filled-text-field-container-color: white !important;
+    --mdc-filled-text-field-input-text-color: rgba(0,0,0, 0.8) !important;
+    --mdc-filled-text-field-label-text-color: rgba(0,0,0, 0.8) !important;
+    --mdc-filled-text-field-input-text-placeholder-color: rgba(0,0,0, 0.5) !important;
+  }
+
+  .member-rank-cell {
+    width: 25%;
+  }
+
+  .member-content-cell {
+    width: 75%;
+
+    & > span, & > img {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .member-avatar {
+    max-width: 50px;
+    max-height: 100px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-block: 1rem;
+  }
+}

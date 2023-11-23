@@ -16,7 +16,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 
 // Components
 @import "assets/styles/components/header.scss";
-@import "assets/styles/components/member.scss";
 
 // Authentication
 @import "assets/styles/components/authentication/authentication-dialog.scss";
@@ -39,3 +38,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 // Group
 @import "assets/styles/components/group/group-profile.scss";
 @import "assets/styles/components/group/groups-list.scss";
+
+// Member
+@import "assets/styles/components/member/member.scss";
+@import "assets/styles/components/member/members-list.scss";

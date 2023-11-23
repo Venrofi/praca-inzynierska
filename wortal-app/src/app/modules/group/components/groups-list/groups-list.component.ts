@@ -11,7 +11,7 @@ import { GroupService } from "../../services/group.service";
 })
 export class GroupsListComponent implements OnInit {
   displayedColumns: string[] = ['rank', 'name'];
-  groupData!: MatTableDataSource<GroupList>;
+  groupsData!: MatTableDataSource<GroupList>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -20,22 +20,22 @@ export class GroupsListComponent implements OnInit {
 
   ngOnInit() {
     this.groupService.getGroupsList().subscribe((artists: GroupList[]) => {
-      this.groupData = new MatTableDataSource<GroupList>(artists);
+      this.groupsData = new MatTableDataSource<GroupList>(artists);
       this.cdr.detectChanges();
 
       this.sort.active = 'rank';
       this.sort.direction = 'asc';
-      this.groupData.paginator = this.paginator;
-      this.groupData.sort = this.sort;
+      this.groupsData.paginator = this.paginator;
+      this.groupsData.sort = this.sort;
     });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.groupData.filter = filterValue.trim().toLowerCase();
+    this.groupsData.filter = filterValue.trim().toLowerCase();
 
-    if (this.groupData.paginator) {
-      this.groupData.paginator.firstPage();
+    if (this.groupsData.paginator) {
+      this.groupsData.paginator.firstPage();
     }
   }
 }

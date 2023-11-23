@@ -1,4 +1,4 @@
-<section *ngIf="groupData; else loading" class="container-max-width container-center">
+<section *ngIf="groupsData; else loading" class="container-max-width container-center">
   <h1 class="mt-3 px-3">Lista grup</h1>
   <mat-form-field class="filter-field" subscriptSizing="dynamic">
     <mat-label>Wyszukaj grupę</mat-label>
@@ -6,7 +6,7 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="groupData" matSort>
+    <table mat-table [dataSource]="groupsData" matSort>
 
       <!-- Rank Column -->
       <ng-container matColumnDef="rank" class="group-rank-cell">
