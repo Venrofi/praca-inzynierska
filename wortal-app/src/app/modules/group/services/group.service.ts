@@ -11,8 +11,7 @@ export class GroupService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getGroupsList(): Observable<GroupList[]> {
-    // return this.http.get<Artist[]>(`${this.API_ROOT}/List/groups`);
-    return this.http.get<GroupList[]>('https://backend-hip-hop-hub.azurewebsites.net/groups')
+    return this.http.get<GroupList[]>(`${this.API_ROOT}/List/groups`)
       .pipe(
         map((groups: GroupList[]) => {
           return groups.map((group: GroupList, index: number) => {
@@ -23,13 +22,13 @@ export class GroupService {
             };
           });
         })
-      ); // TODO: Wrong API endpoint address!
+      );
   }
 
   getGroupInformation(groupID: string) {
     const params = new HttpParams().set('id', groupID);
 
-    return this.http.get<Group>(`https://backend-hip-hop-hub.azurewebsites.net/group`, { params })
+    return this.http.get<Group>(`${this.API_ROOT}/Details/group`, { params })
       .pipe(
         map((group: Group) => {
           return {
@@ -37,14 +36,14 @@ export class GroupService {
             image: this.generateRandomAvatar(),
           }
         })
-      ); // TODO: Wrong API endpoint address!
+      );
   }
 
   joinGroup(groupID: string) {
     const userId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('groupId', groupID).set('userId', userId);
 
-    return this.http.post(`https://backend-hip-hop-hub.azurewebsites.net/join`, {}, { params }); // TODO: Wrong API endpoint address!
+    return this.http.post(`${this.API_ROOT}/Action/join`, {}, { params });
   }
 
   private generateRandomAvatar(): string {

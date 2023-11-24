@@ -69,5 +69,5 @@ export class GroupProfileComponent implements OnInit {
         });
       }
     });
-  } // TODO: Add error handling and toast notifications!
+  }
 }

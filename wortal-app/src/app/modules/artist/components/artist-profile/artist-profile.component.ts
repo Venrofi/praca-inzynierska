@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
-import { Artist, Member } from 'src/app/core/core.model';
-import { ArtistService } from "../../services/artist.service";
-import { AuthService } from 'src/app/core/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { switchMap } from 'rxjs';
 import { StoreModel } from 'src/app/app-state.model';
+import { Artist, Member } from 'src/app/core/core.model';
 import * as memberActions from '../../../../store/member/member.actions';
+import { ArtistService } from "../../services/artist.service";
 
 @Component({
   selector: 'app-artist-profile',
@@ -22,7 +21,6 @@ export class ArtistProfileComponent implements OnInit {
 
   constructor(
     private artistService: ArtistService,
-    private authService: AuthService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private store: Store<StoreModel>,
@@ -43,9 +41,7 @@ export class ArtistProfileComponent implements OnInit {
 
   openAlbumModal(albumId: string) {
     console.log(`Open album #${albumId}`);
-
-    // TODO:
-    // 1. Add Album Modal Component
+    // TODO: Add Album Modal Component
   }
 
   followArtist(artistId: string) {
@@ -76,5 +72,5 @@ export class ArtistProfileComponent implements OnInit {
         });
       }
     });
-  } // TODO: Add error handling and toast notifications!
+  }
 }
