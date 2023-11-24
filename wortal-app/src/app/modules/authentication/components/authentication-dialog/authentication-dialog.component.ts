@@ -11,6 +11,8 @@ import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-
 })
 export class AuthenticationDialogComponent implements OnInit {
 
+  usernamePattern = /^[a-zA-Z0-9]+$/; // only letters and numbers
+
   captchaKey = '6LepIwspAAAAABSSutqFK1NovK_2kctg8PgZD17K';
 
   reCaptcha!: string;
