@@ -16,8 +16,12 @@
       <mat-form-field>
         <input matInput placeholder="Nazwa użytkownika"
           [(ngModel)]="loginCredentials.username"
-          name="usernameLogin" #usernameLogin="ngModel" required>
-        <mat-error>Proszę podać nazwę użytkownika.</mat-error>
+          name="usernameLogin" #usernameLogin="ngModel"
+          [pattern]="usernamePattern" required>
+        <mat-error>
+          <span *ngIf="usernameLogin.errors?.['required']">Proszę podać nazwę użytkownika.</span>
+          <span *ngIf="usernameLogin.errors?.['pattern']">Nazwa zawiera niedozwolone znaki.</span>
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Hasło"
@@ -41,8 +45,12 @@
       <mat-form-field>
         <input matInput placeholder="Nazwa użytkownika"
           [(ngModel)]="registerCredentials.username"
-          name="usernameRegister" #usernameRegister="ngModel" required>
-        <mat-error>Proszę podać nazwę użytkownika.</mat-error>
+          name="usernameRegister" #usernameRegister="ngModel"
+          [pattern]="usernamePattern" required>
+          <mat-error>
+            <span *ngIf="usernameRegister.errors?.['required']">Proszę podać nazwę użytkownika.</span>
+            <span *ngIf="usernameRegister.errors?.['pattern']">Nazwa zawiera niedozwolone znaki.</span>
+          </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Hasło"

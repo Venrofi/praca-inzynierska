@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.store.dispatch(memberActions.update({ member: undefined }));
     this.router.navigateByUrl('/');
-    this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end' });
+    this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end', panelClass: ['snackbar-success'] });
   }
 
   memberAuthenticate(): void {
@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
     ).subscribe(user => {
       if (user) {
         this.store.dispatch(memberActions.update({ member: user as Member }));
-        this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end' });
+        this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end', panelClass: ['snackbar-success'] });
       }
     });
   }

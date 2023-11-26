@@ -11,8 +11,7 @@ export class ArtistService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getArtistsList(): Observable<ArtistList[]> {
-    // return this.http.get<Artist[]>(`${this.API_ROOT}/List/artists`);
-    return this.http.get<ArtistList[]>('https://backend-hip-hop-hub.azurewebsites.net/artists')
+    return this.http.get<ArtistList[]>(`${this.API_ROOT}/List/artists`)
       .pipe(
         map((artists: ArtistList[]) => {
           return artists.map((artist: ArtistList, index: number) => {
@@ -23,13 +22,13 @@ export class ArtistService {
             };
           });
         })
-      ); // TODO: Wrong API endpoint address!
+      );
   }
 
   getArtistInformation(artistID: string) {
     const params = new HttpParams().set('id', artistID);
 
-    return this.http.get<Artist>(`https://backend-hip-hop-hub.azurewebsites.net/artist`, { params })
+    return this.http.get<Artist>(`${this.API_ROOT}/Details/artist`, { params })
       .pipe(
         map((artist: Artist) => {
           return {
@@ -43,15 +42,14 @@ export class ArtistService {
             }),
           }
         })
-      ); // TODO: Wrong API endpoint address!
-    // return this.http.get<Artist[]>('assets/data/artists.json').pipe(map(artists => artists.find(artist => artist.id === '1')));
+      );
   }
 
   followArtist(artistID: string) {
     const userId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('artistId', artistID).set('userId', userId);
 
-    return this.http.post(`https://backend-hip-hop-hub.azurewebsites.net/follow`, {}, { params }); // TODO: Wrong API endpoint address!
+    return this.http.post(`${this.API_ROOT}/Action/follow`, {}, { params });
   }
 
   private generateRandomAvatar(): string {
