@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Backend.Controllers
 {
@@ -31,6 +32,11 @@ namespace Backend.Controllers
                 return BadRequest(new { code = "email-already-used" });
             if (_context.Users.Any(x => x.UserName == request.Username))
                 return BadRequest(new { code = "username-already-used" });
+
+            var mailPrefix = request.Email.Split("@")[0];
+            Regex regex = new Regex("^[a-zA-Z0-9.]+$");
+            if (!regex.IsMatch(mailPrefix))
+                return BadRequest(new { code = "mail-error" });
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
