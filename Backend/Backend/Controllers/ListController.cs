@@ -18,7 +18,23 @@ namespace Backend.Controllers {
             if (_context.ArtistsProfiles == null) {
                 return NotFound();
             }
-            return await _context.ArtistsProfiles.Select(a => new { id = a.ArtistProfileId, name = a.Name, image = a.Image }).ToListAsync();
+            var list = await _context.ArtistsProfiles.Select(a => new { 
+                id = a.ArtistProfileId, 
+                name = a.Name, 
+                image = a.Image,
+                rank = a.Followers.Count() +
+                   a.DiscussionPosts.Count() +
+                   a.OrganizedEvents.Count() +
+                   a.Albums.Count()
+            }).OrderByDescending(c => c.rank)
+            .ToListAsync();
+
+            return list.Select((a, index) => new {
+                id = a.id,
+                name = a.name,
+                imnage = a.image,
+                rank = index + 1
+            }).ToList();
         }
         #endregion
 
@@ -28,7 +44,22 @@ namespace Backend.Controllers {
             if (_context.Groups == null) {
                 return NotFound();
             }
-            return await _context.Groups.Select(g => new { id = g.GroupId, name = g.Name, image = g.Image }).ToListAsync();
+            var list = await _context.Groups.Select(g => new {
+                id = g.GroupId,
+                name = g.Name,
+                image = g.Image,
+                rank = g.Users.Count() +
+                   g.DiscussionPosts.Count() +
+                   g.OrganizedEvents.Count()
+            }).OrderByDescending(c => c.rank)
+            .ToListAsync();
+
+            return list.Select((a, index) => new {
+                id = a.id,
+                name = a.name,
+                imnage = a.image,
+                rank = index + 1
+            }).ToList();
         }
         #endregion
 
@@ -38,7 +69,22 @@ namespace Backend.Controllers {
             if (_context.Users == null) {
                 return NotFound();
             }
-            return await _context.Users.Select(u => new { id = u.UserId, name = u.UserName, avatar = u.Avatar}).ToListAsync();
+            var list = await _context.Users.Select(u => new {
+                id = u.UserId,
+                name = u.UserName,
+                image = u.Avatar,
+                rank = u.FollowedArtists.Count() +
+                   u.DiscussionPosts.Count() +
+                   u.ParticipatedEvents.Count()
+            }).OrderByDescending(c => c.rank)
+            .ToListAsync();
+
+            return list.Select((a, index) => new {
+                id = a.id,
+                name = a.name,
+                imnage = a.image,
+                rank = index + 1
+            }).ToList();
         }
         #endregion
     }
