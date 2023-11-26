@@ -41,8 +41,10 @@ namespace Backend.Controllers
 
             var topDiscussions = await _context.DiscussionPosts
                 .Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist)
+                .Where(dp => dp.ArtistProfileId != null)
                 .Where(dp => dp.NumberOfComments > 0)
                 .Where(dp => dp.CreationTime >= lastMonday)
+                .Where(dp => !id.HasValue || !(dp.ArtistProfile.Followers.Contains(user)))  //to test
                 .OrderByDescending(dp => dp.NumberOfComments)
                 .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title })
                 .Take(5)
@@ -50,6 +52,7 @@ namespace Backend.Controllers
 
             var topArtists = await _context.ArtistsProfiles
                 .Where(ap => ap.DiscussionPosts != null)
+                .Where(ap => !id.HasValue || !(ap.Followers.Contains(user)))  //to test
                 .OrderByDescending(ap => ap.DiscussionPosts.Count(dp => dp.CreationTime >= lastMonday))
                 .Select(ap => new { id = ap.ArtistProfileId, name = ap.Name })
                 .Take(5)
@@ -64,6 +67,7 @@ namespace Backend.Controllers
 
             var recommendedGroups = await _context.Groups
                 .Where(g => g.DiscussionPosts != null)
+                .Where(g => !id.HasValue || !(g.Users.Contains(user)))  //to test
                 .OrderByDescending(g => g.DiscussionPosts.Count(dp => dp.CreationTime >= lastMonday))
                 .Select(gr => new { id = gr.GroupId, name = gr.Name })
                 .Take(5)
