@@ -75,26 +75,10 @@ namespace Backend.Controllers {
 
         #region ProfanitiesTest
         [HttpPost("profanity-test")]
-        public async Task<IActionResult> ProfanityTest(UserLoginRequest ulr) {
+        public async Task<IActionResult> LoadProfanity() {
             ProfanitySearchAlgorithm psa = new ProfanitySearchAlgorithm(_context);
-
-            if (!_context.Profanities.Any()) {
-                psa.LoadBadWords();
-            }
-            await _context.SaveChangesAsync();
-
-            string words = string.Join("|", _context.Profanities.Select(p => p.ProfanitiesName));
-            words = words.Remove(words.Length - 1);
-            //return Ok(words);
-            //zmiana 0 na o, 3 na e, ó na o itd...
-            //tolowercase
-            //jak rozwiazac problem ze spacjami, myslikami, podlogami? usuneicie tych znaków mocno ogranicza algorytm podczas przeszukiwania np komentarzy
-            if (psa.HasBadWords(ulr.Username))
-                return Ok("Wystapil wulgaryzm");
-            else
-                return Ok("Bez wulgaryzmu");
-
-            //return Ok($"New artist profile was created.");
+            psa.SeedProfanities();
+            return Ok($"New artist profile was created.");
         }
 
         #endregion
