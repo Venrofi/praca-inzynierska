@@ -1,5 +1,9 @@
 ﻿using Backend.Core.Entities;
 using Backend.Data.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 namespace Backend.Repositories {
@@ -7,8 +11,11 @@ namespace Backend.Repositories {
 
         private readonly ApplicationDbContext _context;
 
-        private string[] profanities = new string[] {"chuj","chuja", "chujek", "chuju", "chujem", "chujnia",
-                                                    "chujowy", "chujowa", "chujowe", "cipa", "cipę", "cipe", "cipą",
+        private readonly string[] profanities = new string[] {"chuj","chuja", "chujek", "chuju", "chujem", "chujnia",
+                                                    "chujowy", "chujowa", "chujowe",
+                                                    "choj","choja", "chojek", "choju", "chojem", "chojnia",
+                                                    "chojowy", "chojowa", "chojowe",
+                                                    "cipa", "cipę", "cipe", "cipą",
                                                     "cipie", "dojebać","dojebac", "dojebie", "dojebał", "dojebal",
                                                     "dojebała", "dojebala", "dojebałem", "dojebalem", "dojebałam",
                                                     "dojebalam", "dojebię", "dojebie", "dopieprzać", "dopieprzac",
@@ -132,27 +139,47 @@ namespace Backend.Repositories {
                                                     "zesrywać", "zesrywający", "zjebać", "zjebac", "zjebał", "zjebal",
                                                     "zjebała", "zjebala", "zjebana", "zjebią", "zjebali", "zjeby"};
 
+        //private readonly string[] needles = new string[] { "drop", "table", "alter", "delete"};
+
         public ProfanitySearchAlgorithm(ApplicationDbContext context) {
             _context = context;
         }
 
-        public async void LoadBadWords() {
+        public void SeedProfanities() {
             if (!_context.Profanities.Any()) {
-                foreach(string word in profanities) {
-                    Guid guid = Guid.NewGuid();
-                    Profanities prof = new Profanities {
-                        ProfanitiesId = guid,
-                        ProfanitiesName = word
-                    };
-                    _context.Profanities.Add(prof);
-                    
+                foreach (var profanity in profanities) {
+                    _context.Profanities.Add(new Profanities {
+                        ProfanitiesId = Guid.NewGuid(),
+                        ProfanitiesName = profanity
+                    });
                 }
-            }
-            //await _context.SaveChangesAsync();
+                _context.SaveChanges();
+            };              
         }
 
-        public bool HasBadWords(string inputWords) {
-            string words = string.Join("|", _context.Profanities.Select(p => p.ProfanitiesName));
+        /*public bool ContainsAnySensitive(string haystack) {
+            foreach(string needle in needles) {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+            return false;
+        }*/
+
+        public async Task<string> ChangeCharacters(string word) {
+            return word.ToLower()
+                .Replace('!', 'i').Replace('@', 'a').Replace('$', 's').Replace('€', 'e')
+                .Replace('0', 'o').Replace('1', 'i').Replace('3', 'e').Replace('4', 'a').Replace('5', 's').Replace('7', 'l').Replace('8', 'b')
+                .Replace('ó', 'o').Replace('ę', 'e').Replace('ą', 'a').Replace('ł', 'l').Replace('ś', 's')
+                .Replace('ż', 'z').Replace('ź', 'z').Replace('ć', 'c').Replace('ń', 'n');
+        }
+
+        public async Task<bool> HasBadWords(string inputWords) {
+            var profanities = await _context.Profanities.Select(p => p.ProfanitiesName).ToListAsync();
+            if(!profanities.Any()) {
+                SeedProfanities();
+                profanities = await _context.Profanities.Select(p => p.ProfanitiesName).ToListAsync();
+            }
+            string words = string.Join("|", profanities);
             words = words.Remove(words.Length - 1);
             Regex wordFilter = new Regex(words);
             return wordFilter.IsMatch(inputWords);
