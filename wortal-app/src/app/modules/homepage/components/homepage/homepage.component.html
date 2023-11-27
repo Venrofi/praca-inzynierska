@@ -8,7 +8,7 @@
           <mat-tab>
             <ng-template mat-tab-label>
               {{isWideScreen ? 'Dyskusje' : ''}}
-              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Dyskusje'}}">3p</mat-icon>
+              <mat-icon class="mx-1" matTooltip="{{ isWideScreen ? '' : 'Dyskusje' }}">3p</mat-icon>
             </ng-template>
 
             <app-discussion-list></app-discussion-list>
@@ -16,7 +16,7 @@
           <mat-tab>
             <ng-template mat-tab-label>
               {{isWideScreen ? 'Radar Premier' : ''}}
-              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Radar Premier'}}">radar</mat-icon>
+              <mat-icon class="mx-1" matTooltip="{{ isWideScreen ? '' : 'Radar Premier' }}">radar</mat-icon>
             </ng-template>
 
             <app-premiere-list></app-premiere-list>
@@ -24,7 +24,7 @@
           <mat-tab>
             <ng-template mat-tab-label>
               {{isWideScreen ? 'Wydarzenia' : ''}}
-              <mat-icon class="mx-1" matTooltip="{{isWideScreen ? '' : 'Wydarzenia'}}">event</mat-icon>
+              <mat-icon class="mx-1" matTooltip="{{ isWideScreen ? '' : 'Wydarzenia' }}">event</mat-icon>
             </ng-template>
 
             <app-events-list></app-events-list>
@@ -33,10 +33,19 @@
       </article>
       <aside *ngIf="sideRecommendations | async as recommendations; else loading"
         class="mt-5" [ngClass]="isWideScreen ? 'w-25' : 'w-100'">
-        <app-side-recommendations [recommendation]="recommendations.topDiscussions" [type]="'DISCUSSIONS'"></app-side-recommendations>
-        <app-side-recommendations [recommendation]="recommendations.topArtists" [type]="'ARTISTS'"></app-side-recommendations>
-        <app-side-recommendations [recommendation]="recommendations.topMembers" [type]="'MEMBERS'" [activeLinks]="authService.isAuthenticatedUser()"></app-side-recommendations>
-        <app-side-recommendations *ngIf="authService.isAuthenticatedUser()" [recommendation]="recommendations.recommendedGroups" [type]="'GROUPS'"></app-side-recommendations>
+        <app-side-recommendations *ngIf="recommendations.topDiscussions.content.length > 0"
+          [recommendation]="recommendations.topDiscussions" [type]="'DISCUSSIONS'">
+        </app-side-recommendations>
+        <app-side-recommendations *ngIf="recommendations.topArtists.content.length > 0"
+          [recommendation]="recommendations.topArtists" [type]="'ARTISTS'">
+        </app-side-recommendations>
+        <app-side-recommendations *ngIf="recommendations.topMembers.content.length > 0"
+          [recommendation]="recommendations.topMembers" [type]="'MEMBERS'"
+          [activeLinks]="authService.isAuthenticatedUser()">
+        </app-side-recommendations>
+        <app-side-recommendations *ngIf="authService.isAuthenticatedUser() && recommendations.recommendedGroups.content.length > 0"
+          [recommendation]="recommendations.recommendedGroups" [type]="'GROUPS'">
+        </app-side-recommendations>
 
         <mat-card class="side-card mb-3">
           <mat-card-header>
