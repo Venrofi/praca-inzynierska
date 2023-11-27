@@ -181,6 +181,10 @@ namespace Backend.Controllers {
                 .Include(dp => dp.Group)
                 .Where(dp => dp.DiscussionPostId == id).FirstOrDefaultAsync();
 
+            var group = await _context.Groups
+                .Include(g => g.Users)
+                .Where(g => g == post.Group).FirstOrDefaultAsync();
+
             var details = await _context.DiscussionPostsDetails
                 .Where(dpd => dpd.DiscussionPostId == id).FirstOrDefaultAsync();
             var comments = await _context.Comments
@@ -188,7 +192,7 @@ namespace Backend.Controllers {
                 .Where(c => c.DiscussionPostDetailsId == details.DiscussionPostDetailsId).ToListAsync();
 
             //var type = await _context.UserTypes.Where(u => u.Description == "USER").FirstOrDefaultAsync();
-
+            
             if (post == null)
                 return NotFound(new { code = "post-not-found"});
             if (details == null)
@@ -197,7 +201,6 @@ namespace Backend.Controllers {
                 return NotFound(new { code = "comments-not-found"});
             //if (type == null)
             //    return NotFound(new { code = "user-type-not-found"});
-
             var res = new {
                 post = new { 
                     id = post.DiscussionPostId,
@@ -206,7 +209,8 @@ namespace Backend.Controllers {
                         //name = (post.User.UserTypeId == type.UserTypeId) ? (post.User.UserName) : (string.Empty),
                         //avatar = (post.User.UserTypeId == type.UserTypeId) ? (post.User.Avatar) : (string.Empty)
                         name = post.User.UserName,
-                        avatar = post.User.Avatar
+                        avatar = post.User.Avatar,
+                        active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? ("true") : (group.Users.Contains(post.User) ? ("true") : ("false"))
                     },
                     topic = new {
                         id = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (post.ArtistProfileId) : (post.GroupId),
