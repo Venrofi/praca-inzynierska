@@ -5,7 +5,7 @@ namespace Backend.Core.Requests
     public class UserRegisterRequest
     {
         [Required, MinLength(4)]
-        [RegularExpression("^[a-zA-Z0-9.]+$", ErrorMessage = "username-error")]
+        [RegularExpression("^[a-zA-Z0-9]+$", ErrorMessage = "username-error")]
         public string Username { get; set; } = string.Empty;
 
         [Required, EmailAddress]
