@@ -11,6 +11,9 @@ namespace Backend.Core.Entities
         [Required]
         public string Content { get; set; }
 
+        [Required]
+        public DateTime CreationTime { get; set; }
+
         public User User { get; set; }
         public Guid UserId { get; set; }
 
