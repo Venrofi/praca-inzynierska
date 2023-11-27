@@ -92,5 +92,41 @@ namespace Backend.Controllers {
             return Ok(new { code = "success" });
         }
         #endregion
+
+        #region Unfollow
+        [HttpPost("unfollow")]
+        public async Task<IActionResult> UnfollowArtist(Guid artistId, Guid userId) {
+            var artist = await _context.ArtistsProfiles.Include(a => a.Followers).Where(a => a.ArtistProfileId == artistId).FirstOrDefaultAsync();
+            var user = await _context.Users.Include(u => u.FollowedArtists).Where(u => u.UserId == userId).FirstOrDefaultAsync();
+
+            if (user == null)
+                return BadRequest(new { code = "wrong-id" });
+            if (artist == null)
+                return BadRequest(new { code = "wrong-id" });
+
+            if (!artist.Followers.Contains(user) || !user.FollowedArtists.Contains(artist))
+                return BadRequest(new { code = "cant-unfollow" });
+
+            artist.Followers.Remove(user);
+            user.FollowedArtists.Remove(artist);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { code = "success" });
+        }
+        #endregion
+
+        #region Unjoin
+        [HttpPost("unjoin")]
+        public async Task<IActionResult> UnjoinGroup(Guid groupId, Guid userId) {
+            return Ok();
+        }
+        #endregion
+
+        #region Unattend
+        [HttpPost("unattend")]
+        public async Task<IActionResult> UnattendEvent(Guid eventId, Guid userId) {
+            return Ok();
+        }
+        #endregion
     }
 }
