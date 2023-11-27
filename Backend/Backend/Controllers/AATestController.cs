@@ -394,6 +394,7 @@ namespace Backend.Controllers {
             var comment = new Comment {
                 CommentId = guid,
                 Content = desc[r.Next(0, desc.Length - 1)],
+                CreationTime = DateTime.UtcNow,
                 User = user,
                 UserId = user.UserId,
                 DiscussionPostDetails = dpd,
