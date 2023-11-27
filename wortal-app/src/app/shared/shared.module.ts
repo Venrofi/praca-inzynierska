@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedMaterialModule } from '../material.module';
@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderSideMenuComponent } from './components/header/side-menu/header-side-menu.component';
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.component';
+import { ContentDetailsService } from './services/content-details.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,10 @@ import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.
     DiscussionPostDetailsComponent,
     EventDetailsComponent,
     TextWithIconComponent,
+  ],
+  providers: [
+    ContentDetailsService,
+    DatePipe,
   ],
 })
 export class SharedModule { }

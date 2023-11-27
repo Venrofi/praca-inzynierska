@@ -1,1 +1,62 @@
-<p>event-details works!</p>
+<div *ngIf="event; else loading" class="container-max-width event-container p-3">
+  <mat-card class="event-card">
+    <mat-card-header class="d-flex container-center p-3 event-header">
+      <div class="container-center">
+        <img [src]="event.image" class="event-image">
+      </div>
+      <section aria-label="Artist main information">
+        <div class="d-flex justify-content-between align-items-center">
+          <article class="d-flex flex-column" style="gap: 0.25rem;">
+            <mat-card-title>{{ event.name }}</mat-card-title>
+            <app-text-with-icon *ngIf="event.location" icon="location_on" [text]="event.location"></app-text-with-icon>
+            <app-text-with-icon *ngIf="event.date" icon="schedule" [text]="formatDate(event.date)"></app-text-with-icon>
+          </article>
+          <div>
+            <button mat-icon-button
+              [matTooltip]="eventAttened ? 'Zrezyguj z udziału' : 'Weź udział'"
+              (click)="eventAction()">
+              <mat-icon class="follow-icon" [style.color]="eventAttened ? 'initial' : 'black !important'">
+                {{ eventAttened ? 'event' : 'event_available' }}
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+        <article class="mt-2" aria-label="Event description">
+          <p>{{ event.description || "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quos doloremque soluta pariatur sunt optio modi accusamus beatae laborum voluptatibus totam dignissimos, architecto nam voluptate fuga consequuntur ipsam perspiciatis? In quisquam tenetur, ratione quam adipisci assumenda? Sequi dignissimos amet deserunt totam repellendus temporibus eveniet libero, quidem cumque, repudiandae cum aut." }}</p>
+        </article>
+      </section>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider class="mt-2" style="background-color: lightgray;"></mat-divider>
+
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="person_pic_circle" text="Orgranizator">
+          <span>-</span>
+          <a routerLink="../artist" [queryParams]="{ id: event.promoter.id }">{{ event.promoter.name }}</a>
+        </app-text-with-icon>
+      </mat-card-title>
+
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="account_box" text="Uczestnicy">({{event.participants.length}})</app-text-with-icon>
+      </mat-card-title>
+      <section class="d-flex flex-column" style="gap: 1rem;">
+        <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist discussion posts">
+          <div class="d-flex flex-column">
+            <ng-container *ngFor="let participant of event.participants | slice:0:10">
+              <a routerLink="../user" [queryParams]="{ id: participant.id }">• {{ participant.name }}</a>
+            </ng-container>
+            <ng-container *ngIf="event.participants.length > 10">
+              oraz {{ event.participants.length - 10 }} innych..
+            </ng-container>
+          </div>
+        </article>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>

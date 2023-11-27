@@ -16,6 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 
 // Components
 @import "assets/styles/components/header.scss";
+@import "assets/styles/components/event-details.scss";
 
 // Authentication
 @import "assets/styles/components/authentication/authentication-dialog.scss";
