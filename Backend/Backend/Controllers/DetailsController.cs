@@ -225,7 +225,8 @@ namespace Backend.Controllers {
                     comments = comments.Select(c => new {
                         author = new {
                             id = c.UserId,
-                            name = c.User.UserName
+                            name = c.User.UserName,
+                            creationTime = c.CreationTime
                         },
                         content = c.Content
                     }),
