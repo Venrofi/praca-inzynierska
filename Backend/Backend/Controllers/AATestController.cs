@@ -108,7 +108,7 @@ namespace Backend.Controllers {
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
 
             Guid guid = Guid.NewGuid();
-            var name = nicknames[r.Next(0, nicknames.Length)] + "-" + guid.ToString("N").Substring(0, 5);
+            var name = nicknames[r.Next(0, nicknames.Length)] + guid.ToString("N").Substring(0, 5);
             var mail = name.ToLower() + "@example.com";
             int bioIndex = r.Next(0, desc.Length);
 
