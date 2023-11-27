@@ -99,9 +99,7 @@ namespace Backend.Controllers {
             var artist = await _context.ArtistsProfiles.Include(a => a.Followers).Where(a => a.ArtistProfileId == artistId).FirstOrDefaultAsync();
             var user = await _context.Users.Include(u => u.FollowedArtists).Where(u => u.UserId == userId).FirstOrDefaultAsync();
 
-            if (user == null)
-                return BadRequest(new { code = "wrong-id" });
-            if (artist == null)
+            if (user == null || artist == null)
                 return BadRequest(new { code = "wrong-id" });
 
             if (!artist.Followers.Contains(user) || !user.FollowedArtists.Contains(artist))
@@ -118,14 +116,40 @@ namespace Backend.Controllers {
         #region Unjoin
         [HttpPost("unjoin")]
         public async Task<IActionResult> UnjoinGroup(Guid groupId, Guid userId) {
-            return Ok();
+            var group = await _context.Groups.Include(g => g.Users).Where(g => g.GroupId == groupId).FirstOrDefaultAsync();
+            var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == userId).FirstOrDefaultAsync();
+
+            if (user == null || group == null)
+                return BadRequest(new { code = "wrong-id" });
+
+            if (!group.Users.Contains(user) || !user.Groups.Contains(group))
+                return BadRequest(new { code = "cant-unjoin" });
+
+            group.Users.Remove(user);
+            user.Groups.Remove(group);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { code = "success" });
         }
         #endregion
 
         #region Unattend
         [HttpPost("unattend")]
         public async Task<IActionResult> UnattendEvent(Guid eventId, Guid userId) {
-            return Ok();
+            var eventt = await _context.Events.Include(e => e.Participants).Where(e => e.EventId == eventId).FirstOrDefaultAsync();
+            var user = await _context.Users.Include(u => u.ParticipatedEvents).Where(u => u.UserId == userId).FirstOrDefaultAsync();
+
+            if (user == null || eventt == null)
+                return BadRequest(new { code = "wrong-id" });
+
+            if (!eventt.Participants.Contains(user) || !user.ParticipatedEvents.Contains(eventt))
+                return BadRequest(new { code = "cant-unattend" });
+
+            eventt.Participants.Remove(user);
+            user.ParticipatedEvents.Remove(eventt);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { code = "success" });
         }
         #endregion
     }
