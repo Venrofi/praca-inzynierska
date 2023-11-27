@@ -105,15 +105,15 @@ namespace Backend.Controllers
                 return BadRequest(new { code = "not-found" });
 
             user.PasswordResetToken = CreateRandomToken();
-            user.ResetTokenExpiration = DateTime.Now.AddHours(1);
+            user.ResetTokenExpiration = DateTime.UtcNow.AddHours(1);
             await _context.SaveChangesAsync();
 
             string resetLink = CreatePasswordResetLink(user.PasswordResetToken);
-            string formattedExpiration = DateTime.Now.AddHours(1).ToString("HH:mm:ss dd.MM.yyyy");
+            string formattedExpiration = DateTime.UtcNow.AddHours(1).ToString("HH:mm:ss dd.MM.yyyy");
             string emailBody = $"Cześć <b>{user.UserName}</b>,<br/><br/>"
                              + $"Doszły nas słuchy, że chcesz zmienić swoje hasło. Jeśli to nie Ty wykonałeś próbę resetu hasła zignoruj tą wiadomość.<br/><br/>"
                              + $"Kliknij w link aby ustawić nowe hasło: <b><a href=\"{resetLink}\">Zmień hasło</a></b> <br/><br/>"
-                             + $"Link wygaśnie: <b>{formattedExpiration}</b> <br/><br/>"
+                             + $"Link wygaśnie <b>po godzinie od otrzymania wiadomości!</b> <br/><br/>"
                              + $"Miłego dnia,<br/> <b>HipHopHub Team</b>";
 
             _emailService.SendEmail(new EmailRequest
@@ -130,7 +130,7 @@ namespace Backend.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
         {
             var user = await _context.Users.Where(x => x.PasswordResetToken == request.Token).FirstOrDefaultAsync();
-            if (user == null || user.ResetTokenExpiration < DateTime.Now)
+            if (user == null || user.ResetTokenExpiration < DateTime.UtcNow)
                 return BadRequest(new { code = "invalid-token" });
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
