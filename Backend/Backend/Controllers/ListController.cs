@@ -1,6 +1,7 @@
 ﻿using Backend.Data.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Controllers {
     [Route("api/[controller]")]
@@ -32,7 +33,7 @@ namespace Backend.Controllers {
             return list.Select((a, index) => new {
                 id = a.id,
                 name = a.name,
-                imnage = a.image,
+                image = a.image,
                 rank = index + 1
             }).ToList();
         }
@@ -57,7 +58,7 @@ namespace Backend.Controllers {
             return list.Select((a, index) => new {
                 id = a.id,
                 name = a.name,
-                imnage = a.image,
+                image = a.image,
                 rank = index + 1
             }).ToList();
         }
@@ -72,7 +73,7 @@ namespace Backend.Controllers {
             var list = await _context.Users.Select(u => new {
                 id = u.UserId,
                 name = u.UserName,
-                image = u.Avatar,
+                avatar = !u.Avatar.IsNullOrEmpty() ? (u.Avatar) : (""),
                 rank = u.FollowedArtists.Count() +
                    u.DiscussionPosts.Count() +
                    u.ParticipatedEvents.Count()
@@ -82,7 +83,7 @@ namespace Backend.Controllers {
             return list.Select((a, index) => new {
                 id = a.id,
                 name = a.name,
-                imnage = a.image,
+                avatar = a.avatar,
                 rank = index + 1
             }).ToList();
         }
