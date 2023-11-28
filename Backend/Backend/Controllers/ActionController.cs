@@ -70,13 +70,15 @@ namespace Backend.Controllers {
         #region Attend
         [HttpPost("attend")]
         public async Task<IActionResult> AttendEvent(Guid eventId, Guid userId) {
-            var eventt = await _context.Events.Include(e => e.Participants).Where(e => e.EventId == eventId).FirstOrDefaultAsync();
+            var eventt = await _context.Events.Include(e => e.Participants).Include(e => e.Group.Users).Where(e => e.EventId == eventId).FirstOrDefaultAsync();
             var user = await _context.Users.Include(u => u.ParticipatedEvents).Where(u => u.UserId == userId).FirstOrDefaultAsync();
 
             if (user == null)
                 return BadRequest(new { code = "wrong-id" });
             if (eventt == null)
                 return BadRequest(new { code = "wrong-id" });
+            if (eventt.Promotor == Event.PromotorType.Group && !eventt.Group.Users.Contains(user))
+                return BadRequest(new { code = "user-group-error" });
             //check if included lists are nulles
             eventt.Participants ??= new List<User>();
             user.ParticipatedEvents ??= new List<Event>();
