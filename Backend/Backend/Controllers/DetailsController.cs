@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics.Arm;
 namespace Backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class DetailsController :ControllerBase {
+    public class DetailsController : ControllerBase {
         private readonly ApplicationDbContext _context;
 
         public DetailsController(ApplicationDbContext context) {
@@ -42,9 +42,9 @@ namespace Backend.Controllers {
                 name = resArtist.Name,
                 image = resArtist.Image,
                 description = resArtist.Description,
-                albums = resArtist.Albums.Select(a => new { id = a.PremiereAlbumId, name = a.Title, cover = a.Cover, releaseDate = a.ReleaseDate}),
+                albums = resArtist.Albums.Select(a => new { id = a.PremiereAlbumId, name = a.Title, cover = a.Cover, releaseDate = a.ReleaseDate }),
                 events = resArtist.OrganizedEvents.Select(e => new { id = e.EventId, name = e.Title }),
-                followers = resArtist.Followers.Select(f => new { id = f.UserId, name = f.UserName}),
+                followers = resArtist.Followers.Select(f => new { id = f.UserId, name = f.UserName }),
                 discussionPosts = resArtist.DiscussionPosts.Select(d => new { id = d.DiscussionPostId, name = d.Title })
             };
             return res;
@@ -79,13 +79,16 @@ namespace Backend.Controllers {
                 image = group.Image,
                 description = group.Description,
                 events = group.OrganizedEvents.Select(e => new {
-                    id = e.EventId, name = e.Title
+                    id = e.EventId,
+                    name = e.Title
                 }),
                 members = group.Users.Select(u => new {
-                    id = u.UserId, name = u.UserName
+                    id = u.UserId,
+                    name = u.UserName
                 }),
                 discussionPosts = group.DiscussionPosts.Select(d => new {
-                    id = d.DiscussionPostId, name = d.Title
+                    id = d.DiscussionPostId,
+                    name = d.Title
                 })
             };
             return res;
@@ -135,46 +138,6 @@ namespace Backend.Controllers {
                 return NotFound();
             }
 
-            /*export interface DiscussionPost {
-              id: string;
-              author: DiscussionPostAuthor;
-              topic: DiscussionPostTopic;
-              title: string;
-              creationTime: string;
-              numberOfComments: number;
-            }
-
-            // DiscussionPostAuthor:
-            // - can be created by a Member of a Group (author has name)
-            // - can be added by a moderator/admin about an Artist (author has no name and it's hidden)
-            export interface DiscussionPostAuthor {
-              id: string;
-              name?: string;
-              avatar: string;
-            }
-
-            // DiscussionPostTopic:
-            // - can be about an Artist (type is ARTIST, name is ArtistName and it's ID)
-            // - can be about a Group (type is GROUP, name is GroupName and it's ID)
-            // - DiscussionPosts from a Group can only be vibile to Members of that Group (we can add a public/private flag to the Group in the future)
-            export interface DiscussionPostTopic extends BaseWortalElement {
-              type: DiscussionPostType;
-            }
-
-            export type DiscussionPostType = 'ARTIST' | 'GROUP';
-
-            export interface DiscussionPostDetails extends DiscussionPost {
-              comments: Comment[];
-              content: string;
-            }
-
-            // Comment:
-            // - can be created by a Member on a DiscussionPost of any type
-            export interface Comment {
-              author: BaseWortalUser;
-              content: string;
-            }*/
-
             var post = await _context.DiscussionPosts
                 .Include(dp => dp.User)
                 .Include(dp => dp.ArtistProfile)
@@ -192,46 +155,42 @@ namespace Backend.Controllers {
                 .Where(c => c.DiscussionPostDetailsId == details.DiscussionPostDetailsId).ToListAsync();
 
             //var type = await _context.UserTypes.Where(u => u.Description == "USER").FirstOrDefaultAsync();
-            
+
             if (post == null)
-                return NotFound(new { code = "post-not-found"});
+                return NotFound(new { code = "post-not-found" });
             if (details == null)
-                return NotFound(new { code = "details-not-found"});
+                return NotFound(new { code = "details-not-found" });
             if (comments == null)
-                return NotFound(new { code = "comments-not-found"});
+                return NotFound(new { code = "comments-not-found" });
             //if (type == null)
             //    return NotFound(new { code = "user-type-not-found"});
             var res = new {
-                post = new { 
-                    id = post.DiscussionPostId,
+                id = post.DiscussionPostId,
+                author = new {
+                    id = post.UserId,
+                    //name = (post.User.UserTypeId == type.UserTypeId) ? (post.User.UserName) : (string.Empty),
+                    //avatar = (post.User.UserTypeId == type.UserTypeId) ? (post.User.Avatar) : (string.Empty)
+                    name = post.User.UserName,
+                    avatar = !post.User.Avatar.IsNullOrEmpty() ? (post.User.Avatar) : (""),
+                    active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (true) : (group.Users.Contains(post.User) ? (true) : (false))
+                },
+                topic = new {
+                    id = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (post.ArtistProfileId) : (post.GroupId),
+                    name = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (post.ArtistProfile.Name) : (post.Group.Name),
+                    type = post.TopicType.ToString().ToUpper()
+                },
+                title = post.Title,
+                creationTime = post.CreationTime,
+                numberOfComments = post.NumberOfComments,
+                comments = comments.Select(c => new {
                     author = new {
-                        id = post.UserId,
-                        //name = (post.User.UserTypeId == type.UserTypeId) ? (post.User.UserName) : (string.Empty),
-                        //avatar = (post.User.UserTypeId == type.UserTypeId) ? (post.User.Avatar) : (string.Empty)
-                        name = post.User.UserName,
-                        avatar = post.User.Avatar,
-                        active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? ("true") : (group.Users.Contains(post.User) ? ("true") : ("false"))
+                        id = c.UserId,
+                        name = c.User.UserName                  
                     },
-                    topic = new {
-                        id = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (post.ArtistProfileId) : (post.GroupId),
-                        name = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (post.ArtistProfile.Name) : (post.Group.Name),
-                        type = post.TopicType.ToString().ToUpper()
-                    },
-                    title = post.Title,
-                    creationTime = post.CreationTime,
-                    numberOfComments = post.NumberOfComments
-                },
-                details = new { 
-                    comments = comments.Select(c => new {
-                        author = new {
-                            id = c.UserId,
-                            name = c.User.UserName,
-                            creationTime = c.CreationTime
-                        },
-                        content = c.Content
-                    }),
-                    content = details.Content
-                },
+                    creationTime = c.CreationTime,
+                    content = c.Content
+                }).OrderBy(o => o.creationTime),
+                content = details.Content
             };
             return res;
         }
