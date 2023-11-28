@@ -32,9 +32,11 @@
       <mat-card-title class="my-3">
         <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
       </mat-card-title>
+
       <section class="d-flex flex-column" style="gap: 1rem;">
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist discussion posts">
           <span class="artist-stat-title">Dyskusje ({{ artist.discussionPosts.length || 0 }}):</span>
+
           <div class="d-flex flex-column">
             <ng-container *ngFor="let post of artist.discussionPosts | slice:0:5">
               <a routerLink="../discussion" [queryParams]="{ id: post.id }">{{ post.name }}</a>
@@ -47,6 +49,7 @@
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist events">
           <span class="artist-stat-title">Wydarzenia ({{ artist.events.length || 0 }}):</span>
+
           <div class="d-flex flex-column">
             <ng-container *ngFor="let event of artist.events | slice:0:5">
               <a routerLink="../event" [queryParams]="{ id: event.id }">{{ event.name }}</a>
@@ -59,7 +62,8 @@
 
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Artist followers">
           <span class="artist-stat-title">Obserwujący ({{ artist.followers.length || 0 }}):</span>
-          <div class="d-flex flex-column">
+
+          <div *ngIf="member; else readOnlyFollowers" class="d-flex flex-column">
             <ng-container *ngFor="let artist of artist.followers | slice:0:5">
               <a routerLink="../user" [queryParams]="{ id: artist.id }">{{ artist.name }}</a>
             </ng-container>
@@ -67,6 +71,17 @@
               oraz {{ artist.followers.length - 5 }} innych..
             </ng-container>
           </div>
+
+          <ng-template #readOnlyFollowers>
+            <div class="d-flex flex-column">
+              <ng-container *ngFor="let artist of artist.followers | slice:0:5">
+                <span style="color: #8531A9">{{ artist.name }}</span>
+              </ng-container>
+              <ng-container *ngIf="artist.followers.length > 5">
+                oraz {{ artist.followers.length - 5 }} innych..
+              </ng-container>
+            </div>
+          </ng-template>
         </article>
       </section>
 

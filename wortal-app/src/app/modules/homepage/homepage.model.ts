@@ -16,6 +16,7 @@ export interface DiscussionPostAuthor {
   id: string;
   name?: string;
   avatar: string;
+  active: boolean;
 }
 
 // DiscussionPostTopic:
@@ -37,6 +38,7 @@ export interface DiscussionPostDetails extends DiscussionPost {
 // - can be created by a Member on a DiscussionPost of any type
 export interface Comment {
   author: BaseWortalUser;
+  creationTime: string;
   content: string;
 }
 

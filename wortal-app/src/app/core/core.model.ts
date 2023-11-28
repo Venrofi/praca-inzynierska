@@ -7,6 +7,7 @@ export interface BaseWortalElement {
 // User
 export interface BaseWortalUser extends BaseWortalElement {
   avatar: string;
+  active: boolean;
 }
 
 // MEMBER

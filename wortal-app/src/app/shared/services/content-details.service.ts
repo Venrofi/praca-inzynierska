@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Event } from 'src/app/core/core.model';
-import { DiscussionPost } from 'src/app/modules/homepage/homepage.model';
+import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
 import { environment } from 'src/enviroments/enviroment';
 
 @Injectable()
@@ -41,14 +41,44 @@ export class ContentDetailsService {
     return this.http.post(`${this.API_ROOT}/Action/unattend`, {}, { params });
   }
 
-  getDiscussionPostDetails(postID: string): Observable<DiscussionPost> {
+  getDiscussionPostDetails(postID: string): Observable<DiscussionPostDetails> {
     const params = new HttpParams().set('id', postID);
 
-    return this.http.get<DiscussionPost>(`${this.API_ROOT}/Details/discussion`, { params });
+    return this.http.get<DiscussionPostDetails>(`${this.API_ROOT}/Details/discussion`, { params }).pipe(
+      map((discussionPost: any) => {
+        return {
+          id: discussionPost.post.id,
+          author: {
+            ...discussionPost.post.author,
+            avatar: this.generateRandomAvatar(),
+          },
+          topic: discussionPost.post.topic,
+          title: discussionPost.post.title,
+          creationTime: discussionPost.post.creationTime,
+          numberOfComments: discussionPost.post.numberOfComments,
+          comments: discussionPost.details.comments.map((comment: any) => {
+            return {
+              ...comment,
+              author: {
+                ...comment.author,
+                avatar: this.generateRandomAvatar(),
+              }
+            }
+          }),
+          content: discussionPost.details.content,
+        }
+      })
+    );
   }
 
   private generateRandomImage(): string {
-    const randomAvatarSize = Math.floor(Math.random() * 300 + 600); // returns a random number between 600 and 900
+    const randomImageSize = Math.floor(Math.random() * 300 + 600); // returns a random number between 600 and 900
+
+    return `https://picsum.photos/${randomImageSize}/${randomImageSize}`;
+  }
+
+  private generateRandomAvatar(): string {
+    const randomAvatarSize = Math.floor(Math.random() * 100 + 200); // returns a random number between 200 and 300
 
     return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;
   }
