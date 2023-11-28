@@ -103,7 +103,7 @@ namespace Backend.Controllers
                     .OrderByDescending(d => d.CreationTime)
                     .Select(d => new {
                         id = d.DiscussionPostId,
-                        author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar},
+                        author = new { id = d.User.UserId, name = d.User.UserName, avatar = !d.User.Avatar.IsNullOrEmpty() ? (d.User.Avatar) : ("")},
                         topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
                         title = d.Title,
                         creationTime = d.CreationTime,
@@ -115,7 +115,7 @@ namespace Backend.Controllers
                 .OrderByDescending(d => d.CreationTime)
                 .Select(d => new {
                     id = d.DiscussionPostId,
-                    author = new { id = d.User.UserId, name = d.User.UserName, avatar = d.User.Avatar },
+                    author = new { id = d.User.UserId, name = d.User.UserName, avatar = !d.User.Avatar.IsNullOrEmpty() ? (d.User.Avatar) : ("") },
                     topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
                     title = d.Title,
                     creationTime = d.CreationTime,
