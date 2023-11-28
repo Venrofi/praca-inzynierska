@@ -37,7 +37,7 @@ namespace Backend.Controllers
             var res = new {
                 Id = resUser.UserId,
                 Name = resUser.UserName,
-                Avatar = resUser.Avatar,
+                Avatar = !resUser.Avatar.IsNullOrEmpty() ? (resUser.Avatar) :(""),
                 Bio = resUser.Bio,
                 Email = resUser.Email,
                 Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
