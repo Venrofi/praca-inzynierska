@@ -117,6 +117,7 @@ namespace Backend.Controllers {
                 UserName = name,
                 Bio = desc[bioIndex],
                 Email = mail,
+                Avatar = "",
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 VerificationToken = CreateRandomToken(),
