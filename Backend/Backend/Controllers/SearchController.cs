@@ -34,9 +34,14 @@ namespace Backend.Controllers {
 
             //done
             var artists = await _context.ArtistsProfiles
+                .Include(ap => ap.Followers)
                 .Where(ap => ap.Name.Contains(input) || ap.Description.Contains(input))
                 .OrderBy(a => a.Name)
-                .Select(ap => new { id = ap.ArtistProfileId, name = ap.Name })
+                .Select(ap => new { 
+                    id = ap.ArtistProfileId, 
+                    name = ap.Name,
+                    active = id.HasValue ? (ap.Followers.Contains(user)):(false)
+                })
                 .ToArrayAsync();
 
             //done
@@ -49,17 +54,21 @@ namespace Backend.Controllers {
                 .Where(e => e.Title.Contains(input) || e.Description.Contains(input))
                 .OrderBy(e => e.Title)
                 .ThenBy(e => e.Date)
-                .Select(e => new { id = e.EventId, name = e.Title})
+                .Select(e => new { 
+                    id = e.EventId, 
+                    name = e.Title,
+                    active = id.HasValue ? (e.Participants.Contains(user)) : (false)
+                })
                 //.Select(e => new { id = e.EventId, name = e.Title, group = e.GroupId.HasValue ? (e.GroupId):(null) })
                 .ToArrayAsync();
 
             //done
             var posts = await _context.DiscussionPosts
-                .Include(dp => dp.DiscussionPostDetails)
+                .Include(dp => dp.DiscussionPostDetails)//.Comments)
                 .Include(dp => dp.Group.Users)
                 .Where(dp => id.HasValue ? (dp.TopicType == DiscussionPost.TopicTypes.Artist || (dp.TopicType == DiscussionPost.TopicTypes.Group && dp.Group.Users.Contains(user))) : (dp.TopicType == DiscussionPost.TopicTypes.Artist))
                 .Where(dp => id.HasValue ? (dp.Group != null || dp.ArtistProfile != null) : (dp.ArtistProfile != null))
-                .Where(dp => dp.Title.Contains(input) || dp.Topic.Contains(input) || dp.DiscussionPostDetails.Content.Contains(input))
+                .Where(dp => dp.Title.Contains(input) || dp.Topic.Contains(input) || dp.DiscussionPostDetails.Content.Contains(input))// || dp.DiscussionPostDetails.Comments.Any(c => c.Content.Contains(input)))
                 .OrderBy(dp => dp.CreationTime)
                 .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title })
                 //.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title, group = dp.GroupId.HasValue ? (dp.GroupId):(null) })
@@ -74,9 +83,14 @@ namespace Backend.Controllers {
 
             //done
             var groups = id.HasValue ? (await _context.Groups
+                //.Include(g => g.Users)
                 .Where(g => g.Name.Contains(input))
                 .OrderBy(g => g.Name)
-                .Select(gr => new { id = gr.GroupId, name = gr.Name })
+                .Select(gr => new { 
+                    id = gr.GroupId, 
+                    name = gr.Name,
+                    active = gr.Users.Contains(user)
+                })
                 .ToListAsync()) : (null);
 
             return new { artists, events, posts, users, groups };
