@@ -12,6 +12,7 @@ import { ContentDetailsService } from './services/content-details.service';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SearchService } from './services/search.service';
+import { TruncateTextDirective } from './directives/truncate-text.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchService } from './services/search.service';
     EventDetailsComponent,
     TextWithIconComponent,
     SearchResultsComponent,
+    TruncateTextDirective,
   ],
   imports: [
     CommonModule,
