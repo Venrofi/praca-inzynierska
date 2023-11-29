@@ -50,10 +50,20 @@
           </ng-container>
         </article>
       </section>
-      <button *ngIf="member" mat-raised-button color="primary" (click)="commentAction()" class="mt-5">
-        <mat-icon class="follow-icon">add_comment</mat-icon>
-        Dodaj komentarz
-      </button>
+      <form *ngIf="member" class="d-flex flex-column" #commentForm="ngForm">
+        <mat-form-field>
+          <mat-label>Treść komentarza</mat-label>
+          <textarea matInput [(ngModel)]="newComment" #newCommentInput="ngModel" name="newComment" color="accent" rows="5" maxlength="2000" required></textarea>
+          <mat-error>
+            <span *ngIf="newCommentInput.errors?.['required']">Proszę wpisać treść komentarza.</span>
+            <span *ngIf="newCommentInput.errors?.['maxlength']">Komentarz jest zbyt długi.</span>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="commentAction()" [disabled]="!commentForm.valid" class="mt-5">
+          <mat-icon class="follow-icon">add_comment</mat-icon>
+          Dodaj komentarz
+        </button>
+      </form>
     </mat-card-content>
   </mat-card>
 </div>

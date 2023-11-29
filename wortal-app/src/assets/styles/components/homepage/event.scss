@@ -14,4 +14,18 @@ app-event {
   }
 
   --mat-expansion-header-indicator-color: #8531A9 !important;
+
+  a, a:visited {
+    text-decoration: none;
+    color: black;
+  }
+
+  a:hover, a:active, a:focus {
+    text-decoration: underline;
+    color: $my-accent-OG;
+  }
+
+  .event-promoter, .event-promoter:visited {
+    color: $my-primary-OG;
+  }
 }

@@ -1,7 +1,11 @@
 <mat-expansion-panel class="expansion-panel">
   <mat-expansion-panel-header class="p-5">
-    <mat-panel-title>
-      {{ event.name }}
+    <mat-panel-title class="d-flex flex-column justify-content-center">
+      <a routerLink="/event" [queryParams]="{ id: event.id }" matTooltip="Szczegóły wydarzenia">{{ event.name }}</a>
+      <a [routerLink]="event.type === 'GROUP' ? '/group' : '/artist'" [queryParams]="{ id: event.promoter.id }"
+        matTooltip="Orgranizator" class="event-promoter">
+        <app-text-with-icon icon="person_4" [text]="event.promoter.name"></app-text-with-icon>
+      </a>
     </mat-panel-title>
     <mat-panel-description class="d-flex flex-column">
       <p>{{ event.date | date: 'medium' }}</p>

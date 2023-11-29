@@ -52,6 +52,13 @@ export class ArtistService {
     return this.http.post(`${this.API_ROOT}/Action/follow`, {}, { params });
   }
 
+  unfollowArtist(artistID: string) {
+    const userId = this.authService.getLoggedInUser() || '';
+    const params = new HttpParams().set('artistId', artistID).set('userId', userId);
+
+    return this.http.post(`${this.API_ROOT}/Action/unfollow`, {}, { params });
+  }
+
   private generateRandomAvatar(): string {
     const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
 

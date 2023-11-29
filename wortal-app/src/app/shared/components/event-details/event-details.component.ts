@@ -43,7 +43,7 @@ export class EventDetailsComponent implements OnInit {
     });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
-      this.eventAttened ? this.unAttendEvent(this.event.id) : this.attendEvent(this.event.id);
+      this.eventAttened ? this.unAttendEvent() : this.attendEvent();
     });
   }
 
@@ -51,8 +51,8 @@ export class EventDetailsComponent implements OnInit {
     this.clickSubject.next();
   }
 
-  attendEvent(eventId: string) {
-    this.contentDetailsService.attendEvent(eventId).subscribe({
+  attendEvent() {
+    this.contentDetailsService.attendEvent(this.event.id).subscribe({
       next: () => {
         if (this.member) {
           this.eventAttened = true;
@@ -81,8 +81,8 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
-  unAttendEvent(eventId: string) {
-    this.contentDetailsService.unAttendEvent(eventId).subscribe({
+  unAttendEvent() {
+    this.contentDetailsService.unAttendEvent(this.event.id).subscribe({
       next: () => {
         if (this.member) {
           this.eventAttened = false;

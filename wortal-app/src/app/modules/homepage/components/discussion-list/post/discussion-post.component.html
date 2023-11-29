@@ -5,14 +5,14 @@
       (click)="post.topic.type === 'GROUP' ? openAuthorProfile() : openArtistProfile()">
     </div>
     <mat-card-subtitle (click)="openTopicForum()">
-      <span class="post-topic">{{ post.topic.name }}</span>
+      <span class="post-topic" [matTooltip]="post.topic.type === 'GROUP' ? 'Zobacz profil Grupy' : 'Otwórz profil Artysty'">{{ post.topic.name }}</span>
     </mat-card-subtitle>
     <mat-card-title>
-      <span class="post-title" (click)="openPostDetails()">{{ post.title }}</span>
+      <span class="post-title" (click)="openPostDetails()" matTooltip="Szczegóły dyskusji">{{ post.title }}</span>
     </mat-card-title>
     <mat-card-subtitle class="mt-1 d-flex justify-content-between w-100"
       [ngClass]="isWideScreen ? 'flex-row align-items-center' : 'flex-column'">
-      <span class="post-author" (click)="post.topic.type === 'GROUP' ? openAuthorProfile() : openArtistProfile()">
+      <span class="post-author" (click)="post.topic.type === 'GROUP' ? openAuthorProfile() : openArtistProfile()" matTooltip="Autor">
         {{ post.topic.type === 'GROUP' ? post.author.name : '' }}
       </span>
 

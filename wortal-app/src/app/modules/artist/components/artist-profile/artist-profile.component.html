@@ -14,7 +14,7 @@
           <div>
             <button mat-icon-button
               [matTooltip]="artistFollowed ? 'Obserwujesz' : 'Obserwuj'"
-              (click)="!artistFollowed && followArtist(artist.id)">
+              (click)="artistAction()">
               <mat-icon class="follow-icon" [style.color]="artistFollowed ? 'initial' : 'black !important'">
                 {{ artistFollowed ? 'star' : 'star_half' }}
               </mat-icon>
@@ -98,7 +98,7 @@
               [style.background-image]="'url(' + album.cover + ')'">
               <mat-card-header class="artist-album-header">
                 <mat-card-title>
-                  <span class="artist-album-title" >{{ album.name }}</span>
+                  <span class="artist-album-title" matTooltip="Otwórz Album">{{ album.name }}</span>
                 </mat-card-title>
                 <mat-card-subtitle class="artist-album-info">
                   <span class="artist-album-time">{{ album.releaseDate | date : 'shortDate' }}</span>
