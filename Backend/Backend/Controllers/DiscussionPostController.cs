@@ -4,6 +4,7 @@ using Backend.Data.Context;
 using Backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Intrinsics.Arm;
 
@@ -141,7 +142,7 @@ namespace Backend.Controllers {
                         author = new {
                             id = com.UserId,
                             name = com.User.UserName,
-                            avatar = com.User.Avatar,
+                            avatar = !com.User.Avatar.IsNullOrEmpty() ? (com.User.Avatar):(string.Empty),
                             active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (true) : (post.Group.Users.Contains(user) ? (true) : (false))
                         },
                         creationTime = com.CreationTime,
