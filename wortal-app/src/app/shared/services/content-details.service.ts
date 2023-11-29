@@ -47,16 +47,12 @@ export class ContentDetailsService {
     return this.http.get<DiscussionPostDetails>(`${this.API_ROOT}/Details/discussion`, { params }).pipe(
       map((discussionPost: any) => {
         return {
-          id: discussionPost.post.id,
+          ...discussionPost,
           author: {
-            ...discussionPost.post.author,
+            ...discussionPost.author,
             avatar: this.generateRandomAvatar(),
           },
-          topic: discussionPost.post.topic,
-          title: discussionPost.post.title,
-          creationTime: discussionPost.post.creationTime,
-          numberOfComments: discussionPost.post.numberOfComments,
-          comments: discussionPost.details.comments.map((comment: any) => {
+          comments: discussionPost.comments.map((comment: any) => {
             return {
               ...comment,
               author: {
@@ -65,7 +61,6 @@ export class ContentDetailsService {
               }
             }
           }),
-          content: discussionPost.details.content,
         }
       })
     );

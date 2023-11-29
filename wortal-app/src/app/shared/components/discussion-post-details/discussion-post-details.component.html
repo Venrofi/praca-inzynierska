@@ -26,17 +26,17 @@
         <mat-card-title class="my-3">
           <app-text-with-icon icon="comment" text="Komentarze">({{discussionPost.comments.length}})</app-text-with-icon>
         </mat-card-title>
-        <article class="d-flex" style="gap: 1rem;" aria-label="Post comments">
-          <ng-container *ngFor="let comment of discussionPost.comments | slice:0:10">
+        <article class="d-flex flex-column" style="gap: 2rem;" aria-label="Post comments">
+          <div *ngFor="let comment of discussionPost.comments | slice:0:10" class="d-flex" style="gap: 2rem;">
             <a *ngIf="member; else readOnlyUser" routerLink="../user" [queryParams]="{ id: comment.author.id }"
-              class="d-flex flex-column" style="gap: 0.5rem;">
+              class="d-flex flex-column w-25">
               <img [src]="comment.author.avatar" class="comment-author-avatar">
-              <span>{{ comment.author.name }}</span>
+              <span class="mt-2" [matTooltip]="comment.author.name" appTruncateText>{{ comment.author.name }}</span>
             </a>
             <ng-template #readOnlyUser>
-              <div class="d-flex flex-column" style="gap: 0.5rem;">
+              <div class="d-flex flex-column w-25">
                 <img [src]="comment.author.avatar" class="comment-author-avatar">
-                <span style="color: #8531A9">{{ comment.author.name }}</span>
+                <span class="mt-2" style="color: #8531A9" appTruncateText>{{ comment.author.name }}</span>
               </div>
             </ng-template>
 
@@ -44,13 +44,14 @@
               <p>{{ comment.content }}</p>
               <p>{{ (comment.creationTime | date: 'medium') || '28 lis 2023, 16:59:46' }}</p>
             </div>
-          </ng-container>
+          </div>
           <ng-container *ngIf="discussionPost.comments.length > 10">
             oraz {{ discussionPost.comments.length - 10 }} innych..
           </ng-container>
         </article>
       </section>
-      <form *ngIf="member" class="d-flex flex-column" #commentForm="ngForm">
+      <form *ngIf="member" class="d-flex flex-column mt-5" #commentForm="ngForm">
+        <h2>Nowy komentarz</h2>
         <mat-form-field>
           <mat-label>Treść komentarza</mat-label>
           <textarea matInput [(ngModel)]="newComment" #newCommentInput="ngModel" name="newComment" color="accent" rows="5" maxlength="2000" required></textarea>
@@ -59,7 +60,7 @@
             <span *ngIf="newCommentInput.errors?.['maxlength']">Komentarz jest zbyt długi.</span>
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="commentAction()" [disabled]="!commentForm.valid" class="mt-5">
+        <button mat-raised-button color="accent" class="add-comment-button" (click)="commentAction()" [disabled]="!commentForm.valid">
           <mat-icon class="follow-icon">add_comment</mat-icon>
           Dodaj komentarz
         </button>

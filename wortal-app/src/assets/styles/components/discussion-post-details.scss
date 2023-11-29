@@ -37,6 +37,16 @@ app-discussion-post-details {
     border: 2px solid $my-primary-OG;
     background-size: cover;
     background-position: center;
+
+    @media screen and (max-width: 600px) {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .add-comment-button {
+    --mdc-protected-button-disabled-container-color: #a1eec9 !important;
+    --mdc-protected-button-disabled-label-text-color: black !important;
   }
 
   a, a:visited {

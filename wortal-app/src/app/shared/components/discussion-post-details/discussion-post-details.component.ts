@@ -40,7 +40,6 @@ export class DiscussionPostDetailsComponent implements OnInit {
       })
     ).subscribe(discussionPost => {
       this.discussionPost = discussionPost;
-      console.log(this.discussionPost);
     });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => this.addComment());
