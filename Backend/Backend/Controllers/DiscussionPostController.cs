@@ -106,18 +106,6 @@ namespace Backend.Controllers {
             try {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                /*[Required]
-                        public Guid CommentId { get; set; }
-
-                        [Required]
-                        public string Content { get; set; }
-
-                        public User User { get; set; }
-                        public Guid UserId { get; set; }
-
-                        public DiscussionPostDetails? DiscussionPostDetails { get; set; }
-                        public Guid? DiscussionPostDetailsId { get; set; }*/
-
                 var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == request.AuthorId).FirstOrDefaultAsync();
                 if (user == null) return NotFound(new { code = "user-not-found" });
                 var post = await _context.DiscussionPosts
@@ -147,7 +135,19 @@ namespace Backend.Controllers {
                 _context.Comments.Add(com);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { code = "success"});
+                return Ok(new {
+                    code = "success",
+                    createdComment = new {
+                        author = new {
+                            id = com.UserId,
+                            name = com.User.UserName,
+                            avatar = com.User.Avatar,
+                            active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (true) : (post.Group.Users.Contains(user) ? (true) : (false))
+                        },
+                        creationTime = com.CreationTime,
+                        content = com.Content
+                    }
+                });
             }
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
