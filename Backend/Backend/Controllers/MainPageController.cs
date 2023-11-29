@@ -93,11 +93,11 @@ namespace Backend.Controllers
             if (_context.DiscussionPosts == null)
                 return NotFound(new { code = "posts-not-found"});
 
-            User user = null;
-            if (id != null) {
-                user = await _context.Users.FindAsync(id);
-                if(user == null) 
-                    return NotFound(new { code = "user-not-found"});
+            User user = await _context.Users.Where(u => u.UserId == id).FirstOrDefaultAsync();
+            if (id != null && user == null)
+                return NotFound(new { code = "user-not-found" });
+
+            if (user != null) {
                 return await _context.DiscussionPosts.Include(d => d.ArtistProfile).Include(d => d.Group)
                     .Where(d => d.Group.Users.Contains(user) || d.ArtistProfile.Followers.Contains(user))
                     .OrderByDescending(d => d.CreationTime)
@@ -111,7 +111,8 @@ namespace Backend.Controllers
                     }).ToListAsync();
             }
 
-            return await _context.DiscussionPosts.Where(d => d.TopicType == DiscussionPost.TopicTypes.Artist)
+            return await _context.DiscussionPosts
+                .Where(d => d.TopicType == DiscussionPost.TopicTypes.Artist)
                 .OrderByDescending(d => d.CreationTime)
                 .Select(d => new {
                     id = d.DiscussionPostId,
@@ -129,11 +130,11 @@ namespace Backend.Controllers
             if (_context.Events == null)
                 return NotFound(new { code = "events-not-found"});
 
-            User user = null;
-            if (id != null) {
-                user = await _context.Users.FindAsync(id);
-                if (user == null)
-                    return NotFound(new { code = "user-not-found" });
+            User user = await _context.Users.Where(u => u.UserId == id).FirstOrDefaultAsync();
+            if (id != null && user == null)
+                return NotFound(new { code = "user-not-found" });
+
+            if (user != null) {
                 return await _context.Events.Include(e => e.Participants)
                     .OrderByDescending(e => e.Participants.Contains(user))
                     .ThenByDescending(e => e.Group.Users.Contains(user))
@@ -142,8 +143,9 @@ namespace Backend.Controllers
                     .Select(e => new {
                         id = e.EventId,
                         name = e.Title,
-                        image = e.Cover,
                         date = e.Date,
+                        image = e.Cover,
+                        type = e.Promotor.ToString().ToUpper(),
                         location = e.Location,
                         description = e.Description,
                         promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
@@ -152,12 +154,14 @@ namespace Backend.Controllers
             }
 
             return await _context.Events.Include(e=>e.Participants)
+                .Where(e => e.Promotor == Event.PromotorType.Artist)
                 .OrderByDescending(e=>e.Date)
                 .Select(e => new {
                     id = e.EventId,
                     name = e.Title,
-                    image = e.Cover,
                     date = e.Date,
+                    image = e.Cover,
+                    type = e.Promotor.ToString().ToUpper(),
                     location = e.Location,
                     description = e.Description,
                     promoter = new { id = e.GroupId.HasValue ? e.GroupId : e.ArtistProfileId, name = e.Group.Name != null ? e.Group.Name : e.ArtistProfile.Name },
@@ -166,16 +170,15 @@ namespace Backend.Controllers
         }
 
         [HttpGet("premiere-albums")]
-        public async Task<ActionResult<IEnumerable<object>>> GetPremiersList(Guid? id)
-        {
+        public async Task<ActionResult<IEnumerable<object>>> GetPremiersList(Guid? id) {
             if (_context.PremiereAlbums == null)
                 return NotFound(new { code = "premiere-albums-not-found"});
 
-            User user = null;
-            if (id != null) {
-                user = await _context.Users.FindAsync(id);
-                if (user == null)
-                    return NotFound(new { code = "user-not-found" });
+            User user = await _context.Users.Where(u => u.UserId == id).FirstOrDefaultAsync();
+            if (id != null && user == null)
+                return NotFound(new { code = "user-not-found"});
+
+            if (user != null) {
                 return await _context.PremiereAlbums.Include(p => p.ArtistProfile)
                     .OrderByDescending(p => p.ArtistProfile.Followers.Contains(user))
                     .ThenBy(p => p.ReleaseDate)
