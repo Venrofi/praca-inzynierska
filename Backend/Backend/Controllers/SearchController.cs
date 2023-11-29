@@ -39,10 +39,9 @@ namespace Backend.Controllers {
                 .OrderBy(a => a.Name)
                 .Select(ap => new { 
                     id = ap.ArtistProfileId, 
-                    name = ap.Name,
-                    active = id.HasValue ? (ap.Followers.Contains(user)):(false)
+                    name = ap.Name
                 })
-                .ToArrayAsync();
+                .ToListAsync();
 
             //done
             var events = await _context.Events
@@ -57,10 +56,9 @@ namespace Backend.Controllers {
                 .Select(e => new { 
                     id = e.EventId, 
                     name = e.Title,
-                    active = id.HasValue ? (e.Participants.Contains(user)) : (false)
                 })
                 //.Select(e => new { id = e.EventId, name = e.Title, group = e.GroupId.HasValue ? (e.GroupId):(null) })
-                .ToArrayAsync();
+                .ToListAsync();
 
             //done
             var posts = await _context.DiscussionPosts
@@ -88,8 +86,7 @@ namespace Backend.Controllers {
                 .OrderBy(g => g.Name)
                 .Select(gr => new { 
                     id = gr.GroupId, 
-                    name = gr.Name,
-                    active = gr.Users.Contains(user)
+                    name = gr.Name
                 })
                 .ToListAsync()) : (null);
 
