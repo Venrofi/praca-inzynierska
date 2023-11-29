@@ -146,7 +146,7 @@ namespace Backend.Controllers {
                         },
                         creationTime = c.CreationTime,
                         content = c.Content
-                    }).OrderBy(o => o.creationTime),
+                    }).OrderBy(o => o.creationTime).ToList(),
                     content = d.DiscussionPostDetails.Content
                 })
                 .FirstOrDefaultAsync();
