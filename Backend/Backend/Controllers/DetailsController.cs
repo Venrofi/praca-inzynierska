@@ -95,6 +95,7 @@ namespace Backend.Controllers {
                     name = e.Title,
                     date = e.Date,
                     image = e.Cover,
+                    type = e.Promotor.ToString().ToUpper(),
                     location = e.Location,
                     description = e.Description,
                     promoter = new {
