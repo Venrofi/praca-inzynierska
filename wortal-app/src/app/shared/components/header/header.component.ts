@@ -26,6 +26,8 @@ export class HeaderComponent implements OnInit {
 
   member: Member | undefined;
 
+  searchTerm: string = '';
+
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,

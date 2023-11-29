@@ -1,0 +1,95 @@
+<div *ngIf="searchResult | async as result; else loading" class="container-max-width search-container p-3">
+  <h1>Wyniki wyszukiwania</h1>
+  <mat-tab-group class="user-select-none" animationDuration="500ms">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span *ngIf="isWideScreen">Dyskusje ({{result.posts.length}})</span>
+        <mat-icon class="mx-1">3p</mat-icon>
+      </ng-template>
+
+      <mat-card class="search-results-card">
+        <mat-card-content class="d-flex flex-column">
+          <h3 *ngFor="let post of result.posts">
+            <a routerLink="../discussion" [queryParams]="{ id: post.id }">• {{ post.name }}</a>
+          </h3>
+
+          <h2 *ngIf="result.posts.length === 0">Brak wyników.</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span *ngIf="isWideScreen">Artyści ({{result.artists.length}})</span>
+        <mat-icon class="mx-1">library_music</mat-icon>
+      </ng-template>
+
+      <mat-card class="search-results-card">
+        <mat-card-content class="d-flex flex-column">
+          <h3 *ngFor="let artist of result.artists">
+            <a routerLink="../artist" [queryParams]="{ id: artist.id }">• {{ artist.name }}</a>
+          </h3>
+
+          <h2 *ngIf="result.artists.length === 0">Brak wyników.</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span *ngIf="isWideScreen">Wydarzenia ({{result.events.length}})</span>
+        <mat-icon class="mx-1">event</mat-icon>
+      </ng-template>
+
+      <mat-card class="search-results-card">
+        <mat-card-content class="d-flex flex-column">
+          <h3 *ngFor="let event of result.events">
+            <a routerLink="../event" [queryParams]="{ id: event.id }">• {{ event.name }}</a>
+          </h3>
+
+          <h2 *ngIf="result.events.length === 0">Brak wyników.</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <ng-container *ngIf="member">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span *ngIf="isWideScreen">Członkowie ({{result.users?.length}})</span>
+          <mat-icon class="mx-1">person_search</mat-icon>
+        </ng-template>
+
+        <mat-card class="search-results-card">
+          <mat-card-content class="d-flex flex-column">
+            <h3 *ngFor="let user of result.users">
+              <a routerLink="../user" [queryParams]="{ id: user.id }">• {{ user.name }}</a>
+            </h3>
+
+            <h2 *ngIf="result.users?.length === 0">Brak wyników.</h2>
+          </mat-card-content>
+        </mat-card>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span *ngIf="isWideScreen">Grupy ({{result.groups?.length}})</span>
+          <mat-icon class="mx-1">groups</mat-icon>
+        </ng-template>
+
+        <mat-card class="search-results-card">
+          <mat-card-content class="d-flex flex-column">
+            <h3 *ngFor="let group of result.groups">
+              <a routerLink="../group" [queryParams]="{ id: group.id }">• {{ group.name }}</a>
+            </h3>
+
+            <h2 *ngIf="result.groups?.length === 0">Brak wyników.</h2>
+          </mat-card-content>
+        </mat-card>
+      </mat-tab>
+    </ng-container>
+  </mat-tab-group>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>
+
