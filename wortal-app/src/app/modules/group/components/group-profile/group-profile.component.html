@@ -11,7 +11,7 @@
             <!-- <app-text-with-icon icon="person" [text]="member.role"></app-text-with-icon> -->
           </article>
           <div>
-            <button mat-icon-button [matTooltip]="groupMember ? 'Należysz' : 'Dołącz'" (click)="!groupMember && joinGroup(group.id)">
+            <button mat-icon-button [matTooltip]="groupMember ? 'Należysz' : 'Dołącz'" (click)="groupAction()">
               <mat-icon class="join-icon" [style.color]="groupMember ? 'initial' : 'black !important'">
                 {{ groupMember ? 'person_check' : 'person_add' }}
               </mat-icon>
