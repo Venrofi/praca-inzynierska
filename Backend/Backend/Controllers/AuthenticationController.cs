@@ -44,7 +44,9 @@ namespace Backend.Controllers
             {
                 UserId = new Guid(),
                 UserName = request.Username,
+                Bio = string.Empty,
                 Email = request.Email,
+                Avatar = string.Empty,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 VerificationToken = CreateRandomToken(),
