@@ -9,6 +9,7 @@ import { HeaderSideMenuComponent } from './components/header/side-menu/header-si
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.component';
 import { ContentDetailsService } from './services/content-details.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ContentDetailsService } from './services/content-details.service';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     SharedMaterialModule,
   ],
   exports: [

@@ -71,6 +71,12 @@ export class ContentDetailsService {
     );
   }
 
+  addComment(discussionPostId: string, content: string) {
+    const authorId = this.authService.getLoggedInUser() || '';
+
+    return this.http.post(`${this.API_ROOT}/Discussionpost/add-comment`, { discussionPostId, authorId, content });
+  }
+
   private generateRandomImage(): string {
     const randomImageSize = Math.floor(Math.random() * 300 + 600); // returns a random number between 600 and 900
 
