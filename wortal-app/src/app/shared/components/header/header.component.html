@@ -4,10 +4,15 @@
 
     <mat-form-field class="mt-4 w-50" color="accent">
       <mat-label>Wyszukaj w społeczności..</mat-label>
-      <input matInput type="text">
-      <button matSuffix mat-icon-button aria-label="Clear">
+      <input matInput type="text" [(ngModel)]="searchTerm" #searchInput="ngModel" minlength="3" maxlength="200">
+      <button matSuffix mat-icon-button aria-label="Search"
+        routerLink="/search" [queryParams]="{ input: searchTerm }" [disabled]="!searchInput.valid">
         <mat-icon>search</mat-icon>
       </button>
+      <mat-error>
+        <span *ngIf="searchInput.errors?.['minlength']">Należy wpisać minimum 3 znaki.</span>
+        <span *ngIf="searchInput.errors?.['maxlength']">Fraza jest zbyt długa.</span>
+      </mat-error>
     </mat-form-field>
 
     <section class="d-flex justify-content-end align-items-center">

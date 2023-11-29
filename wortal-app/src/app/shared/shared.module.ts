@@ -10,6 +10,8 @@ import { UserProfileComponent } from "./components/user-profile/user-profile.com
 import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.component';
 import { ContentDetailsService } from './services/content-details.service';
 import { FormsModule } from '@angular/forms';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { SearchService } from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     DiscussionPostDetailsComponent,
     EventDetailsComponent,
     TextWithIconComponent,
+    SearchResultsComponent,
   ],
   imports: [
     CommonModule,
@@ -33,9 +36,11 @@ import { FormsModule } from '@angular/forms';
     DiscussionPostDetailsComponent,
     EventDetailsComponent,
     TextWithIconComponent,
+    SearchResultsComponent,
   ],
   providers: [
     ContentDetailsService,
+    SearchService,
     DatePipe,
   ],
 })

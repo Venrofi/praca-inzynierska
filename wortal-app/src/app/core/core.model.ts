@@ -87,3 +87,13 @@ export interface Event extends BaseWortalElement {
 }
 
 export type EventType = 'ARTIST' | 'GROUP';
+
+// SEARCH
+
+export interface SearchResult {
+  artists: BaseWortalElement[];
+  events: BaseWortalElement[];
+  posts: BaseWortalElement[];
+  users?: BaseWortalElement[];
+  groups?: BaseWortalElement[];
+}
