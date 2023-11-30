@@ -167,7 +167,7 @@ namespace Backend.Controllers {
                 .Where(pad => pad.PremiereAlbumId == id)
                 .Select(a => new {
                     id = a.PremiereAlbumId,
-                    title = a.PremiereAlbum.Title,
+                    name = a.PremiereAlbum.Title,
                     artist = new { 
                         id = a.PremiereAlbum.ArtistProfileId, 
                         name = a.PremiereAlbum.ArtistProfile.Name
