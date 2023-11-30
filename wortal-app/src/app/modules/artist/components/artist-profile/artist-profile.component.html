@@ -93,12 +93,13 @@
         </mat-card-title>
         <section>
           <div class="artist-albums-container">
-            <mat-card *ngFor="let album of artist.albums" class="artist-album" color="accent"
-              (click)="openAlbumModal(album.id)"
-              [style.background-image]="'url(' + album.cover + ')'">
+            <mat-card *ngFor="let album of artist.albums" class="artist-album" color="accent" [style.background-image]="'url(' + album.cover + ')'">
               <mat-card-header class="artist-album-header">
                 <mat-card-title>
-                  <span class="artist-album-title" matTooltip="Otwórz Album">{{ album.name }}</span>
+                  <span routerLink="album" [queryParams]="{ id: album.id }"
+                    class="artist-album-title" matTooltip="Otwórz Album">
+                    {{ album.name }}
+                  </span>
                 </mat-card-title>
                 <mat-card-subtitle class="artist-album-info">
                   <span class="artist-album-time">{{ album.releaseDate | date : 'shortDate' }}</span>

@@ -1,7 +1,7 @@
 <mat-card class="album" color="accent" [style.background-image]="'url(' + album.cover + ')'">
   <mat-card-header class="album-header">
     <mat-card-title>
-      <span class="album-title" (click)="openAlbumModal()" matTooltip="Zobacz Album">{{ album.title }}</span>
+      <span class="album-title" (click)="openAlbumModal()" matTooltip="Zobacz Album">{{ album.name }}</span>
     </mat-card-title>
     <mat-card-subtitle class="album-info">
       <span class="album-artist" (click)="openArtistForum()" matTooltip="Otwórz profil Artysty">{{ album.artist.name }}</span>

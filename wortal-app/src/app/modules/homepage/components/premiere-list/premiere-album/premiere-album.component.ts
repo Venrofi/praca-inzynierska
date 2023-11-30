@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { PremiereAlbum } from '../../../homepage.model';
+import { Album } from '../../../homepage.model';
 
 @Component({
   selector: 'app-premiere-album',
@@ -8,7 +8,7 @@ import { PremiereAlbum } from '../../../homepage.model';
 })
 export class PremiereAlbumComponent {
 
-  @Input() album!: PremiereAlbum;
+  @Input() album!: Album;
 
   @Output() artist = new EventEmitter<string>();
   @Output() albumModal = new EventEmitter<string>();

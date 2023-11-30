@@ -42,15 +42,13 @@ export interface Comment {
   content: string;
 }
 
-export interface PremiereAlbum {
-  id: string;
-  title: string;
+export interface Album extends BaseWortalElement {
   artist: BaseWortalElement;
   cover: string;
   releaseDate: string;
 }
 
-export interface PremiereAlbumDetails extends PremiereAlbum {
+export interface AlbumDetails extends Album {
   tracks: Track[];
   description: string;
   duration: string;

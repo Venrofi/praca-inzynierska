@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { DiscussionPost, HomepageSideRecommendations, PremiereAlbum } from '../homepage.model';
+import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/core/core.model';
 import { environment } from 'src/enviroments/enviroment';
@@ -29,11 +29,11 @@ export class HomepageService {
     );
   }
 
-  getPremiereList(userID?: string): Observable<PremiereAlbum[]> {
+  getPremiereList(userID?: string): Observable<Album[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<PremiereAlbum[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
-      map((albums: PremiereAlbum[]) => {
+    return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
+      map((albums: Album[]) => {
         return albums.map(album => {
           return {
             ...album,
@@ -43,7 +43,7 @@ export class HomepageService {
       })
     );
 
-    // return this.http.get<PremiereAlbum[]>('assets/data/premiere-albums.json').pipe(delay(1000));
+    // return this.http.get<Album[]>('assets/data/premiere-albums.json').pipe(delay(1000));
   }
 
   getEventList(userID?: string): Observable<Event[]> {
