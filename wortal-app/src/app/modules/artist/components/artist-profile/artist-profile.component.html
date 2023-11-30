@@ -11,7 +11,7 @@
             <!-- TODO: We can add more information about the artist - for example, his real name, date of birth, etc. -->
             <!-- <app-text-with-icon icon="person" [text]="member.role"></app-text-with-icon> -->
           </article>
-          <div>
+          <div *ngIf="member">
             <button mat-icon-button
               [matTooltip]="artistFollowed ? 'Obserwujesz' : 'Obserwuj'"
               (click)="artistAction()">
