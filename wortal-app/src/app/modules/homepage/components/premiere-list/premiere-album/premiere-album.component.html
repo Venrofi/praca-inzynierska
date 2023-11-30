@@ -1,10 +1,16 @@
 <mat-card class="album" color="accent" [style.background-image]="'url(' + album.cover + ')'">
   <mat-card-header class="album-header">
     <mat-card-title>
-      <span class="album-title" (click)="openAlbumModal()" matTooltip="Zobacz Album">{{ album.name }}</span>
+      <span class="album-title" matTooltip="Zobacz Album"
+        routerLink="/artist/album" [queryParams]="{ id: album.id }">
+        {{ album.name }}
+      </span>
     </mat-card-title>
     <mat-card-subtitle class="album-info">
-      <span class="album-artist" (click)="openArtistForum()" matTooltip="Otwórz profil Artysty">{{ album.artist.name }}</span>
+      <span class="album-artist" matTooltip="Otwórz profil Artysty"
+        routerLink="/artist" [queryParams]="{ id: album.artist.id }">
+        {{ album.artist.name }}
+      </span>
       <span class="album-time">{{ album.releaseDate | date : 'shortDate' }}</span>
     </mat-card-subtitle>
   </mat-card-header>

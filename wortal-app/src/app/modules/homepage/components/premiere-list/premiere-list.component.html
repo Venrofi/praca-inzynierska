@@ -1,10 +1,6 @@
 <ng-container *ngIf="premiereList | async as list; else loading">
   <div class="list-wrapper">
-    <app-premiere-album *ngFor="let album of list" class="list-item"
-      [album]="album"
-      (artist)="navigateToArtistProfile($event)"
-      (albumModal)="openAlbumModal(album)">
-    </app-premiere-album>
+    <app-premiere-album *ngFor="let album of list" class="list-item" [album]="album"></app-premiere-album>
   </div>
 </ng-container>
 

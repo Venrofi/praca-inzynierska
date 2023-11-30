@@ -1,0 +1,59 @@
+app-album-details {
+  .album-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .album-card {
+    background-color: white;
+    max-width: 800px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
+    @media screen and (min-width: 768px) {
+      min-width: 500px;
+    }
+  }
+
+  .album-title-artist {
+    display: flex;
+    justify-content: center;
+    color: $my-primary-OG;
+    max-width: fit-content;
+    margin: 0 auto;
+  }
+
+  .album-title-artist > div:hover {
+    color: $my-accent-OG;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .album-image {
+    width: 100%;
+    min-height: 400px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .album-traits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: $my-accent-OG !important;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .album-traits > mat-icon:hover {
+    color: $my-primary-OG !important;
+  }
+}

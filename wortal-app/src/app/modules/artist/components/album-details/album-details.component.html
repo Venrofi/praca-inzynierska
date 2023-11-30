@@ -1,1 +1,47 @@
-<p>album-details works!</p>
+<div *ngIf="album | async as album; else loading" class="container-max-width album-container p-3">
+  <mat-card class="album-card">
+    <mat-card-header class="d-flex flex-column py-3 px-0">
+      <mat-card-title class="my-2">
+        <app-text-with-icon class="album-title-artist"
+          routerLink="/artist" [queryParams]="{ id: album.artist.id }"
+          icon="person_4" [text]="album.artist.name"></app-text-with-icon>
+      </mat-card-title>
+      <h2 class="text-center mb-0">{{ album.name }}</h2>
+      <h4 class="text-center">
+        {{ album.releaseDate | date : 'shortDate' }}
+        • {{ album.tracks.length }} {{ album.tracks.length == 1 ? 'utwór' : 'utwory' }},
+        {{ presentAlbumDuration(album.duration) }}
+      </h4>
+      <div class="album-image" [style.background-image]="'url(' + album.cover + ')'">
+        <aside class="album-traits">
+          <mat-icon [matTooltip]="'Gatunek: ' + album.genre" style="cursor: pointer;">tune</mat-icon>
+          <mat-icon [matTooltip]="'Ocena: ' + album.rating" style="cursor: pointer;">star</mat-icon>
+        </aside>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <section aria-label="Album description">
+        <mat-card-title class="mb-3">
+          <app-text-with-icon icon="description" text="Opis"></app-text-with-icon>
+        </mat-card-title>
+        <p>{{ album.description || "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus quos doloremque soluta pariatur sunt optio modi accusamus beatae laborum voluptatibus totam dignissimos, architecto nam voluptate fuga consequuntur ipsam perspiciatis? In quisquam tenetur, ratione quam adipisci assumenda? Sequi dignissimos amet deserunt totam repellendus temporibus eveniet libero, quidem cumque, repudiandae cum aut." }}
+        </p>
+      </section>
+
+      <mat-divider class="mt-2" style="background-color: lightgray;"></mat-divider>
+
+      <mat-card-title class="my-3">
+        <app-text-with-icon icon="album" text="Utwory"></app-text-with-icon>
+      </mat-card-title>
+      <section>
+        <p *ngFor="let track of album.tracks" class="mb-0">• {{ track.title }} - {{track.duration }}</p>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center mt-5">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</ng-template>

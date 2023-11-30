@@ -61,11 +61,6 @@ export class ArtistProfileComponent implements OnInit {
     });
   }
 
-  openAlbumModal(albumId: string) {
-    console.log(`Open album #${albumId}`);
-    // TODO: Add Album Modal Component
-  }
-
   followArtist() {
     this.artistService.followArtist(this.artist.id).subscribe({
       next: () => {

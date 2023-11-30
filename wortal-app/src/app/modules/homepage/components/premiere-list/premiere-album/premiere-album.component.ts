@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
 import { Album } from '../../../homepage.model';
 
 @Component({
@@ -10,22 +10,11 @@ export class PremiereAlbumComponent {
 
   @Input() album!: Album;
 
-  @Output() artist = new EventEmitter<string>();
-  @Output() albumModal = new EventEmitter<string>();
-
   isWideScreen: boolean = window.innerWidth > 600;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     this.isWideScreen = window.innerWidth > 600;
-  }
-
-  openArtistForum() {
-    this.artist.emit(this.album.artist.id);
-  }
-
-  openAlbumModal() {
-    this.albumModal.emit(this.album.id);
   }
 
   generateRandomCover(): string {

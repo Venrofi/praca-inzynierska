@@ -4,6 +4,7 @@ import { map, Observable } from "rxjs";
 import { environment } from "../../../../enviroments/enviroment";
 import { Artist, ArtistList } from "../../../core/core.model";
 import { AuthService } from "src/app/core/authentication.service";
+import { AlbumDetails } from "../../homepage/homepage.model";
 
 @Injectable()
 export class ArtistService {
@@ -45,6 +46,19 @@ export class ArtistService {
       );
   }
 
+  getAlbumDetails(albumID: string) {
+    const params = new HttpParams().set('id', albumID);
+
+    return this.http.get<AlbumDetails>(`${this.API_ROOT}/Details/album`, { params }).pipe(
+      map((album: AlbumDetails) => {
+        return {
+          ...album,
+          cover: this.generateRandomCover(),
+        }
+      })
+    );
+  }
+
   followArtist(artistID: string) {
     const userId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('artistId', artistID).set('userId', userId);
@@ -57,6 +71,12 @@ export class ArtistService {
     const params = new HttpParams().set('artistId', artistID).set('userId', userId);
 
     return this.http.post(`${this.API_ROOT}/Action/unfollow`, {}, { params });
+  }
+
+  private generateRandomCover(): string {
+    const randomImageSize = Math.floor(Math.random() * 200 + 400); // returns a random number between 400 and 600
+
+    return `https://picsum.photos/${randomImageSize * 2}/${randomImageSize}`;
   }
 
   private generateRandomAvatar(): string {
