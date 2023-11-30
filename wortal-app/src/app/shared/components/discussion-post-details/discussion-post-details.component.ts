@@ -69,7 +69,8 @@ export class DiscussionPostDetailsComponent implements OnInit {
     this.contentDetailsService.addComment(this.discussionPost.id, this.newComment)
       .subscribe({
         next: (response) => {
-          // this.discussionPost.comments.push(response.createdComment); // TODO: add comment to the local list
+          this.discussionPost.comments.push(response.createdComment);
+
           this.newComment = '';
           this.commentForm.resetForm();
 

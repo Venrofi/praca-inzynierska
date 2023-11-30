@@ -1,3 +1,5 @@
+import { BaseWortalUser } from "./core.model";
+
 export interface LoginRequest {
   username: string;
   password: string;
@@ -22,6 +24,14 @@ export interface ResetPasswordRequest {
   token: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface AddCommentResponse extends BasicResponse {
+  createdComment: {
+    author: BaseWortalUser;
+    creationTime: string;
+    content: string;
+  }
 }
 
 export interface BasicResponse {

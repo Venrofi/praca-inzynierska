@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { AddCommentResponse } from 'src/app/core/api.model';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Event } from 'src/app/core/core.model';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
@@ -66,10 +67,23 @@ export class ContentDetailsService {
     );
   }
 
-  addComment(discussionPostId: string, content: string) {
+  addComment(discussionPostId: string, content: string): Observable<AddCommentResponse> {
     const authorId = this.authService.getLoggedInUser() || '';
 
-    return this.http.post(`${this.API_ROOT}/Discussionpost/add-comment`, { discussionPostId, authorId, content });
+    return this.http.post<AddCommentResponse>(`${this.API_ROOT}/Discussionpost/add-comment`, { discussionPostId, authorId, content }).pipe(
+      map((response: AddCommentResponse) => {
+        return {
+          ...response,
+          createdComment: {
+            ...response.createdComment,
+            author: {
+              ...response.createdComment.author,
+              avatar: this.generateRandomAvatar(),
+            }
+          }
+        }
+      })
+    );
   }
 
   private generateRandomImage(): string {
