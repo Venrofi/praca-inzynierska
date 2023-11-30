@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, Member } from 'src/app/core/core.model';
 import { ContentDetailsService } from '../../services/content-details.service';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, debounceTime, switchMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import * as memberActions from '../../../store/member/member.actions';
@@ -28,19 +28,35 @@ export class EventDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.store.select(state => state.app.member).subscribe(member => this.member = member);
 
-    this.route.queryParams.pipe(
-      switchMap(params => {
-        return this.contentDetailsService.getEventDetails(params['id'])
-      })
-    ).subscribe(event => {
-      this.event = event;
-      this.event.participants.find(participant => participant.id === this.member?.id) ? this.eventAttened = true : this.eventAttened = false;
-    });
+    this.route.queryParams
+      .pipe(
+        switchMap(params => {
+          return this.contentDetailsService.getEventDetails(params['id'])
+        })
+      )
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Wystąpił błąd podczas wczytywania szczegółów wydarzenia.', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-error']
+          });
+
+          this.router.navigate(['/']);
+
+          return of({} as Event);
+        })
+      )
+      .subscribe(event => {
+        this.event = event;
+        this.event.participants.find(participant => participant.id === this.member?.id) ? this.eventAttened = true : this.eventAttened = false;
+      });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
       this.eventAttened ? this.unAttendEvent() : this.attendEvent();

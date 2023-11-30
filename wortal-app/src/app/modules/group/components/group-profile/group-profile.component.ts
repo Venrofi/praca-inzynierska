@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Subject, debounceTime, switchMap } from "rxjs";
+import { Subject, catchError, debounceTime, of, switchMap } from "rxjs";
 import { StoreModel } from "../../../../app-state.model";
 import { Group, Member } from "../../../../core/core.model";
 import * as memberActions from "../../../../store/member/member.actions";
@@ -24,6 +24,7 @@ export class GroupProfileComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
     private store: Store<StoreModel>,
   ) { }
@@ -31,14 +32,29 @@ export class GroupProfileComponent implements OnInit {
   ngOnInit() {
     this.store.select(state => state.app.member).subscribe(member => this.member = member);
 
-    this.route.queryParams.pipe(
-      switchMap(params => {
-        return this.groupService.getGroupInformation(params['id']);
-      })
-    ).subscribe(group => {
-      this.group = group;
-      this.group.members.find(member => member.id === this.member?.id) ? this.groupMember = true : this.groupMember = false;
-    });
+    this.route.queryParams
+      .pipe(
+        switchMap(params => {
+          return this.groupService.getGroupInformation(params['id']);
+        })
+      )
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Wystąpił błąd podczas wczytywania profilu grupy.', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-error']
+          });
+
+          this.router.navigate(['/']);
+
+          return of({} as Group);
+        })
+      )
+      .subscribe(group => {
+        this.group = group;
+        this.group.members.find(member => member.id === this.member?.id) ? this.groupMember = true : this.groupMember = false;
+      });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
       this.groupMember ? this.unjoinGroup() : this.joinGroup();

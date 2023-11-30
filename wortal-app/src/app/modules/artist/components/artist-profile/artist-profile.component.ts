@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject, debounceTime, switchMap } from 'rxjs';
+import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
 import { StoreModel } from 'src/app/app-state.model';
 import { Artist, Member } from 'src/app/core/core.model';
 import * as memberActions from '../../../../store/member/member.actions';
@@ -24,6 +24,7 @@ export class ArtistProfileComponent implements OnInit {
   constructor(
     private artistService: ArtistService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
     private store: Store<StoreModel>,
   ) { }
@@ -31,14 +32,29 @@ export class ArtistProfileComponent implements OnInit {
   ngOnInit() {
     this.store.select(state => state.app.member).subscribe(member => this.member = member);
 
-    this.route.queryParams.pipe(
-      switchMap(params => {
-        return this.artistService.getArtistInformation(params['id'])
-      })
-    ).subscribe(artist => {
-      this.artist = artist;
-      this.artist.followers.find(follower => follower.id === this.member?.id) ? this.artistFollowed = true : this.artistFollowed = false;
-    });
+    this.route.queryParams
+      .pipe(
+        switchMap(params => {
+          return this.artistService.getArtistInformation(params['id'])
+        })
+      )
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Wystąpił błąd podczas wczytywania profilu artysty.', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-error']
+          });
+
+          this.router.navigate(['/']);
+
+          return of({} as Artist);
+        })
+      )
+      .subscribe(artist => {
+        this.artist = artist;
+        this.artist.followers.find(follower => follower.id === this.member?.id) ? this.artistFollowed = true : this.artistFollowed = false;
+      });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
       this.artistFollowed ? this.unfollowArtist() : this.followArtist();

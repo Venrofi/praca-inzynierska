@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, debounceTime, switchMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
 import { ContentDetailsService } from '../../services/content-details.service';
 import { StoreModel } from 'src/app/app-state.model';
@@ -28,19 +28,35 @@ export class DiscussionPostDetailsComponent implements OnInit {
     private contentDetailsService: ContentDetailsService,
     private store: Store<StoreModel>,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
     this.store.select(state => state.app.member).subscribe(member => this.member = member);
 
-    this.route.queryParams.pipe(
-      switchMap(params => {
-        return this.contentDetailsService.getDiscussionPostDetails(params['id'])
-      })
-    ).subscribe(discussionPost => {
-      this.discussionPost = discussionPost;
-    });
+    this.route.queryParams
+      .pipe(
+        switchMap(params => {
+          return this.contentDetailsService.getDiscussionPostDetails(params['id'])
+        })
+      )
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Wystąpił błąd podczas wczytywania szczegółów dyskusji.', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-error']
+          });
+
+          this.router.navigate(['/']);
+
+          return of({} as DiscussionPostDetails);
+        })
+      )
+      .subscribe(discussionPost => {
+        this.discussionPost = discussionPost;
+      });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => this.addComment());
   }
