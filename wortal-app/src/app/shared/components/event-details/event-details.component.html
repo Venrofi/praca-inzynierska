@@ -11,7 +11,7 @@
             <app-text-with-icon *ngIf="event.location" icon="location_on" [text]="event.location"></app-text-with-icon>
             <app-text-with-icon *ngIf="event.date" icon="schedule" [text]="formatDate(event.date)"></app-text-with-icon>
           </article>
-          <div>
+          <div *ngIf="member">
             <button mat-icon-button
               [matTooltip]="eventAttened ? 'Zrezyguj z udziału' : 'Weź udział'"
               (click)="eventAction()">
