@@ -19,7 +19,13 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule } from '@angular/material/tooltip';
+
+export const myTooltipDefaults: MatTooltipDefaultOptions = {
+  showDelay: 200,
+  hideDelay: 200,
+  touchendHideDelay: 200,
+};
 
 @NgModule({
   exports: [
@@ -44,5 +50,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatFormFieldModule,
     MatSelectModule,
   ],
+  providers: [{ provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: myTooltipDefaults }],
 })
 export class SharedMaterialModule { }
