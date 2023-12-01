@@ -16,20 +16,20 @@ export class DiscussionPostActionService {
   createNewDiscussion(request: CreateDiscussionPostRequest): Observable<any> {
     const authorId = this.authService.getLoggedInUser() || '';
 
-    return this.http.post(`${this.API_ROOT}/Discussionpost/create`, request);
+    return this.http.post(`${this.API_ROOT}/DiscussionPost/create`, request);
   }
 
   createNewDiscussionInitData(): Observable<BaseWortalElement[]> {
     const authorId = this.authService.getLoggedInUser() || '';
     const params = new HttpParams().set('id', authorId);
 
-    return this.http.post<BaseWortalElement[]>(`${this.API_ROOT}/Discussionpost/init-create-data`, {}, { params });
+    return this.http.post<BaseWortalElement[]>(`${this.API_ROOT}/DiscussionPost/init-create-data`, {}, { params });
   }
 
   addComment(discussionPostId: string, content: string): Observable<AddCommentResponse> {
     const authorId = this.authService.getLoggedInUser() || '';
 
-    return this.http.post<AddCommentResponse>(`${this.API_ROOT}/Discussionpost/add-comment`, { discussionPostId, authorId, content }).pipe(
+    return this.http.post<AddCommentResponse>(`${this.API_ROOT}/DiscussionPost/add-comment`, { discussionPostId, authorId, content }).pipe(
       map((response: AddCommentResponse) => {
         return {
           ...response,

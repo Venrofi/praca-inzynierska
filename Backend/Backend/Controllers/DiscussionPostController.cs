@@ -11,11 +11,11 @@ using System.Runtime.Intrinsics.Arm;
 namespace Backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class DiscussionpostController : ControllerBase {
+    public class DiscussionPostController : ControllerBase {
         private readonly ApplicationDbContext _context;
         private readonly ProfanitySearchAlgorithm _psa;
 
-        public DiscussionpostController(ApplicationDbContext context) {
+        public DiscussionPostController(ApplicationDbContext context) {
             _context = context;
             _psa = new ProfanitySearchAlgorithm(_context);
         }
