@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
@@ -20,6 +20,13 @@ export class DiscussionPostDetailsComponent implements OnInit {
   member: Member | undefined;
 
   newComment: string = '';
+
+  isWideScreen: boolean = window.innerWidth > 600;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isWideScreen = window.innerWidth > 600;
+  }
 
   private clickSubject = new Subject<void>();
 

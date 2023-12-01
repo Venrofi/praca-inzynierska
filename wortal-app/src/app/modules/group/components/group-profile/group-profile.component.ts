@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -20,6 +20,13 @@ export class GroupProfileComponent implements OnInit {
   member: Member | undefined;
 
   private clickSubject = new Subject<void>();
+
+  isWideScreen: boolean = window.innerWidth > 600;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isWideScreen = window.innerWidth > 600;
+  }
 
   constructor(
     private groupService: GroupService,

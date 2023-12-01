@@ -1,6 +1,6 @@
 <div *ngIf="event; else loading" class="container-max-width event-container p-3">
   <mat-card class="event-card">
-    <mat-card-header class="d-flex container-center p-3 event-header">
+    <mat-card-header class="d-flex container-center event-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
       <div class="container-center">
         <img [src]="event.image" class="event-image">
       </div>
@@ -26,7 +26,7 @@
         </article>
       </section>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [ngClass]="isWideScreen ? null : 'p-0'">
       <mat-divider class="mt-2" style="background-color: lightgray;"></mat-divider>
 
       <mat-card-title class="my-3">

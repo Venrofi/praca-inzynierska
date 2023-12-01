@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Event, Member } from 'src/app/core/core.model';
 import { ContentDetailsService } from '../../services/content-details.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,6 +21,13 @@ export class EventDetailsComponent implements OnInit {
   member: Member | undefined;
 
   private clickSubject = new Subject<void>();
+
+  isWideScreen: boolean = window.innerWidth > 600;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isWideScreen = window.innerWidth > 600;
+  }
 
   constructor(
     private contentDetailsService: ContentDetailsService,

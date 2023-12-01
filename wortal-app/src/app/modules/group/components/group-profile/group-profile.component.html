@@ -1,6 +1,6 @@
 <div *ngIf="group; else loading" class="container-max-width group-container p-3">
   <mat-card class="group-card">
-    <mat-card-header class="d-flex container-center p-3 group-header">
+    <mat-card-header class="d-flex container-center group-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
       <div class="container-center">
         <img [src]="group.image" class="group-image">
       </div>
@@ -23,7 +23,7 @@
         </article>
       </section>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [ngClass]="isWideScreen ? null : 'p-0'">
       <mat-divider class="mt-2" style="background-color: lightgray;"></mat-divider>
 
       <mat-card-title class="my-3">

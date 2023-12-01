@@ -1,6 +1,6 @@
 <div *ngIf="member | async as member; else loading" class="container-max-width member-container p-3">
   <mat-card class="member-card">
-    <mat-card-header class="d-flex container-center p-3 member-header">
+    <mat-card-header class="d-flex container-center member-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
       <div class="container-center">
         <img [src]="member.avatar" class="member-avatar">
       </div>
@@ -20,7 +20,7 @@
         </article>
       </section>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [ngClass]="isWideScreen ? null : 'p-0'">
       <mat-divider style="background-color: lightgray;"></mat-divider>
       <mat-card-title class="my-3">
         <app-text-with-icon icon="query_stats" text="Statystyki"></app-text-with-icon>
