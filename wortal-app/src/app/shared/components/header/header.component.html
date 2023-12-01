@@ -2,9 +2,9 @@
   <div class="d-flex justify-content-between container-max-width">
     <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" routerLink="/">
 
-    <mat-form-field class="mt-4 w-50" color="accent">
+    <mat-form-field class="mt-4 w-50" color="accent" hideRequiredMarker="true">
       <mat-label>Wyszukaj w społeczności..</mat-label>
-      <input matInput type="text" [(ngModel)]="searchTerm" #searchInput="ngModel" minlength="3" maxlength="200">
+      <input matInput type="text" [(ngModel)]="searchTerm" #searchInput="ngModel" minlength="3" maxlength="200" required>
       <button matSuffix mat-icon-button aria-label="Search"
         routerLink="/search" [queryParams]="{ input: searchTerm }" [disabled]="!searchInput.valid">
         <mat-icon>search</mat-icon>
@@ -16,8 +16,8 @@
     </mat-form-field>
 
     <section class="d-flex justify-content-end align-items-center">
-      <button mat-icon-button *ngIf="!!member"
-      aria-label="icon-button which opens new post creation" matTooltip="Stwórz nowy post">
+      <button mat-icon-button *ngIf="!!member && member?.joinedGroups?.length" (click)="openCreateDiscussionDialog()"
+              aria-label="icon-button which opens new post creation" matTooltip="Stwórz nowy post">
         <mat-icon>forum</mat-icon>
       </button>
 
@@ -39,7 +39,8 @@
     <img src="assets/img/logo.svg" alt="Site logo 'Hip-Hop Hub'" class="logo" routerLink="/">
 
     <section class="d-flex justify-content-end align-items-center">
-      <button mat-icon-button>
+      <button mat-icon-button *ngIf="!!member && member?.joinedGroups?.length" (click)="openCreateDiscussionDialog()"
+              aria-label="icon-button which opens new post creation" matTooltip="Stwórz nowy post">
         <mat-icon>forum</mat-icon>
       </button>
 
@@ -55,10 +56,15 @@
   <mat-toolbar class="d-flex justify-content-center mobile-search-bar">
     <mat-form-field class="mt-4 w-100">
       <mat-label>Wyszukaj w społeczności..</mat-label>
-      <input matInput type="text">
-      <button matSuffix mat-icon-button aria-label="Clear">
+      <input matInput type="text" [(ngModel)]="searchTerm" #searchInput="ngModel" minlength="3" maxlength="200" required>
+      <button matSuffix mat-icon-button aria-label="Search"
+              routerLink="/search" [queryParams]="{ input: searchTerm }" [disabled]="!searchInput.valid">
         <mat-icon>search</mat-icon>
       </button>
+      <mat-error>
+        <span *ngIf="searchInput.errors?.['minlength']">Należy wpisać minimum 3 znaki.</span>
+        <span *ngIf="searchInput.errors?.['maxlength']">Fraza jest zbyt długa.</span>
+      </mat-error>
     </mat-form-field>
   </mat-toolbar>
 </ng-template>

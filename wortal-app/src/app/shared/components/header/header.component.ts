@@ -11,6 +11,8 @@ import { AuthenticationDialogComponent } from '../../../modules/authentication/c
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from "../../../core/user.service";
 import { AccountVerificationComponent } from '../../../modules/authentication/components/account-verification/account-verification.component';
+import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
+import { CreateDiscussionPostDialogComponent } from "../create-discussion-post-dialog/create-discussion-post-dialog.component";
 
 @Component({
   selector: 'app-header',
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private userService: UserService,
+    private discussionPostActionService: DiscussionPostActionService,
     private router: Router,
     private store: Store<StoreModel>,
     private snackBar: MatSnackBar,
@@ -85,6 +88,17 @@ export class HeaderComponent implements OnInit {
         this.snackBar.open('Zalogowano pomyślnie!', 'OK', { duration: 2000, horizontalPosition: 'end', panelClass: ['snackbar-success'] });
       }
     });
+  }
+
+  openCreateDiscussionDialog() {
+    this.discussionPostActionService.createNewDiscussionInitData().subscribe({
+      next: (response) => {
+        this.dialog.open(CreateDiscussionPostDialogComponent, { width: '90vw', maxWidth: '500px', data: response });
+      },
+      error: () => {
+        this.snackBar.open('Nie można stworzyć nowej dyskusji!', 'OK', { duration: 3000, horizontalPosition: 'end', panelClass: ['snackbar-error'] });
+      }
+    })
   }
 
   getMemberInformation(userID: string): void {
