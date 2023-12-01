@@ -184,7 +184,7 @@ namespace Backend.Controllers
                     .ThenBy(p => p.ReleaseDate)
                     .Select(p => new {
                         id = p.PremiereAlbumId,
-                        title = p.Title,
+                        name = p.Title,
                         artist = new {
                             id = p.ArtistProfileId,
                             name = p.ArtistProfile.Name
