@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { Member } from 'src/app/core/core.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
+import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
 
 @Component({
   selector: 'app-discussion-post-details',
@@ -26,6 +27,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
 
   constructor(
     private contentDetailsService: ContentDetailsService,
+    private discussionPostActionService: DiscussionPostActionService,
     private store: Store<StoreModel>,
     private route: ActivatedRoute,
     private router: Router,
@@ -66,7 +68,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
   }
 
   addComment() {
-    this.contentDetailsService.addComment(this.discussionPost.id, this.newComment)
+    this.discussionPostActionService.addComment(this.discussionPost.id, this.newComment)
       .subscribe({
         next: (response) => {
           this.discussionPost.comments.push(response.createdComment);

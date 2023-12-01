@@ -34,6 +34,13 @@ export interface AddCommentResponse extends BasicResponse {
   }
 }
 
+export interface CreateDiscussionPostRequest {
+  authorId: string;
+  groupId: string;
+  title: string;
+  content: string;
+}
+
 export interface BasicResponse {
   code: string;
 }

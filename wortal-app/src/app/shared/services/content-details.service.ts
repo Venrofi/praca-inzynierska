@@ -67,25 +67,6 @@ export class ContentDetailsService {
     );
   }
 
-  addComment(discussionPostId: string, content: string): Observable<AddCommentResponse> {
-    const authorId = this.authService.getLoggedInUser() || '';
-
-    return this.http.post<AddCommentResponse>(`${this.API_ROOT}/Discussionpost/add-comment`, { discussionPostId, authorId, content }).pipe(
-      map((response: AddCommentResponse) => {
-        return {
-          ...response,
-          createdComment: {
-            ...response.createdComment,
-            author: {
-              ...response.createdComment.author,
-              avatar: this.generateRandomAvatar(),
-            }
-          }
-        }
-      })
-    );
-  }
-
   private generateRandomImage(): string {
     const randomImageSize = Math.floor(Math.random() * 300 + 600); // returns a random number between 600 and 900
 

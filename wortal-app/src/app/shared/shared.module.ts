@@ -11,8 +11,10 @@ import { TextWithIconComponent } from './controls/text-with-icon/text-with-icon.
 import { ContentDetailsService } from './services/content-details.service';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { DiscussionPostActionService } from "./services/discussion-post-action.service";
 import { SearchService } from './services/search.service';
 import { TruncateTextDirective } from './directives/truncate-text.directive';
+import { CreateDiscussionPostDialogComponent } from './components/create-discussion-post-dialog/create-discussion-post-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { TruncateTextDirective } from './directives/truncate-text.directive';
     TextWithIconComponent,
     SearchResultsComponent,
     TruncateTextDirective,
+    CreateDiscussionPostDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,7 @@ import { TruncateTextDirective } from './directives/truncate-text.directive';
   ],
   providers: [
     ContentDetailsService,
+    DiscussionPostActionService,
     SearchService,
     DatePipe,
   ],
