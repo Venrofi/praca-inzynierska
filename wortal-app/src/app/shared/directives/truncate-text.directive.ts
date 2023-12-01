@@ -19,11 +19,9 @@ export class TruncateTextDirective implements AfterViewInit {
     this.checkTruncation();
   }
 
-  private checkTruncation() { //TODO: NEEDS PROPER DEBUGGING!
+  private checkTruncation() {
     const element = this.el.nativeElement;
     const text = element.innerText;
-
-    console.log('checking..');
 
     // Check if text is truncated and remove truncation
     if (element.offsetWidth >= element.scrollWidth && element.innerText.endsWith('...')) {
