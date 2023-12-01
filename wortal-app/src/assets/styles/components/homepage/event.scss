@@ -1,6 +1,7 @@
 app-event {
   mat-expansion-panel {
     background-color: #f2f2f2 !important;
+    background: #f2f2f2 !important;
     color: black !important;
     border-radius: 0 !important;
   }
@@ -27,5 +28,16 @@ app-event {
 
   .event-promoter, .event-promoter:visited {
     color: $my-primary-OG;
+  }
+
+  @media screen and (max-width: 600px) {
+    .mat-expansion-panel-header-description {
+      flex-grow: 1 !important;
+    }
+
+    .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+      flex-grow: 2;
+      align-items: initial;
+    }
   }
 }
