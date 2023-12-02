@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { AddCommentResponse } from 'src/app/core/api.model';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Event } from 'src/app/core/core.model';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';

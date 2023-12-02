@@ -15,6 +15,7 @@ import { PremiereAlbumComponent } from './components/premiere-list/premiere-albu
 import { PremiereListComponent } from './components/premiere-list/premiere-list.component';
 import { SideRecommendationsComponent } from './components/side-recommendations/side-recommendations.component';
 import { HomepageService } from './services/homepage.service';
+import { ContentDetailsService } from 'src/app/shared/services/content-details.service';
 
 @NgModule({
   declarations: [
@@ -38,10 +39,11 @@ import { HomepageService } from './services/homepage.service';
   exports: [
     HomepageComponent,
     DiscussionPostComponent,
-    DiscussionListComponent
+    DiscussionListComponent,
   ],
   providers: [
-    HomepageService
+    HomepageService,
+    ContentDetailsService,
   ],
 })
 export class HomepageModule { }

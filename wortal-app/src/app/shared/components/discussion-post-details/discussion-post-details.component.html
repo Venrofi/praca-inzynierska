@@ -1,7 +1,12 @@
-<div *ngIf="discussionPost; else loading" class="container-max-width post-container p-3">
+<div *ngIf="discussionPost; else loading" class="container-max-width post-container" [ngClass]="discussionPostData ? 'p-0' : 'p-3'">
   <mat-card class="post-card">
     <mat-card-header class="d-flex flex-column container-center text-center" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
-      <mat-card-title>{{ discussionPost.title }}</mat-card-title>
+      <mat-card-title>
+        {{ discussionPost.title }}
+        <button *ngIf="discussionPostData" mat-icon-button mat-dialog-close class="dialog-close-icon">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-title>
       <a [queryParams]="{ id: discussionPost.topic.id }"
         [routerLink]="discussionPost.topic.type === 'ARTIST' ? '../artist' : '../group'"
         class="d-flex align-items-center justify-content-center" style="gap: 0.25rem;"

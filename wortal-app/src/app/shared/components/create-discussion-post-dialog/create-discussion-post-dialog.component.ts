@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 import { StoreModel } from "../../../app-state.model";
@@ -21,7 +21,6 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public availableGroups: BaseWortalElement[],
     private dialogRef: MatDialogRef<CreateDiscussionPostDialogComponent>,
     private discussionPostActionService: DiscussionPostActionService,
-    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private store: Store<StoreModel>,
   ) { }
@@ -29,7 +28,7 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
   ngOnInit() {
     this.store.select(state => state.app.member)
       .subscribe(member => {
-        if(member) {
+        if (member) {
           this.newPost = {
             authorId: member.id,
             groupId: '',
@@ -43,12 +42,9 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
   create() {
     this.isProcessing = true;
 
-    console.log(this.newPost);
-
     this.discussionPostActionService.createNewDiscussion(this.newPost).subscribe({
       next: (response) => {
         this.isProcessing = false;
-        console.log(response);
 
         this.snackBar.open('Stworzyłeś nowy post!', 'OK', {
           duration: 3000,
@@ -60,7 +56,6 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
-        console.log(error);
 
         this.snackBar.open('Nie udało się dodać nowego postu.', 'OK', {
           duration: 3000,

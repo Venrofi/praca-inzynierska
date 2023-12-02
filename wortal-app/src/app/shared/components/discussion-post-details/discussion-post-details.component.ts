@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
@@ -9,6 +9,7 @@ import { Member } from 'src/app/core/core.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-discussion-post-details',
@@ -33,6 +34,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
   @ViewChild('commentForm') commentForm!: NgForm;
 
   constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public discussionPostData: DiscussionPostDetails,
     private contentDetailsService: ContentDetailsService,
     private discussionPostActionService: DiscussionPostActionService,
     private store: Store<StoreModel>,
@@ -43,6 +45,13 @@ export class DiscussionPostDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(state => state.app.member).subscribe(member => this.member = member);
+
+    this.clickSubject.pipe(debounceTime(500)).subscribe(() => this.addComment());
+
+    if (this.discussionPostData) {
+      this.discussionPost = this.discussionPostData;
+      return;
+    }
 
     this.route.queryParams
       .pipe(
@@ -66,8 +75,6 @@ export class DiscussionPostDetailsComponent implements OnInit {
       .subscribe(discussionPost => {
         this.discussionPost = discussionPost;
       });
-
-    this.clickSubject.pipe(debounceTime(500)).subscribe(() => this.addComment());
   }
 
   commentAction() {
