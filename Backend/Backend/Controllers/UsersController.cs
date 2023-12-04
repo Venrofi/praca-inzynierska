@@ -23,6 +23,8 @@ namespace Backend.Controllers
             _context = context;
         }
 
+        #region Get
+
         // GET: api/Users/5
         [HttpGet("basic-user")]
         public async Task<ActionResult<object>> GetBasicUser(Guid id) {
@@ -38,7 +40,7 @@ namespace Backend.Controllers
             var res = new {
                 Id = resUser.UserId,
                 Name = resUser.UserName,
-                Avatar = !resUser.Avatar.IsNullOrEmpty() ? (resUser.Avatar) :(""),
+                Avatar = !resUser.Avatar.IsNullOrEmpty() ? (resUser.Avatar) : (""),
                 Bio = resUser.Bio,
                 Email = resUser.Email,
                 Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
@@ -53,6 +55,10 @@ namespace Backend.Controllers
             return res;
         }
 
+        #endregion
+
+        #region Update
+
         [HttpPut("update-user")]
         public async Task<ActionResult<object>> UpadteBasicUser(UpdateUserRequest request) {
 
@@ -64,9 +70,8 @@ namespace Backend.Controllers
                 }
 
                 var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == request.MemberId).FirstOrDefaultAsync();
-                if (resUser == null) {
-                    return NotFound();
-                }
+                if (resUser == null) return NotFound();
+
 
                 resUser.Bio = request.Data.Bio;
                 await _context.SaveChangesAsync();
@@ -74,10 +79,13 @@ namespace Backend.Controllers
                 return await GetBasicUser(resUser.UserId);
 
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
             }
-            
+
         }
+
+        #endregion
+
     }
 }
