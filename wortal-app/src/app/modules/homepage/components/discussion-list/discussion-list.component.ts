@@ -64,8 +64,6 @@ export class DiscussionListComponent implements OnInit {
   }
 
   openPostModal(post: DiscussionPost) {
-    console.log(`Open post modal/details at: /forum/${post.topic.name}/${post.id}`);
-
     this.contentDetailsService.getDiscussionPostDetails(post.id).subscribe({
       next: (discussionPost) => {
         this.dialog.open(DiscussionPostDetailsComponent, { data: discussionPost });

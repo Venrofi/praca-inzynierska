@@ -44,6 +44,13 @@ app-discussion-post-details {
     }
   }
 
+  .edit-discussion-button {
+    position: absolute;
+    cursor: pointer;
+    transform: scale(0.8);
+    color: $my-primary-OG;
+  }
+
   .add-comment-button {
     --mdc-protected-button-disabled-container-color: #a1eec9 !important;
     --mdc-protected-button-disabled-label-text-color: black !important;

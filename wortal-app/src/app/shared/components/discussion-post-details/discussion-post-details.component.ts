@@ -9,7 +9,8 @@ import { Member } from 'src/app/core/core.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { EditDiscussionPostDialogComponent } from '../edit-discussion-post-dialog/edit-discussion-post-dialog.component';
 
 @Component({
   selector: 'app-discussion-post-details',
@@ -41,6 +42,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,10 @@ export class DiscussionPostDetailsComponent implements OnInit {
       .subscribe(discussionPost => {
         this.discussionPost = discussionPost;
       });
+  }
+
+  editDiscussionPost() {
+    this.dialog.open(EditDiscussionPostDialogComponent, { width: '90vw', maxWidth: '500px', data: this.discussionPost });
   }
 
   commentAction() {

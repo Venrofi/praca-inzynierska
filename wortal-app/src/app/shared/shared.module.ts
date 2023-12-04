@@ -15,6 +15,7 @@ import { DiscussionPostActionService } from "./services/discussion-post-action.s
 import { SearchService } from './services/search.service';
 import { TruncateTextDirective } from './directives/truncate-text.directive';
 import { CreateDiscussionPostDialogComponent } from './components/create-discussion-post-dialog/create-discussion-post-dialog.component';
+import { EditDiscussionPostDialogComponent } from './components/edit-discussion-post-dialog/edit-discussion-post-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CreateDiscussionPostDialogComponent } from './components/create-discuss
     SearchResultsComponent,
     TruncateTextDirective,
     CreateDiscussionPostDialogComponent,
+    EditDiscussionPostDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -48,6 +48,15 @@ export interface UpdateMemberRequest {
   }
 }
 
+export interface EditDiscussionPostRequest {
+  postId: string;
+  userId: string;
+  data: {
+    title: string;
+    content: string;
+  }
+}
+
 export interface BasicResponse {
   code: string;
 }

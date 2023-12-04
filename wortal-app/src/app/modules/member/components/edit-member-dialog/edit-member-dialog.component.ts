@@ -33,7 +33,6 @@ export class EditMemberDialogComponent {
     }
   }
 
-
   edit() {
     console.log('edit', this.editMemberModel);
     this.isProcessing = true;
@@ -42,7 +41,12 @@ export class EditMemberDialogComponent {
       next: (response: Member) => {
         this.isProcessing = false;
         console.log(response);
-        // this.store.dispatch(memberActions.update({ member: { ...response } }));
+        this.store.dispatch(memberActions.update({ member: { ...response } }));
+        this.snackBar.open('Pomyślnie zapisano zmiany na profilu.', 'OK', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          panelClass: ['snackbar-success']
+        });
         this.dialogRef.close();
       },
       error: (error) => {

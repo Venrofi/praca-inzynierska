@@ -1,28 +1,23 @@
 <div mat-dialog-title class="position-relative d-flex justify-content-center">
-  <h2 class="mt-2">Stwórz nową dyskusję</h2>
+  <h2 class="mt-2">Edytuj dyskusję</h2>
   <button mat-icon-button mat-dialog-close class="dialog-close-icon">
     <mat-icon>close</mat-icon>
   </button>
 </div>
 
 <mat-dialog-content class="mat-typography">
-  <form #createDiscussionForm="ngForm" class="d-flex flex-column mt-3">
-    <mat-form-field>
-      <mat-label>Wybierz grupę</mat-label>
-      <mat-select [(ngModel)]="newPost.groupId" name="postGroup" required>
-        <mat-option *ngFor="let group of availableGroups" [value]="group.id">{{ group.name }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form #editDiscussionForm="ngForm" class="d-flex flex-column mt-3">
     <mat-form-field>
       <mat-label>Tytuł dyskusji</mat-label>
-      <input matInput [(ngModel)]="newPost.title" name="postTitle" #postTitleInput="ngModel" required>
+      <input matInput [(ngModel)]="editDiscussionPostModel.data.title" name="postTitle" #postTitleInput="ngModel" required>
       <mat-error>
         <span *ngIf="postTitleInput.errors?.['required']">Proszę podać tytuł nowej dyskusji.</span>
       </mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Treść dyskusji</mat-label>
-      <textarea matInput [(ngModel)]="newPost.content" #postContentInput="ngModel" name="postContent" color="accent" rows="10" maxlength="2000" required></textarea>
+      <textarea matInput [(ngModel)]="editDiscussionPostModel.data.content" name="postContent" #postContentInput="ngModel" rows="10" maxlength="2000" required></textarea>
       <mat-error>
         <span *ngIf="postContentInput.errors?.['required']">Proszę wpisać treść dyskusji.</span>
         <span *ngIf="postContentInput.errors?.['maxlength']">Treść jest zbyt długa.</span>
@@ -33,6 +28,6 @@
       <mat-spinner [diameter]="50"></mat-spinner>
     </div>
 
-    <button mat-raised-button (click)="create()" [disabled]="!createDiscussionForm.valid || isProcessing" color="accent">Utwórz</button>
+    <button mat-raised-button (click)="edit()" [disabled]="!editDiscussionForm.valid || isProcessing" color="accent">Zapisz</button>
   </form>
 </mat-dialog-content>
