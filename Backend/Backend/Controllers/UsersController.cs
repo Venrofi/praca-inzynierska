@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Core.Entities;
 using Backend.Data.Context;
 using Microsoft.IdentityModel.Tokens;
+using Backend.Core.Requests;
 
 namespace Backend.Controllers
 {
@@ -45,11 +46,51 @@ namespace Backend.Controllers
                 AttendedEvents = resUser.ParticipatedEvents.Select(pe => new { id = pe.EventId, name = pe.Title }),
                 FollowedArtists = resUser.FollowedArtists.Select(fa => new { id = fa.ArtistProfileId, name = fa.Name }),
                 Role = resUser.UserType.Description,
-                AccountDays = (resUser.VerificationTime.HasValue) ? ((DateTime.UtcNow.Day - resUser.VerificationTime.Value.Day) > 0 ? (DateTime.UtcNow.Day - resUser.VerificationTime.Value.Day) : 0) : 0
+                AccountDays = Math.Floor((resUser.VerificationTime.HasValue) ? ((DateTime.UtcNow - resUser.VerificationTime.Value) > TimeSpan.Zero ? ((DateTime.UtcNow - resUser.VerificationTime.Value)).TotalDays : 0) : 0)
             };
 
 
             return res;
+        }
+
+        [HttpPut("update-user")]
+        public async Task<ActionResult<object>> UpadteBasicUser(UpdateUserRequest request) {
+
+            try {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                if (_context.Users == null) {
+                    return NotFound();
+                }
+
+                var resUser = await _context.Users.Include(u => u.Groups).Include(u => u.DiscussionPosts).Include(u => u.UserType).Include(u => u.ParticipatedEvents).Include(u => u.FollowedArtists).Where(u => u.UserId == request.MemberId).FirstOrDefaultAsync();
+                if (resUser == null) {
+                    return NotFound();
+                }
+
+                resUser.Bio = request.Bio;
+                await _context.SaveChangesAsync();
+
+                var res = new {
+                    Id = resUser.UserId,
+                    Name = resUser.UserName,
+                    Avatar = !resUser.Avatar.IsNullOrEmpty() ? (resUser.Avatar) : (""),
+                    Bio = resUser.Bio,
+                    Email = resUser.Email,
+                    Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
+                    JoinedGroups = resUser.Groups.Select(g => new { id = g.GroupId, name = g.Name }),
+                    AttendedEvents = resUser.ParticipatedEvents.Select(pe => new { id = pe.EventId, name = pe.Title }),
+                    FollowedArtists = resUser.FollowedArtists.Select(fa => new { id = fa.ArtistProfileId, name = fa.Name }),
+                    Role = resUser.UserType.Description,
+                    AccountDays = Math.Floor((resUser.VerificationTime.HasValue) ? ((DateTime.UtcNow - resUser.VerificationTime.Value) > TimeSpan.Zero ? ((DateTime.UtcNow - resUser.VerificationTime.Value)).TotalDays : 0) : 0)
+                };
+                return res;
+
+            }
+            catch(Exception ex) {
+                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+            }
+            
         }
     }
 }
