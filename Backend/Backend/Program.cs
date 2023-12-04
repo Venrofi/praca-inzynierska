@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Data.Context;
 using Backend.Services;
+using AspNetCoreRateLimit;
+using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HipHopHub");
@@ -22,6 +24,34 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(options => {
+    options.EnableEndpointRateLimiting = true;
+    options.StackBlockedRequests = false;
+    options.HttpStatusCode = 429;
+    options.RealIpHeader = "X-Real-IP";
+    options.ClientIdHeader = "X-ClientId";
+    options.GeneralRules = new List<RateLimitRule>
+        {
+            new RateLimitRule
+            {
+                Endpoint = "*",
+                Period = "3s",
+                Limit = 2,
+                QuotaExceededResponse = new QuotaExceededResponse() {
+                    Content = $"Przekroczono limit 2 zapytañ w czasie 3 sekund.",
+                    //ContentType = "application/json",
+                    StatusCode = 429
+                }
+            }
+        };
+});
+builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+builder.Services.AddInMemoryRateLimiting();
+
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -35,6 +65,8 @@ app.UseCors("EnableAngularApp");
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseIpRateLimiting();
 
 app.UseAuthorization();
 
