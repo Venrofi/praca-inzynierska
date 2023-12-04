@@ -71,20 +71,7 @@ namespace Backend.Controllers
                 resUser.Bio = request.Bio;
                 await _context.SaveChangesAsync();
 
-                var res = new {
-                    Id = resUser.UserId,
-                    Name = resUser.UserName,
-                    Avatar = !resUser.Avatar.IsNullOrEmpty() ? (resUser.Avatar) : (""),
-                    Bio = resUser.Bio,
-                    Email = resUser.Email,
-                    Posts = resUser.DiscussionPosts.Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }),
-                    JoinedGroups = resUser.Groups.Select(g => new { id = g.GroupId, name = g.Name }),
-                    AttendedEvents = resUser.ParticipatedEvents.Select(pe => new { id = pe.EventId, name = pe.Title }),
-                    FollowedArtists = resUser.FollowedArtists.Select(fa => new { id = fa.ArtistProfileId, name = fa.Name }),
-                    Role = resUser.UserType.Description,
-                    AccountDays = Math.Floor((resUser.VerificationTime.HasValue) ? ((DateTime.UtcNow - resUser.VerificationTime.Value) > TimeSpan.Zero ? ((DateTime.UtcNow - resUser.VerificationTime.Value)).TotalDays : 0) : 0)
-                };
-                return res;
+                return await GetBasicUser(resUser.UserId);
 
             }
             catch(Exception ex) {
