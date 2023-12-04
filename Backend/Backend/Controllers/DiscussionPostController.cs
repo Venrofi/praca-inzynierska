@@ -103,7 +103,7 @@ namespace Backend.Controllers {
 
         #region Edit
         [HttpPut("edit")]
-        public async Task<ActionResult<object>> UpadteBasicUser(EditDiscussionPostRequest request) {
+        public async Task<ActionResult<object>> EditDiscussionPost(EditDiscussionPostRequest request) {
             try {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -122,6 +122,33 @@ namespace Backend.Controllers {
                 await _context.SaveChangesAsync();
 
                 return Ok(new { code = "success" });
+            }
+            catch (Exception ex) {
+                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+            }
+        }
+        #endregion
+
+        #region Delete
+        [HttpDelete("delete")]
+        public async Task<ActionResult<object>> DeleteDiscussionPost(DeleteDiscussionPostRequest request) {
+            try {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                //request.AuthorId
+                //request.PostId
+                var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == request.AuthorId).FirstOrDefaultAsync();
+                if (user == null) return NotFound(new { code = "user-not-found" });
+                var post = await _context.DiscussionPosts.Include(d => d.DiscussionPostDetails).Where(d => d.DiscussionPostId == request.PostId).FirstOrDefaultAsync();
+                if (post == null) return NotFound(new { code = "post-not-found" });
+
+                if (post.UserId != user.UserId) return BadRequest(new { code = "not-author" });
+
+                await _context.Comments.Where(c => c.DiscussionPostDetailsId == post.DiscussionPostDetails.DiscussionPostDetailsId).ExecuteDeleteAsync();
+                await _context.DiscussionPostsDetails.Where(dpd => dpd.DiscussionPostId == post.DiscussionPostId).ExecuteDeleteAsync();
+                await _context.DiscussionPosts.Where(dp => dp == post).ExecuteDeleteAsync();
+
+                return Ok(new { code = "success"});
             }
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
