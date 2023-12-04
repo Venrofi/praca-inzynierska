@@ -9,9 +9,10 @@ import { MemberComponent } from './components/member/member.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberService } from './services/member.service';
+import { EditMemberDialogComponent } from './components/edit-member-dialog/edit-member-dialog.component';
 
 @NgModule({
-  declarations: [MemberComponent, MembersListComponent],
+  declarations: [MemberComponent, MembersListComponent, EditMemberDialogComponent],
   imports: [
     CommonModule,
     MemberRoutingModule,

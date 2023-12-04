@@ -41,6 +41,13 @@ export interface CreateDiscussionPostRequest {
   content: string;
 }
 
+export interface UpdateMemberRequest {
+  memberId: string;
+  data: {
+    bio: string;
+  }
+}
+
 export interface BasicResponse {
   code: string;
 }

@@ -1,8 +1,10 @@
 import { Component, HostListener } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StoreModel } from 'src/app/app-state.model';
 import { Member } from 'src/app/core/core.model';
+import { EditMemberDialogComponent } from '../edit-member-dialog/edit-member-dialog.component';
 
 @Component({
   selector: 'app-member',
@@ -19,7 +21,11 @@ export class MemberComponent {
     this.isWideScreen = window.innerWidth > 600;
   }
 
-  constructor(private store: Store<StoreModel>) {
+  constructor(private store: Store<StoreModel>, private dialog: MatDialog) {
     this.member = this.store.select(state => state.app.member);
+  }
+
+  openEditDialog() {
+    this.dialog.open(EditMemberDialogComponent, { width: '90vw', maxWidth: '500px', data: this.member });
   }
 }

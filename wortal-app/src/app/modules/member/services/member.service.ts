@@ -2,7 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable, map } from "rxjs";
 import { environment } from "../../../../enviroments/enviroment";
-import { MemberList } from "../../../core/core.model";
+import { Member, MemberList } from "../../../core/core.model";
+import { UpdateMemberRequest } from "src/app/core/api.model";
 
 @Injectable()
 export class MemberService {
@@ -22,6 +23,10 @@ export class MemberService {
           });
         })
       );
+  }
+
+  updateMember(request: UpdateMemberRequest): Observable<Member> {
+    return this.http.put<Member>(`${this.API_ROOT}/Users/update-user`, request);
   }
 
   private generateRandomAvatar(): string {
