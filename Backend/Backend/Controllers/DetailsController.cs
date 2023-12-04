@@ -139,7 +139,7 @@ namespace Backend.Controllers {
                     },
                     title = d.Title,
                     creationTime = d.CreationTime,
-                    numberOfComments = d.NumberOfComments,
+                    numberOfComments = d.DiscussionPostDetails.Comments != null ? (d.DiscussionPostDetails.Comments.Count): (0),
                     comments = d.DiscussionPostDetails.Comments.Select(c => new {
                         author = new {
                             id = c.UserId,
