@@ -68,7 +68,7 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                resUser.Bio = request.Bio;
+                resUser.Bio = request.Data.Bio;
                 await _context.SaveChangesAsync();
 
                 return await GetBasicUser(resUser.UserId);
