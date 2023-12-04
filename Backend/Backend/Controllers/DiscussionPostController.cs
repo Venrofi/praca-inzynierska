@@ -24,7 +24,7 @@ namespace Backend.Controllers {
         [HttpPost("init-create-data")]
         public async Task<ActionResult<object>> Init(Guid id) {
             try {
-                if (id == null) return BadRequest(new { code = "id-error"});
+                if (id == null) return BadRequest(new { code = "id-error" });
                 var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == id).FirstOrDefaultAsync();
                 if (user == null) return NotFound(new { code = "user-not-found" });
 
@@ -59,7 +59,7 @@ namespace Backend.Controllers {
                     return BadRequest(new { code = "empty-content" });
                 //check user in group and group in user
                 if (!user.Groups.Where(g => g == group).Any() || !group.Users.Where(u => u == user).Any())
-                    return BadRequest(new { code = "user-group-error"});
+                    return BadRequest(new { code = "user-group-error" });
 
                 //Profanities searching -- for now, not good implementation imo
 
@@ -97,7 +97,35 @@ namespace Backend.Controllers {
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
             }
-            
+
+        }
+        #endregion
+
+        #region Edit
+        [HttpPut("edit")]
+        public async Task<ActionResult<object>> UpadteBasicUser(EditDiscussionPostRequest request) {
+            try {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                if (request.Data.Title.Length < 1) return BadRequest(new { code = "short-title"});
+                if (request.Data.Content.Length < 1) return BadRequest(new { code = "short-content"});
+
+                var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == request.AuthorId).FirstOrDefaultAsync();
+                if (user == null) return NotFound(new { code = "user-not-found" });
+                var post = await _context.DiscussionPosts.Include(d => d.DiscussionPostDetails).Where(d => d.DiscussionPostId == request.PostId).FirstOrDefaultAsync();
+                if (post == null) return NotFound(new { code = "post-not-found"});
+
+                if (post.UserId != user.UserId) return BadRequest(new { code = "not-author"});
+
+                post.Title = request.Data.Title;
+                post.DiscussionPostDetails.Content = request.Data.Content;
+                await _context.SaveChangesAsync();
+
+                return Ok(new { code = "success" });
+            }
+            catch (Exception ex) {
+                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+            }
         }
         #endregion
 
@@ -115,13 +143,13 @@ namespace Backend.Controllers {
                     .Include(dp => dp.DiscussionPostDetails)
                     .Where(dp => dp.DiscussionPostId == request.DiscussionPostId)
                     .FirstOrDefaultAsync();
-                if (post == null) return NotFound(new { code = "post-not-found"});
-                if (post.DiscussionPostDetails == null) return NotFound(new { code = "details-not-found"});
+                if (post == null) return NotFound(new { code = "post-not-found" });
+                if (post.DiscussionPostDetails == null) return NotFound(new { code = "details-not-found" });
                 if (request.Content == null || request.Content == string.Empty) return BadRequest(new { code = "empty-content" });
 
                 var group = await _context.Groups.Include(g => g.Users).Where(g => g == post.Group).FirstOrDefaultAsync();
-                if (post.TopicType == DiscussionPost.TopicTypes.Group && (!group.Users.Contains(user) || !user.Groups.Contains(group))) 
-                    return BadRequest(new { code = "user-group-error"});
+                if (post.TopicType == DiscussionPost.TopicTypes.Group && (!group.Users.Contains(user) || !user.Groups.Contains(group)))
+                    return BadRequest(new { code = "user-group-error" });
 
                 var com = new Comment {
                     CommentId = Guid.NewGuid(),
@@ -142,7 +170,7 @@ namespace Backend.Controllers {
                         author = new {
                             id = com.UserId,
                             name = com.User.UserName,
-                            avatar = !com.User.Avatar.IsNullOrEmpty() ? (com.User.Avatar):(string.Empty),
+                            avatar = !com.User.Avatar.IsNullOrEmpty() ? (com.User.Avatar) : (string.Empty),
                             active = (post.TopicType == DiscussionPost.TopicTypes.Artist) ? (true) : (post.Group.Users.Contains(user) ? (true) : (false))
                         },
                         creationTime = com.CreationTime,
@@ -154,7 +182,7 @@ namespace Backend.Controllers {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
             }
         }
-            #endregion
+        #endregion
 
-        }
+    }
 }
