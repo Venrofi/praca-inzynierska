@@ -15,5 +15,7 @@ namespace Backend.Core.Entities
         public List<DiscussionPost>? DiscussionPosts { get; set; }
 
         public List<Event>? OrganizedEvents { get; set; }
+        public Guid? OwnerId { get; set; }
+        public User? Owner { get; set; }
     }
 }
