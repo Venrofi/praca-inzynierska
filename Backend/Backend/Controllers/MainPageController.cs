@@ -42,10 +42,10 @@ namespace Backend.Controllers
             var topDiscussions = await _context.DiscussionPosts
                 .Where(dp => dp.TopicType == DiscussionPost.TopicTypes.Artist)
                 .Where(dp => dp.ArtistProfileId != null)
-                .Where(dp => dp.NumberOfComments > 0)
+                .Where(dp => dp.DiscussionPostDetails.Comments.Count > 0)
                 .Where(dp => dp.CreationTime >= lastMonday)
                 .Where(dp => !id.HasValue || !(dp.ArtistProfile.Followers.Contains(user)))  //to test
-                .OrderByDescending(dp => dp.NumberOfComments)
+                .OrderByDescending(dp => dp.DiscussionPostDetails.Comments.Count)
                 .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title })
                 .Take(5)
                 .ToListAsync();
@@ -107,7 +107,7 @@ namespace Backend.Controllers
                         topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
                         title = d.Title,
                         creationTime = d.CreationTime,
-                        numberOfComments = d.NumberOfComments
+                        numberOfComments = d.DiscussionPostDetails.Comments.Count
                     }).ToListAsync();
             }
 
@@ -120,7 +120,7 @@ namespace Backend.Controllers
                     topic = new { id = d.GroupId.HasValue ? d.GroupId : d.ArtistProfileId, name = d.Topic, type = d.TopicType.ToString().ToUpper() },
                     title = d.Title,
                     creationTime = d.CreationTime,
-                    numberOfComments = d.NumberOfComments
+                    numberOfComments = d.DiscussionPostDetails.Comments.Count
                 }).ToListAsync();
         }
 
