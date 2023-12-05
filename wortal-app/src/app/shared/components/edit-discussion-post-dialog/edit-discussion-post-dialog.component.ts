@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { EditDiscussionPostRequest } from 'src/app/core/api.model';
+import { BasicResponse, EditDiscussionPostRequest } from 'src/app/core/api.model';
 import { DiscussionPostActionService } from '../../services/discussion-post-action.service';
 import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -25,7 +25,7 @@ export class EditDiscussionPostDialogComponent {
   ) {
     this.editDiscussionPostModel = {
       postId: this.discussionData.id,
-      userId: this.discussionData.author.id,
+      authorId: this.discussionData.author.id,
       data: {
         title: this.discussionData.title,
         content: this.discussionData.content,
@@ -37,16 +37,14 @@ export class EditDiscussionPostDialogComponent {
     this.isProcessing = true;
 
     this.discussionPostActionService.editDiscussionPost(this.editDiscussionPostModel).subscribe({
-      next: (response) => {
+      next: (response: BasicResponse) => {
         this.isProcessing = false;
-        console.log(response);
         this.snackBar.open('Pomyślnie zapisano zmiany dla dyskusji.', 'OK', {
           duration: 3000,
           horizontalPosition: 'end',
           panelClass: ['snackbar-success']
         });
-        this.dialogRef.close();
-        this.router.navigate(['/discussion'], { queryParams: { id: this.discussionData.id } });
+        this.dialogRef.close({ code: response.code, data: this.editDiscussionPostModel.data });
       },
       error: (error) => {
         this.isProcessing = false;

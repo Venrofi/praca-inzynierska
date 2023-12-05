@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { EditDiscussionPostDialogComponent } from '../edit-discussion-post-dialog/edit-discussion-post-dialog.component';
+import { EditDiscussionPostResponse } from 'src/app/core/api.model';
 
 @Component({
   selector: 'app-discussion-post-details',
@@ -80,7 +81,13 @@ export class DiscussionPostDetailsComponent implements OnInit {
   }
 
   editDiscussionPost() {
-    this.dialog.open(EditDiscussionPostDialogComponent, { width: '90vw', maxWidth: '500px', data: this.discussionPost });
+    this.dialog.open(EditDiscussionPostDialogComponent, { width: '90vw', maxWidth: '500px', data: this.discussionPost })
+      .afterClosed().subscribe((response: EditDiscussionPostResponse) => {
+        if (response?.code === 'success') {
+          this.discussionPost.title = response.data.title;
+          this.discussionPost.content = response.data.content;
+        }
+      });
   }
 
   commentAction() {

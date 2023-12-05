@@ -50,7 +50,14 @@ export interface UpdateMemberRequest {
 
 export interface EditDiscussionPostRequest {
   postId: string;
-  userId: string;
+  authorId: string;
+  data: {
+    title: string;
+    content: string;
+  }
+}
+
+export interface EditDiscussionPostResponse extends BasicResponse {
   data: {
     title: string;
     content: string;
