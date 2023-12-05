@@ -34,7 +34,6 @@ export class EditMemberDialogComponent {
   }
 
   edit() {
-    console.log('edit', this.editMemberModel);
     this.isProcessing = true;
 
     this.memberService.updateMember(this.editMemberModel).subscribe({

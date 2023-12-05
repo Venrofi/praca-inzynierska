@@ -25,7 +25,7 @@ export class MemberComponent {
     this.member = this.store.select(state => state.app.member);
   }
 
-  openEditDialog() {
-    this.dialog.open(EditMemberDialogComponent, { width: '90vw', maxWidth: '500px', data: this.member });
+  openEditDialog(member: Member) {
+    this.dialog.open(EditMemberDialogComponent, { width: '90vw', maxWidth: '500px', data: member });
   }
 }

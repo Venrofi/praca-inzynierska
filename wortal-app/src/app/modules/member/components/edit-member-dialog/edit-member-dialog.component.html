@@ -9,7 +9,10 @@
   <form #editMemberForm="ngForm" class="d-flex flex-column mt-3">
     <mat-form-field>
       <mat-label>Bio</mat-label>
-      <textarea matInput [(ngModel)]="editMemberModel.data.bio" name="memberBio" #memberBioInput="ngModel" rows="10" maxlength="2000"></textarea>
+      <textarea matInput [(ngModel)]="editMemberModel.data.bio" name="memberBio" #memberBioInput="ngModel" rows="10" maxlength="2000" required></textarea>
+      <mat-error>
+        <span *ngIf="memberBioInput.errors?.['required']">Proszę wprowadzić treść bio.</span>
+      </mat-error>
     </mat-form-field>
 
     <div *ngIf="isProcessing" class="d-flex justify-content-center mt-3 w-100">

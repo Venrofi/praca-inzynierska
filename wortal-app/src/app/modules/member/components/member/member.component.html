@@ -12,7 +12,7 @@
             <app-text-with-icon icon="mail" [text]="member.email"></app-text-with-icon>
           </article>
           <div>
-            <button *ngIf="member" mat-icon-button matTooltip="Edytuj profil" (click)="openEditDialog()"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="member" mat-icon-button matTooltip="Edytuj profil" (click)="openEditDialog(member)"><mat-icon>edit</mat-icon></button>
           </div>
         </div>
         <article class="mt-2" aria-label="Member description">
