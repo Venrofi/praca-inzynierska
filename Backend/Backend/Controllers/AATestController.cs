@@ -403,8 +403,8 @@ namespace Backend.Controllers {
             };
 
             var dp = _context.DiscussionPosts.Where(dp => dp.DiscussionPostDetails == dpd).FirstOrDefault();
-            if (dp != null)
-                dp.NumberOfComments++;
+/*            if (dp != null)
+                dp.NumberOfComments++;*/
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
