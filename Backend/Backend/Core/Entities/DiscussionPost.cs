@@ -25,9 +25,6 @@ namespace Backend.Core.Entities
         [Required]
         public DateTime CreationTime { get; set; }
 
-        [Required]
-        public int NumberOfComments { get; set; }
-
         public User User { get; set; }
         public Guid UserId { get; set; }
         public DiscussionPostDetails DiscussionPostDetails { get; set; }
