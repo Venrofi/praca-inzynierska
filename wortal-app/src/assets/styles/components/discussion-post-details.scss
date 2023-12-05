@@ -44,6 +44,11 @@ app-discussion-post-details {
     }
   }
 
+  .discussion-content {
+    overflow: auto !important;
+    height: 65vh !important;
+  }
+
   .discussion-action-button {
     color: $my-primary-OG;
   }

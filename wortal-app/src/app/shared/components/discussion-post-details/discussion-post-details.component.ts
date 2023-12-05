@@ -55,6 +55,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
 
     if (this.discussionPostData) {
       this.discussionPost = this.discussionPostData;
+      this.formattedContent = this.discussionPost.content.split('\n').filter(line => line !== '');
       return;
     }
 

@@ -66,7 +66,7 @@ export class DiscussionListComponent implements OnInit {
   openPostModal(post: DiscussionPost) {
     this.contentDetailsService.getDiscussionPostDetails(post.id).subscribe({
       next: (discussionPost) => {
-        this.dialog.open(DiscussionPostDetailsComponent, { data: discussionPost });
+        this.dialog.open(DiscussionPostDetailsComponent, { maxWidth: '90vw', data: discussionPost });
       },
       error: () => {
         this.router.navigate(['/']).catch(noop);

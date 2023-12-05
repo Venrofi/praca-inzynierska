@@ -14,7 +14,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-card-header>
-    <mat-card-content [ngClass]="isWideScreen ? null : 'p-0'">
+    <mat-card-content class="discussion-content" [ngClass]="isWideScreen ? null : 'p-0'">
       <section *ngIf="member?.id === discussionPost.author.id" class="d-flex justify-content-end">
         <button mat-icon-button matTooltip="Edytuj dyskusje" (click)="editDiscussionPost()">
           <mat-icon class="discussion-action-button">edit</mat-icon>
@@ -51,9 +51,9 @@
               </div>
             </ng-template>
 
-            <div style="align-self: center;">
+            <div class="w-75" style="align-self: center;">
               <p>{{ comment.content }}</p>
-              <p>{{ (comment.creationTime | date: 'medium') || '28 lis 2023, 16:59:46' }}</p>
+              <p>{{ comment.creationTime | date: 'medium' }}</p>
             </div>
           </div>
           <ng-container *ngIf="discussionPost.comments.length > 10">
