@@ -1,12 +1,7 @@
 <div *ngIf="discussionPost; else loading" class="container-max-width post-container" [ngClass]="discussionPostData ? 'p-0' : 'p-3'">
   <mat-card class="post-card">
     <mat-card-header class="d-flex flex-column container-center text-center" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
-      <mat-card-title class="position-relative">
-        <span>{{ discussionPost.title }}</span>
-        <mat-icon *ngIf="member?.id === discussionPost.author.id"
-          class="edit-discussion-button p-0" matTooltip="Edytuj dyskusje"
-          (click)="editDiscussionPost()">edit</mat-icon>
-      </mat-card-title>
+      <mat-card-title>{{ discussionPost.title }}</mat-card-title>
       <a [queryParams]="{ id: discussionPost.topic.id }"
         [routerLink]="discussionPost.topic.type === 'ARTIST' ? '../artist' : '../group'"
         class="d-flex align-items-center justify-content-center" style="gap: 0.25rem;"
@@ -20,8 +15,16 @@
       </button>
     </mat-card-header>
     <mat-card-content [ngClass]="isWideScreen ? null : 'p-0'">
+      <section *ngIf="member?.id === discussionPost.author.id" class="d-flex justify-content-end">
+        <button mat-icon-button matTooltip="Edytuj dyskusje" (click)="editDiscussionPost()">
+          <mat-icon class="discussion-action-button">edit</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Usuń dyskusje" (click)="deleteDiscussionPost()">
+          <mat-icon class="discussion-action-button">delete</mat-icon>
+        </button>
+      </section>
       <section>
-        <p style="text-align: justify;">{{ discussionPost.content || 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus consequuntur maxime rerum nobis veniam doloribus ex dolore laudantium similique, impedit temporibus a vel totam recusandae culpa atque, reprehenderit fugiat placeat quod adipisci necessitatibus. Rem tempora debitis temporibus animi, consequuntur nihil sunt magni rerum eos voluptate quis praesentium nemo, beatae recusandae necessitatibus vitae iste. Nesciunt aspernatur architecto, magni fugit eveniet culpa et ab rerum aliquam, velit dicta, alias molestias distinctio animi? Ut ducimus sed doloremque nostrum recusandae quas velit eligendi consequatur sunt fuga cumque laboriosam cum quod quae consectetur dolores nihil vero architecto, suscipit, veniam mollitia dignissimos nobis voluptatem molestias? Blanditiis qui facere quo. Veniam hic ullam iusto officiis non est magni. Non quam assumenda, nam exercitationem aliquid ipsum magnam. Esse eligendi quia et, nulla placeat culpa non, quasi repellendus eos earum sint recusandae nisi illum? Numquam, natus maxime. Nulla sed quod rem nisi quibusdam sequi molestias atque possimus cumque iusto vel officiis qui fugit voluptatum a, officia omnis harum aliquid, quisquam assumenda amet? Dicta voluptate perferendis temporibus exercitationem officia, assumenda dolores velit excepturi voluptates quos illum deleniti dolorum impedit porro. Labore ducimus dolor ullam provident nostrum similique amet id! Esse incidunt nesciunt laborum provident, quod reiciendis unde neque quam quidem. Tempore porro, omnis, odit ratione natus non possimus voluptatum asperiores quam voluptas molestiae illum, quae eum incidunt ipsum a ea. Unde quo voluptates beatae similique in aspernatur dignissimos. Quisquam, doloremque. Magnam, possimus ad reiciendis sed labore, blanditiis ipsa doloribus recusandae consequuntur illum cupiditate nisi dignissimos tempora corporis error voluptates nostrum, rem veniam maxime distinctio excepturi quo nemo. Aliquid ipsum nesciunt asperiores nam, consequatur nemo distinctio possimus? Error inventore tempora velit, officiis neque consequuntur, voluptas hic odio temporibus atque mollitia magni beatae officia reprehenderit deleniti. Vitae maxime dolorum voluptas assumenda cum, voluptates doloremque reiciendis incidunt, ullam hic, doloribus ducimus! Deleniti ad incidunt ducimus, est officia facilis tenetur ea tempora error corporis reiciendis totam mollitia excepturi a! Deserunt veniam at libero modi enim delectus ea eaque ducimus odit dolores et impedit omnis ut eos facilis quae vero porro, quas provident architecto magni rem sequi praesentium. Modi ab facilis neque magnam quis. Eligendi non excepturi, suscipit nulla reprehenderit at, mollitia provident dolores nostrum illo a debitis eos iure pariatur? Quos nesciunt incidunt eius architecto nostrum vitae culpa sint illum quae libero. Explicabo ipsa deserunt fugit! Illum exercitationem aspernatur maxime illo numquam voluptate inventore possimus, quis cupiditate! Tempore dolor quia iste molestias adipisci eligendi quam ut a, velit neque. Nobis recusandae eaque, aspernatur incidunt autem porro nesciunt! In excepturi nemo quam nesciunt quia saepe quis itaque odit quo error unde omnis doloribus modi ut molestiae cum debitis veniam cumque, ducimus ipsum beatae fugiat. Excepturi laudantium aperiam doloremque quasi veritatis quae neque veniam cupiditate, debitis perspiciatis vero possimus, officia praesentium architecto esse omnis assumenda totam dignissimos? Soluta, dolores inventore ullam dolore incidunt perferendis blanditiis sint corporis id nobis quis voluptatem reprehenderit repellat, sapiente veniam! Molestiae est sed modi consequuntur incidunt deleniti doloribus fugiat, dolore officiis, necessitatibus in, debitis consequatur quaerat eveniet. Laborum, veritatis id?' }}</p>
+        <p *ngFor="let paragraph of formattedContent" style="text-align: justify;">{{ paragraph }}</p>
       </section>
       <aside *ngIf="discussionPost.topic.type === 'GROUP'" class="d-flex flex-column align-items-end mt-3" aria-label="Post author">
         <a routerLink="../user" [queryParams]="{ id: discussionPost.author.id }" matTooltip="Przejdź do profilu Autora">

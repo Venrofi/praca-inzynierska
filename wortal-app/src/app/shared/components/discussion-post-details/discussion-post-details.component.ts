@@ -20,6 +20,8 @@ import { EditDiscussionPostResponse } from 'src/app/core/api.model';
 export class DiscussionPostDetailsComponent implements OnInit {
   discussionPost!: DiscussionPostDetails;
 
+  formattedContent: string[] = [];
+
   member: Member | undefined;
 
   newComment: string = '';
@@ -77,6 +79,7 @@ export class DiscussionPostDetailsComponent implements OnInit {
       )
       .subscribe(discussionPost => {
         this.discussionPost = discussionPost;
+        this.formattedContent = this.discussionPost.content.split('\n').filter(line => line !== '');
       });
   }
 
@@ -86,8 +89,13 @@ export class DiscussionPostDetailsComponent implements OnInit {
         if (response?.code === 'success') {
           this.discussionPost.title = response.data.title;
           this.discussionPost.content = response.data.content;
+          this.formattedContent = this.discussionPost.content.split('\n').filter(line => line !== '');
         }
       });
+  }
+
+  deleteDiscussionPost() {
+    console.log('delete');
   }
 
   commentAction() {
