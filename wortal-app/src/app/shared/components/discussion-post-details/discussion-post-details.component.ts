@@ -95,7 +95,26 @@ export class DiscussionPostDetailsComponent implements OnInit {
   }
 
   deleteDiscussionPost() {
-    console.log('delete');
+    if (confirm('Czy na pewno chcesz usunąć tą dyskusję?')) {
+      this.discussionPostActionService.deleteDiscussionPost({ postId: this.discussionPost.id, authorId: this.discussionPost.author.id }).subscribe({
+        next: () => {
+          this.snackBar.open('Usunięto dyskusję!', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-success']
+          });
+
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.snackBar.open('Wystąpił błąd podczas próby usunięcia dyskusji!', 'OK', {
+            duration: 3000,
+            horizontalPosition: 'end',
+            panelClass: ['snackbar-error']
+          });
+        }
+      });
+    }
   }
 
   commentAction() {

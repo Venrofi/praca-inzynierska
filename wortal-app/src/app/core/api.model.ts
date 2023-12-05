@@ -64,6 +64,11 @@ export interface EditDiscussionPostResponse extends BasicResponse {
   }
 }
 
+export interface DeleteDiscussionPostRequest {
+  postId: string;
+  authorId: string;
+}
+
 export interface BasicResponse {
   code: string;
 }

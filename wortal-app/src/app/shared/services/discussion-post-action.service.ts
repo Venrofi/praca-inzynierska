@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
 import { environment } from "../../../enviroments/enviroment";
-import { AddCommentResponse, CreateDiscussionPostRequest, EditDiscussionPostRequest } from "../../core/api.model";
+import { AddCommentResponse, BasicResponse, CreateDiscussionPostRequest, DeleteDiscussionPostRequest, EditDiscussionPostRequest } from "../../core/api.model";
 import { AuthService } from "../../core/authentication.service";
 import { BaseWortalElement } from "../../core/core.model";
 
@@ -24,8 +24,12 @@ export class DiscussionPostActionService {
     return this.http.post<BaseWortalElement[]>(`${this.API_ROOT}/DiscussionPost/init-create-data`, {}, { params });
   }
 
-  editDiscussionPost(request: EditDiscussionPostRequest): Observable<any> {
-    return this.http.put(`${this.API_ROOT}/DiscussionPost/edit`, request);
+  editDiscussionPost(request: EditDiscussionPostRequest): Observable<BasicResponse> {
+    return this.http.put<BasicResponse>(`${this.API_ROOT}/DiscussionPost/edit`, request);
+  }
+
+  deleteDiscussionPost(request: DeleteDiscussionPostRequest): Observable<BasicResponse> {
+    return this.http.delete<BasicResponse>(`${this.API_ROOT}/DiscussionPost/delete`, { body: request });
   }
 
   addComment(discussionPostId: string, content: string): Observable<AddCommentResponse> {
