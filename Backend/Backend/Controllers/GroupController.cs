@@ -28,9 +28,9 @@ namespace Backend.Controllers {
                 if (user == null) return NotFound(new { code = "user-not-found" });
 
                 var userType = await _context.UserTypes.Where(ut => ut.Description == "USER").FirstOrDefaultAsync();
-                if (userType == null) return BadRequest(new { code = "user-type-error"});
+                if (userType == null) return BadRequest(new { code = "user-type-error" });
 
-                if (request.Name == string.Empty) return BadRequest(new { code = "empty-name"});
+                if (request.Name == string.Empty) return BadRequest(new { code = "empty-name" });
 
                 var group = new Group() {
                     GroupId = Guid.NewGuid(),
@@ -41,11 +41,42 @@ namespace Backend.Controllers {
                     Users = new List<User>(),
                     DiscussionPosts = new List<DiscussionPost>(),
                     OrganizedEvents = new List<Event>(),
-                    OwnerId = user.UserType == userType ? (user.UserId):(null),
+                    OwnerId = user.UserType == userType ? (user.UserId) : (null),
                     Owner = user.UserType == userType ? (user) : (null)
                 };
                 group.Users.Add(user);
                 _context.Groups.Add(group);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { code = "success" });
+            }
+            catch (Exception ex) {
+                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+            }
+        }
+        #endregion
+
+        #region Edit
+        [HttpPut("edit")]
+        public async Task<ActionResult<object>> EditGroup(EditGroupRequest request) {
+            try {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                if (request.Data.Name == string.Empty) return BadRequest(new { code ="empty-name"});
+                if (request.Data.Description == string.Empty) return BadRequest(new { code ="empty-description"});
+                if (request.Data.Image == string.Empty) return BadRequest(new { code="empty-image"});
+
+                var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == request.UserId).FirstOrDefaultAsync();
+                if (user == null) return NotFound(new { code = "user-not-found" });
+                var group = await _context.Groups.Where(g => g.GroupId == request.GroupId).FirstOrDefaultAsync();
+                if (group == null) return NotFound(new { code = "group-not-found"});
+
+                if (group.Owner == null) return BadRequest(new { code = "null-owner"});
+                if (group.OwnerId != user.UserId) return BadRequest(new { code = "not-owner"});
+
+                group.Name = request.Data.Name;
+                group.Description = request.Data.Description;
+                group.Image = request.Data.Image;
                 await _context.SaveChangesAsync();
 
                 return Ok(new { code = "success" });
