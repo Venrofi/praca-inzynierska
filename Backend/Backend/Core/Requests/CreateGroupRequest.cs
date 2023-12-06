@@ -17,8 +17,8 @@ namespace Backend.Core.Requests {
         [MaxLength(2000, ErrorMessage = "long-description")]
         public string Description { get; set; } = string.Empty;
 
-        //[Required(ErrorMessage = "null-image")]
-        [MaxLength(200, ErrorMessage = "long-image")]
+        [Required(ErrorMessage = "null-image")]
+        [MaxLength(2000, ErrorMessage = "long-image")]
         public string Image { get; set; } = string.Empty;
     }
 }
