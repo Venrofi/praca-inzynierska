@@ -2,9 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
+import * as memberActions from '../../../../store/member/member.actions';
 import { StoreModel } from "../../../../app-state.model";
 import { CreateDiscussionPostRequest } from "../../../../core/api.model";
-import { BaseWortalElement } from "../../../../core/core.model";
+import { BaseWortalElement, Member } from "../../../../core/core.model";
 import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
 
 @Component({
@@ -12,6 +13,8 @@ import { DiscussionPostActionService } from "../../services/discussion-post-acti
   templateUrl: './create-discussion-post-dialog.component.html'
 })
 export class CreateDiscussionPostDialogComponent implements OnInit {
+
+  member!: Member;
 
   newPost!: CreateDiscussionPostRequest;
 
@@ -29,6 +32,8 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
     this.store.select(state => state.app.member)
       .subscribe(member => {
         if (member) {
+          this.member = member;
+
           this.newPost = {
             authorId: member.id,
             groupId: '',
@@ -45,6 +50,9 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
     this.discussionPostActionService.createNewDiscussion(this.newPost).subscribe({
       next: (response) => {
         this.isProcessing = false;
+
+        const posts = [...this.member.posts, response.newPost];
+        this.store.dispatch(memberActions.update({ member: { ...this.member, posts } }));
 
         this.snackBar.open('Stworzyłeś nowy post!', 'OK', {
           duration: 3000,

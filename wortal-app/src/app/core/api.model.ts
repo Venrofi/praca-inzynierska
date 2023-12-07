@@ -1,4 +1,4 @@
-import { BaseWortalUser } from "./core.model";
+import { BaseWortalElement, BaseWortalUser } from "./core.model";
 
 export interface LoginRequest {
   username: string;
@@ -39,6 +39,10 @@ export interface CreateDiscussionPostRequest {
   groupId: string;
   title: string;
   content: string;
+}
+
+export interface CreateDiscussionPostResponse extends BasicResponse {
+  newPost: BaseWortalElement;
 }
 
 export interface UpdateMemberRequest {
