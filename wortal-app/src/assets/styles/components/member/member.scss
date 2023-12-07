@@ -10,10 +10,15 @@ app-member, app-user-profile {
   .member-card {
     background-color: white;
     max-width: 800px;
+    min-width: 600px;
     padding: 1rem;
     padding-bottom: 3rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+
+    @media screen and (max-width: 800px) {
+      min-width: 300px;
+    }
   }
 
   .member-header {
@@ -37,6 +42,10 @@ app-member, app-user-profile {
     border: 5px solid $my-primary-OG;
     background-size: cover;
     background-position: center;
+  }
+
+  .edit-icon {
+    color: $my-primary-OG !important;
   }
 
   a, a:visited {

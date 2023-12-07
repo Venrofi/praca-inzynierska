@@ -1,10 +1,10 @@
 <div *ngIf="member | async as member; else loading" class="container-max-width member-container p-3">
   <mat-card class="member-card">
-    <mat-card-header class="d-flex container-center member-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
-      <div class="container-center">
+    <mat-card-header class="d-flex member-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
+      <div [ngClass]="isWideScreen ? '' : 'container-center'">
         <img [src]="member.avatar" class="member-avatar">
       </div>
-      <section aria-label="Member main information">
+      <section class="flex-grow-1" aria-label="Member main information">
         <div class="d-flex justify-content-between">
           <article>
             <mat-card-title>{{ member.name }}</mat-card-title>
@@ -12,7 +12,9 @@
             <app-text-with-icon icon="mail" [text]="member.email"></app-text-with-icon>
           </article>
           <div>
-            <button *ngIf="member" mat-icon-button matTooltip="Edytuj profil" (click)="openEditDialog(member)"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="member" mat-icon-button matTooltip="Edytuj profil" (click)="openEditDialog(member)">
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
           </div>
         </div>
         <article class="mt-2" aria-label="Member description">

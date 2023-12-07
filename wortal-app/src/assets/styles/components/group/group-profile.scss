@@ -9,12 +9,17 @@ app-group-profile {
   .group-card {
     background-color: white;
     max-width: 800px;
+    min-width: 600px;
     padding: 1rem 1rem 3rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 
     .mat-mdc-card-header-text {
       display: none;
+    }
+
+    @media screen and (max-width: 800px) {
+      min-width: 300px;
     }
   }
 
