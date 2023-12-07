@@ -68,10 +68,6 @@ export class HeaderComponent implements OnInit {
     this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end', panelClass: ['snackbar-success'] });
   }
 
-  memberAuthenticate(): void {
-    this.dialog.open(AccountVerificationComponent, { width: '90vw', maxWidth: '500px' });
-  }
-
   openAuthenticationDialog(): void {
     const authDialogRef = this.dialog.open(AuthenticationDialogComponent, { width: '90vw', maxWidth: '500px' });
 
@@ -99,6 +95,10 @@ export class HeaderComponent implements OnInit {
         this.snackBar.open('Nie można stworzyć nowej dyskusji!', 'OK', { duration: 3000, horizontalPosition: 'end', panelClass: ['snackbar-error'] });
       }
     })
+  }
+
+  openCreateNewGroupDialog(): void {
+    this.dialog.open(AccountVerificationComponent, { width: '90vw', maxWidth: '500px' });
   }
 
   getMemberInformation(userID: string): void {
