@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
-import { environment } from "../../../enviroments/enviroment";
-import { AddCommentResponse, BasicResponse, CreateDiscussionPostRequest, DeleteDiscussionPostRequest, EditDiscussionPostRequest } from "../../core/api.model";
-import { AuthService } from "../../core/authentication.service";
-import { BaseWortalElement } from "../../core/core.model";
+import { environment } from "../../../../enviroments/enviroment";
+import { AddCommentResponse, BasicResponse, CreateDiscussionPostRequest, DeleteDiscussionPostRequest, EditDiscussionPostRequest } from "../../../core/api.model";
+import { AuthService } from "../../../core/authentication.service";
+import { BaseWortalElement } from "../../../core/core.model";
 
 @Injectable()
 export class DiscussionPostActionService {

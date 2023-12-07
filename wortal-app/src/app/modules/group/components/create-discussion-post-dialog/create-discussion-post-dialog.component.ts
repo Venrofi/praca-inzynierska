@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { StoreModel } from "../../../app-state.model";
-import { CreateDiscussionPostRequest } from "../../../core/api.model";
-import { BaseWortalElement } from "../../../core/core.model";
+import { StoreModel } from "../../../../app-state.model";
+import { CreateDiscussionPostRequest } from "../../../../core/api.model";
+import { BaseWortalElement } from "../../../../core/core.model";
 import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
 
 @Component({

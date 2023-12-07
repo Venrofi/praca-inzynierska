@@ -8,9 +8,9 @@ import { Store } from '@ngrx/store';
 import { Member } from 'src/app/core/core.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
-import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
+import { DiscussionPostActionService } from "../../../modules/group/services/discussion-post-action.service";
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { EditDiscussionPostDialogComponent } from '../edit-discussion-post-dialog/edit-discussion-post-dialog.component';
+import { EditDiscussionPostDialogComponent } from '../../../modules/group/components/edit-discussion-post-dialog/edit-discussion-post-dialog.component';
 import { EditDiscussionPostResponse } from 'src/app/core/api.model';
 
 @Component({

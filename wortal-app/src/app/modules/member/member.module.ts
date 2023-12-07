@@ -5,14 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedMaterialModule } from 'src/app/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditMemberDialogComponent } from './components/edit-member-dialog/edit-member-dialog.component';
 import { MemberComponent } from './components/member/member.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberService } from './services/member.service';
-import { EditMemberDialogComponent } from './components/edit-member-dialog/edit-member-dialog.component';
 
 @NgModule({
-  declarations: [MemberComponent, MembersListComponent, EditMemberDialogComponent],
+  declarations: [
+    MemberComponent,
+    MembersListComponent,
+    EditMemberDialogComponent,
+  ],
   imports: [
     CommonModule,
     MemberRoutingModule,
@@ -22,7 +26,11 @@ import { EditMemberDialogComponent } from './components/edit-member-dialog/edit-
     RouterModule,
     SharedMaterialModule,
   ],
-  exports: [MemberComponent],
+  exports: [
+    MemberComponent,
+    MembersListComponent,
+    EditMemberDialogComponent,
+  ],
   providers: [MemberService]
 })
 export class MemberModule { }
