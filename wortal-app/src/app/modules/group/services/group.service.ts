@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { map, Observable } from "rxjs";
+import { Observable, map } from "rxjs";
+import { BasicResponse, CreateNewGroupRequest, CreateNewGroupResponse, EditGroupRequest } from "src/app/core/api.model";
 import { AuthService } from "src/app/core/authentication.service";
 import { environment } from "../../../../enviroments/enviroment";
 import { Group, GroupList } from "../../../core/core.model";
@@ -17,7 +18,7 @@ export class GroupService {
           return groups.map((group: GroupList, index: number) => {
             return {
               ...group,
-              image: this.generateRandomAvatar(),
+              image: this.generateRandomImage(),
               rank: (index + 1).toString(),
             };
           });
@@ -33,10 +34,18 @@ export class GroupService {
         map((group: Group) => {
           return {
             ...group,
-            image: this.generateRandomAvatar(),
+            image: this.generateRandomImage(),
           }
         })
       );
+  }
+
+  createNewGroup(newGroup: CreateNewGroupRequest): Observable<CreateNewGroupResponse> {
+    return this.http.post<CreateNewGroupResponse>(`${this.API_ROOT}/Group/create`, newGroup);
+  }
+
+  editGroup(request: EditGroupRequest): Observable<BasicResponse> {
+    return this.http.put<BasicResponse>(`${this.API_ROOT}/Group/edit`, request);
   }
 
   joinGroup(groupID: string) {
@@ -53,7 +62,13 @@ export class GroupService {
     return this.http.post(`${this.API_ROOT}/Action/unjoin`, {}, { params });
   }
 
-  private generateRandomAvatar(): string {
+  generateDefaultGroupImage(): string {
+    const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
+
+    return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;
+  }
+
+  private generateRandomImage(): string {
     const randomAvatarSize = Math.floor(Math.random() * 300 + 200); // returns a random number between 200 and 400
 
     return `https://picsum.photos/${randomAvatarSize}/${randomAvatarSize}`;

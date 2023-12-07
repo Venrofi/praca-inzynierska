@@ -1,1 +1,44 @@
-<p>create-new-group-dialog works!</p>
+<div mat-dialog-title class="position-relative d-flex justify-content-center">
+  <h2 class="mt-2">Stwórz nową grupę</h2>
+  <button mat-icon-button mat-dialog-close class="dialog-close-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <form #createGroupForm="ngForm" class="d-flex flex-column mt-3">
+    <mat-form-field>
+      <mat-label>Nazwa grupy</mat-label>
+      <input matInput [(ngModel)]="newGroup.name" name="groupName" #groupNameInput="ngModel" required>
+      <mat-error>
+        <span *ngIf="groupNameInput.errors?.['required']">Proszę nadać nazwę nowej grupie.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Opis grupy</mat-label>
+      <textarea matInput [(ngModel)]="newGroup.description" #groupDescriptionInput="ngModel" name="groupDescription" color="accent" rows="10" maxlength="2000" required></textarea>
+      <mat-error>
+        <span *ngIf="groupDescriptionInput.errors?.['required']">Proszę wpisać opis nowej grupy.</span>
+        <span *ngIf="groupDescriptionInput.errors?.['maxlength']">Treść jest zbyt długa.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Zdjęcie grupy</mat-label>
+      <input matInput [(ngModel)]="newGroup.image" name="groupImage" #groupImageInput="ngModel" required>
+      <mat-error>
+        <span *ngIf="groupImageInput.errors?.['required']">Proszę podać link do zdjęcia grupy.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <ng-container *ngIf="newGroup.image">
+      <span>Podgląd:</span>
+      <img [src]="newGroup.image" class="group-image-preview">
+    </ng-container>
+
+    <div *ngIf="isProcessing" class="d-flex justify-content-center mt-3 w-100">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+
+    <button mat-raised-button (click)="create()" [disabled]="!createGroupForm.valid || isProcessing" color="accent">Utwórz</button>
+  </form>
+</mat-dialog-content>

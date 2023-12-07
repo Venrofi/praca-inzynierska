@@ -14,6 +14,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { SearchService } from './services/search.service';
 import { TruncateTextDirective } from './directives/truncate-text.directive';
 import { DiscussionPostActionService } from '../modules/group/services/discussion-post-action.service';
+import { GroupService } from '../modules/group/services/group.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DiscussionPostActionService } from '../modules/group/services/discussio
     ContentDetailsService,
     DiscussionPostActionService,
     SearchService,
+    GroupService,
     DatePipe,
   ],
 })

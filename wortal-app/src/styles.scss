@@ -17,7 +17,6 @@ body {
 }
 
 
-
 // General
 @import "assets/styles/variables";
 @import "assets/styles/common";
@@ -26,7 +25,6 @@ body {
 @import "assets/styles/components/header.scss";
 @import "assets/styles/components/event-details.scss";
 @import "assets/styles/components/discussion-post-details.scss";
-@import "assets/styles/components/create-discussion-post-dialog.scss";
 @import "assets/styles/components/search-results.scss";
 
 // Authentication
@@ -51,6 +49,7 @@ body {
 // Group
 @import "assets/styles/components/group/group-profile.scss";
 @import "assets/styles/components/group/groups-list.scss";
+@import "assets/styles/components/group/create-new-group-dialog.scss";
 
 // Member
 @import "assets/styles/components/member/member.scss";
