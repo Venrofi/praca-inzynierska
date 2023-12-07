@@ -73,6 +73,31 @@ export interface DeleteDiscussionPostRequest {
   authorId: string;
 }
 
+export interface DeleteDiscussionPostResponse extends BasicResponse {
+  deletedPost: BaseWortalElement;
+}
+
+export interface CreateNewGroupRequest {
+  userId: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface CreateNewGroupResponse extends BasicResponse {
+  newGroup: BaseWortalElement;
+}
+
+export interface EditGroupRequest {
+  userId: string;
+  groupId: string;
+  data: {
+    name: string;
+    description: string;
+    image: string;
+  }
+}
+
 export interface BasicResponse {
   code: string;
 }

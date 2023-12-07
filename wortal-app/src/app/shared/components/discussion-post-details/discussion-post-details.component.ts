@@ -1,17 +1,19 @@
 import { Component, HostListener, Inject, OnInit, Optional, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
-import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
-import { ContentDetailsService } from '../../services/content-details.service';
-import { StoreModel } from 'src/app/app-state.model';
-import { Store } from '@ngrx/store';
-import { Member } from 'src/app/core/core.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
-import { DiscussionPostActionService } from "../../../modules/group/services/discussion-post-action.service";
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { EditDiscussionPostDialogComponent } from '../../../modules/group/components/edit-discussion-post-dialog/edit-discussion-post-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
+import { StoreModel } from 'src/app/app-state.model';
 import { EditDiscussionPostResponse } from 'src/app/core/api.model';
+import { Member } from 'src/app/core/core.model';
+import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
+import * as memberActions from '../../../store/member/member.actions';
+import { EditDiscussionPostDialogComponent } from '../../../modules/group/components/edit-discussion-post-dialog/edit-discussion-post-dialog.component';
+import { DiscussionPostActionService } from "../../../modules/group/services/discussion-post-action.service";
+import { ContentDetailsService } from '../../services/content-details.service';
+
 
 @Component({
   selector: 'app-discussion-post-details',
@@ -98,7 +100,12 @@ export class DiscussionPostDetailsComponent implements OnInit {
   deleteDiscussionPost() {
     if (confirm('Czy na pewno chcesz usunąć tą dyskusję?')) {
       this.discussionPostActionService.deleteDiscussionPost({ postId: this.discussionPost.id, authorId: this.discussionPost.author.id }).subscribe({
-        next: () => {
+        next: (response) => {
+          if (this.member) {
+            const posts = this.member.posts.filter(post => post.id !== response.deletedPost.id);
+            this.store.dispatch(memberActions.update({ member: { ...this.member, posts } }));
+          }
+
           this.snackBar.open('Usunięto dyskusję!', 'OK', {
             duration: 3000,
             horizontalPosition: 'end',
