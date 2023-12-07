@@ -17,7 +17,9 @@ export class GroupProfileComponent implements OnInit {
 
   groupMember: boolean = false;
 
-  member: Member | undefined;
+  groupOwner: boolean = false;
+
+  member!: Member;
 
   private clickSubject = new Subject<void>();
 
@@ -37,7 +39,17 @@ export class GroupProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.select(state => state.app.member).subscribe(member => this.member = member);
+    this.store.select(state => state.app.member).subscribe(member => {
+      if (member) {
+        this.member = member;
+      }
+      if (this.group && member) {
+        this.group.members.find(member => member.id === this.member.id) ? this.groupMember = true : this.groupMember = false;
+      }
+      if (this.group.owner && member) {
+        this.group.owner.id === this.member.id ? this.groupOwner = true : this.groupOwner = false;
+      }
+    });
 
     this.route.queryParams
       .pipe(
@@ -60,10 +72,18 @@ export class GroupProfileComponent implements OnInit {
       )
       .subscribe(group => {
         this.group = group;
-        this.group.members.find(member => member.id === this.member?.id) ? this.groupMember = true : this.groupMember = false;
+        this.group.members.find(member => member.id === this.member.id) ? this.groupMember = true : this.groupMember = false;
+
+        if (this.group.owner) {
+          this.group.owner.id === this.member.id ? this.groupOwner = true : this.groupOwner = false;
+        }
       });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
+      if (this.groupOwner) {
+        this.openEditGroupDialog();
+        return;
+      }
       this.groupMember ? this.unjoinGroup() : this.joinGroup();
     });
   }
@@ -126,6 +146,10 @@ export class GroupProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  openEditGroupDialog() {
+    // this.groupService.openEditGroupDialog(this.group);
   }
 
   groupAction() {

@@ -51,8 +51,10 @@ export class CreateDiscussionPostDialogComponent implements OnInit {
       next: (response) => {
         this.isProcessing = false;
 
-        const posts = [...this.member.posts, response.newPost];
-        this.store.dispatch(memberActions.update({ member: { ...this.member, posts } }));
+        if (response.newPost) {
+          const posts = [...this.member.posts, response.newPost];
+          this.store.dispatch(memberActions.update({ member: { ...this.member, posts } }));
+        }
 
         this.snackBar.open('Stworzyłeś nowy post!', 'OK', {
           duration: 3000,

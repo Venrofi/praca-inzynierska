@@ -56,6 +56,7 @@ export interface Group extends BaseWortalElement {
   events: BaseWortalElement[]; // Events created by the Group
   members: BaseWortalElement[]; // Members that joined the Group
   discussionPosts: BaseWortalElement[]; // Discussion posts created by the Group
+  owner: BaseWortalElement | null; // Member that created the Group
 }
 
 export interface GroupList extends BaseWortalElement {
