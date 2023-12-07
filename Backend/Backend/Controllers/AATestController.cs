@@ -16,7 +16,9 @@ namespace Backend.Controllers {
         private Random r;
 
         #region FieldsToRandomize
-        private readonly string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", "White 2115", "Deys" };
+        private readonly string[] authors = new string[] { "Szpaku", "Chivas", "Kamil Pivot", "Young Leosia", "Bambi", "Pezet", "Onar", "Młody ATZ", 
+            "White 2115", "Deys", "O.S.T.R.", "Pezet", "Sokół", "Tede", "Peja", "Gural", "Kękę", "Sobota", "Łona", "JWP", "Liroy", "Grammatik", "Eldo", "Paluch", 
+            "Sarius", "Abradab", "Diox", "Quebonafide", "Bonson", "Fokus", "Hades", "Kajman", "Miuosh", "Włodi"};
         private readonly string[] albums = new string[] { "Atypowy", "Mandarynki", "Czarny Swing", "Hulanki", "Szkoła 81", "Brawurowo i pusto", "Dziki i nietoperze", "Coś więcej niż muzyka", "Trzecie rzeczy", "Szum" };
         private readonly string[] locations = new string[] { "Warszawa", "Poznań", "Rybnik", "Gdańsk", "Bydgoszcz", "Ustrzyki Dolne", "Łodź", "Szczecin", "Radom", "Włocławek" };
         private readonly string[] desc = new string[] { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse commodo dolor nisl, quis viverra odio auctor vel.",
@@ -27,9 +29,25 @@ namespace Backend.Controllers {
             "Duis nec tortor sagittis ante feugiat posuere." };
         private readonly string[] genres = new string[] { "hip-hopolo", "newschool", "oldschool", "hard-rap", "rap-blokowy", "electro-rap" };
         private readonly string[] tracks = new string[] { "Dorosłość", "Wakacje", "Czarne ciuchy", "Ostatni ninja", "Popiół", "Ukryty w mieście krzyk", "Françoise Hardy", "BFF", "Szklanki", "Mandarynki" };
-        private readonly string[] nicknames = new string[] { "MikrofonMistrz", "BitowyCzarodziej", "RapMistrzowski", "GrooveGuru", "SlowoWBit",
-            "BityINuty", "RebelRymow", "FlowMagik", "PolskiRapGenius", "SzalenczySylaby", "BitowaPasja", "RapowaFala", "WersyWietrzne",
-            "RymyRozładowane", "BitowaBrawura", "PolskiFlowMaster", "RapowaRewolucja", "BitowyPatriota", "RymyRealne", "HipHopHermetyk" };
+        private readonly string[] nicknames = new string[] { "OstryOgnisty", "PezetPlutonowy", "SokolSłowoMistrz", "K.A.S.A.RapGuru", "TedeTytan", "PejaPandemonium", 
+            "GuralGłosWielkopolski", "KękęKroniki", "SobotaStylowy", "ŁonaLirykaOsobista", "JWPJednośćWPracy", "LiroyLewy", "GrammatikGracz", "EldoElokwentny", "PaluchPanteon", 
+            "SariusSzept", "AbradabAbstrakt", "DioxDeus", "RafiRapira", "FiszFuzja", "PelsonPerełka", "QuebonafideQlash", "RydzykRapMagister", "BonsonBarykada", "O.S.T.R.OstatniZmierzch", 
+            "FokusFlow", "HadesHoryzont", "KajmanKomentator", "TenTypTomek", "MiuoshMistrzowski", "RasLutaReprezentant", "WłodiWeteran", "ŁozoŁowca", "DwaSławyDzwon", "SmarkiSztuczka", 
+            "AbramKowalczyk", "RuffneckRespekt", "WacoWartownik", "SolarSolarium", "GutekGwiazda", "MeteoMetoda", "FuriatFuria", "BobOneBoski", "KaliKroniki", "OER.OstatniEmisariusz", 
+            "KaczorKlan", "ZBUKUZnak", "RenoRytm", "Te-TrisTeoria", "FenomenFotony", "KękęKarny", "JazzyJeffRapowy", "SmarkiSzarza", "TacoHemingway", "PejaPewny", "PaluchProfil", 
+            "SariusSzlak", "QuebonafideQuattro", "EldoElement", "LiroyLinia", "DioxDźwięk", "RafiRównowaga", "FiszFantazja", "PelsonPięknie", "GrammatikGrosz", "AbradabAlfa", 
+            "DonguraleskoDźwiękowiec", "KękęKryptonim", "OstryOsnowa", "PezetPrzeznaczenie", "SokolSygnał", "TedeTekst", "ŁonaLament", "JWPJazda", "LiroyLament", "GrammatikGeniusz", 
+            "EldoEskapada", "SariusSłowo", "QuebonafideQuota", "AbradabAmator", "DioxDruga", "RafiRozdział", "FiszFala", "PelsonPodróż", "GrammatikGawędziarz", "SokolSzał", 
+            "TacoTrzymajcie", "OER.OstatniEmigrant", "KękęKonspekt", "OstreOstrożny", "PezetPies", "SokolSowa", "K.A.S.A.Klimat", "TedeTenor", "PejaPezetel", "GuralGryf", 
+            "KękęKwestia", "SobotaSekta", "ŁonaLiczba", "JWPJazz", "LiroyLysy", "GrammatikGoblin", "EldoEpicentrum", "PaluchProza", "SariusSłowik", "AbradabArena", "DioxDożywocie", 
+            "RafiRajd", "FiszFormacja", "PelsonPrzelew", "QuebonafideQubit", "RydzykRozprawa", "BonsonBeton", "O.S.T.R.OdNowa", "FokusFlirt", "HadesHazard", "KajmanKatalog", 
+            "TenTypTaktyka", "MiuoshMędrzec", "RasLutaRozum", "WłodiWydobywca", "ŁozoŁysy", "DwaSławyDzień", "SmarkiSerca", "AbramKamień", "RuffneckRaj", "WacoWąż", "SolarStacja", 
+            "GutekGłębia", "MeteoMetamorfoza", "FuriatFach", "BobOneBrawo", "KaliKask", "OER.Oldschool", "KaczorKról", "ZBUKUZbawiciel", "RenoRzeka", "Te-TrisTransformacja", 
+            "FenomenFotografia", "KękęKrew", "JazzyJeffJam", "SmarkiSpokój", "TacoTaniec", "PejaPęknięcie", "PaluchPrawda", "SariusSzansa", "QuebonafideQuartet", "EldoEgzekutor", 
+            "LiroyLokalizacja", "DioxDług", "RafiRozbudowa", "FiszFuria", "PelsonPejzaż", "GrammatikGranie", "AbradabAstronauta", "DonguraleskoDziedzic", "KękęKlimatyzacja", 
+            "OstryOstatni", "PezetPozorny", "SokolSerce", "K.A.S.A.Koza", "TedeTytuł", "PejaPudło", "GuralGraffiti", "KękęKoc", "SobotaSukces", "ŁonaLiryczny", "JWPJasność", "LiroyLuminarz", 
+            "GrammatikGatunek", "EldoEnergia", "PaluchPandemia", "SariusSława", "AbradabApokalipsa", "DioxDusza", "RafiRzut", "FiszFotograf", "PelsonPoczątek", "QuebonafideQuack", 
+            "RydzykReformacja", "BonsonBryła", "O.S.T.R.Oferta", "FokusFlama", "HadesHarmonia", "KajmanKot", "TenTypTeksański", "MiuoshMikrofon", "RasLutaRozkosz", "WłodiWywiad"};
         #endregion
 
         public AATestController(ApplicationDbContext context) {
@@ -65,6 +83,35 @@ namespace Backend.Controllers {
         }
         #endregion
 
+        #region FastFollowAttendJoin
+        [HttpPost("fast-follow-attend-join")]
+        public async Task<IActionResult> FFAJ() {
+            for(int i = 0; i < 250; i++) {
+                await FastAddUserToEvent();
+                await FastAddUserToGroup();
+                await FastUserFollowArtist();
+            }
+            return Ok("success");
+        }
+        #endregion
+
+        #region FixDuration
+        [HttpPost("fix-duration")]
+        public async Task<IActionResult> FixDuration() {
+            var details = await _context.PremiereAlbumDetails.ToListAsync();
+            foreach(var detail in details) {
+                detail.Duration = new TimeSpan();
+                var tracks = await _context.Tracks.Where(t => t.PremiereAlbumDetailsId == detail.PremiereAlbumDetailsId).ToListAsync();
+                foreach(var track in tracks) {
+                    detail.Duration += track.Duration;
+                }
+                await _context.SaveChangesAsync();
+            }
+           
+            return Ok();
+        }
+        #endregion
+
         /*[HttpPost("fast-artist-profile")]
         public async Task<IActionResult> FastArtistProfile() {
             Guid guid = Guid.NewGuid();
@@ -77,7 +124,7 @@ namespace Backend.Controllers {
         [HttpPost("profanity-test")]
         public async Task<IActionResult> LoadProfanity() {
             ProfanitySearchAlgorithm psa = new ProfanitySearchAlgorithm(_context);
-            psa.SeedProfanities();
+            //psa.SeedProfanities();
             return Ok($"New artist profile was created.");
         }
 
@@ -106,9 +153,16 @@ namespace Backend.Controllers {
             }
 
             CreatePasswordHash("test12345", out byte[] passwordHash, out byte[] passwordSalt);
-
+            var name = string.Empty;
             Guid guid = Guid.NewGuid();
-            var name = nicknames[r.Next(0, nicknames.Length)] + guid.ToString("N").Substring(0, 5);
+            int i = 0;
+            do {
+                name = nicknames[i];// + guid.ToString("N").Substring(0, 5);
+                i++;
+                if (i == nicknames.Length)
+                    break;
+            } while (_context.Users.Any(u => u.UserName == name));
+
             var mail = name.ToLower() + "@example.com";
             int bioIndex = r.Next(0, desc.Length);
 
@@ -284,6 +338,8 @@ namespace Backend.Controllers {
                 Image = "",
                 Users = new List<User>(),
                 DiscussionPosts = new List<DiscussionPost>(),
+                Owner = null,
+                OwnerId = null
             };
 
             _context.Groups.Add(group);

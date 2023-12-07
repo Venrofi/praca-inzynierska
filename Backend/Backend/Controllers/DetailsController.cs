@@ -72,7 +72,8 @@ namespace Backend.Controllers {
                     discussionPosts = g.DiscussionPosts.Select(d => new {
                         id = d.DiscussionPostId,
                         name = d.Title
-                    })
+                    }),
+                    owner = g.Owner == null ? (null):(new { id = g.OwnerId, name = g.Owner.UserName})
                 })
                 .FirstOrDefaultAsync();
 

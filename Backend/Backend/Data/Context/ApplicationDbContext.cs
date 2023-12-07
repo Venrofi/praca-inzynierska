@@ -24,10 +24,12 @@ namespace Backend.Data.Context
         public DbSet<Profanities> Profanities { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             //
-
+            modelBuilder.Entity<Group>()
+                .HasOne(g => g.Owner)
+                .WithMany(u => u.OwnedGroups)
+                .HasForeignKey(g => g.OwnerId);
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -23,6 +23,7 @@ namespace Backend.Core.Entities
         public List<Comment>? Comments { get; set; }
         public List<DiscussionPost>? DiscussionPosts { get; set; }
         public List<Group>? Groups { get; set; }
+        public List<Group>? OwnedGroups { get; set; }
         public List<Event>? ParticipatedEvents { get; set; }
         public List<ArtistProfile>? FollowedArtists { get; set; }
 
