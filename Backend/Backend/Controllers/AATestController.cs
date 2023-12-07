@@ -124,7 +124,7 @@ namespace Backend.Controllers {
         [HttpPost("profanity-test")]
         public async Task<IActionResult> LoadProfanity() {
             ProfanitySearchAlgorithm psa = new ProfanitySearchAlgorithm(_context);
-            psa.SeedProfanities();
+            //psa.SeedProfanities();
             return Ok($"New artist profile was created.");
         }
 
