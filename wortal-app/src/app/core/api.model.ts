@@ -98,6 +98,14 @@ export interface EditGroupRequest {
   }
 }
 
+export interface EditGroupResponse extends BasicResponse {
+  data: {
+    name: string;
+    description: string;
+    image: string;
+  }
+}
+
 export interface BasicResponse {
   code: string;
 }

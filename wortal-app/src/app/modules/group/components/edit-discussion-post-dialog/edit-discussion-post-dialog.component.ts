@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { BasicResponse, EditDiscussionPostRequest } from 'src/app/core/api.model';
-import { DiscussionPostActionService } from '../../services/discussion-post-action.service';
-import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { BasicResponse, EditDiscussionPostRequest } from 'src/app/core/api.model';
+import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
+import { DiscussionPostActionService } from '../../services/discussion-post-action.service';
 
 @Component({
   selector: 'app-edit-discussion-post-dialog',
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class EditDiscussionPostDialogComponent {
 
-  editDiscussionPostModel!: EditDiscussionPostRequest;
+  editDiscussionPostModel: EditDiscussionPostRequest;
 
   isProcessing: boolean = false;
 
@@ -20,7 +19,6 @@ export class EditDiscussionPostDialogComponent {
     @Inject(MAT_DIALOG_DATA) public discussionData: DiscussionPostDetails,
     private discussionPostActionService: DiscussionPostActionService,
     private dialogRef: MatDialogRef<EditDiscussionPostDialogComponent>,
-    private router: Router,
     private snackBar: MatSnackBar,
   ) {
     this.editDiscussionPostModel = {

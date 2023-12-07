@@ -1,14 +1,16 @@
 <div *ngIf="group && member; else loading" class="container-max-width group-container p-3">
   <mat-card class="group-card">
-    <mat-card-header class="d-flex container-center group-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
-      <div class="container-center">
+    <mat-card-header class="d-flex group-header" [ngClass]="isWideScreen ? 'p-3' : 'p-0'">
+      <div [ngClass]="isWideScreen ? '' : 'container-center'">
         <img [src]="group.image" class="group-image">
       </div>
-      <section aria-label="Group main information">
+      <section class="flex-grow-1" aria-label="Group main information">
         <div class="d-flex justify-content-between align-items-center">
           <article>
             <mat-card-title>{{ group.name }}</mat-card-title>
-            <!-- <app-text-with-icon icon="person" [text]="member.role"></app-text-with-icon> -->
+            <a *ngIf="group.owner" routerLink="../user" [queryParams]="{ id: group.owner.id }">
+              <app-text-with-icon icon="person_4" [text]="group.owner.name"></app-text-with-icon>
+            </a>
           </article>
           <div>
             <button *ngIf="!groupOwner; else ownerButton" mat-icon-button [matTooltip]="groupMember ? 'Należysz' : 'Dołącz'" (click)="groupAction()">
@@ -65,8 +67,8 @@
         <article class="d-flex" style="gap: 0.5rem;" aria-label="Group members">
           <span class="group-stat-title">Członkowie ({{ group.members.length || 0 }}):</span>
           <div class="d-flex flex-column">
-            <ng-container *ngFor="let group of group.members | slice:0:5">
-              <a routerLink="../user" [queryParams]="{ id: group.id }">{{ group.name }}</a>
+            <ng-container *ngFor="let member of group.members | slice:0:5">
+              <a routerLink="../user" [queryParams]="{ id: member.id }">{{ member.name }}</a>
             </ng-container>
             <ng-container *ngIf="group.members.length > 5">
               oraz {{ group.members.length - 5 }} innych..
