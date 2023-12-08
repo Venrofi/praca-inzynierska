@@ -6,8 +6,12 @@ using MailKit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using MimeKit;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Backend.Controllers
@@ -18,12 +22,16 @@ namespace Backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
+        private readonly IConfiguration _configuration;
 
-        public AuthenticationController(ApplicationDbContext context, IEmailService emailService)
+        public AuthenticationController(ApplicationDbContext context, IEmailService emailService, IConfiguration configuration)
         {
             _context = context;
             _emailService = emailService;
+            _configuration = configuration;
         }
+
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterRequest request)
@@ -152,6 +160,52 @@ namespace Backend.Controllers
             return Ok();
 
         }
+
+
+        [HttpPost("check-jwt-token")]
+        public IActionResult CheckJWTToken()
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var Sectoken = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+              _configuration["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+
+            return Ok(token);
+        }
+
+        [HttpPost("login-jwt")]
+        public async Task<IActionResult> LoginJWTToken(UserLoginRequest request)
+        {
+            var user = await _context.Users.Where(x => x.UserName == request.Username).FirstOrDefaultAsync();
+            if (user == null)
+                return BadRequest(new { code = "not-found" });
+            if (user.VerificationTime == null)
+                return BadRequest(new { code = "user-not-verified" });
+            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+                return BadRequest(new { code = "wrong-password" });
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var Sectoken = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+              _configuration["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+
+            return Ok(new { code = "login-success", token }); //TODO: Generate userSessionToken?
+        }
+
+
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
