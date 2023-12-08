@@ -1,18 +1,18 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { of, switchMap } from 'rxjs';
 import { StoreModel } from 'src/app/app-state.model';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Member } from 'src/app/core/core.model';
-import * as memberActions from '../../../store/member/member.actions';
-import { AuthenticationDialogComponent } from '../../../modules/authentication/components/authentication-dialog/authentication-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateNewGroupDialogComponent } from 'src/app/modules/group/components/create-new-group-dialog/create-new-group-dialog.component';
 import { UserService } from "../../../core/user.service";
-import { AccountVerificationComponent } from '../../../modules/authentication/components/account-verification/account-verification.component';
-import { DiscussionPostActionService } from "../../services/discussion-post-action.service";
-import { CreateDiscussionPostDialogComponent } from "../create-discussion-post-dialog/create-discussion-post-dialog.component";
+import { AuthenticationDialogComponent } from '../../../modules/authentication/components/authentication-dialog/authentication-dialog.component';
+import * as memberActions from '../../../store/member/member.actions';
+import { DiscussionPostActionService } from "../../../modules/group/services/discussion-post-action.service";
+import { CreateDiscussionPostDialogComponent } from "../../../modules/group/components/create-discussion-post-dialog/create-discussion-post-dialog.component";
 
 @Component({
   selector: 'app-header',
@@ -68,10 +68,6 @@ export class HeaderComponent implements OnInit {
     this.snackBar.open('Zostałeś wylogowany', 'OK', { duration: 2000, horizontalPosition: 'end', panelClass: ['snackbar-success'] });
   }
 
-  memberAuthenticate(): void {
-    this.dialog.open(AccountVerificationComponent, { width: '90vw', maxWidth: '500px' });
-  }
-
   openAuthenticationDialog(): void {
     const authDialogRef = this.dialog.open(AuthenticationDialogComponent, { width: '90vw', maxWidth: '500px' });
 
@@ -99,6 +95,10 @@ export class HeaderComponent implements OnInit {
         this.snackBar.open('Nie można stworzyć nowej dyskusji!', 'OK', { duration: 3000, horizontalPosition: 'end', panelClass: ['snackbar-error'] });
       }
     })
+  }
+
+  openCreateNewGroupDialog(): void {
+    this.dialog.open(CreateNewGroupDialogComponent, { width: '90vw', maxWidth: '500px' });
   }
 
   getMemberInformation(userID: string): void {

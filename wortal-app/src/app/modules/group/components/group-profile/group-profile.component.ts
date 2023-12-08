@@ -7,6 +7,9 @@ import { StoreModel } from "../../../../app-state.model";
 import { Group, Member } from "../../../../core/core.model";
 import * as memberActions from "../../../../store/member/member.actions";
 import { GroupService } from "../../services/group.service";
+import { MatDialog } from '@angular/material/dialog';
+import { EditGroupProfileDialogComponent } from '../edit-group-profile-dialog/edit-group-profile-dialog.component';
+import { EditGroupRequest, EditGroupResponse } from 'src/app/core/api.model';
 
 @Component({
   selector: 'app-group-profile',
@@ -17,7 +20,9 @@ export class GroupProfileComponent implements OnInit {
 
   groupMember: boolean = false;
 
-  member: Member | undefined;
+  groupOwner: boolean = false;
+
+  member!: Member;
 
   private clickSubject = new Subject<void>();
 
@@ -34,10 +39,21 @@ export class GroupProfileComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private store: Store<StoreModel>,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.store.select(state => state.app.member).subscribe(member => this.member = member);
+    this.store.select(state => state.app.member).subscribe(member => {
+      if (member) {
+        this.member = member;
+      }
+      if (member && this.group) {
+        this.group.members.find(member => member.id === this.member.id) ? this.groupMember = true : this.groupMember = false;
+      }
+      if (member && this.group?.owner) {
+        this.group.owner.id === this.member.id ? this.groupOwner = true : this.groupOwner = false;
+      }
+    });
 
     this.route.queryParams
       .pipe(
@@ -61,9 +77,17 @@ export class GroupProfileComponent implements OnInit {
       .subscribe(group => {
         this.group = group;
         this.group.members.find(member => member.id === this.member?.id) ? this.groupMember = true : this.groupMember = false;
+
+        if (this.group.owner) {
+          this.group.owner.id === this.member?.id ? this.groupOwner = true : this.groupOwner = false;
+        }
       });
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
+      if (this.groupOwner) {
+        this.openEditGroupDialog();
+        return;
+      }
       this.groupMember ? this.unjoinGroup() : this.joinGroup();
     });
   }
@@ -126,6 +150,26 @@ export class GroupProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  openEditGroupDialog() {
+    const editData: EditGroupRequest = {
+      userId: this.member.id,
+      groupId: this.group.id,
+      data: {
+        name: this.group.name,
+        description: this.group.description,
+        image: this.group.image,
+      }
+    }
+    this.dialog.open(EditGroupProfileDialogComponent, { width: '90vw', maxWidth: '500px', data: editData })
+      .afterClosed().subscribe((response: EditGroupResponse) => {
+        if (response?.code === 'success') {
+          this.group.name = response.data.name;
+          this.group.description = response.data.description;
+          this.group.image = response.data.image;
+        }
+      });
   }
 
   groupAction() {

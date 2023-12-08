@@ -13,13 +13,13 @@ export class HeaderSideMenuComponent {
   memberLogout = new EventEmitter<boolean>();
 
   @Output()
-  memberAuthenticate = new EventEmitter<boolean>();
+  newGroup = new EventEmitter<boolean>();
 
   onMemberLogout(): void {
     this.memberLogout.emit(true);
   }
 
-  onAuthenticateMember(): void {
-    this.memberAuthenticate.emit(true);
+  onCreateNewGroup(): void {
+    this.newGroup.emit(true);
   }
 }

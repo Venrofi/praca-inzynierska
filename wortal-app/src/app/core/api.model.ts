@@ -1,4 +1,4 @@
-import { BaseWortalUser } from "./core.model";
+import { BaseWortalElement, BaseWortalUser } from "./core.model";
 
 export interface LoginRequest {
   username: string;
@@ -41,6 +41,10 @@ export interface CreateDiscussionPostRequest {
   content: string;
 }
 
+export interface CreateDiscussionPostResponse extends BasicResponse {
+  newPost: BaseWortalElement;
+}
+
 export interface UpdateMemberRequest {
   memberId: string;
   data: {
@@ -67,6 +71,39 @@ export interface EditDiscussionPostResponse extends BasicResponse {
 export interface DeleteDiscussionPostRequest {
   postId: string;
   authorId: string;
+}
+
+export interface DeleteDiscussionPostResponse extends BasicResponse {
+  deletedPost: BaseWortalElement;
+}
+
+export interface CreateNewGroupRequest {
+  userId: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface CreateNewGroupResponse extends BasicResponse {
+  newGroup: BaseWortalElement;
+}
+
+export interface EditGroupRequest {
+  userId: string;
+  groupId: string;
+  data: {
+    name: string;
+    description: string;
+    image: string;
+  }
+}
+
+export interface EditGroupResponse extends BasicResponse {
+  data: {
+    name: string;
+    description: string;
+    image: string;
+  }
 }
 
 export interface BasicResponse {
