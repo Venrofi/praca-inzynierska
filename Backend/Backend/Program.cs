@@ -3,6 +3,9 @@ using Backend.Data.Context;
 using Backend.Services;
 using AspNetCoreRateLimit;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HipHopHub");
@@ -46,6 +49,33 @@ builder.Services.Configure<IpRateLimitOptions>(options => {
             }
         };
 });
+
+/// JWT TOKEN CONFIGURATION - KEY & ISSUER TO BE SET IN APPSETTINGS.JSON
+
+
+ builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        // JWT Key configuration
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Issuer").Get<string>())),
+        
+        // JWT Issuer configuration
+        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>(),
+        
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+ 
+
+
 builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
 builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
