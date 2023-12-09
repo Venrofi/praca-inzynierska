@@ -196,7 +196,6 @@ namespace Backend.Controllers
             var permissionClaims = new List<Claim>();
             permissionClaims.Add(new Claim("UserID", user.UserId.ToString()));
             var Sectoken = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-              _configuration["Jwt:Issuer"],
               claims: permissionClaims,
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
