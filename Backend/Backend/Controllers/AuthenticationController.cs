@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -192,10 +193,11 @@ namespace Backend.Controllers
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+            var permissionClaims = new List<Claim>();
+            permissionClaims.Add(new Claim("UserID", user.UserId.ToString()));
             var Sectoken = new JwtSecurityToken(_configuration["Jwt:Issuer"],
               _configuration["Jwt:Issuer"],
-              null,
+              claims: permissionClaims,
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
 
