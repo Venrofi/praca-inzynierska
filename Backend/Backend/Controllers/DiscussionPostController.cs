@@ -92,7 +92,7 @@ namespace Backend.Controllers {
                 _context.DiscussionPosts.Add(dp);
                 _context.DiscussionPostsDetails.Add(dp.DiscussionPostDetails);
                 await _context.SaveChangesAsync();
-                return Ok(new { code = "success" });
+                return Ok(new { code = "success", newPost = new { id = dp.DiscussionPostId, name = dp.Title} });
             }
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
@@ -144,11 +144,14 @@ namespace Backend.Controllers {
 
                 if (post.UserId != user.UserId) return BadRequest(new { code = "not-author" });
 
+                Guid pId = post.DiscussionPostId;
+                string pName = post.Title;
+
                 await _context.Comments.Where(c => c.DiscussionPostDetailsId == post.DiscussionPostDetails.DiscussionPostDetailsId).ExecuteDeleteAsync();
                 await _context.DiscussionPostsDetails.Where(dpd => dpd.DiscussionPostId == post.DiscussionPostId).ExecuteDeleteAsync();
                 await _context.DiscussionPosts.Where(dp => dp == post).ExecuteDeleteAsync();
 
-                return Ok(new { code = "success"});
+                return Ok(new { code = "success", deletedPost = new { id = pId, name = pName} });
             }
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
