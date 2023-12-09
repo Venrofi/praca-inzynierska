@@ -48,7 +48,7 @@ namespace Backend.Controllers {
                 _context.Groups.Add(group);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { code = "success" });
+                return Ok(new { code = "success", newGroup = new { id = group.GroupId, name = group.Name} });
             }
             catch (Exception ex) {
                 return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
