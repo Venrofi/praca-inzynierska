@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
+using Org.BouncyCastle.Utilities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -202,9 +203,19 @@ namespace Backend.Controllers
 
             var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-            return Ok(new { code = "login-success", token }); //TODO: Generate userSessionToken?
-        }
+            byte[] userGUID = user.UserId.ToByteArray();
+            char[] code = System.Text.Encoding.UTF8.GetString(userGUID).ToCharArray();
+            int pos_mid = token.Length % 2 == 1 ? (token.Length / 2 + 1) : (token.Length / 2);
+            int pos_fill = pos_mid % 2 == 1 ? (pos_mid / 2 + 1) : (pos_mid / 2);
+            string newCode = RandomChar() + token[0..pos_fill] + code[0] + token[(pos_fill + 1)..pos_mid] + code[0] + token[(pos_mid + 1)..(pos_fill + pos_mid)] + code[0] + token[(pos_fill + pos_mid + 1)..] + RandomChar();
 
+
+            return Ok(new { code = "login-success", newCode, token }); 
+        }
+        private char RandomChar()
+        {
+            return  (char)new Random().Next('A', 'Z' + 1);
+        }
 
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
