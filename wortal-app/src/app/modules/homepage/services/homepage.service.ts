@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/core/core.model';
@@ -33,11 +33,12 @@ export class HomepageService {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
     return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
+      take(9),
       map((albums: Album[]) => {
         return albums.map(album => {
           return {
             ...album,
-            cover: this.generateRandomAvatar(),
+            cover: this.generateRandomImage(),
           };
         });
       })
@@ -58,6 +59,12 @@ export class HomepageService {
     return this.http.get<HomepageSideRecommendations>(`${this.API_ROOT}/MainPage/side-recommendations`, { params });
 
     // return this.http.get<any>('assets/data/side-recommendations.json').pipe(delay(1000));
+  }
+
+  private generateRandomImage(): string {
+    const randomImageSize = Math.floor(Math.random() * 300 + 600); // returns a random number between 600 and 900
+
+    return `https://picsum.photos/${randomImageSize}/${randomImageSize}`;
   }
 
   private generateRandomAvatar(): string {
