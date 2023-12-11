@@ -33,7 +33,7 @@ export class HomepageService {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
     return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
-      take(9),
+      map((albums: Album[]) => albums.slice(0,9)),
       map((albums: Album[]) => {
         return albums.map(album => {
           return {
