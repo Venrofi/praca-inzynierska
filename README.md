@@ -6,12 +6,6 @@
 
 **Autorzy:** Radosław Terelak, Jakub Nowak, Kamil Plewnia
 
-
 Warstwa Frontend to Angular + TypeScript  
-Warstwa Backend to ..  
-Baza danych to ..
-
-
-______________________________________________________________________________________________________________
-
-Aby poprawnie uruchomić aplikację należy ..
+Warstwa Backend to C# ASP.NET Core + Entity Framework Core
+Baza danych to MS SQL Server
