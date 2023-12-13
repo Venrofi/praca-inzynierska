@@ -39,7 +39,6 @@ export class EditMemberDialogComponent {
     this.memberService.updateMember(this.editMemberModel).subscribe({
       next: (response: Member) => {
         this.isProcessing = false;
-        console.log(response);
         this.store.dispatch(memberActions.update({ member: { ...response } }));
         this.snackBar.open('Pomyślnie zapisano zmiany na profilu.', 'OK', {
           duration: 3000,
@@ -55,7 +54,6 @@ export class EditMemberDialogComponent {
           horizontalPosition: 'end',
           panelClass: ['snackbar-error']
         });
-        console.log(error);
       }
     })
   }

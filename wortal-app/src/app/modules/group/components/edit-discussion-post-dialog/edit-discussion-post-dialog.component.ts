@@ -51,7 +51,6 @@ export class EditDiscussionPostDialogComponent {
           horizontalPosition: 'end',
           panelClass: ['snackbar-error']
         });
-        console.log(error);
       }
     });
   }
