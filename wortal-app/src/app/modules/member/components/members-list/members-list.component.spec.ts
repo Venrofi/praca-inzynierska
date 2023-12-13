@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { MemberList } from 'src/app/core/core.model';
 import { SharedMaterialModule } from 'src/app/material.module';
-import { ArtistRoutingModule } from 'src/app/modules/artist/artist-routing.module';
+import { MemberRoutingModule } from '../../member-routing.module';
 import { MemberService } from '../../services/member.service';
 import { MembersListComponent } from './members-list.component';
 
@@ -22,7 +22,7 @@ describe('MembersListComponent', () => {
       declarations: [MembersListComponent],
       imports: [
         BrowserAnimationsModule,
-        ArtistRoutingModule,
+        MemberRoutingModule,
         SharedMaterialModule,
       ],
       providers: [
@@ -39,8 +39,8 @@ describe('MembersListComponent', () => {
 
   it('should call getMembersList on ngOnInit and set up the data source', () => {
     const mockMembers = [
-      { id: '1', name: 'Artist #1', rank: '1', avatar: 'https://picsum.photos/100' },
-      { id: '2', name: 'Artist #2', rank: '2', avatar: 'https://picsum.photos/100' },
+      { id: '1', name: 'Member #1', rank: '1', avatar: 'https://picsum.photos/100' },
+      { id: '2', name: 'Member #2', rank: '2', avatar: 'https://picsum.photos/100' },
     ] as MemberList[];
     memberService.getMembersList.and.returnValue(of(mockMembers));
 
@@ -51,17 +51,17 @@ describe('MembersListComponent', () => {
   });
 
   it('should apply filter when applyFilter is called', () => {
-    const mockEvent = { target: { value: 'Artist #1' } } as unknown as Event;
+    const mockEvent = { target: { value: 'Member #1' } } as unknown as Event;
     const mockFilteredGroups = [
-      { id: '1', name: 'Artist #1', rank: '1', avatar: 'https://picsum.photos/100' },
-      { id: '2', name: 'Artist #2', rank: '2', avatar: 'https://picsum.photos/100' },
+      { id: '1', name: 'Member #1', rank: '1', avatar: 'https://picsum.photos/100' },
+      { id: '2', name: 'Member #2', rank: '2', avatar: 'https://picsum.photos/100' },
     ] as MemberList[];
 
     component.membersData = new MatTableDataSource(mockFilteredGroups);
     component.applyFilter(mockEvent);
 
-    expect(component.membersData.filter).toBe('artist #1');
-    expect(component.membersData.filteredData).toEqual([{ id: '1', name: 'Artist #1', rank: '1', avatar: 'https://picsum.photos/100' }] as MemberList[]);
+    expect(component.membersData.filter).toBe('member #1');
+    expect(component.membersData.filteredData).toEqual([{ id: '1', name: 'Member #1', rank: '1', avatar: 'https://picsum.photos/100' }] as MemberList[]);
   });
 
   it('should display a message when no data is available', () => {
