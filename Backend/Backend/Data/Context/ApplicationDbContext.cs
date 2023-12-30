@@ -11,7 +11,7 @@ namespace Backend.Data.Context
         }
 
         public DbSet<User> Users => Set<User>();
-        public DbSet<Comment> Comments { get; set; } //= null!;
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<DiscussionPost> DiscussionPosts { get; set; }
         public DbSet<DiscussionPostDetails> DiscussionPostsDetails { get; set; }
         public DbSet<Event> Events { get; set; }
@@ -25,7 +25,6 @@ namespace Backend.Data.Context
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            //
             modelBuilder.Entity<Group>()
                 .HasOne(g => g.Owner)
                 .WithMany(u => u.OwnedGroups)

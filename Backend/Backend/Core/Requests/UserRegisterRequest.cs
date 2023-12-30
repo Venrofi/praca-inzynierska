@@ -11,7 +11,7 @@ namespace Backend.Core.Requests
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required, MinLength(8, ErrorMessage = "Minimum length for password is 8 characters!")]    //TODO WORK OUT PASSWORD REQUIREMENTS
+        [Required, MinLength(8, ErrorMessage = "Minimum length for password is 8 characters!")]
         public string Password { get; set; } = string.Empty;
 
         [Required, Compare("Password")]

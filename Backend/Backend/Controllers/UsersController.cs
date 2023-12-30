@@ -25,7 +25,6 @@ namespace Backend.Controllers
 
         #region Get
 
-        // GET: api/Users/5
         [HttpGet("basic-user")]
         public async Task<ActionResult<object>> GetBasicUser(Guid id) {
             if (_context.Users == null) {
@@ -80,7 +79,7 @@ namespace Backend.Controllers
 
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while updating the user. | {ex.Message}");
             }
 
         }

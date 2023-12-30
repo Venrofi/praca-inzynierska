@@ -73,7 +73,6 @@ namespace Backend.Controllers
                 .Take(5)
                 .ToListAsync();
 
-            //SideRecommendations new {TopDiscussions, TopArtists, TopUsers, RecommendedGroups}
             object sideRecommendations = new { 
                 TopDiscussions = new { title = "Najlepsze dyskusje" , content = topDiscussions },
                 TopArtists = new { title = "Najpopularniejsi artyści", content = topArtists },

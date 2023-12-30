@@ -51,7 +51,7 @@ namespace Backend.Controllers {
                 return Ok(new { code = "success", newGroup = new { id = group.GroupId, name = group.Name} });
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while creating the group. | {ex.Message}");
             }
         }
         #endregion
@@ -71,8 +71,13 @@ namespace Backend.Controllers {
                 var group = await _context.Groups.Where(g => g.GroupId == request.GroupId).FirstOrDefaultAsync();
                 if (group == null) return NotFound(new { code = "group-not-found"});
 
-                if (group.Owner == null) return BadRequest(new { code = "null-owner"});
-                if (group.OwnerId != user.UserId) return BadRequest(new { code = "not-owner"});
+                var userType = await _context.UserTypes.Where(ut => ut.Description == "USER").FirstOrDefaultAsync();
+                if (userType == null) return BadRequest(new { code = "user-type-error" });
+
+                if(user.UserType == userType){
+                    if (group.Owner == null) return BadRequest(new { code = "null-owner"});
+                    if (group.OwnerId != user.UserId) return BadRequest(new { code = "not-owner"});
+                }             
 
                 group.Name = request.Data.Name;
                 group.Description = request.Data.Description;
@@ -82,7 +87,7 @@ namespace Backend.Controllers {
                 return Ok(new { code = "success" });
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while editing the group. | {ex.Message}");
             }
         }
         #endregion

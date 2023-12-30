@@ -2,10 +2,7 @@
 
 namespace Backend.Core.Requests {
     public class CreateGroupRequest {
-        /*userId: string;
-          name: string;
-          description: string;
-          image: string;*/
+
         [Required(ErrorMessage = "null-userid")]
         public Guid UserId { get; set; }
 

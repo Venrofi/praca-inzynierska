@@ -14,7 +14,6 @@ namespace Backend.Repositories {
             _context = context;
         }
 
-        //Maybe with tags, something... xd
         public List<Group> GetRecommendedGroups(User? user) {
             if(user == null || user.Groups == null || !user.Groups.Any())
                 return  _context.Groups.OrderBy(g => g.Users.Count).ToList();

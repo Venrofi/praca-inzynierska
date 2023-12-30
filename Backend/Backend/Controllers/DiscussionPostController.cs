@@ -42,10 +42,6 @@ namespace Backend.Controllers {
         #region Create
         [HttpPost("create")]
         public async Task<IActionResult> Create(DiscussionPostRequest request) {
-            /*      public Guid AuthorId { get; set; }
-                    public Guid GroupId { get; set; }
-                    public string Title { get; set; } = string.Empty;
-                    public string Content { get; set; } = string.Empty; */
             try {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -60,13 +56,6 @@ namespace Backend.Controllers {
                 //check user in group and group in user
                 if (!user.Groups.Where(g => g == group).Any() || !group.Users.Where(u => u == user).Any())
                     return BadRequest(new { code = "user-group-error" });
-
-                //Profanities searching -- for now, not good implementation imo
-
-                //string testTitle = await _psa.ChangeCharacters(request.Title.ToLower());
-                //string testContent = await _psa.ChangeCharacters(request.Content.ToLower());
-                //if (_psa.HasBadWords(testTitle).Result) //|| _psa.HasBadWords(testContent).Result)
-                //    return Ok(new { code = "bad-words" });
 
                 var dp = new DiscussionPost() {
                     DiscussionPostId = Guid.NewGuid(),
@@ -124,7 +113,7 @@ namespace Backend.Controllers {
                 return Ok(new { code = "success" });
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while editing the discussion post. | {ex.Message}");
             }
         }
         #endregion
@@ -135,8 +124,6 @@ namespace Backend.Controllers {
             try {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                //request.AuthorId
-                //request.PostId
                 var user = await _context.Users.Include(u => u.Groups).Where(u => u.UserId == request.AuthorId).FirstOrDefaultAsync();
                 if (user == null) return NotFound(new { code = "user-not-found" });
                 var post = await _context.DiscussionPosts.Include(d => d.DiscussionPostDetails).Where(d => d.DiscussionPostId == request.PostId).FirstOrDefaultAsync();
@@ -154,7 +141,7 @@ namespace Backend.Controllers {
                 return Ok(new { code = "success", deletedPost = new { id = pId, name = pName} });
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while deleting the discussion post. | {ex.Message}");
             }
         }
         #endregion
@@ -209,7 +196,7 @@ namespace Backend.Controllers {
                 });
             }
             catch (Exception ex) {
-                return StatusCode(500, $"An error occurred while creating the discussion post. | {ex.Message}");
+                return StatusCode(500, $"An error occurred while adding the comment. | {ex.Message}");
             }
         }
         #endregion

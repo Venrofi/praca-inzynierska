@@ -112,19 +112,11 @@ namespace Backend.Controllers {
         }
         #endregion
 
-        /*[HttpPost("fast-artist-profile")]
-        public async Task<IActionResult> FastArtistProfile() {
-            Guid guid = Guid.NewGuid();
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return Ok($"New artist profile was created. {i}");
-        }*/
 
         #region ProfanitiesTest
         [HttpPost("profanity-test")]
         public async Task<IActionResult> LoadProfanity() {
             ProfanitySearchAlgorithm psa = new ProfanitySearchAlgorithm(_context);
-            //psa.SeedProfanities();
             return Ok($"New artist profile was created.");
         }
 
@@ -157,7 +149,7 @@ namespace Backend.Controllers {
             Guid guid = Guid.NewGuid();
             int i = 0;
             do {
-                name = nicknames[i];// + guid.ToString("N").Substring(0, 5);
+                name = nicknames[i];
                 i++;
                 if (i == nicknames.Length)
                     break;
@@ -459,8 +451,6 @@ namespace Backend.Controllers {
             };
 
             var dp = _context.DiscussionPosts.Where(dp => dp.DiscussionPostDetails == dpd).FirstOrDefault();
-/*            if (dp != null)
-                dp.NumberOfComments++;*/
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
@@ -560,26 +550,22 @@ namespace Backend.Controllers {
                 return BadRequest(new { code = "user-not-found" });
             if (group == null)
                 return BadRequest(new { code = "group-not-found" });
-            //check if user is in group
+
             if (group.Users == null)
                 group.Users = new List<User>();
             if (user.Groups == null)
                 user.Groups = new List<Group>();
-            //if (group.Users.Contains(user))
-            //    return BadRequest(new { code = "user-already-in-group"});
+
             if (group.Users.Any(u => u.UserId == user.UserId))
                 return BadRequest(new { code = "user-already-in-group" });
             if (user.Groups.Any(g => g.GroupId == group.GroupId))
                 return BadRequest(new { code = "user-already-in-group" });
 
-            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
             group.Users.Add(user);
             await _context.SaveChangesAsync();
 
             user.Groups.Add(group);
-            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
 
-            //_context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok(new { code = "success" });
         }
@@ -597,26 +583,20 @@ namespace Backend.Controllers {
                 return BadRequest(new { code = "user-not-found" });
             if (eventt == null)
                 return BadRequest(new { code = "event-not-found" });
-            //check if user is in group
             if (eventt.Participants == null)
                 eventt.Participants = new List<User>();
             if (user.ParticipatedEvents == null)
                 user.ParticipatedEvents = new List<Event>();
-            //if (group.Users.Contains(user))
-            //    return BadRequest(new { code = "user-already-in-group"});
+
             if (eventt.Participants.Any(u => u.UserId == user.UserId))
                 return BadRequest(new { code = "user-already-in-event" });
             if (user.ParticipatedEvents.Any(g => g.EventId == eventt.EventId))
                 return BadRequest(new { code = "user-already-in-event" });
 
-            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
             eventt.Participants.Add(user);
             await _context.SaveChangesAsync();
 
             user.ParticipatedEvents.Add(eventt);
-            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
-
-            //_context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok(new { code = "success" });
         }
@@ -634,26 +614,22 @@ namespace Backend.Controllers {
                 return BadRequest(new { code = "user-not-found" });
             if (artist == null)
                 return BadRequest(new { code = "artist-not-found" });
-            //check if user is in group
+
             if (artist.Followers == null)
                 artist.Followers = new List<User>();
             if (user.FollowedArtists == null)
                 user.FollowedArtists = new List<ArtistProfile>();
-            //if (group.Users.Contains(user))
-            //    return BadRequest(new { code = "user-already-in-group"});
+
             if (artist.Followers.Any(u => u.UserId == user.UserId))
                 return BadRequest(new { code = "user-already-in-artist" });
             if (user.FollowedArtists.Any(g => g.ArtistProfileId == artist.ArtistProfileId))
                 return BadRequest(new { code = "user-already-in-artist" });
 
-            //_context.Groups.Where(g => g == group).FirstOrDefault().Users.Add(user);
             artist.Followers.Add(user);
             await _context.SaveChangesAsync();
 
             user.FollowedArtists.Add(artist);
-            //_context.Users.Where(u => u == user).FirstOrDefault().Groups.Add(group);
 
-            //_context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok(new { code = "success" });
         }
@@ -671,17 +647,6 @@ namespace Backend.Controllers {
         #endregion
 
         #region GetUserWithAllHisGroupsArtistsEvents
-
-        /* 
-         SELECT u.UserId, u.UserName, ap.Name, g.Name, e.Title FROM dbo.Users u 
-            left join dbo.ArtistProfileUser apu on apu.FollowersUserId = u.UserId
-            left join dbo.ArtistsProfiles ap on ap.ArtistProfileId = apu.FollowedArtistsArtistProfileId
-            left join dbo.GroupUser gu on gu.UsersUserId = u.UserId
-            left join dbo.Groups g on g.GroupId = gu.GroupsGroupId
-            left join dbo.EventUser eu on eu.ParticipantsUserId = u.UserId
-            left join dbo.Events e on e.EventId = eu.ParticipatedEventsEventId
-            WHERE u.UserId = ''
-         */
 
         [HttpGet("get-users-with-all-his-groups-artists-events")]
         public async Task<ActionResult<object>> GetUsersWithAllHisGroupsArtistsEvents(Guid userId) {

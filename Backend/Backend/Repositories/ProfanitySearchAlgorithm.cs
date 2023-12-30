@@ -15,26 +15,6 @@ namespace Backend.Repositories {
             _context = context;
         }
 
-        /*public void SeedProfanities() {
-            if (!_context.Profanities.Any()) {
-                foreach (var profanity in profanities) {
-                    _context.Profanities.Add(new Profanities {
-                        ProfanitiesId = Guid.NewGuid(),
-                        ProfanitiesName = profanity
-                    });
-                }
-                _context.SaveChanges();
-            };              
-        }*/
-
-        /*public bool ContainsAnySensitive(string haystack) {
-            foreach(string needle in needles) {
-                if (haystack.Contains(needle))
-                    return true;
-            }
-            return false;
-        }*/
-
         public string ChangeCharacters(string word) {
             return word.ToLower()
                 .Replace('!', 'i').Replace('@', 'a').Replace('$', 's').Replace('€', 'e')
