@@ -62,7 +62,7 @@ namespace Backend.Controllers {
                 .Where(dp => id.HasValue ? (dp.Group != null || dp.ArtistProfile != null) : (dp.ArtistProfile != null))
                 .Where(dp => dp.Title.Contains(input) || dp.Topic.Contains(input) || dp.DiscussionPostDetails.Content.Contains(input))// || dp.DiscussionPostDetails.Comments.Any(c => c.Content.Contains(input)))
                 .OrderBy(dp => dp.CreationTime)
-                .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title }) })
+                .Select(dp => new { id = dp.DiscussionPostId, name = dp.Title })
                 .ToListAsync();
 
             var users = id.HasValue ? (await _context.Users
