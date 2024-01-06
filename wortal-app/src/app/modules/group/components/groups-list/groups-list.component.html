@@ -28,7 +28,12 @@
 
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4" style="color: white;" class="px-3">Nie znaleziono grup zawierających w nazwie "{{ inputFilter.value }}"..</td>
+        <td class="mat-cell" colspan="4" style="color: white;" class="px-3">
+          <span *ngIf="inputFilter.value; else default">Nie znaleziono grup zawierających w nazwie "{{ inputFilter.value }}"..</span>
+          <ng-template #default>
+            <span>Nie znaleziono grup..</span>
+          </ng-template>
+        </td>
       </tr>
     </table>
 
