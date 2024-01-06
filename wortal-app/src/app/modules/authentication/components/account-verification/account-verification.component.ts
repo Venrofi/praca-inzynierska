@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/authentication.service';
@@ -16,7 +15,6 @@ export class AccountVerificationComponent {
 
   constructor(
     private authService: AuthService,
-    private dialog: MatDialogRef<AccountVerificationComponent>,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
@@ -40,10 +38,9 @@ export class AccountVerificationComponent {
     this.authService.verify(token).subscribe({
       next: () => {
         this.snackBar.open('Weryfikacja pomyślna! Konto zostało aktywowane. Możesz się zalogować :)', 'OK', { horizontalPosition: 'center', panelClass: ['snackbar-success'] });
-        this.isProcessing = false;
 
+        this.isProcessing = false;
         this.router.navigate(['/']);
-        this.dialog.close();
       },
       error: (response) => {
         console.log('Verification failed..', response.error.code);
@@ -60,9 +57,7 @@ export class AccountVerificationComponent {
         }
 
         this.isProcessing = false;
-
         this.router.navigate(['/']);
-        this.dialog.close();
       }
     });
   }
