@@ -7,5 +7,5 @@
 **Autorzy:** Radosław Terelak, Jakub Nowak, Kamil Plewnia
 
 Warstwa Frontend to Angular + TypeScript  
-Warstwa Backend to C# ASP.NET Core + Entity Framework Core
+Warstwa Backend to C# ASP.NET Core + Entity Framework Core  
 Baza danych to MS SQL Server
