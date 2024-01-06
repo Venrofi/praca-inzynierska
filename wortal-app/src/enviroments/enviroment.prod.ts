@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://backend-hip-hop-hub.azurewebsites.net/api',
+  apiBaseUrl: 'https://hiphophub.azurewebsites.net/api',
 };
