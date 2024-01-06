@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Event } from 'src/app/core/core.model';
-import { DiscussionPostDetails } from 'src/app/modules/homepage/homepage.model';
+import { DiscussionPostDetails, Comment } from 'src/app/modules/homepage/homepage.model';
 import { environment } from 'src/enviroments/enviroment';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class ContentDetailsService {
         map((event: Event) => {
           return {
             ...event,
-            image: this.generateRandomImage(),
+            image: event.image || this.generateRandomImage(),
           }
         })
       );
@@ -45,19 +45,19 @@ export class ContentDetailsService {
     const params = new HttpParams().set('id', postID);
 
     return this.http.get<DiscussionPostDetails>(`${this.API_ROOT}/Details/discussion`, { params }).pipe(
-      map((discussionPost: any) => {
+      map((discussionPost: DiscussionPostDetails) => {
         return {
           ...discussionPost,
           author: {
             ...discussionPost.author,
-            avatar: this.generateRandomAvatar(),
+            avatar: discussionPost.author.avatar || this.generateRandomAvatar(),
           },
-          comments: discussionPost.comments.map((comment: any) => {
+          comments: discussionPost.comments.map((comment: Comment) => {
             return {
               ...comment,
               author: {
                 ...comment.author,
-                avatar: this.generateRandomAvatar(),
+                avatar: comment.author.avatar || this.generateRandomAvatar(),
               }
             }
           }),

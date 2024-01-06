@@ -43,7 +43,7 @@ export class DiscussionPostActionService {
             ...response.createdComment,
             author: {
               ...response.createdComment.author,
-              avatar: this.generateRandomAvatar(),
+              avatar: response.createdComment.author.avatar || this.generateRandomAvatar(),
             }
           }
         }

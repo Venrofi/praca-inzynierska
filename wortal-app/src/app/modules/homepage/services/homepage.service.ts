@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, take } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/core/core.model';
@@ -21,7 +21,7 @@ export class HomepageService {
             ...post,
             author: {
               ...post.author,
-              avatar: this.generateRandomAvatar(),
+              avatar: post.author.avatar || this.generateRandomAvatar(),
             }
           };
         })
@@ -33,12 +33,12 @@ export class HomepageService {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
     return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
-      map((albums: Album[]) => albums.slice(0,9)),
+      map((albums: Album[]) => albums.slice(0, 9)),
       map((albums: Album[]) => {
         return albums.map(album => {
           return {
             ...album,
-            cover: this.generateRandomImage(),
+            cover: album.cover || this.generateRandomImage(),
           };
         });
       })

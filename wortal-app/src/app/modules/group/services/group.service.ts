@@ -18,7 +18,7 @@ export class GroupService {
           return groups.map((group: GroupList, index: number) => {
             return {
               ...group,
-              image: this.generateRandomImage(),
+              image: group.image || this.generateRandomImage(),
               rank: (index + 1).toString(),
             };
           });
@@ -34,7 +34,7 @@ export class GroupService {
         map((group: Group) => {
           return {
             ...group,
-            image: this.generateRandomImage(),
+            image: group.image || this.generateRandomImage(),
           }
         })
       );

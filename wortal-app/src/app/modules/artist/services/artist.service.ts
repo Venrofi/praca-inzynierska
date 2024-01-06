@@ -18,7 +18,7 @@ export class ArtistService {
           return artists.map((artist: ArtistList, index: number) => {
             return {
               ...artist,
-              image: this.generateRandomAvatar(),
+              image: artist.image || this.generateRandomAvatar(),
               rank: (index + 1).toString(),
             };
           });
@@ -38,7 +38,7 @@ export class ArtistService {
             albums: artist.albums.map(album => {
               return {
                 ...album,
-                cover: this.generateRandomAvatar(),
+                cover: album.cover || this.generateRandomAvatar(),
               };
             }),
           }
@@ -53,7 +53,7 @@ export class ArtistService {
       map((album: AlbumDetails) => {
         return {
           ...album,
-          cover: this.generateRandomCover(),
+          cover: album.cover || this.generateRandomCover(),
         }
       })
     );

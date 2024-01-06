@@ -17,7 +17,7 @@ export class MemberService {
           return members.map((member: MemberList, index: number) => {
             return {
               ...member,
-              avatar: this.generateRandomAvatar(),
+              avatar: member.avatar || this.generateRandomAvatar(),
               rank: (index + 1).toString(),
             };
           });

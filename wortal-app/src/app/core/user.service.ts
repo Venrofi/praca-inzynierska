@@ -25,7 +25,7 @@ export class UserService {
       map((member: Member) => {
         return {
           ...member,
-          avatar: this.generateRandomAvatar(),
+          avatar: member.avatar || this.generateRandomAvatar(),
         }
       })
     ); //TODO: Add error handling
