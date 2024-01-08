@@ -34,7 +34,7 @@ export class ArtistService {
         map((artist: Artist) => {
           return {
             ...artist,
-            image: this.generateRandomAvatar(),
+            image: artist.image || this.generateRandomAvatar(),
             albums: artist.albums.map(album => {
               return {
                 ...album,
