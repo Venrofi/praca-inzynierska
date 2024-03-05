@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
-import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 import { Injectable } from '@angular/core';
+import { Observable, delay, map } from 'rxjs';
 import { Event } from 'src/app/core/core.model';
 import { environment } from 'src/enviroments/enviroment';
+import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 
 @Injectable()
 export class HomepageService {
@@ -14,7 +14,8 @@ export class HomepageService {
   getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<DiscussionPost[]>(`${this.API_ROOT}/MainPage/discussion-posts`, { params }).pipe(
+    return this.http.get<DiscussionPost[]>(`${this.API_ROOT}/homepage--discussion-posts`, { params }).pipe(
+      delay(1000),
       map((posts: DiscussionPost[]) => {
         return posts.map(post => {
           return {
@@ -32,7 +33,8 @@ export class HomepageService {
   getPremiereList(userID?: string): Observable<Album[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
+    return this.http.get<Album[]>(`${this.API_ROOT}/homepage--premiere-albums?_limit=9`, { params }).pipe(
+      delay(1000),
       map((albums: Album[]) => albums.slice(0, 9)),
       map((albums: Album[]) => {
         return albums.map(album => {
@@ -43,22 +45,18 @@ export class HomepageService {
         });
       })
     );
-
-    // return this.http.get<Album[]>('assets/data/premiere-albums.json').pipe(delay(1000));
   }
 
   getEventList(userID?: string): Observable<Event[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<Event[]>(`${this.API_ROOT}/MainPage/events`, { params });
+    return this.http.get<Event[]>(`${this.API_ROOT}/homepage--events`, { params }).pipe(delay(1000));
   }
 
   getSideRecommendations(userID?: string): Observable<HomepageSideRecommendations> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<HomepageSideRecommendations>(`${this.API_ROOT}/MainPage/side-recommendations`, { params });
-
-    // return this.http.get<any>('assets/data/side-recommendations.json').pipe(delay(1000));
+    return this.http.get<HomepageSideRecommendations>(`${this.API_ROOT}/homepage--side-recommendations`, { params });
   }
 
   private generateRandomImage(): string {

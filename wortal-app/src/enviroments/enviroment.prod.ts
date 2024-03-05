@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://hiphophub.azurewebsites.net/api',
+  apiBaseUrl: 'http://localhost:3000'
 };
