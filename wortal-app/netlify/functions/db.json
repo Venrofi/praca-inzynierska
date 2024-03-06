@@ -1,0 +1,389 @@
+{
+  "homepage": {
+    "discussion-posts": [
+      {
+        "id": "1",
+        "author": {
+          "id": "1",
+          "name": "John Doe",
+          "active": true
+        },
+        "topic": {
+          "id": "1",
+          "name": "Artist 1",
+          "type": "ARTIST"
+        },
+        "title": "Discussion Post 1",
+        "creationTime": "2022-01-01T00:00:00Z",
+        "numberOfComments": 10
+      },
+      {
+        "id": "2",
+        "author": {
+          "id": "2",
+          "name": "Jane Smith",
+          "active": true
+        },
+        "topic": {
+          "id": "2",
+          "name": "Artist 2",
+          "type": "ARTIST"
+        },
+        "title": "Discussion Post 2",
+        "creationTime": "2022-01-02T00:00:00Z",
+        "numberOfComments": 5
+      },
+      {
+        "id": "3",
+        "author": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "active": true
+        },
+        "topic": {
+          "id": "3",
+          "name": "Artist 3",
+          "type": "ARTIST"
+        },
+        "title": "Discussion Post 3",
+        "creationTime": "2022-01-03T00:00:00Z",
+        "numberOfComments": 6
+      },
+      {
+        "id": "4",
+        "author": {
+          "id": "4",
+          "name": "Sue Williams",
+          "active": true
+        },
+        "topic": {
+          "id": "4",
+          "name": "Artist 4",
+          "type": "ARTIST"
+        },
+        "title": "Discussion Post 4",
+        "creationTime": "2022-01-04T00:00:00Z",
+        "numberOfComments": 3
+      },
+      {
+        "id": "5",
+        "author": {
+          "id": "5",
+          "name": "Tom Brown",
+          "active": true
+        },
+        "topic": {
+          "id": "5",
+          "name": "Artist 5",
+          "type": "ARTIST"
+        },
+        "title": "Discussion Post 5",
+        "creationTime": "2022-01-05T00:00:00Z",
+        "numberOfComments": 11
+      }
+    ],
+    "premiere-albums": [
+      {
+        "id": "1",
+        "name": "Album 1",
+        "artist": {
+          "id": "1",
+          "name": "Artist 1"
+        },
+        "releaseDate": "2022-01-01"
+      },
+      {
+        "id": "2",
+        "name": "Album 2",
+        "artist": {
+          "id": "2",
+          "name": "Artist 2"
+        },
+        "releaseDate": "2022-01-02"
+      },
+      {
+        "id": "3",
+        "name": "Album 3",
+        "artist": {
+          "id": "3",
+          "name": "Artist 3"
+        },
+        "releaseDate": "2022-01-03"
+      },
+      {
+        "id": "4",
+        "name": "Album 4",
+        "artist": {
+          "id": "4",
+          "name": "Artist 4"
+        },
+        "releaseDate": "2022-01-04"
+      },
+      {
+        "id": "5",
+        "name": "Album 5",
+        "artist": {
+          "id": "5",
+          "name": "Artist 5"
+        },
+        "releaseDate": "2022-01-05"
+      },
+      {
+        "id": "6",
+        "name": "Album 6",
+        "artist": {
+          "id": "6",
+          "name": "Artist 6"
+        },
+        "releaseDate": "2022-01-06"
+      },
+      {
+        "id": "7",
+        "name": "Album 7",
+        "artist": {
+          "id": "7",
+          "name": "Artist 7"
+        },
+        "releaseDate": "2022-01-07"
+      },
+      {
+        "id": "8",
+        "name": "Album 8",
+        "artist": {
+          "id": "8",
+          "name": "Artist 8"
+        },
+        "releaseDate": "2022-01-08"
+      },
+      {
+        "id": "9",
+        "name": "Album 9",
+        "artist": {
+          "id": "9",
+          "name": "Artist 9"
+        },
+        "releaseDate": "2022-01-09"
+      },
+      {
+        "id": "10",
+        "name": "Album 10",
+        "artist": {
+          "id": "10",
+          "name": "Artist 10"
+        },
+        "releaseDate": "2022-01-10"
+      }
+    ],
+    "events": [
+      {
+        "id": "1",
+        "name": "Event 1",
+        "date": "2022-01-01",
+        "type": "ARTIST",
+        "location": "Location 1",
+        "description": "Description 1",
+        "promoter": {
+          "id": "1",
+          "name": "Promoter 1"
+        },
+        "participants": [
+          {
+            "id": "1",
+            "name": "Artist 1"
+          },
+          {
+            "id": "2",
+            "name": "Artist 2"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Event 2",
+        "date": "2022-01-02",
+        "type": "ARTIST",
+        "location": "Location 2",
+        "description": "Description 2",
+        "promoter": {
+          "id": "2",
+          "name": "Promoter 2"
+        },
+        "participants": [
+          {
+            "id": "3",
+            "name": "Artist 3"
+          },
+          {
+            "id": "4",
+            "name": "Artist 4"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Event 3",
+        "date": "2022-01-03",
+        "type": "GROUP",
+        "location": "Location 3",
+        "description": "Description 3",
+        "promoter": {
+          "id": "3",
+          "name": "Promoter 3"
+        },
+        "participants": [
+          {
+            "id": "5",
+            "name": "Artist 5"
+          },
+          {
+            "id": "6",
+            "name": "Artist 6"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "name": "Event 4",
+        "date": "2022-01-04",
+        "type": "ARTIST",
+        "location": "Location 4",
+        "description": "Description 4",
+        "promoter": {
+          "id": "4",
+          "name": "Promoter 4"
+        },
+        "participants": [
+          {
+            "id": "7",
+            "name": "Artist 7"
+          },
+          {
+            "id": "8",
+            "name": "Artist 8"
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "name": "Event 5",
+        "date": "2022-01-05",
+        "type": "ARTIST",
+        "location": "Location 5",
+        "description": "Description 5",
+        "promoter": {
+          "id": "5",
+          "name": "Promoter 5"
+        },
+        "participants": [
+          {
+            "id": "9",
+            "name": "Artist 9"
+          }
+        ]
+      }
+    ],
+    "side-recommendations": {
+      "topDiscussions": {
+        "title": "Najlepsze dyskusje",
+        "content": [
+          {
+            "id": "1",
+            "name": "Discussion 1"
+          },
+          {
+            "id": "2",
+            "name": "Discussion 2"
+          },
+          {
+            "id": "3",
+            "name": "Discussion 3"
+          },
+          {
+            "id": "4",
+            "name": "Discussion 4"
+          },
+          {
+            "id": "5",
+            "name": "Discussion 5"
+          }
+        ]
+      },
+      "topArtists": {
+        "title": "Popularni artyści",
+        "content": [
+          {
+            "id": "1",
+            "name": "Artist 1"
+          },
+          {
+            "id": "2",
+            "name": "Artist 2"
+          },
+          {
+            "id": "3",
+            "name": "Artist 3"
+          },
+          {
+            "id": "4",
+            "name": "Artist 4"
+          },
+          {
+            "id": "5",
+            "name": "Artist 5"
+          }
+        ]
+      },
+      "topMembers": {
+        "title": "Użytkownicy tygodnia",
+        "content": [
+          {
+            "id": "1",
+            "name": "Member 1"
+          },
+          {
+            "id": "2",
+            "name": "Member 2"
+          },
+          {
+            "id": "3",
+            "name": "Member 3"
+          },
+          {
+            "id": "4",
+            "name": "Member 4"
+          },
+          {
+            "id": "5",
+            "name": "Member 5"
+          }
+        ]
+      },
+      "recommendedGroups": {
+        "title": "Rekomendowane grupy",
+        "content": [
+          {
+            "id": "1",
+            "name": "Group 1"
+          },
+          {
+            "id": "2",
+            "name": "Group 2"
+          },
+          {
+            "id": "3",
+            "name": "Group 3"
+          },
+          {
+            "id": "4",
+            "name": "Group 4"
+          },
+          {
+            "id": "5",
+            "name": "Group 5"
+          }
+        ]
+      }
+    },
+    "text": "Witaj na"
+  }
+}
