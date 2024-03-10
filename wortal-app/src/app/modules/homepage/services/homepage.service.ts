@@ -4,12 +4,22 @@ import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/core/core.model';
 import { environment } from 'src/environments/environment';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable()
 export class HomepageService {
   private API_ROOT = environment.apiBaseUrl;
+  private postsCollection: AngularFirestoreCollection<DiscussionPost>;
+  posts: Observable<DiscussionPost[]>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private firestore: AngularFirestore) {
+    this.postsCollection = this.firestore.collection<DiscussionPost>('posts');
+    this.posts = this.postsCollection.valueChanges(); // TEST: this.moviesCollection.snapshotChanges();
+
+    this.posts.subscribe(posts => {
+      console.log('Posts:', posts);
+    });
+  }
 
   getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;

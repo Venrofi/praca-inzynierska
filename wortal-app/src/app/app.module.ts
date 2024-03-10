@@ -17,6 +17,9 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 import { HomepageModule } from './modules/homepage/homepage.module';
 import { SharedModule } from './shared/shared.module';
 import { appReducer } from './store/app.reducer';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { appReducer } from './store/app.reducer';
     SharedModule,
     HomepageModule,
     AuthenticationModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
