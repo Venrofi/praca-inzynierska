@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/core/authentication.service';
 import { Event } from 'src/app/core/core.model';
 import { DiscussionPostDetails, Comment } from 'src/app/modules/homepage/homepage.model';
-import { environment } from 'src/enviroments/enviroment';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ContentDetailsService {

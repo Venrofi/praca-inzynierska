@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from "rxjs";
 import { BasicResponse, CreateNewGroupRequest, CreateNewGroupResponse, EditGroupRequest } from "src/app/core/api.model";
 import { AuthService } from "src/app/core/authentication.service";
-import { environment } from "../../../../enviroments/enviroment";
+import { environment } from "../../../../environments/environment";
 import { Group, GroupList } from "../../../core/core.model";
 
 @Injectable()

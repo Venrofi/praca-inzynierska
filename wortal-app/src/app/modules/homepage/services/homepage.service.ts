@@ -3,7 +3,7 @@ import { Observable, map } from 'rxjs';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 import { Injectable } from '@angular/core';
 import { Event } from 'src/app/core/core.model';
-import { environment } from 'src/enviroments/enviroment';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HomepageService {

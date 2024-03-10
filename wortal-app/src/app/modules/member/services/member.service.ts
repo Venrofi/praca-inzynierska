@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable, map } from "rxjs";
-import { environment } from "../../../../enviroments/enviroment";
+import { environment } from "../../../../environments/environment";
 import { Member, MemberList } from "../../../core/core.model";
 import { UpdateMemberRequest } from "src/app/core/api.model";
 

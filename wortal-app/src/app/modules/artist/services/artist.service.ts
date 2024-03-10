@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
-import { environment } from "../../../../enviroments/enviroment";
+import { environment } from "../../../../environments/environment";
 import { Artist, ArtistList } from "../../../core/core.model";
 import { AuthService } from "src/app/core/authentication.service";
 import { AlbumDetails } from "../../homepage/homepage.model";

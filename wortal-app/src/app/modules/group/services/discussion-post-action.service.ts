@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { map, Observable } from "rxjs";
-import { environment } from "../../../../enviroments/enviroment";
+import { environment } from "../../../../environments/environment";
 import { AddCommentResponse, BasicResponse, CreateDiscussionPostRequest, CreateDiscussionPostResponse, DeleteDiscussionPostRequest, DeleteDiscussionPostResponse, EditDiscussionPostRequest } from "../../../core/api.model";
 import { AuthService } from "../../../core/authentication.service";
 import { BaseWortalElement } from "../../../core/core.model";
