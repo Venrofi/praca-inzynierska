@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/core/authentication.service';
-import { Event } from 'src/app/core/core.model';
+import { EventDetails } from 'src/app/core/core.model';
 import { DiscussionPostDetails, Comment } from 'src/app/modules/homepage/homepage.model';
 import { environment } from 'src/environments/environment';
 
@@ -13,12 +13,12 @@ export class ContentDetailsService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getEventDetails(eventID: string): Observable<Event> {
+  getEventDetails(eventID: string): Observable<EventDetails> {
     const params = new HttpParams().set('id', eventID);
 
-    return this.http.get<Event>(`${this.API_ROOT}/Details/event`, { params })
+    return this.http.get<EventDetails>(`${this.API_ROOT}/Details/event`, { params })
       .pipe(
-        map((event: Event) => {
+        map((event: EventDetails) => {
           return {
             ...event,
             image: event.image || this.generateRandomImage(),

@@ -68,12 +68,14 @@ export interface GroupList extends BaseWortalElement {
 // EVENT
 export interface Event extends BaseWortalElement {
   date: string;
-  image: string;
   type: EventType;
   location: string;
   description: string;
   promoter: BaseWortalElement; // Artist / Group
-  participants: BaseWortalElement[]; // Members that are attending the event
+}
+export interface EventDetails extends Event {
+  image: string;
+  participants: BaseWortalElement[];
 }
 
 export type EventType = 'ARTIST' | 'GROUP';

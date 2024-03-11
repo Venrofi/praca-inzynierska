@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Event, Member } from 'src/app/core/core.model';
+import { EventDetails, Member } from 'src/app/core/core.model';
 import { ContentDetailsService } from '../../services/content-details.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './event-details.component.html',
 })
 export class EventDetailsComponent implements OnInit {
-  event!: Event;
+  event!: EventDetails;
 
   eventAttened: boolean = false;
 
@@ -25,7 +25,7 @@ export class EventDetailsComponent implements OnInit {
   isWideScreen: boolean = window.innerWidth > 600;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
+  onResize(event: EventDetails): void {
     this.isWideScreen = window.innerWidth > 600;
   }
 
@@ -57,7 +57,7 @@ export class EventDetailsComponent implements OnInit {
 
           this.router.navigate(['/']);
 
-          return of({} as Event);
+          return of({} as EventDetails);
         })
       )
       .subscribe(event => {

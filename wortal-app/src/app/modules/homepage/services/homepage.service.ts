@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
-import { Event } from 'src/app/core/core.model';
+import { EventDetails } from 'src/app/core/core.model';
 import { environment } from 'src/environments/environment';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 
@@ -14,12 +14,12 @@ export class HomepageService {
 
   private albumsCollection: AngularFirestoreCollection<Album>;
 
-  private eventsCollection: AngularFirestoreCollection<Event>;
+  private eventsCollection: AngularFirestoreCollection<EventDetails>;
 
   constructor(private http: HttpClient, private firestore: AngularFirestore) {
     this.postsCollection = this.firestore.collection<DiscussionPost>('posts');
     this.albumsCollection = this.firestore.collection<Album>('albums');
-    this.eventsCollection = this.firestore.collection<Event>('events');
+    this.eventsCollection = this.firestore.collection<EventDetails>('events');
   }
 
   getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
@@ -50,10 +50,18 @@ export class HomepageService {
     );
   }
 
-  getEventList(userID?: string): Observable<Event[]> {
-    const params = userID ? new HttpParams().set('id', userID) : undefined;
+  getEventList(userID?: string): Observable<EventDetails[]> {
+    // const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<Event[]>(`${this.API_ROOT}/MainPage/events`, { params });
+    return this.eventsCollection.snapshotChanges().pipe(
+      map((events) => {
+        return events.map((event) => {
+          const { name,  } = event.payload.doc.data();
+          const id = event.payload.doc.id;
+          return { id, name, artist, cover, releaseDate } as EventDetails;
+        }).slice(0, 9);
+      })
+    );
   }
 
   getSideRecommendations(userID?: string): Observable<HomepageSideRecommendations> {
@@ -83,7 +91,7 @@ export class HomepageService {
   }
 
   private initEventsData() {
-    this.http.get<Event[]>('assets/data/events.json').subscribe(events => {
+    this.http.get<EventDetails[]>('assets/data/events.json').subscribe(events => {
       events.forEach(event => {
         const id = this.firestore.createId();
         this.eventsCollection.doc(id).set(event);
