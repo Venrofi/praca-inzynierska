@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
-import { EventDetails } from 'src/app/core/core.model';
+import { Event } from 'src/app/core/core.model';
 import { environment } from 'src/environments/environment';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 
@@ -14,12 +14,12 @@ export class HomepageService {
 
   private albumsCollection: AngularFirestoreCollection<Album>;
 
-  private eventsCollection: AngularFirestoreCollection<EventDetails>;
+  private eventsCollection: AngularFirestoreCollection<Event>;
 
   constructor(private http: HttpClient, private firestore: AngularFirestore) {
     this.postsCollection = this.firestore.collection<DiscussionPost>('posts');
     this.albumsCollection = this.firestore.collection<Album>('albums');
-    this.eventsCollection = this.firestore.collection<EventDetails>('events');
+    this.eventsCollection = this.firestore.collection<Event>('events');
   }
 
   getDiscussionList(userID?: string): Observable<DiscussionPost[]> {
@@ -50,16 +50,16 @@ export class HomepageService {
     );
   }
 
-  getEventList(userID?: string): Observable<EventDetails[]> {
+  getEventList(userID?: string): Observable<Event[]> {
     // const params = userID ? new HttpParams().set('id', userID) : undefined;
 
     return this.eventsCollection.snapshotChanges().pipe(
       map((events) => {
         return events.map((event) => {
-          const { name,  } = event.payload.doc.data();
+          const { name, date, type, location, description, promoter } = event.payload.doc.data();
           const id = event.payload.doc.id;
-          return { id, name, artist, cover, releaseDate } as EventDetails;
-        }).slice(0, 9);
+          return { id, name, date, type, location, description, promoter } as Event;
+        }).slice(0, 10);
       })
     );
   }
@@ -91,7 +91,7 @@ export class HomepageService {
   }
 
   private initEventsData() {
-    this.http.get<EventDetails[]>('assets/data/events.json').subscribe(events => {
+    this.http.get<Event[]>('assets/data/events.json').subscribe(events => {
       events.forEach(event => {
         const id = this.firestore.createId();
         this.eventsCollection.doc(id).set(event);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HomepageService } from '../../services/homepage.service';
 import { AuthService } from "../../../../core/authentication.service";
-import { EventDetails } from 'src/app/core/core.model';
+import { Event } from 'src/app/core/core.model';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { EventDetails } from 'src/app/core/core.model';
   templateUrl: 'events-list.component.html',
 })
 export class EventsListComponent implements OnInit {
-  eventsList!: Observable<EventDetails[]>;
+  eventsList!: Observable<Event[]>;
 
   constructor(private homepageService: HomepageService, private authService: AuthService) { }
 

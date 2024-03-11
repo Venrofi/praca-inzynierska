@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
-import { EventDetails } from 'src/app/core/core.model';
+import { Event } from 'src/app/core/core.model';
 
 
 @Component({
@@ -9,12 +9,12 @@ import { EventDetails } from 'src/app/core/core.model';
 })
 export class EventComponent {
 
-  @Input() event!: EventDetails;
+  @Input() event!: Event;
 
   isWideScreen: boolean = window.innerWidth > 700;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: EventDetails): void {
+  onResize(event: Event): void {
     this.isWideScreen = window.innerWidth > 700;
   }
 
