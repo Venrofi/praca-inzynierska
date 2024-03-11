@@ -1,0 +1,468 @@
+[
+  {
+    "author": {
+      "id": "1",
+      "name": "HipHopHead123",
+      "avatar": "https://material.angular.io/assets/img/examples/shiba1.jpg"
+    },
+    "topic": {
+      "id": "1",
+      "name": "O.S.T.R.",
+      "type": "ARTIST"
+    },
+    "title": "Nowy album 'Kosmos' jest nieziemski!",
+    "creationTime": "2023-08-07T00:00:00",
+    "numberOfComments": 2,
+    "comments": [
+      {
+        "creationTime": "2023-08-07T00:00:00",
+        "author": {
+          "id": "2",
+          "name": "RapLover88",
+          "avatar": "https://picsum.photos/200"
+        },
+        "content": "Zgadzam się! O.S.T.R. znowu pokazał, że jest jednym z najlepszych raperów w Polsce. Mój ulubiony utwór to 'Kosmos' - co sądzicie?"
+      },
+      {
+        "creationTime": "2023-08-05T00:55:00",
+        "author": {
+          "id": "3",
+          "name": "TacoFanatic",
+          "avatar": "https://picsum.photos/201"
+        },
+        "content": "Nie jestem fanem O.S.T.R., ale muszę przyznać, że nowy album jest naprawdę dobry. Moim zdaniem, to jedna z najlepszych płyt w jego karierze."
+      }
+    ],
+    "content": "Witam wszystkich! Chciałbym podzielić się z wami moją opinią na temat nowego albumu O.S.T.R. - 'Kosmos'. Jestem pod ogromnym wrażeniem. Co sądzicie o tej płycie?"
+  },
+  {
+    "author": {
+      "id": "4",
+      "name": "FlowMaster99",
+      "avatar": "https://picsum.photos/202"
+    },
+    "topic": {
+      "id": "2",
+      "name": "Quebonafide",
+      "type": "ARTIST"
+    },
+    "title": "Co sądzicie o ostatnim teledysku Quebonafide?",
+    "creationTime": "2023-09-15T12:30:00",
+    "numberOfComments": 1,
+    "comments": [
+      {
+        "creationTime": "2023-09-16T08:45:00",
+        "author": {
+          "id": "5",
+          "name": "HipHopFan2000",
+          "avatar": "https://picsum.photos/203"
+        },
+        "content": "Teledysk jest genialny! Quebonafide znowu pokazał swoją klasę. Jego kreatywność jest niesamowita!"
+      }
+    ],
+    "content": "Hej! Chciałbym usłyszeć wasze opinie na temat najnowszego teledysku Quebonafide. Co myślicie o tej produkcji?"
+  },
+  {
+    "author": {
+      "id": "6",
+      "name": "RapGuru77",
+      "avatar": "https://picsum.photos/204"
+    },
+    "topic": {
+      "id": "3",
+      "name": "Pezet",
+      "type": "ARTIST"
+    },
+    "title": "Koncert Pezeta w Warszawie - kto był?",
+    "creationTime": "2023-10-02T17:45:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Witam! Chciałbym porozmawiać o ostatnim koncercie Pezeta w Warszawie. Kto z was miał okazję być na tej imprezie?"
+  },
+  {
+    "author": {
+      "id": "7",
+      "name": "RapFanatic2001",
+      "avatar": "https://picsum.photos/205"
+    },
+    "topic": {
+      "id": "4",
+      "name": "Taco Hemingway",
+      "type": "ARTIST"
+    },
+    "title": "Ulubione teksty Taco Hemingwaya",
+    "creationTime": "2023-11-20T09:15:00",
+    "numberOfComments": 3,
+    "comments": [
+      {
+        "creationTime": "2023-11-21T14:30:00",
+        "author": {
+          "id": "8",
+          "name": "MusicLover99",
+          "avatar": "https://picsum.photos/206"
+        },
+        "content": "Jestem fanem Taco Hemingwaya od lat! Jego teksty są genialne. Moim ulubionym utworem jest 'Szprycer'."
+      },
+      {
+        "creationTime": "2023-11-22T10:00:00",
+        "author": {
+          "id": "9",
+          "name": "HipHopEnthusiast",
+          "avatar": "https://picsum.photos/207"
+        },
+        "content": "Taco Hemingway to geniusz słowa. Jego teksty są pełne głębi i przemyśleń. Trudno wybrać ulubiony, ale 'Nostalgia' jest wyjątkowa."
+      }
+    ],
+    "content": "Cześć! Chciałbym usłyszeć wasze ulubione teksty Taco Hemingwaya. Podzielcie się swoimi wrażeniami!"
+  },
+  {
+    "author": {
+      "id": "10",
+      "name": "OldSchoolRapFan",
+      "avatar": "https://picsum.photos/208"
+    },
+    "topic": {
+      "id": "5",
+      "name": "Polski hip-hop (lata 90.)",
+      "type": "GROUP"
+    },
+    "title": "Najlepsze albumy polskiego hip-hopu z lat 90.",
+    "creationTime": "2023-12-10T21:00:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Witajcie! Chciałbym porozmawiać o najlepszych albumach polskiego hip-hopu z lat 90. Jakie są wasze ulubione płyty z tamtego okresu?"
+  },
+  {
+    "author": {
+      "id": "11",
+      "name": "BeatMaster",
+      "avatar": "https://picsum.photos/209"
+    },
+    "topic": {
+      "id": "6",
+      "name": "Produkcja muzyczna",
+      "type": "GROUP"
+    },
+    "title": "Najlepsi producenci muzyczni w polskim hip-hopie",
+    "creationTime": "2024-01-05T13:20:00",
+    "numberOfComments": 1,
+    "comments": [
+      {
+        "creationTime": "2024-01-06T09:30:00",
+        "author": {
+          "id": "12",
+          "name": "BeatLover",
+          "avatar": "https://picsum.photos/210"
+        },
+        "content": "Producenci muzyczni odgrywają ogromną rolę w kształtowaniu polskiego hip-hopu. Moim zdaniem, duet White House to jedni z najlepszych."
+      }
+    ],
+    "content": "Hej! Chciałbym usłyszeć wasze opinie na temat najlepszych producentów muzycznych w polskim hip-hopie. Kto waszym zdaniem stoi na szczycie?"
+  },
+  {
+    "author": {
+      "id": "13",
+      "name": "RapLover2000",
+      "avatar": "https://picsum.photos/211"
+    },
+    "topic": {
+      "id": "7",
+      "name": "Polski rap vs. amerykański rap",
+      "type": "GROUP"
+    },
+    "title": "Czy polski rap jest na równi z amerykańskim?",
+    "creationTime": "2024-02-20T08:00:00",
+    "numberOfComments": 2,
+    "comments": [
+      {
+        "creationTime": "2024-02-20T10:30:00",
+        "author": {
+          "id": "14",
+          "name": "WorldwideRapFan",
+          "avatar": "https://picsum.photos/212"
+        },
+        "content": "Polski rap ma swoje unikalne brzmienie i styl, który nie ma sobie równych. Jestem dumny z polskiej sceny hip-hopowej!"
+      },
+      {
+        "creationTime": "2024-02-21T15:45:00",
+        "author": {
+          "id": "15",
+          "name": "HipHopWatcher",
+          "avatar": "https://picsum.photos/213"
+        },
+        "content": "Amerykański rap może być inspiracją, ale polski rap ma swoją własną tożsamość i warto doceniać lokalnych artystów."
+      }
+    ],
+    "content": "Witajcie! Chciałbym rozpocząć dyskusję na temat tego, czy polski rap jest na równi z amerykańskim. Czekam na wasze opinie!"
+  },
+  {
+    "author": {
+      "id": "16",
+      "name": "RhythmMaster",
+      "avatar": "https://picsum.photos/214"
+    },
+    "topic": {
+      "id": "8",
+      "name": "Flow w polskim hip-hopie",
+      "type": "GROUP"
+    },
+    "title": "Najlepszy flow w polskim hip-hopie",
+    "creationTime": "2024-03-10T17:30:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Cześć! Chciałbym usłyszeć wasze opinie na temat najlepszego flow w polskim hip-hopie. Kto waszym zdaniem ma najbardziej charakterystyczny styl?"
+  },
+  {
+    "author": {
+      "id": "17",
+      "name": "HipHopTrendsetter",
+      "avatar": "https://picsum.photos/215"
+    },
+    "topic": {
+      "id": "9",
+      "name": "Popularność polskiego hip-hopu za granicą",
+      "type": "GROUP"
+    },
+    "title": "Dlaczego polski hip-hop jest tak popularny za granicą?",
+    "creationTime": "2024-04-05T10:00:00",
+    "numberOfComments": 1,
+    "comments": [
+      {
+        "creationTime": "2024-04-06T12:20:00",
+        "author": {
+          "id": "18",
+          "name": "InternationalHipHopFan",
+          "avatar": "https://picsum.photos/216"
+        },
+        "content": "Polski hip-hop jest unikalny i ma swoje własne brzmienie, które przyciąga uwagę międzynarodowej publiczności. To kreatywni artyści i ich szczerość robią różnicę."
+      }
+    ],
+    "content": "Witajcie! Chciałbym porozmawiać o popularności polskiego hip-hopu za granicą. Jak myślicie, dlaczego polscy artyści zdobywają taką międzynarodową sławę?"
+  },
+  {
+    "author": {
+      "id": "19",
+      "name": "HipHopFuturist",
+      "avatar": "https://picsum.photos/217"
+    },
+    "topic": {
+      "id": "10",
+      "name": "Przyszłość polskiego hip-hopu",
+      "type": "GROUP"
+    },
+    "title": "Jakie są wasze przewidywania na temat przyszłości polskiego hip-hopu?",
+    "creationTime": "2024-05-15T14:45:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Hej! Chciałbym usłyszeć wasze przewidywania dotyczące przyszłości polskiego hip-hopu. Jakie trendy widzicie na horyzoncie?"
+  },
+  {
+    "author": {
+      "id": "20",
+      "name": "RapAddict123",
+      "avatar": "https://picsum.photos/218"
+    },
+    "topic": {
+      "id": "11",
+      "name": "Taco Hemingway",
+      "type": "ARTIST"
+    },
+    "title": "Nowy singiel od Taco Hemingwaya - co sądzicie?",
+    "creationTime": "2024-06-20T09:30:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Witajcie! Chciałbym usłyszeć wasze opinie na temat najnowszego singla Taco Hemingwaya. Co myślicie o tej produkcji?"
+  },
+  {
+    "author": {
+      "id": "21",
+      "name": "HipHopCritic99",
+      "avatar": "https://picsum.photos/219"
+    },
+    "topic": {
+      "id": "12",
+      "name": "Kękę",
+      "type": "ARTIST"
+    },
+    "title": "Najnowszy album Kękę wkrótce na rynku!",
+    "creationTime": "2024-07-05T15:45:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Hej! Ktoś czeka na najnowszy album Kękę? Jak myślicie, co przyniesie ta płyta?"
+  },
+  {
+    "author": {
+      "id": "22",
+      "name": "HipHopLover2001",
+      "avatar": "https://picsum.photos/220"
+    },
+    "topic": {
+      "id": "13",
+      "name": "Łona i Webber",
+      "type": "GROUP"
+    },
+    "title": "Koncert Łony i Webbera - ktoś był?",
+    "creationTime": "2024-08-10T18:20:00",
+    "numberOfComments": 1,
+    "comments": [
+      {
+        "creationTime": "2024-08-11T11:00:00",
+        "author": {
+          "id": "23",
+          "name": "ConcertGoer",
+          "avatar": "https://picsum.photos/221"
+        },
+        "content": "Byłem na ich koncercie w zeszłym roku i było niesamowicie! Łona i Webber tworzą magiczną atmosferę na scenie."
+      }
+    ],
+    "content": "Cześć! Kto z was miał okazję być na koncercie Łony i Webbera? Podzielcie się swoimi wrażeniami!"
+  },
+  {
+    "author": {
+      "id": "24",
+      "name": "HipHopInsider",
+      "avatar": "https://picsum.photos/222"
+    },
+    "topic": {
+      "id": "14",
+      "name": "Sokół",
+      "type": "ARTIST"
+    },
+    "title": "Najlepsze albumy Sokóła według was",
+    "creationTime": "2024-09-25T10:10:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Witam! Chciałbym usłyszeć wasze opinie na temat najlepszych albumów Sokóła. Jakie są wasze ulubione płyty tego artysty?"
+  },
+  {
+    "author": {
+      "id": "25",
+      "name": "HipHopFanatic2002",
+      "avatar": "https://picsum.photos/223"
+    },
+    "topic": {
+      "id": "15",
+      "name": "Kali",
+      "type": "ARTIST"
+    },
+    "title": "Czy nowy utwór od Kaliego to hit czy kit?",
+    "creationTime": "2024-10-15T14:55:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Hej! Co myślicie o najnowszym utworze od Kaliego? Czekam na wasze opinie!"
+  },
+  {
+    "author": {
+      "id": "26",
+      "name": "HipHopHistorian",
+      "avatar": "https://picsum.photos/224"
+    },
+    "topic": {
+      "id": "16",
+      "name": "Paktofonika",
+      "type": "GROUP"
+    },
+    "title": "Klasyczne utwory Paktofoniki, których nie możemy zapomnieć",
+    "creationTime": "2024-11-02T11:30:00",
+    "numberOfComments": 2,
+    "comments": [
+      {
+        "creationTime": "2024-11-03T09:20:00",
+        "author": {
+          "id": "27",
+          "name": "OldSchoolHipHopFan",
+          "avatar": "https://picsum.photos/225"
+        },
+        "content": "Paktofonika to legenda polskiego hip-hopu! Ich muzyka nadal inspiruje kolejne pokolenia."
+      },
+      {
+        "creationTime": "2024-11-03T12:45:00",
+        "author": {
+          "id": "28",
+          "name": "Paktofan",
+          "avatar": "https://picsum.photos/226"
+        },
+        "content": "Mam sentyment do utworu 'Jestem Bogiem'. Paktofonika na zawsze pozostanie w moim sercu."
+      }
+    ],
+    "content": "Cześć! Chciałbym porozmawiać o klasycznych utworach Paktofoniki, które są niezapomniane dla fanów hip-hopu. Jakie są wasze ulubione piosenki?"
+  },
+  {
+    "author": {
+      "id": "29",
+      "name": "HipHopDebater",
+      "avatar": "https://picsum.photos/227"
+    },
+    "topic": {
+      "id": "17",
+      "name": "Pezet/Małolat",
+      "type": "GROUP"
+    },
+    "title": "Najlepsze wspólne produkcje Pezeta i Małolata",
+    "creationTime": "2025-01-10T17:00:00",
+    "numberOfComments": 1,
+    "comments": [
+      {
+        "creationTime": "2025-01-11T10:15:00",
+        "author": {
+          "id": "30",
+          "name": "HipHopCollaborator",
+          "avatar": "https://picsum.photos/228"
+        },
+        "content": "Ich wspólne utwory to klasyka! 'Mój jest ten kawałek podłogi' na zawsze będzie jednym z najlepszych kawałków polskiego hip-hopu."
+      }
+    ],
+    "content": "Witajcie! Chciałbym usłyszeć wasze ulubione wspólne produkcje Pezeta i Małolata. Które piosenki są waszymi faworytami?"
+  },
+  {
+    "author": {
+      "id": "31",
+      "name": "HipHopAficionado",
+      "avatar": "https://picsum.photos/229"
+    },
+    "topic": {
+      "id": "18",
+      "name": "PRO8L3M",
+      "type": "GROUP"
+    },
+    "title": "Czekacie na nowy album od PRO8L3M?",
+    "creationTime": "2025-02-20T09:30:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Hej! Ktoś czeka na najnowszy album od PRO8L3M? Co myślicie, czego możemy się spodziewać po tej płycie?"
+  },
+  {
+    "author": {
+      "id": "32",
+      "name": "HipHopEnthusiast2023",
+      "avatar": "https://picsum.photos/230"
+    },
+    "topic": {
+      "id": "19",
+      "name": "Quebonafide",
+      "type": "ARTIST"
+    },
+    "title": "Twórczość Quebonafide wciąż mnie zachwyca",
+    "creationTime": "2025-03-15T14:45:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Witam! Chciałbym podzielić się moim zachwytem nad twórczością Quebonafide. Co sądzicie o jego muzyce?"
+  },
+  {
+    "author": {
+      "id": "33",
+      "name": "HipHopFollower2024",
+      "avatar": "https://picsum.photos/231"
+    },
+    "topic": {
+      "id": "20",
+      "name": "Sarius",
+      "type": "ARTIST"
+    },
+    "title": "Co myślicie o nowym utworze od Sariusa?",
+    "creationTime": "2025-04-10T11:30:00",
+    "numberOfComments": 0,
+    "comments": [],
+    "content": "Cześć! Chciałbym usłyszeć wasze opinie na temat najnowszego utworu od Sariusa. Czy podoba wam się jego nowa muzyka?"
+  }
+]
