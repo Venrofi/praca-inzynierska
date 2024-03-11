@@ -1,0 +1,622 @@
+[
+  {
+    "name": "Pierwsze wyjście z mroku",
+    "artist": {
+      "id": "1",
+      "name": "Hades"
+    },
+    "cover": "https://picsum.photos/500/701",
+    "releaseDate": "2023-08-15T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "No Escape",
+        "duration": "3:00"
+      },
+      {
+        "title": "Out of Tartarus",
+        "duration": "3:00"
+      },
+      {
+        "title": "Wretched Thug",
+        "duration": "3:00"
+      },
+      {
+        "title": "The Painful Way",
+        "duration": "3:00"
+      }
+    ],
+    "description": "Pierwsze wyjście z mroku to debiutancki album studyjny polskiego rapera Hadesa. Został wydany 15 sierpnia 2023 roku przez wytwórnię muzyczną SBM Label. Album zawiera 10 utworów, w tym 2 single promujące: „No Escape” i „Out of Tartarus”.",
+    "duration": "30:00",
+    "genre": "Rap",
+    "rating": 4.5
+  },
+  {
+    "name": "Soma 0,5 mg",
+    "artist": {
+      "id": "2",
+      "name": "Taco Hemingway"
+    },
+    "cover": "https://picsum.photos/500/702",
+    "releaseDate": "2023-09-22T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Za sto lat",
+        "duration": "4:12"
+      },
+      {
+        "title": "W drodze do marzeń",
+        "duration": "3:57"
+      },
+      {
+        "title": "Europa",
+        "duration": "3:45"
+      },
+      {
+        "title": "Marność",
+        "duration": "4:29"
+      }
+    ],
+    "description": "Soma 0,5 mg to trzeci album studyjny polskiego rapera Taco Hemingwaya. Został wydany 22 września 2023 roku przez wytwórnię muzyczną Taco Corp. Album zawiera 12 utworów, w tym single „Za sto lat” i „W drodze do marzeń”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Eklektyka",
+    "artist": {
+      "id": "3",
+      "name": "Quebonafide"
+    },
+    "cover": "https://picsum.photos/500/703",
+    "releaseDate": "2023-11-10T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Ulisses",
+        "duration": "3:48"
+      },
+      {
+        "title": "Zdjęcia",
+        "duration": "3:30"
+      },
+      {
+        "title": "Nobel",
+        "duration": "3:25"
+      },
+      {
+        "title": "Ekscentryk",
+        "duration": "3:15"
+      }
+    ],
+    "description": "Eklektyka to czwarty album studyjny polskiego rapera Quebonafide. Został wydany 10 listopada 2023 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 14 utworów, w tym single „Ulisses” i „Zdjęcia”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.6
+  },
+  {
+    "name": "Undergroundowy lupus",
+    "artist": {
+      "id": "4",
+      "name": "Paluch"
+    },
+    "cover": "https://picsum.photos/500/704",
+    "releaseDate": "2024-01-18T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Cień",
+        "duration": "3:33"
+      },
+      {
+        "title": "Mrok",
+        "duration": "4:07"
+      },
+      {
+        "title": "Bez zębów",
+        "duration": "3:55"
+      },
+      {
+        "title": "Lokalny patriota",
+        "duration": "3:45"
+      }
+    ],
+    "description": "Undergroundowy lupus to siódmy album studyjny polskiego rapera Palucha. Został wydany 18 stycznia 2024 roku przez wytwórnię muzyczną SBM Label. Album zawiera 16 utworów, w tym single „Cień” i „Mrok”.",
+    "duration": "55:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Antidotum",
+    "artist": {
+      "id": "5",
+      "name": "Sokół"
+    },
+    "cover": "https://picsum.photos/500/705",
+    "releaseDate": "2024-03-09T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Wojtek",
+        "duration": "3:44"
+      },
+      {
+        "title": "Dwie sławy",
+        "duration": "3:30"
+      },
+      {
+        "title": "Akustycznie",
+        "duration": "3:20"
+      },
+      {
+        "title": "Nieznane",
+        "duration": "4:10"
+      }
+    ],
+    "description": "Antidotum to dziesiąty album studyjny polskiego rapera Sokoła. Został wydany 9 marca 2024 roku przez wytwórnię muzyczną Prosto. Album zawiera 14 utworów, w tym single „Wojtek” i „Dwie sławy”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.5
+  },
+  {
+    "name": "O",
+    "artist": {
+      "id": "6",
+      "name": "O.S.T.R."
+    },
+    "cover": "https://picsum.photos/500/706",
+    "releaseDate": "2024-05-12T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Ostatnia szansa",
+        "duration": "3:22"
+      },
+      {
+        "title": "Symetryczno-liryczna",
+        "duration": "3:55"
+      },
+      {
+        "title": "Nie zrozumiesz",
+        "duration": "3:45"
+      },
+      {
+        "title": "Rehab",
+        "duration": "4:10"
+      }
+    ],
+    "description": "O to jedenasty album studyjny polskiego rapera O.S.T.R.-a. Został wydany 12 maja 2024 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 12 utworów, w tym single „Ostatnia szansa” i „Symetryczno-liryczna”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Codex",
+    "artist": {
+      "id": "7",
+      "name": "PRO8L3M"
+    },
+    "cover": "https://picsum.photos/500/707",
+    "releaseDate": "2024-07-19T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Miliardy",
+        "duration": "3:20"
+      },
+      {
+        "title": "Mówiłam",
+        "duration": "3:45"
+      },
+      {
+        "title": "Czerń",
+        "duration": "3:30"
+      },
+      {
+        "title": "Powrót",
+        "duration": "3:55"
+      }
+    ],
+    "description": "Codex to trzeci album studyjny polskiego zespołu PRO8L3M. Został wydany 19 lipca 2024 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 13 utworów, w tym single „Miliardy” i „Mówiłam”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Jedzenie dla duszy",
+    "artist": {
+      "id": "8",
+      "name": "Kękę"
+    },
+    "cover": "https://picsum.photos/500/708",
+    "releaseDate": "2024-09-03T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Bogini",
+        "duration": "3:15"
+      },
+      {
+        "title": "Dzieci gorszego boga",
+        "duration": "3:20"
+      },
+      {
+        "title": "Niezły wyjazd",
+        "duration": "3:45"
+      },
+      {
+        "title": "Jestem w dobrym miejscu",
+        "duration": "3:30"
+      }
+    ],
+    "description": "Jedzenie dla duszy to szósty album studyjny polskiego rapera Kękę. Został wydany 3 września 2024 roku przez wytwórnię muzyczną Prosto. Album zawiera 14 utworów, w tym single „Bogini” i „Dzieci gorszego boga”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.6
+  },
+  {
+    "name": "Szczerze",
+    "artist": {
+      "id": "9",
+      "name": "Sarius"
+    },
+    "cover": "https://picsum.photos/500/709",
+    "releaseDate": "2024-10-30T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Wymiar",
+        "duration": "3:30"
+      },
+      {
+        "title": "Śmiem wątpić",
+        "duration": "3:20"
+      },
+      {
+        "title": "Wojownik",
+        "duration": "3:45"
+      },
+      {
+        "title": "Każdego dnia",
+        "duration": "3:25"
+      }
+    ],
+    "description": "Szczerze to drugi album studyjny polskiego rapera Sariusa. Został wydany 30 października 2024 roku przez wytwórnię muzyczną QueQuality. Album zawiera 12 utworów, w tym single „Wymiar” i „Śmiem wątpić”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Pluta",
+    "artist": {
+      "id": "10",
+      "name": "Kali"
+    },
+    "cover": "https://picsum.photos/500/710",
+    "releaseDate": "2025-01-20T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Trudny dzieciak",
+        "duration": "3:40"
+      },
+      {
+        "title": "Wspólny problem",
+        "duration": "4:10"
+      },
+      {
+        "title": "Siódme niebo",
+        "duration": "3:25"
+      },
+      {
+        "title": "Kapitał",
+        "duration": "3:45"
+      }
+    ],
+    "description": "Pluta to piąty album studyjny polskiego rapera Kaliego. Został wydany 20 stycznia 2025 roku przez wytwórnię muzyczną Prosto. Album zawiera 11 utworów, w tym single „Trudny dzieciak” i „Wspólny problem”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.6
+  },
+  {
+    "name": "Mosty",
+    "artist": {
+      "id": "11",
+      "name": "Taco Hemingway"
+    },
+    "cover": "https://picsum.photos/500/711",
+    "releaseDate": "2025-03-10T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Intro",
+        "duration": "2:30"
+      },
+      {
+        "title": "Wirtualny świat",
+        "duration": "3:20"
+      },
+      {
+        "title": "Raj",
+        "duration": "3:10"
+      },
+      {
+        "title": "Złodziej",
+        "duration": "3:40"
+      }
+    ],
+    "description": "Mosty to szósty album studyjny polskiego rapera Taco Hemingwaya. Został wydany 10 marca 2025 roku przez wytwórnię muzyczną Taco Corp. Album zawiera 11 utworów, w tym single „Intro” i „Wirtualny świat”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Dzień czystości",
+    "artist": {
+      "id": "12",
+      "name": "Popek"
+    },
+    "cover": "https://picsum.photos/500/712",
+    "releaseDate": "2025-05-25T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Żyję dla rapu",
+        "duration": "3:15"
+      },
+      {
+        "title": "Mocno",
+        "duration": "3:30"
+      },
+      {
+        "title": "Czysty rap",
+        "duration": "3:25"
+      },
+      {
+        "title": "Dobre serce",
+        "duration": "3:45"
+      }
+    ],
+    "description": "Dzień czystości to ósmy album studyjny polskiego rapera Popeka. Został wydany 25 maja 2025 roku przez wytwórnię muzyczną Hustla Music. Album zawiera 12 utworów, w tym single „Żyję dla rapu” i „Mocno”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Czarno białe",
+    "artist": {
+      "id": "13",
+      "name": "KęKę"
+    },
+    "cover": "https://picsum.photos/500/713",
+    "releaseDate": "2025-08-18T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Ciemna strona",
+        "duration": "3:20"
+      },
+      {
+        "title": "Białe nieba",
+        "duration": "3:40"
+      },
+      {
+        "title": "Droga do celu",
+        "duration": "3:25"
+      },
+      {
+        "title": "Ostatnia szansa",
+        "duration": "3:15"
+      }
+    ],
+    "description": "Czarno białe to dziewiąty album studyjny polskiego rapera KęKę. Został wydany 18 sierpnia 2025 roku przez wytwórnię muzyczną Prosto. Album zawiera 13 utworów, w tym single „Ciemna strona” i „Białe nieba”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Ziemia",
+    "artist": {
+      "id": "14",
+      "name": "Bedoes"
+    },
+    "cover": "https://picsum.photos/500/714",
+    "releaseDate": "2025-10-22T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Wypijemy",
+        "duration": "3:45"
+      },
+      {
+        "title": "Nie ma słów",
+        "duration": "3:30"
+      },
+      {
+        "title": "Czy to świat",
+        "duration": "3:25"
+      },
+      {
+        "title": "Jedno życie",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Ziemia to piąty album studyjny polskiego rapera Bedoesa. Został wydany 22 października 2025 roku przez wytwórnię muzyczną SBM Label. Album zawiera 11 utworów, w tym single „Wypijemy” i „Nie ma słów”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.6
+  },
+  {
+    "name": "Prawdziwa historia",
+    "artist": {
+      "id": "15",
+      "name": "Peja"
+    },
+    "cover": "https://picsum.photos/500/715",
+    "releaseDate": "2026-01-15T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Intro",
+        "duration": "2:50"
+      },
+      {
+        "title": "Historia prawdziwa",
+        "duration": "3:10"
+      },
+      {
+        "title": "Czas przemija",
+        "duration": "3:30"
+      },
+      {
+        "title": "Podziękowania",
+        "duration": "3:15"
+      }
+    ],
+    "description": "Prawdziwa historia to dziesiąty album studyjny polskiego rapera Peji. Został wydany 15 stycznia 2026 roku przez wytwórnię muzyczną R.R.X.. Album zawiera 12 utworów, w tym single „Intro” i „Historia prawdziwa”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Bóg",
+    "artist": {
+      "id": "16",
+      "name": "Quebonafide"
+    },
+    "cover": "https://picsum.photos/500/716",
+    "releaseDate": "2026-03-18T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Antykwariat",
+        "duration": "3:40"
+      },
+      {
+        "title": "Bóg",
+        "duration": "3:30"
+      },
+      {
+        "title": "Dziedzictwo",
+        "duration": "3:25"
+      },
+      {
+        "title": "Droga przez piekło",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Bóg to piąty album studyjny polskiego rapera Quebonafide. Został wydany 18 marca 2026 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 11 utworów, w tym single „Antykwariat” i „Bóg”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Narkotyki",
+    "artist": {
+      "id": "17",
+      "name": "KaeN"
+    },
+    "cover": "https://picsum.photos/500/717",
+    "releaseDate": "2026-05-20T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Strefa",
+        "duration": "3:15"
+      },
+      {
+        "title": "Narkotyki",
+        "duration": "3:30"
+      },
+      {
+        "title": "Podróże",
+        "duration": "3:45"
+      },
+      {
+        "title": "Sny",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Narkotyki to czwarty album studyjny polskiego rapera KaeNa. Został wydany 20 maja 2026 roku przez wytwórnię muzyczną SBM Label. Album zawiera 12 utworów, w tym single „Strefa” i „Narkotyki”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.6
+  },
+  {
+    "name": "Czysty kod",
+    "artist": {
+      "id": "18",
+      "name": "VNM"
+    },
+    "cover": "https://picsum.photos/500/718",
+    "releaseDate": "2026-08-22T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Złoty chłopak",
+        "duration": "3:45"
+      },
+      {
+        "title": "Czysty kod",
+        "duration": "3:30"
+      },
+      {
+        "title": "Przestępstwo",
+        "duration": "3:25"
+      },
+      {
+        "title": "Dobro",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Czysty kod to szósty album studyjny polskiego rapera VNM-a. Został wydany 22 sierpnia 2026 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 11 utworów, w tym single „Złoty chłopak” i „Czysty kod”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.7
+  },
+  {
+    "name": "Księżycowe miłości",
+    "artist": {
+      "id": "19",
+      "name": "Tede"
+    },
+    "cover": "https://picsum.photos/500/719",
+    "releaseDate": "2026-10-11T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Dowód rzeczowy nr 1",
+        "duration": "3:15"
+      },
+      {
+        "title": "Gaz",
+        "duration": "3:30"
+      },
+      {
+        "title": "Grawitacja",
+        "duration": "3:45"
+      },
+      {
+        "title": "Sznur",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Księżycowe miłości to jedenasty album studyjny polskiego rapera Tedego. Został wydany 11 października 2026 roku przez wytwórnię muzyczną Wielkie Joł. Album zawiera 13 utworów, w tym single „Dowód rzeczowy nr 1” i „Gaz”.",
+    "duration": "50:00",
+    "genre": "Rap",
+    "rating": 4.8
+  },
+  {
+    "name": "Odwet",
+    "artist": {
+      "id": "20",
+      "name": "Sokół"
+    },
+    "cover": "https://picsum.photos/500/720",
+    "releaseDate": "2027-01-05T00:00:00.000Z",
+    "tracks": [
+      {
+        "title": "Wojna",
+        "duration": "3:45"
+      },
+      {
+        "title": "Requiem",
+        "duration": "3:30"
+      },
+      {
+        "title": "Ślad",
+        "duration": "3:25"
+      },
+      {
+        "title": "Upadek",
+        "duration": "3:20"
+      }
+    ],
+    "description": "Odwet to jedenasty album studyjny polskiego rapera Sokoła. Został wydany 5 stycznia 2027 roku przez wytwórnię muzyczną Prosto. Album zawiera 12 utworów, w tym single „Wojna” i „Requiem”.",
+    "duration": "45:00",
+    "genre": "Rap",
+    "rating": 4.7
+  }
+]

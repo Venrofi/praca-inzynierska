@@ -31,27 +31,23 @@ export class HomepageService {
           const { author, topic, title, creationTime, numberOfComments } = post.payload.doc.data();
           const id = post.payload.doc.id;
           return { id, author, topic, title, creationTime, numberOfComments } as DiscussionPost;
-        });
+        }).slice(0, 10);
       })
     );
   }
 
   getPremiereList(userID?: string): Observable<Album[]> {
-    const params = userID ? new HttpParams().set('id', userID) : undefined;
+    // const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<Album[]>(`${this.API_ROOT}/MainPage/premiere-albums`, { params }).pipe(
-      map((albums: Album[]) => albums.slice(0, 9)),
-      map((albums: Album[]) => {
-        return albums.map(album => {
-          return {
-            ...album,
-            cover: album.cover || this.generateRandomImage(),
-          };
-        });
+    return this.albumsCollection.snapshotChanges().pipe(
+      map((albums) => {
+        return albums.map((album) => {
+          const { name, artist, cover, releaseDate } = album.payload.doc.data();
+          const id = album.payload.doc.id;
+          return { id, name, artist, cover, releaseDate } as Album;
+        }).slice(0, 9);
       })
     );
-
-    // return this.http.get<Album[]>('assets/data/premiere-albums.json').pipe(delay(1000));
   }
 
   getEventList(userID?: string): Observable<Event[]> {
