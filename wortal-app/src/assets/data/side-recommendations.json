@@ -2,41 +2,41 @@
   "topDiscussions": {
     "title": "Najlepsze Dyskusje",
     "content": [
-      { "id": "1", "label": "Nowa fala w polskim hip-hopie" },
-      { "id": "2", "label": "Czy rap to tylko muzyka?" },
-      { "id": "3", "label": "Teksty w hip-hopie - analiza i interpretacja" },
-      { "id": "4", "label": "Polskie bitwy freestyle'owe" },
-      { "id": "5", "label": "Rapowe klasyki - nasze ulubione utwory" }
+      { "id": "1", "name": "Nowa fala w polskim hip-hopie" },
+      { "id": "2", "name": "Czy rap to tylko muzyka?" },
+      { "id": "3", "name": "Teksty w hip-hopie - analiza i interpretacja" },
+      { "id": "4", "name": "Polskie bitwy freestyle'owe" },
+      { "id": "5", "name": "Rapowe klasyki - nasze ulubione utwory" }
     ]
   },
   "topArtists": {
     "title": "Najpopularniejsi Artyści",
     "content": [
-      { "id": "1", "label": "Quebonafide" },
-      { "id": "2", "label": "Taco Hemingway" },
-      { "id": "3", "label": "Sokół" },
-      { "id": "4", "label": "Sarius" },
-      { "id": "5", "label": "Peja" }
+      { "id": "1", "name": "Quebonafide" },
+      { "id": "2", "name": "Taco Hemingway" },
+      { "id": "3", "name": "Sokół" },
+      { "id": "4", "name": "Sarius" },
+      { "id": "5", "name": "Peja" }
     ]
   },
   "topMembers": {
     "title": "Najaktywniejsi Członkowie",
     "content": [
-      { "id": "1", "label": "matius22" },
-      { "id": "2", "label": "Venrofi" },
-      { "id": "3", "label": "kubica_here" },
-      { "id": "4", "label": "OsomOsom" },
-      { "id": "5", "label": "małpka8" }
+      { "id": "1", "name": "matius22" },
+      { "id": "2", "name": "Venrofi" },
+      { "id": "3", "name": "kubica_here" },
+      { "id": "4", "name": "OsomOsom" },
+      { "id": "5", "name": "małpka8" }
     ]
   },
   "topGroups": {
     "title": "Polecane Grupy",
     "content": [
-      { "id": "1", "label": "Polscy Rap Geniusze" },
-      { "id": "2", "label": "Graffiti Art Lovers" },
-      { "id": "3", "label": "Freestyle Warriors" },
-      { "id": "4", "label": "Hip-Hop Producent Masters" },
-      { "id": "5", "label": "Rapowe Tekstualne Analizy" }
+      { "id": "1", "name": "Polscy Rap Geniusze" },
+      { "id": "2", "name": "Graffiti Art Lovers" },
+      { "id": "3", "name": "Freestyle Warriors" },
+      { "id": "4", "name": "Hip-Hop Producent Masters" },
+      { "id": "5", "name": "Rapowe Tekstualne Analizy" }
     ]
   }
 }

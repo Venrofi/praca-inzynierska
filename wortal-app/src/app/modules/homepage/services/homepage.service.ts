@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable, map } from 'rxjs';
-import { Event } from 'src/app/core/core.model';
+import { Observable, delay, map } from 'rxjs';
+import { Artist, Event } from 'src/app/core/core.model';
 import { environment } from 'src/environments/environment';
 import { Album, DiscussionPost, HomepageSideRecommendations } from '../homepage.model';
 
@@ -67,9 +67,9 @@ export class HomepageService {
   getSideRecommendations(userID?: string): Observable<HomepageSideRecommendations> {
     const params = userID ? new HttpParams().set('id', userID) : undefined;
 
-    return this.http.get<HomepageSideRecommendations>(`${this.API_ROOT}/MainPage/side-recommendations`, { params });
+    // return this.http.get<HomepageSideRecommendations>(`${this.API_ROOT}/MainPage/side-recommendations`, { params });
 
-    // return this.http.get<any>('assets/data/side-recommendations.json').pipe(delay(1000));
+    return this.http.get<HomepageSideRecommendations>('assets/data/side-recommendations.json').pipe(delay(1000));
   }
 
   private initPostsData() {
@@ -95,6 +95,15 @@ export class HomepageService {
       events.forEach(event => {
         const id = this.firestore.createId();
         this.eventsCollection.doc(id).set(event);
+      });
+    });
+  }
+
+  private initArtistsData() {
+    this.http.get<Artist[]>('assets/data/artists.json').subscribe(artists => {
+      artists.forEach(artist => {
+        const id = this.firestore.createId();
+        this.firestore.collection('artists').doc(id).set(artist);
       });
     });
   }
