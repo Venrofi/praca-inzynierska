@@ -1,5 +1,3 @@
-import { Album } from "../modules/homepage/homepage.model";
-
 // Group / Artist / Event
 export interface BaseWortalElement {
   id: string;
@@ -33,7 +31,7 @@ export interface MemberList extends BaseWortalUser {
 export interface Artist extends BaseWortalElement {
   image: string;
   description: string;
-  albums: Album[]; // Albums that the artist has created
+  albums: BaseWortalElement[]; // Albums that the artist has created
   events: BaseWortalElement[]; // Events about the Artist
   followers: BaseWortalElement[]; // Members that follow the Artist
   discussionPosts: BaseWortalElement[]; // Discussion posts about the Artist

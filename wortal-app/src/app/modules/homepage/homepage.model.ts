@@ -48,6 +48,11 @@ export interface Album extends BaseWortalElement {
   releaseDate: string;
 }
 
+export interface AlbumBasicDetails extends BaseWortalElement {
+  cover: string;
+  releaseDate: string;
+};
+
 export interface AlbumDetails extends Album {
   tracks: Track[];
   description: string;
