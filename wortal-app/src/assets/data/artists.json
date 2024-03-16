@@ -1,193 +1,312 @@
 [
   {
-    "id": "1",
-    "name": "The Beatles",
-    "description": "The Beatles were an English rock band formed in Liverpool in 1960. With a line-up comprising John Lennon, Paul McCartney, George Harrison and Ringo Starr, they are regarded as the most influential band of all time.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/The_Beatles_members_at_New_York_City_in_1964.jpg/800px-The_Beatles_members_at_New_York_City_in_1964.jpg",
+    "name": "Gibbs",
+    "image": "assets/img/artists/gibbs.jpg",
+    "description": "Gibbs (właściwie Mateusz Przybylski) to urodzony 24 października 1995 roku w Kłobucku raper oraz producent muzyczny. Były członek zespołu Ganja Mafia, obecnie członek ekipy Fonos oraz jeden z założycieli studia DOPEHOUSE.",
     "albums": [
       {
-        "id": "1",
-        "name": "Please Please Me",
-        "cover": "",
-        "releaseDate": "1963-03-22"
+        "id": 1,
+        "name": "SAFE"
       },
       {
-        "id": "2",
-        "name": "With the Beatles",
-        "cover": "",
-        "releaseDate": "1963-11-22"
-      },
+        "id": 2,
+        "name": "Czarno na białym"
+      }
+    ],
+    "events": [
       {
-        "id": "3",
-        "name": "A Hard Day's Night",
-        "cover": "",
-        "releaseDate": "1964-07-10"
-      },
-      {
-        "id": "4",
-        "name": "Beatles for Sale",
-        "cover": "",
-        "releaseDate": "1964-12-04"
-      },
-      {
-        "id": "5",
-        "name": "Help!",
-        "cover": "",
-        "releaseDate": "1965-08-06"
-      },
-      {
-        "id": "6",
-        "name": "Rubber Soul",
-        "cover": "",
-        "releaseDate": "1965-12-03"
-      },
-      {
-        "id": "7",
-        "name": "Revolver",
-        "cover": "",
-        "releaseDate": "1966-08-05"
-      },
-      {
-        "id": "8",
-        "name": "Sgt. Pepper's Lonely Hearts Club Band",
-        "cover": "",
-        "releaseDate": "1967-06-01"
-      },
-      {
-        "id": "9",
-        "name": "Magical Mystery Tour",
-        "cover": "",
-        "releaseDate": "1967-11-27"
-      },
-      {
-        "id": "10",
-        "name": "The Beatles",
-        "cover": "",
-        "releaseDate": "1968-11-22"
-      },
-      {
-        "id": "11",
-        "name": "Yellow Submarine",
-        "cover": "",
-        "releaseDate": "1969-01-17"
-      },
-      {
-        "id": "12",
-        "name": "Abbey Road",
-        "cover": "",
-        "releaseDate": "1969-09-26"
-      },
-      {
-        "id": "13",
-        "name": "Let It Be",
-        "cover": "",
-        "releaseDate": "1970-05-08"
+        "id": 1,
+        "name": "Event 1"
       }
     ],
     "followers": [
-      { "id": "1", "name": "John" },
-      { "id": "2", "name": "Paul" },
-      { "id": "3", "name": "George" },
-      { "id": "4", "name": "Ringo" }
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
     ],
     "discussionPosts": [
-      { "id": "1", "content": "I love the Beatles!" },
-      { "id": "2", "content": "I love the Beatles too!" },
-      { "id": "3", "content": "I love the Beatles more!" },
-      { "id": "4", "content": "I love the Beatles most!" }
-    ],
-    "events": []
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
   },
   {
-    "id": "2",
-    "name": "The Rolling Stones",
-    "description": "The Rolling Stones are an English rock band formed in London in 1962. The first stable line-up consisted of bandleader Brian Jones (guitar, harmonica, keyboards), Mick Jagger (lead vocals, harmonica), Keith Richards (guitar, vocals), Bill Wyman (bass guitar), Charlie Watts (drums), and Ian Stewart (piano).",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Rolling_Stones_1965.jpg/800px-Rolling_Stones_1965.jpg",
+    "name": "Mata",
+    "image": "assets/img/artists/mata.jpg",
+    "description": "Michał Matczak (ur. 14 lipca 2000 r. we Wrocławiu), znany głównie jako Mata, to warszawski raper, autor tekstów, a prywatnie syn znanego radcy prawnego Marcina Matczaka, który jest twórcą jego pseudonimu artystycznego.",
     "albums": [
       {
-        "id": "3",
-        "title": "The Rolling Stones",
-        "cover": "",
-        "releaseDate": "1964-04-16"
+        "id": 1,
+        "name": "Młody Matczak"
       },
       {
-        "id": "4",
-        "title": "The Rolling Stones No. 2",
-        "cover": "",
-        "releaseDate": "1965-01-15"
+        "id": 2,
+        "name": "100 dni do matury"
       }
     ],
-    "followers": ["Brian", "Mick", "Keith", "Bill", "Charlie", "Ian"],
-    "discussionPosts": [],
-    "events": []
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
   },
   {
-    "id": "3",
-    "name": "The Who",
-    "description": "The Who are an English rock band formed in London in 1964. Their classic line-up consisted of lead singer Roger Daltrey, guitarist and singer Pete Townshend, bass guitarist John Entwistle, and drummer Keith Moon.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/The_Who_in_1975.jpg/800px-The_Who_in_1975.jpg",
+    "name": "schafter",
+    "image": "assets/img/artists/schafter.jpg",
+    "description": "Wojciech Laskowski (ur. 2003) – polski raper i producent hip-hopowy pochodzący ze Śląska, a dokładniej spod Raciborza. Początkowo zajmował się produkcją bitów, a jego pierwszy kawałek z wokalem powstał w 2016.",
     "albums": [
       {
-        "id": "5",
-        "title": "My Generation",
-        "cover": "",
-        "releaseDate": "1965-12-03"
-      },
-      {
-        "id": "6",
-        "title": "A Quick One",
-        "cover": "",
-        "releaseDate": "1966-12-09"
+        "id": 1,
+        "name": "audiotele"
       }
     ],
-    "followers": ["Roger", "Pete", "John", "Keith"],
-    "discussionPosts": [],
-    "events": []
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
   },
   {
-    "id": "4",
-    "name": "The Kinks",
-    "description": "The Kinks are an English rock band formed in Muswell Hill, North London, in 1964 by brothers Ray and Dave Davies. They are regarded as one of the most influential rock bands of the 1960s.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/The_Kinks_in_1965.jpg/800px-The_Kinks_in_1965.jpg",
+    "name": "Miętha",
+    "image": "assets/img/artists/mietha.jpg",
+    "description": "Zespół Miętha tworzą raper Skip i producent Awgs. Miętha oferuje świeże (jak to mięta), charakterystyczne, organiczne i miękkie granie, wzbogacone zaskakującymi jak na krótki staż sceniczny możliwościami wokalnymi Skipa. Obaj muzycy dostarczają wspólny, spójny i komplementarny materiał.",
     "albums": [
       {
-        "id": "7",
-        "title": "Kinks",
-        "cover": "",
-        "releaseDate": "1964-10-02"
+        "id": 1,
+        "name": "36,6"
       },
       {
-        "id": "8",
-        "title": "Kinda Kinks",
-        "cover": "",
-        "releaseDate": "1965-03-05"
+        "id": 2,
+        "name": "Audioportret"
       }
     ],
-    "followers": ["Ray", "Dave", "Pete", "Mick", "John"],
-    "discussionPosts": [],
-    "events": []
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
   },
   {
-    "id": "5",
-    "name": "Jimmy Hendrix",
-    "description": "James Marshall \"Jimi\" Hendrix (born Johnny Allen Hendrix; November 27, 1942 - September 18, 1970) was an American rock guitarist, singer, and songwriter. Although his mainstream career spanned only four years, he is widely regarded as one of the most influential electric guitarists in the history of popular music, and one of the most celebrated musicians of the 20th century.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Jimi_Hendrix_1967.png/800px-Jimi_Hendrix_1967.png",
+    "name": "Kizo",
+    "image": "assets/img/artists/kizo.jpg",
+    "description": "Kizo, właściwie Patryk Woziński (ur. 26.06.1994) – reprezentant Gdańska, pierwsze numery udostępniał w 2009 roku. Na początku swojej kariery był związany z Ciemną Strefą. Pierwszym wydawnictwem współtworzonym przez Kizo był album składu TROYA z 2017 roku. Obecnie wydaje muzykę pod szyldem MyToSukces. Od 2019 roku jest członkiem kolektywu Chillwagon, którego założycielem jest kielecki raper Borixon.",
     "albums": [
       {
-        "id": "9",
-        "title": "Are You Experienced",
-        "cover": "",
-        "releaseDate": "1967-05-12"
-      },
-      {
-        "id": "10",
-        "title": "Axis: Bold as Love",
-        "cover": "",
-        "releaseDate": "1967-12-01"
+        "id": 1,
+        "name": "Jeszcze 5 minut"
       }
     ],
-    "followers": ["Jimi", "Noel", "Mitch", "Billy"],
-    "discussionPosts": [],
-    "events": []
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
+  },
+  {
+    "name": "Taco Hemingway",
+    "image": "assets/img/artists/taco.jpg",
+    "description": "Filip Tadeusz Szcześniak (ur. 29 lipca 1990 roku w Kairze), znany też jako Taco Hemingway lub Fifi to polski raper, autor tekstów, muzyk oraz laureat trzech Fryderyków, uznawany także za najpopularniejszego MC w naszym kraju w drugiej dekadzie XXI w. Ukończył on liceum im. Mikołaja Kopernika, oraz Kulturoznawstwo na Uniwersytecie Warszawskim. W 2012 roku podjął również studia magisterskie na wydziale antropologii Uniwersytetu Londyńskiego.",
+    "albums": [
+      {
+        "id": 1,
+        "name": "1-800-OŚWIECENIE"
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
+  },
+  {
+    "name": "Quebonafide",
+    "image": "assets/img/artists/quebo.jpg",
+    "description": "Quebonafide, właśc. Kuba Grabowski – polski raper, piosenkarz, autor tekstów. Członek duetów Yochimu oraz Taconafide. Założyciel wytwórni QueQuality. Muzyk sprzedał w Polsce ponad 500 tys. płyt co czyni go jednym z najlepiej sprzedających się raperów w Polsce.",
+    "albums": [
+      {
+        "id": 1,
+        "name": "ROMANTIC PSYCHO"
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
+  },
+  {
+    "name": "Young Igi",
+    "image": "assets/img/artists/igi.jpg",
+    "description": "Igor Ośmiałowski (ur. 17 listopada 1999 roku w Gdyni), znany głównie jako Young Igi to polski raper i autor tekstów piosenek.",
+    "albums": [
+      {
+        "id": 1,
+        "name": "Skan myśli"
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
+  },
+  {
+    "name": "Paluch",
+    "image": "assets/img/artists/paluch.jpg",
+    "description": "Paluch (dokładniej Łukasz Paluszak) to poznański raper, który zadebiutował w 2004 roku materiałem „Życie jest piękne”.",
+    "albums": [
+      {
+        "id": 1,
+        "name": "Złota Owca"
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
+  },
+  {
+    "name": "Dwa Sławy",
+    "image": "assets/img/artists/dwaslawy.jpg",
+    "description": "Dwa Sławy – łódzki duet, w skład którego wchodzą Radosław “Rado Radosny” Średziński oraz Jarosław “Astek” Steciuk.",
+    "albums": [
+      {
+        "id": 1,
+        "name": "Pokolenie X2"
+      },
+      {
+        "id": 2,
+        "name": "Coś Przerywa"
+      },
+      {
+        "id": 3,
+        "name": "Ludzie Sztosy"
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "Event 1"
+      }
+    ],
+    "followers": [
+      {
+        "id": 1,
+        "name": "Follower 1"
+      }
+    ],
+    "discussionPosts": [
+      {
+        "id": 1,
+        "name": "Discussion Post 1"
+      }
+    ]
   }
 ]

@@ -1,622 +1,938 @@
 [
   {
-    "name": "Pierwsze wyjście z mroku",
+    "name": "SAFE",
     "artist": {
-      "id": "1",
-      "name": "Hades"
+      "id": "iE9ZHwm3mfpEv8rZU9Xl",
+      "name": "Gibbs"
     },
-    "cover": "https://picsum.photos/500/701",
-    "releaseDate": "2023-08-15T00:00:00.000Z",
+    "cover": "assets/img/albums/gibbs-safe.jpg",
+    "releaseDate": "2023-10-24T00:00:00.000Z",
     "tracks": [
-      {
-        "title": "No Escape",
-        "duration": "3:00"
-      },
-      {
-        "title": "Out of Tartarus",
-        "duration": "3:00"
-      },
-      {
-        "title": "Wretched Thug",
-        "duration": "3:00"
-      },
-      {
-        "title": "The Painful Way",
-        "duration": "3:00"
-      }
+      { "title": "SAFE", "duration": "3:24" },
+      { "title": "Samotność", "duration": "3:09" },
+      { "title": "Zawsze chciałem", "duration": "3:04" },
+      { "title": "Kolor", "duration": "2:49" },
+      { "title": "Czerwone łzy", "duration": "3:24" },
+      { "title": "Drive", "duration": "3:22" },
+      { "title": "Zero cukru", "duration": "3:30" },
+      { "title": "Złoty Chłopak", "duration": "3:15" },
+      { "title": "Czarna róża", "duration": "3:00" },
+      { "title": "Ogień", "duration": "3:07" },
+      { "title": "Stan", "duration": "3:01" },
+      { "title": "Oczy", "duration": "2:50" },
+      { "title": "Cios", "duration": "2:57" }
     ],
-    "description": "Pierwsze wyjście z mroku to debiutancki album studyjny polskiego rapera Hadesa. Został wydany 15 sierpnia 2023 roku przez wytwórnię muzyczną SBM Label. Album zawiera 10 utworów, w tym 2 single promujące: „No Escape” i „Out of Tartarus”.",
-    "duration": "30:00",
-    "genre": "Rap",
-    "rating": 4.5
+    "description": "Safe to drugi, solowy album Gibbsa, wykonawcy wywodzącego się z Kłobucka, na co dzień mieszkającego na Śląsku. Za kompozycje na krążku odpowiada Jonatan, 4money oraz sam Gibbs. Pracę nad płytą rozpoczęły się na początku bieżącego roku, podczas pobytu artystów w Azji. Album ukaże się na rynku w październiku 2023 roku nakładem wytwórni Dopehouse. Krążek promują single 'Stan', 'Samotność' czy 'Złoty chłopiec'",
+    "duration": "40:58",
+    "genre": "Hip-hop",
+    "rating": 4.9
   },
   {
-    "name": "Soma 0,5 mg",
+    "name": "Czarno na białym",
     "artist": {
-      "id": "2",
-      "name": "Taco Hemingway"
+      "id": "iE9ZHwm3mfpEv8rZU9Xl",
+      "name": "Gibbs"
     },
-    "cover": "https://picsum.photos/500/702",
-    "releaseDate": "2023-09-22T00:00:00.000Z",
+    "cover": "assets/img/artists/gibbs-czarno.jpg",
+    "releaseDate": "2021-09-30T00:00:00.000Z",
     "tracks": [
-      {
-        "title": "Za sto lat",
-        "duration": "4:12"
-      },
-      {
-        "title": "W drodze do marzeń",
-        "duration": "3:57"
-      },
-      {
-        "title": "Europa",
-        "duration": "3:45"
-      },
-      {
-        "title": "Marność",
-        "duration": "4:29"
-      }
+      { "title": "Abrakadabra", "duration": "3:02" },
+      { "title": "Kompas", "duration": "4:07" },
+      { "title": "Lepsza strona słońca", "duration": "4:24" },
+      { "title": "200%", "duration": "3:25" },
+      { "title": "Cień przypadku", "duration": "4:19" },
+      { "title": "Niewidzialny", "duration": "3:04" },
+      { "title": "Nigdy albo zawsze", "duration": "3:50" },
+      { "title": "Udawanko", "duration": "4:48" },
+      { "title": "(Po)ciąg dalszy nastąpi", "duration": "4:25" },
+      { "title": "Łzy ślepego szczęścia", "duration": "3:33" },
+      { "title": "Pieść dziękczynna", "duration": "3:48" },
+      { "title": "Joan Miro", "duration": "4:04" }
     ],
-    "description": "Soma 0,5 mg to trzeci album studyjny polskiego rapera Taco Hemingwaya. Został wydany 22 września 2023 roku przez wytwórnię muzyczną Taco Corp. Album zawiera 12 utworów, w tym single „Za sto lat” i „W drodze do marzeń”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.7
+    "description": "Czarno na białym to pierwsze solowe wydawnictwo Gibbsa, które w całości zostało wyprodukowane i napisane przez niego. Album pełen emocji, skrajności i melancholijnego spojrzenia na świat.",
+    "duration": "46:55",
+    "genre": "Hip-hop",
+    "rating": 5
   },
   {
-    "name": "Eklektyka",
+    "name": "100 dni do matury",
     "artist": {
-      "id": "3",
-      "name": "Quebonafide"
+      "id": "KtGkzXUHLv8FAWyIE1SS",
+      "name": "Mata"
     },
-    "cover": "https://picsum.photos/500/703",
-    "releaseDate": "2023-11-10T00:00:00.000Z",
+    "cover": "assets/img/albums/mata-100.jpg",
+    "releaseDate": "2020-01-17T00:00:00.000Z",
     "tracks": [
-      {
-        "title": "Ulisses",
-        "duration": "3:48"
-      },
-      {
-        "title": "Zdjęcia",
-        "duration": "3:30"
-      },
-      {
-        "title": "Nobel",
-        "duration": "3:25"
-      },
-      {
-        "title": "Ekscentryk",
-        "duration": "3:15"
-      }
+      { "title": "Intro", "duration": "1:30" },
+      { "title": "100 Dni Do Matury", "duration": "3:13" },
+      { "title": "Muzeum", "duration": "2:37" },
+      { "title": "Wieczność", "duration": "2:40" },
+      { "title": "Serce", "duration": "3:04" },
+      { "title": "Apetyt", "duration": "2:40" },
+      { "title": "Przeznaczenie", "duration": "2:41" },
+      { "title": "Kartki z Notatek", "duration": "2:36" },
+      { "title": "Gorzej Nie Będzie", "duration": "3:00" },
+      { "title": "Kochanie", "duration": "2:38" },
+      { "title": "100 Lat Na Karku", "duration": "2:53" },
+      { "title": "Jutro", "duration": "2:36" },
+      { "title": "Ciągle Więcej", "duration": "2:47" },
+      { "title": "Outro", "duration": "1:10" }
     ],
-    "description": "Eklektyka to czwarty album studyjny polskiego rapera Quebonafide. Został wydany 10 listopada 2023 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 14 utworów, w tym single „Ulisses” i „Zdjęcia”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.6
-  },
-  {
-    "name": "Undergroundowy lupus",
-    "artist": {
-      "id": "4",
-      "name": "Paluch"
-    },
-    "cover": "https://picsum.photos/500/704",
-    "releaseDate": "2024-01-18T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Cień",
-        "duration": "3:33"
-      },
-      {
-        "title": "Mrok",
-        "duration": "4:07"
-      },
-      {
-        "title": "Bez zębów",
-        "duration": "3:55"
-      },
-      {
-        "title": "Lokalny patriota",
-        "duration": "3:45"
-      }
-    ],
-    "description": "Undergroundowy lupus to siódmy album studyjny polskiego rapera Palucha. Został wydany 18 stycznia 2024 roku przez wytwórnię muzyczną SBM Label. Album zawiera 16 utworów, w tym single „Cień” i „Mrok”.",
-    "duration": "55:00",
-    "genre": "Rap",
-    "rating": 4.8
-  },
-  {
-    "name": "Antidotum",
-    "artist": {
-      "id": "5",
-      "name": "Sokół"
-    },
-    "cover": "https://picsum.photos/500/705",
-    "releaseDate": "2024-03-09T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Wojtek",
-        "duration": "3:44"
-      },
-      {
-        "title": "Dwie sławy",
-        "duration": "3:30"
-      },
-      {
-        "title": "Akustycznie",
-        "duration": "3:20"
-      },
-      {
-        "title": "Nieznane",
-        "duration": "4:10"
-      }
-    ],
-    "description": "Antidotum to dziesiąty album studyjny polskiego rapera Sokoła. Został wydany 9 marca 2024 roku przez wytwórnię muzyczną Prosto. Album zawiera 14 utworów, w tym single „Wojtek” i „Dwie sławy”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.5
-  },
-  {
-    "name": "O",
-    "artist": {
-      "id": "6",
-      "name": "O.S.T.R."
-    },
-    "cover": "https://picsum.photos/500/706",
-    "releaseDate": "2024-05-12T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Ostatnia szansa",
-        "duration": "3:22"
-      },
-      {
-        "title": "Symetryczno-liryczna",
-        "duration": "3:55"
-      },
-      {
-        "title": "Nie zrozumiesz",
-        "duration": "3:45"
-      },
-      {
-        "title": "Rehab",
-        "duration": "4:10"
-      }
-    ],
-    "description": "O to jedenasty album studyjny polskiego rapera O.S.T.R.-a. Został wydany 12 maja 2024 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 12 utworów, w tym single „Ostatnia szansa” i „Symetryczno-liryczna”.",
-    "duration": "45:00",
+    "description": "Płyta „100 dni do matury” to najlepsza pamiątka z czasów szkolnych jaką artysta mógł sprezentować sobie i słuchaczom. Krążek jest zapisem historii i emocji, które przewijały się podczas beztroskich czasów edukacji. Wśród czternastu utworów znajduje się burzliwe życie młodego człowieka, spisane w sto dni, od studniówki do ostatnich chwil przed maturą.",
+    "duration": "01:06:00",
     "genre": "Rap",
     "rating": 4.7
   },
   {
-    "name": "Codex",
+    "name": "Młody Matczak",
     "artist": {
-      "id": "7",
-      "name": "PRO8L3M"
+      "id": "KtGkzXUHLv8FAWyIE1SS",
+      "name": "Mata"
     },
-    "cover": "https://picsum.photos/500/707",
-    "releaseDate": "2024-07-19T00:00:00.000Z",
+    "cover": "assets/img/albums/mata-matczak.jpg",
+    "description": "Młody Matczak to drugi studyjny album polskiego rapera Maty, wydany 1 października 2021 roku. Album jest utrzymany w klimacie trapu i hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2021-10-01",
+    "duration": "57:46",
+    "genre": "Trap, Hip-Hop",
+    "rating": 4.5,
     "tracks": [
       {
-        "title": "Miliardy",
-        "duration": "3:20"
+        "title": "IKEA (intro)",
+        "duration": "2:22"
       },
       {
-        "title": "Mówiłam",
+        "title": "Blok (skit)",
+        "duration": "0:32"
+      },
+      {
+        "title": "Blok",
         "duration": "3:45"
       },
       {
-        "title": "Czerń",
-        "duration": "3:30"
+        "title": "SKUTE BOBO",
+        "duration": "3:08"
       },
       {
-        "title": "Powrót",
-        "duration": "3:55"
+        "title": "La La La (Oh Oh)",
+        "duration": "2:48"
+      },
+      {
+        "title": "Nasza klasa, ale to DRILL",
+        "duration": "3:43"
+      },
+      {
+        "title": "2001",
+        "duration": "2:57"
+      },
+      {
+        "title": "WE DONT KNOW WHO DID THIS BEAT IF IT'S YOU PLEASE DM US WE HAVE MONEY (skit)",
+        "duration": "0:17"
+      },
+      {
+        "title": "Patoreakcja",
+        "duration": "3:49"
+      },
+      {
+        "title": "Kumpel",
+        "duration": "3:32"
+      },
+      {
+        "title": "Tango",
+        "duration": "3:14"
+      },
+      {
+        "title": "Atakują",
+        "duration": "3:19"
+      },
+      {
+        "title": "Biblioteka",
+        "duration": "3:46"
+      },
+      {
+        "title": "Młody Matczak",
+        "duration": "3:53"
+      },
+      {
+        "title": "Hotel",
+        "duration": "3:56"
+      },
+      {
+        "title": "Papuga",
+        "duration": "3:23"
+      },
+      {
+        "title": "SZANOWNY PANIE PREZYDENCIE",
+        "duration": "3:26"
+      },
+      {
+        "title": "Outro",
+        "duration": "2:47"
       }
-    ],
-    "description": "Codex to trzeci album studyjny polskiego zespołu PRO8L3M. Został wydany 19 lipca 2024 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 13 utworów, w tym single „Miliardy” i „Mówiłam”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.8
+    ]
   },
   {
-    "name": "Jedzenie dla duszy",
+    "name": "audiotele",
     "artist": {
-      "id": "8",
-      "name": "Kękę"
+      "id": "K0arGWahZ7GiMtPlojrv",
+      "name": "schafter"
     },
-    "cover": "https://picsum.photos/500/708",
-    "releaseDate": "2024-09-03T00:00:00.000Z",
+    "cover": "assets/img/albums/schafter-audiotele.jpg",
+    "description": "Audiotele to debiutancki album studyjny polskiego rapera schaftera, wydany 22 listopada 2019 roku. Album jest utrzymany w klimacie trapu i hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2019-11-22",
+    "duration": "45:39",
+    "genre": "Trap, Hip-Hop",
+    "rating": 4,
     "tracks": [
       {
-        "title": "Bogini",
+        "title": "intro",
+        "duration": "2:04"
+      },
+      {
+        "title": "hot coffee",
+        "duration": "3:04"
+      },
+      {
+        "title": "double D's (ft. Żabson)",
+        "duration": "3:14"
+      },
+      {
+        "title": "marwin",
+        "duration": "3:21"
+      },
+      {
+        "title": "ridin' round the town w czyimś Bel Air",
+        "duration": "3:28"
+      },
+      {
+        "title": "telefony",
         "duration": "3:15"
       },
       {
-        "title": "Dzieci gorszego boga",
-        "duration": "3:20"
+        "title": "sen o Warszawie (ft. Taco Hemingway)",
+        "duration": "3:39"
       },
       {
-        "title": "Niezły wyjazd",
-        "duration": "3:45"
-      },
-      {
-        "title": "Jestem w dobrym miejscu",
-        "duration": "3:30"
-      }
-    ],
-    "description": "Jedzenie dla duszy to szósty album studyjny polskiego rapera Kękę. Został wydany 3 września 2024 roku przez wytwórnię muzyczną Prosto. Album zawiera 14 utworów, w tym single „Bogini” i „Dzieci gorszego boga”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.6
-  },
-  {
-    "name": "Szczerze",
-    "artist": {
-      "id": "9",
-      "name": "Sarius"
-    },
-    "cover": "https://picsum.photos/500/709",
-    "releaseDate": "2024-10-30T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Wymiar",
-        "duration": "3:30"
-      },
-      {
-        "title": "Śmiem wątpić",
-        "duration": "3:20"
-      },
-      {
-        "title": "Wojownik",
-        "duration": "3:45"
-      },
-      {
-        "title": "Każdego dnia",
-        "duration": "3:25"
-      }
-    ],
-    "description": "Szczerze to drugi album studyjny polskiego rapera Sariusa. Został wydany 30 października 2024 roku przez wytwórnię muzyczną QueQuality. Album zawiera 12 utworów, w tym single „Wymiar” i „Śmiem wątpić”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.7
-  },
-  {
-    "name": "Pluta",
-    "artist": {
-      "id": "10",
-      "name": "Kali"
-    },
-    "cover": "https://picsum.photos/500/710",
-    "releaseDate": "2025-01-20T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Trudny dzieciak",
-        "duration": "3:40"
-      },
-      {
-        "title": "Wspólny problem",
-        "duration": "4:10"
-      },
-      {
-        "title": "Siódme niebo",
-        "duration": "3:25"
-      },
-      {
-        "title": "Kapitał",
-        "duration": "3:45"
-      }
-    ],
-    "description": "Pluta to piąty album studyjny polskiego rapera Kaliego. Został wydany 20 stycznia 2025 roku przez wytwórnię muzyczną Prosto. Album zawiera 11 utworów, w tym single „Trudny dzieciak” i „Wspólny problem”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.6
-  },
-  {
-    "name": "Mosty",
-    "artist": {
-      "id": "11",
-      "name": "Taco Hemingway"
-    },
-    "cover": "https://picsum.photos/500/711",
-    "releaseDate": "2025-03-10T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Intro",
-        "duration": "2:30"
-      },
-      {
-        "title": "Wirtualny świat",
-        "duration": "3:20"
-      },
-      {
-        "title": "Raj",
-        "duration": "3:10"
-      },
-      {
-        "title": "Złodziej",
-        "duration": "3:40"
-      }
-    ],
-    "description": "Mosty to szósty album studyjny polskiego rapera Taco Hemingwaya. Został wydany 10 marca 2025 roku przez wytwórnię muzyczną Taco Corp. Album zawiera 11 utworów, w tym single „Intro” i „Wirtualny świat”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.8
-  },
-  {
-    "name": "Dzień czystości",
-    "artist": {
-      "id": "12",
-      "name": "Popek"
-    },
-    "cover": "https://picsum.photos/500/712",
-    "releaseDate": "2025-05-25T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Żyję dla rapu",
-        "duration": "3:15"
-      },
-      {
-        "title": "Mocno",
-        "duration": "3:30"
-      },
-      {
-        "title": "Czysty rap",
-        "duration": "3:25"
-      },
-      {
-        "title": "Dobre serce",
-        "duration": "3:45"
-      }
-    ],
-    "description": "Dzień czystości to ósmy album studyjny polskiego rapera Popeka. Został wydany 25 maja 2025 roku przez wytwórnię muzyczną Hustla Music. Album zawiera 12 utworów, w tym single „Żyję dla rapu” i „Mocno”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.7
-  },
-  {
-    "name": "Czarno białe",
-    "artist": {
-      "id": "13",
-      "name": "KęKę"
-    },
-    "cover": "https://picsum.photos/500/713",
-    "releaseDate": "2025-08-18T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Ciemna strona",
-        "duration": "3:20"
-      },
-      {
-        "title": "Białe nieba",
-        "duration": "3:40"
-      },
-      {
-        "title": "Droga do celu",
-        "duration": "3:25"
-      },
-      {
-        "title": "Ostatnia szansa",
-        "duration": "3:15"
-      }
-    ],
-    "description": "Czarno białe to dziewiąty album studyjny polskiego rapera KęKę. Został wydany 18 sierpnia 2025 roku przez wytwórnię muzyczną Prosto. Album zawiera 13 utworów, w tym single „Ciemna strona” i „Białe nieba”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.8
-  },
-  {
-    "name": "Ziemia",
-    "artist": {
-      "id": "14",
-      "name": "Bedoes"
-    },
-    "cover": "https://picsum.photos/500/714",
-    "releaseDate": "2025-10-22T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Wypijemy",
-        "duration": "3:45"
-      },
-      {
-        "title": "Nie ma słów",
-        "duration": "3:30"
-      },
-      {
-        "title": "Czy to świat",
-        "duration": "3:25"
-      },
-      {
-        "title": "Jedno życie",
-        "duration": "3:20"
-      }
-    ],
-    "description": "Ziemia to piąty album studyjny polskiego rapera Bedoesa. Został wydany 22 października 2025 roku przez wytwórnię muzyczną SBM Label. Album zawiera 11 utworów, w tym single „Wypijemy” i „Nie ma słów”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.6
-  },
-  {
-    "name": "Prawdziwa historia",
-    "artist": {
-      "id": "15",
-      "name": "Peja"
-    },
-    "cover": "https://picsum.photos/500/715",
-    "releaseDate": "2026-01-15T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Intro",
+        "title": "03-22",
         "duration": "2:50"
       },
       {
-        "title": "Historia prawdziwa",
+        "title": "banknot",
+        "duration": "3:06"
+      },
+      {
+        "title": "van damme",
+        "duration": "3:24"
+      },
+      {
+        "title": "dwa palce",
+        "duration": "3:02"
+      },
+      {
+        "title": "szlugi",
+        "duration": "3:35"
+      },
+      {
+        "title": "outro",
+        "duration": "2:29"
+      }
+    ]
+  },
+  {
+    "name": "1-800-Oświecenie",
+    "artist": {
+      "id": "oE2VWkFJ7tlyYZgVW2H7",
+      "name": "Taco Hemingway"
+    },
+    "cover": "assets/img/albums/taco-1-800.jpg",
+    "description": "1-800-Oświecenie to szósty studyjny album polskiego rapera Taco Hemingwaya, wydany 22 września 2023 roku. Album jest utrzymany w klimacie hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2023-09-22",
+    "duration": "52:47",
+    "genre": "Hip-Hop",
+    "rating": 4.5,
+    "tracks": [
+      {
+        "title": "1-800-Oświecenie",
+        "duration": "3:27"
+      },
+      {
+        "title": "Cichosza (ft. Otsochodzi)",
+        "duration": "3:34"
+      },
+      {
+        "title": "Gelato",
+        "duration": "3:05"
+      },
+      {
+        "title": "Może To Coś Zmieni?",
+        "duration": "3:24"
+      },
+      {
+        "title": "Pakiet Platinium",
+        "duration": "3:22"
+      },
+      {
+        "title": "Makarena Freestyle",
+        "duration": "2:19"
+      },
+      {
+        "title": "Mix Sałat (ft. Daria Zawiałow)",
+        "duration": "3:37"
+      },
+      {
+        "title": "Codziennie",
+        "duration": "3:21"
+      },
+      {
+        "title": "1000 Dni Freestyle",
+        "duration": "3:09"
+      },
+      {
+        "title": "Nametag (ft. Young Igi)",
+        "duration": "3:25"
+      },
+      {
+        "title": "Wielkomiejska Bezsenność",
+        "duration": "3:45"
+      },
+      {
+        "title": "Przez Twe Oczy",
+        "duration": "3:32"
+      },
+      {
+        "title": "Tamagotchi",
+        "duration": "3:17"
+      },
+      {
+        "title": "Ostatnia Wieczerza (ft. Quebonafide)",
+        "duration": "4:14"
+      },
+      {
+        "title": "Outro",
+        "duration": "2:33"
+      }
+    ]
+  },
+  {
+    "name": "ROMANTIC PSYCHO",
+    "artist": {
+      "id": "zc3TINFek7soWFATW1Pp",
+      "name": "Quebonafide"
+    },
+    "cover": "assets/img/albums/quebo-romantic.jpg",
+    "description": "ROMANTIC PSYCHO to czwarty studyjny album polskiego rapera Quebonafide, wydany 1 kwietnia 2020 roku. Album jest utrzymany w klimacie trapu i hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2020-04-01",
+    "duration": "54:32",
+    "genre": "Trap, Hip-Hop",
+    "rating": 4.5,
+    "tracks": [
+      {
+        "title": "ROMANTICPSYCHO (ft. Taco Hemingway)",
+        "duration": "3:42"
+      },
+      {
+        "title": "JESIEŃ (ft. Natali Szroeder)",
+        "duration": "4:00"
+      },
+      {
+        "title": "PRZY TOBIE",
+        "duration": "3:23"
+      },
+      {
+        "title": "SZUBIENICAPESTYCYDYBROŃ",
+        "duration": "3:24"
+      },
+      {
+        "title": "TĘSKNIĘ ZASTARYMKANYE (ft. Natali Szroeder)",
+        "duration": "3:43"
+      },
+      {
+        "title": "ASPARTAM (ft. Mata)",
+        "duration": "3:52"
+      },
+      {
+        "title": "CO JEST MAŁPY (ft. Smarki Smark)",
+        "duration": "3:14"
+      },
+      {
+        "title": "RUMPELSTILSKIN (ft. Vito Bambino)",
+        "duration": "3:20"
+      },
+      {
+        "title": "SZANUJ",
+        "duration": "3:30"
+      },
+      {
+        "title": "PRZYJACIELE",
+        "duration": "3:08"
+      },
+      {
+        "title": "BUJAJ SIĘ",
+        "duration": "3:27"
+      },
+      {
+        "title": "NIKEEEEEEEEEEEEEE",
+        "duration": "3:04"
+      },
+      {
+        "title": "GANG GANG",
+        "duration": "3:16"
+      },
+      {
+        "title": "03-22",
+        "duration": "3:03"
+      },
+      {
+        "title": "ROMANTICPSYCHO (outro)",
+        "duration": "2:42"
+      }
+    ]
+  },
+  {
+    "name": "Złota Owca",
+    "artist": {
+      "id": "7Nwa1Hic5FfJZGz8dihT",
+      "name": "Paluch"
+    },
+    "cover": "assets/img/albums/paluch-owca.jpg",
+    "description": "Złota Owca to dziewiąty studyjny album polskiego rapera Palucha, wydany 24 listopada 2017 roku. Album jest utrzymany w klimacie hip-hopu i gangsta rapu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2017-11-24",
+    "duration": "42:70",
+    "genre": "Hip-Hop, Gangsta Rap",
+    "rating": 4,
+    "tracks": [
+      {
+        "title": "Złota Owca",
+        "duration": "3:27"
+      },
+      {
+        "title": "Kontrola Jakości (feat. Szpaku)",
+        "duration": "4:07"
+      },
+      {
+        "title": "Głód",
+        "duration": "3:37"
+      },
+      {
+        "title": "Krótka Piłka (feat. Sarius)",
+        "duration": "3:33"
+      },
+      {
+        "title": "List w Butelce",
+        "duration": "4:05"
+      },
+      {
+        "title": "Cardio",
+        "duration": "3:22"
+      },
+      {
+        "title": "Plac Zabaw",
+        "duration": "3:45"
+      },
+      {
+        "title": "Dym",
+        "duration": "3:19"
+      },
+      {
+        "title": "Sterylnie (feat. Quebonafide)",
+        "duration": "4:14"
+      },
+      {
+        "title": "Biohazard",
+        "duration": "3:41"
+      },
+      {
+        "title": "Zły Sen",
+        "duration": "3:27"
+      },
+      {
+        "title": "Zimne Ognie",
+        "duration": "3:54"
+      },
+      {
+        "title": "Za Blisko",
+        "duration": "3:34"
+      }
+    ]
+  },
+  {
+    "name": "Jeszcze 5 minut",
+    "artist": {
+      "id": "DYfBGNQuWKRc5oMvS8WA",
+      "name": "Kizo"
+    },
+    "cover": "assets/img/albums/kizo-jeszcze-5.jpg",
+    "description": "Jeszcze 5 minut to trzeci studyjny album polskiego rapera Kizo, wydany 22 października 2021 roku. Album jest utrzymany w klimacie trapu i hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2021-10-22",
+    "duration": "34:90",
+    "genre": "Trap, Hip-Hop",
+    "rating": 4.5,
+    "tracks": [
+      {
+        "title": "MTS (prod. Traperhoff)",
+        "duration": "2:55"
+      },
+      {
+        "title": "KRÓL BALU (prod. Dr AP)",
+        "duration": "2:22"
+      },
+      {
+        "title": "Z NADZIEJĄ (prod. C-Wash)",
+        "duration": "2:39"
+      },
+      {
+        "title": "JESZCZE PIĘĆ MINUT ft. Lubin (prod. BeMelo)",
+        "duration": "2:12"
+      },
+      {
+        "title": "DOBRZE (prod. C-Wash)",
+        "duration": "2:56"
+      },
+      {
+        "title": "OJEJ ft. Major SPZ (prod. Oil Beatz)",
+        "duration": "3:09"
+      },
+      {
+        "title": "OXA ft. Pusher (prod. Culten)",
+        "duration": "3:15"
+      },
+      {
+        "title": "FORMA (prod. MØJI)",
+        "duration": "2:42"
+      },
+      {
+        "title": "ALADIN ft. Kabe (prod. Gara & Nofuk)",
+        "duration": "3:43"
+      },
+      {
+        "title": "DISNEY (prod. Sergiusz & Leśny)",
+        "duration": "2:54"
+      },
+      {
+        "title": "POGO ft. OKI (prod. BaHsick)",
+        "duration": "3:19"
+      },
+      {
+        "title": "MAM DO TEGO NOSA ft. Berson (prod. BeMelo)",
+        "duration": "3:00"
+      },
+      {
+        "title": "ZDROWIE ft. Janusz Walczuk (prod. Dio Mudara)",
+        "duration": "2:36"
+      },
+      {
+        "title": "WRRRRUM (prod. PSR)",
+        "duration": "2:31"
+      },
+      {
+        "title": "NASZE LATO ft. Wac Toja (prod. BeMelo)",
+        "duration": "3:20"
+      },
+      {
+        "title": "OJEJ REMIX ft. Major SPZ (prod. BAHsick)",
+        "duration": "3:11"
+      }
+    ]
+  },
+  {
+    "name": "Skan Myśli",
+    "artist": {
+      "id": "VueyboOabk75gfOIFk4H",
+      "name": "Young Igi"
+    },
+    "cover": "assets/img/albums/igi-skan.jpg",
+    "description": "Skan Myśli to drugi studyjny album polskiego rapera Young Igiego, wydany 25 października 2019 roku. Album jest utrzymany w klimacie trapu i hip-hopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2019-10-25",
+    "duration": "42:48",
+    "genre": "Trap, Hip-Hop",
+    "rating": 4,
+    "tracks": [
+      {
+        "title": "Intro",
+        "duration": "2:04"
+      },
+      {
+        "title": "Mamy Bardzo Dużo",
+        "duration": "3:12"
+      },
+      {
+        "title": "Prostsze",
+        "duration": "3:14"
+      },
+      {
+        "title": "Pamiętnik Ex",
+        "duration": "3:22"
+      },
+      {
+        "title": "Droptop",
+        "duration": "3:02"
+      },
+      {
+        "title": "Mama",
+        "duration": "3:24"
+      },
+      {
+        "title": "Promienie Słońca",
+        "duration": "3:18"
+      },
+      {
+        "title": "Inny Gatunek (ft. Kizo)",
+        "duration": "3:20"
+      },
+      {
+        "title": "Idealne Połączenie (ft. Jan-rapowanie)",
+        "duration": "3:22"
+      },
+      {
+        "title": "Bezdomny",
+        "duration": "3:15"
+      },
+      {
+        "title": "Jet Lag",
+        "duration": "3:25"
+      },
+      {
+        "title": "THC (ft. Włodi)",
+        "duration": "3:14"
+      },
+      {
+        "title": "Serio",
+        "duration": "3:17"
+      },
+      {
+        "title": "Clipper (ft. Qry)",
+        "duration": "3:22"
+      },
+      {
+        "title": "Outro",
+        "duration": "2:41"
+      }
+    ]
+  },
+  {
+    "name": "36,6",
+    "artist": {
+      "id": "A9hjk9RAdUPOPhbya31c",
+      "name": "Miętha"
+    },
+    "cover": "assets/img/albums/mietha-36-6.jpg",
+    "description": "36,6 to debiutancki album polskiego duetu Miętha, wydany 15 października 2021 roku. Album jest utrzymany w klimacie indie popu i electropopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2021-10-15",
+    "duration": "35:00",
+    "genre": "Hip-Hop",
+    "rating": 4.5,
+    "tracks": [
+      {
+        "title": "Welur",
+        "duration": "3:22"
+      },
+      {
+        "title": "Wino",
         "duration": "3:10"
       },
       {
-        "title": "Czas przemija",
-        "duration": "3:30"
+        "title": "Kumitsu",
+        "duration": "3:05"
       },
       {
-        "title": "Podziękowania",
-        "duration": "3:15"
+        "title": "Kocham być z dziewczynami",
+        "duration": "3:24"
+      },
+      {
+        "title": "100 nieodebranych",
+        "duration": "3:12"
+      },
+      {
+        "title": "Czeka na mnie",
+        "duration": "3:27"
+      },
+      {
+        "title": "Guilty Gucci (ft. Paluch)",
+        "duration": "3:14"
+      },
+      {
+        "title": "Odejdź",
+        "duration": "3:32"
+      },
+      {
+        "title": "Statek",
+        "duration": "3:20"
+      },
+      {
+        "title": "Mamo",
+        "duration": "3:17"
+      },
+      {
+        "title": "36,6",
+        "duration": "3:27"
+      },
+      {
+        "title": "Outro",
+        "duration": "2:41"
       }
-    ],
-    "description": "Prawdziwa historia to dziesiąty album studyjny polskiego rapera Peji. Został wydany 15 stycznia 2026 roku przez wytwórnię muzyczną R.R.X.. Album zawiera 12 utworów, w tym single „Intro” i „Historia prawdziwa”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.7
+    ]
   },
   {
-    "name": "Bóg",
+    "name": "Audioportret",
     "artist": {
-      "id": "16",
-      "name": "Quebonafide"
+      "id": "A9hjk9RAdUPOPhbya31c",
+      "name": "Miętha"
     },
-    "cover": "https://picsum.photos/500/716",
-    "releaseDate": "2026-03-18T00:00:00.000Z",
+    "cover": "assets/img/albums/mietha-audioportret.jpg",
+    "description": "Audioportret to debiutancki album polskiego duetu Miętha, wydany 25 maja 2019 roku. Album jest utrzymany w klimacie indie popu i electropopu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2019-05-25",
+    "duration": "34:00",
+    "genre": "Hip-Hop",
+    "rating": 4,
     "tracks": [
       {
-        "title": "Antykwariat",
+        "title": "Intro",
+        "duration": "2:04"
+      },
+      {
+        "title": "Star$",
+        "duration": "3:12"
+      },
+      {
+        "title": "Noc",
+        "duration": "3:14"
+      },
+      {
+        "title": "Sen",
+        "duration": "3:22"
+      },
+      {
+        "title": "MIASTO",
+        "duration": "3:02"
+      },
+      {
+        "title": "SAM",
+        "duration": "3:24"
+      },
+      {
+        "title": "WIARA",
+        "duration": "3:18"
+      },
+      {
+        "title": "PIENIĄDZE (ft. Otsochodzi)",
+        "duration": "3:20"
+      },
+      {
+        "title": "PRZYTUŁ (ft. schafter)",
+        "duration": "3:12"
+      },
+      {
+        "title": "CIENIE",
+        "duration": "3:15"
+      },
+      {
+        "title": "DLACZEGO",
+        "duration": "3:25"
+      },
+      {
+        "title": "TAŃCZYMY (ft. Vito Bambino)",
+        "duration": "3:14"
+      },
+      {
+        "title": "Koniec",
+        "duration": "3:17"
+      },
+      {
+        "title": "Outro",
+        "duration": "2:41"
+      }
+    ]
+  },
+  {
+    "name": "Pokolenie X2",
+    "artist": {
+      "id": "Ofii5Ho3FO2PctjwMu0k",
+      "name": "Dwa Sławy"
+    },
+    "cover": "assets/img/albums/dwaslawy-x2.jpg",
+    "description": "Pokolenie X2 to drugi studyjny album polskiego duetu hip-hopowego Dwa Sławy. Album jest utrzymany w klimacie klasycznego hip-hopu i rapu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2020-01-24",
+    "duration": "40:21",
+    "genre": "Hip-Hop, Rap",
+    "rating": 4,
+    "tracks": [
+      {
+        "title": "Co ludzie powiedzą (prod. 808bros)",
+        "duration": "3:27"
+      },
+      {
+        "title": "Twister (prod. Skrywa)",
+        "duration": "3:02"
+      },
+      {
+        "title": "Ostatni puzzel feat. Ten Typ Mes (prod. Skrywa)",
         "duration": "3:40"
       },
       {
-        "title": "Bóg",
+        "title": "Parasolki (prod. Sergiusz x 2K)",
+        "duration": "3:21"
+      },
+      {
+        "title": "Mango lassi feat. Białas (prod. Steez83)",
+        "duration": "3:37"
+      },
+      {
+        "title": "Alfa Mondeo (prod. Skrywa)",
+        "duration": "3:08"
+      },
+      {
+        "title": "Catcall (prod. Skrywa)",
+        "duration": "3:12"
+      },
+      {
+        "title": "Pokolenie X2 (prod. 808bros)",
+        "duration": "3:24"
+      },
+      {
+        "title": "Żółć JBC (prod. Skrywa)",
+        "duration": "3:29"
+      },
+      {
+        "title": "Mumble No. (prod. Sergiusz)",
+        "duration": "2:51"
+      },
+      {
+        "title": "W tłumie (prod. Skrywa)",
+        "duration": "3:24"
+      }
+    ]
+  },
+  {
+    "name": "Coś Przerywa",
+    "artist": {
+      "id": "Ofii5Ho3FO2PctjwMu0k",
+      "name": "Dwa Sławy"
+    },
+    "cover": "assets/img/albums/dwaslawy-przerywa.jpg",
+    "description": "Musimy porozmawiać? Miałem oddzwonić? Znowu zawaliłem? Nie można na mnie polegać? Halo? Coś przerywa. Dwa Sławy mówią o tym czego u siebie nie lubisz, w sposób za który ich kochasz. A za co ich kochasz? Za najlepsze na scenie gry słowne, treść zmuszającą do ruszenia głową i brzmienia zmuszające do ruszenia nóżką. Na albumie czołówka polskich producentów, a gościnnie występują: Kękę, Sarius, Jarecki i Kasia Grzesiek. Spróbuj tego słodko-gorzkiego koktajlu przełamanego pikantną nutą. Smacznego!",
+    "releaseDate": "2018-03-23",
+    "duration": "55:16",
+    "genre": "Hip-Hop, Rap",
+    "rating": 4.8,
+    "tracks": [
+      {
+        "title": "Halo?",
+        "duration": "3:41"
+      },
+      {
+        "title": "Zdejm czapkę",
+        "duration": "2:52"
+      },
+      {
+        "title": "Gdyby miało nie być wczoraj",
+        "duration": "4:26"
+      },
+      {
+        "title": "Giroud",
+        "duration": "3:23"
+      },
+      {
+        "title": "Kiss & Fly",
+        "duration": "3:52"
+      },
+      {
+        "title": "Chwast feat. Sarius",
         "duration": "3:30"
       },
       {
-        "title": "Dziedzictwo",
-        "duration": "3:25"
+        "title": "Ganz egal",
+        "duration": "3:16"
       },
       {
-        "title": "Droga przez piekło",
-        "duration": "3:20"
+        "title": "To już?",
+        "duration": "3:51"
+      },
+      {
+        "title": "Jestem feat. Jarecki",
+        "duration": "3:41"
+      },
+      {
+        "title": "Magnes na lodówkę",
+        "duration": "3:42"
+      },
+      {
+        "title": "Buty do wódy",
+        "duration": "3:32"
+      },
+      {
+        "title": "Dintojra",
+        "duration": "3:38"
+      },
+      {
+        "title": "To brzmi jak",
+        "duration": "3:12"
+      },
+      {
+        "title": "No cześć feat. Kasia Grzesiek",
+        "duration": "5:07"
+      },
+      {
+        "title": "Drugi koniec świata feat. KęKę",
+        "duration": "4:22"
       }
-    ],
-    "description": "Bóg to piąty album studyjny polskiego rapera Quebonafide. Został wydany 18 marca 2026 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 11 utworów, w tym single „Antykwariat” i „Bóg”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.8
+    ]
   },
   {
-    "name": "Narkotyki",
+    "name": "Ludzie Sztosy",
     "artist": {
-      "id": "17",
-      "name": "KaeN"
+      "id": "Ofii5Ho3FO2PctjwMu0k",
+      "name": "Dwa Sławy"
     },
-    "cover": "https://picsum.photos/500/717",
-    "releaseDate": "2026-05-20T00:00:00.000Z",
+    "cover": "assets/img/albums/dwaslawy-sztosy.jpg",
+    "description": "Ludzie Sztosy to drugi studyjny album polskiego duetu hip-hopowego Dwa Sławy. Album jest utrzymany w klimacie klasycznego hip-hopu i rapu, a teksty poruszają szeroką gamę tematów, od życia codziennego po refleksje nad współczesnym światem.",
+    "releaseDate": "2015-01-09",
+    "duration": "49:17",
+    "genre": "Hip-Hop, Rap",
+    "rating": 4.5,
     "tracks": [
       {
-        "title": "Strefa",
+        "title": "Intro",
+        "duration": "2:41"
+      },
+      {
+        "title": "Ludzie Sztosy",
+        "duration": "3:12"
+      },
+      {
+        "title": "Jestem Bogiem",
+        "duration": "3:32"
+      },
+      {
+        "title": "Czasem",
+        "duration": "3:24"
+      },
+      {
+        "title": "Szacunek",
+        "duration": "3:17"
+      },
+      {
+        "title": "Młodość",
+        "duration": "3:22"
+      },
+      {
+        "title": "Złote Tarasy (ft. Quebonafide)",
+        "duration": "3:22"
+      },
+      {
+        "title": "Pieniądze",
         "duration": "3:15"
       },
       {
-        "title": "Narkotyki",
-        "duration": "3:30"
-      },
-      {
-        "title": "Podróże",
-        "duration": "3:45"
-      },
-      {
-        "title": "Sny",
-        "duration": "3:20"
-      }
-    ],
-    "description": "Narkotyki to czwarty album studyjny polskiego rapera KaeNa. Został wydany 20 maja 2026 roku przez wytwórnię muzyczną SBM Label. Album zawiera 12 utworów, w tym single „Strefa” i „Narkotyki”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.6
-  },
-  {
-    "name": "Czysty kod",
-    "artist": {
-      "id": "18",
-      "name": "VNM"
-    },
-    "cover": "https://picsum.photos/500/718",
-    "releaseDate": "2026-08-22T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Złoty chłopak",
-        "duration": "3:45"
-      },
-      {
-        "title": "Czysty kod",
-        "duration": "3:30"
-      },
-      {
-        "title": "Przestępstwo",
+        "title": "Pamiętaj",
         "duration": "3:25"
       },
       {
-        "title": "Dobro",
-        "duration": "3:20"
+        "title": "Szczęście",
+        "duration": "3:14"
+      },
+      {
+        "title": "Outro (ft. Ten Typ Mes)",
+        "duration": "3:22"
       }
-    ],
-    "description": "Czysty kod to szósty album studyjny polskiego rapera VNM-a. Został wydany 22 sierpnia 2026 roku przez wytwórnię muzyczną Asfalt Records. Album zawiera 11 utworów, w tym single „Złoty chłopak” i „Czysty kod”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.7
-  },
-  {
-    "name": "Księżycowe miłości",
-    "artist": {
-      "id": "19",
-      "name": "Tede"
-    },
-    "cover": "https://picsum.photos/500/719",
-    "releaseDate": "2026-10-11T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Dowód rzeczowy nr 1",
-        "duration": "3:15"
-      },
-      {
-        "title": "Gaz",
-        "duration": "3:30"
-      },
-      {
-        "title": "Grawitacja",
-        "duration": "3:45"
-      },
-      {
-        "title": "Sznur",
-        "duration": "3:20"
-      }
-    ],
-    "description": "Księżycowe miłości to jedenasty album studyjny polskiego rapera Tedego. Został wydany 11 października 2026 roku przez wytwórnię muzyczną Wielkie Joł. Album zawiera 13 utworów, w tym single „Dowód rzeczowy nr 1” i „Gaz”.",
-    "duration": "50:00",
-    "genre": "Rap",
-    "rating": 4.8
-  },
-  {
-    "name": "Odwet",
-    "artist": {
-      "id": "20",
-      "name": "Sokół"
-    },
-    "cover": "https://picsum.photos/500/720",
-    "releaseDate": "2027-01-05T00:00:00.000Z",
-    "tracks": [
-      {
-        "title": "Wojna",
-        "duration": "3:45"
-      },
-      {
-        "title": "Requiem",
-        "duration": "3:30"
-      },
-      {
-        "title": "Ślad",
-        "duration": "3:25"
-      },
-      {
-        "title": "Upadek",
-        "duration": "3:20"
-      }
-    ],
-    "description": "Odwet to jedenasty album studyjny polskiego rapera Sokoła. Został wydany 5 stycznia 2027 roku przez wytwórnię muzyczną Prosto. Album zawiera 12 utworów, w tym single „Wojna” i „Requiem”.",
-    "duration": "45:00",
-    "genre": "Rap",
-    "rating": 4.7
+    ]
   }
 ]
