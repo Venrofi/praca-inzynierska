@@ -28,7 +28,7 @@ export class AlbumDetailsComponent {
       )
       .pipe(
         catchError(() => {
-          this.snackBar.open('Wystąpił błąd podczas wczytywania profilu artysty.', 'OK', {
+          this.snackBar.open('Wystąpił błąd podczas wczytywania szczegółów albumu.', 'OK', {
             duration: 3000,
             horizontalPosition: 'end',
             panelClass: ['snackbar-error']
