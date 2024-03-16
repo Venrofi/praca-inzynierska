@@ -36,7 +36,16 @@ export class ArtistService {
   }
 
   getArtistInformation(artistID: string) {
-    return this.artistsCollection.doc(artistID).valueChanges();
+    return this.artistsCollection.doc(artistID).valueChanges()
+      .pipe(
+        map((artist) => {
+          if (!artist) {
+            throw new Error('Artist not found');
+          }
+
+          return artist;
+        })
+      );
   }
 
   getArtistAlbums(albumIDs: string[]) {

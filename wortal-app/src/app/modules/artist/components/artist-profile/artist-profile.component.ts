@@ -62,12 +62,12 @@ export class ArtistProfileComponent implements OnInit {
         })
       )
       .subscribe(artist => {
-        this.artist = artist || {} as Artist;
+        this.artist = artist as Artist;
 
-        const albumsIDs = this.artist.albums.map(album => album.id);
+        const albumsIDs = this.artist.albums?.map(album => album.id);
         this.artistAlbums = this.artistService.getArtistAlbums(albumsIDs);
 
-        this.artist.followers.find(follower => follower.id === this.member?.id) ? this.artistFollowed = true : this.artistFollowed = false;
+        this.artist.followers?.find(follower => follower.id === this.member?.id) ? this.artistFollowed = true : this.artistFollowed = false;
       });
 
 
