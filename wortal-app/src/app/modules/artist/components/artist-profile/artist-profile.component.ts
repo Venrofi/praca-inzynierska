@@ -2,11 +2,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject, catchError, debounceTime, of, switchMap } from 'rxjs';
+import { Subject, catchError, debounceTime, of, switchMap, Observable } from 'rxjs';
 import { StoreModel } from 'src/app/app-state.model';
 import { Artist, Member } from 'src/app/core/core.model';
 import * as memberActions from '../../../../store/member/member.actions';
 import { ArtistService } from "../../services/artist.service";
+import { AlbumBasicDetails } from 'src/app/modules/homepage/homepage.model';
 
 @Component({
   selector: 'app-artist-profile',
@@ -14,6 +15,8 @@ import { ArtistService } from "../../services/artist.service";
 })
 export class ArtistProfileComponent implements OnInit {
   artist!: Artist;
+
+  artistAlbums!: Observable<AlbumBasicDetails[]>;
 
   artistFollowed: boolean = false;
 
@@ -59,9 +62,14 @@ export class ArtistProfileComponent implements OnInit {
         })
       )
       .subscribe(artist => {
-        this.artist = artist;
+        this.artist = artist || {} as Artist;
+
+        const albumsIDs = this.artist.albums.map(album => album.id);
+        this.artistAlbums = this.artistService.getArtistAlbums(albumsIDs);
+
         this.artist.followers.find(follower => follower.id === this.member?.id) ? this.artistFollowed = true : this.artistFollowed = false;
       });
+
 
     this.clickSubject.pipe(debounceTime(500)).subscribe(() => {
       this.artistFollowed ? this.unfollowArtist() : this.followArtist();

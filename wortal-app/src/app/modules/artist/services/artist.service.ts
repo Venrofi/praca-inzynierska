@@ -1,15 +1,24 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { map, Observable } from "rxjs";
+import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
+import { Observable, map } from "rxjs";
+import { AuthService } from "src/app/core/authentication.service";
 import { environment } from "../../../../environments/environment";
 import { Artist, ArtistList } from "../../../core/core.model";
-import { AuthService } from "src/app/core/authentication.service";
-import { AlbumDetails } from "../../homepage/homepage.model";
+import { AlbumBasicDetails, AlbumDetails } from "../../homepage/homepage.model";
 
 @Injectable()
 export class ArtistService {
   private API_ROOT = environment.apiBaseUrl;
-  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  private artistsCollection: AngularFirestoreCollection<Artist>;
+
+  private albumsCollection: AngularFirestoreCollection<AlbumDetails>;
+
+  constructor(private http: HttpClient, private authService: AuthService, private firestore: AngularFirestore) {
+    this.artistsCollection = this.firestore.collection<Artist>('artists');
+    this.albumsCollection = this.firestore.collection<AlbumDetails>('albums');
+  }
 
   getArtistsList(): Observable<ArtistList[]> {
     return this.http.get<ArtistList[]>(`${this.API_ROOT}/List/artists`)
@@ -27,34 +36,41 @@ export class ArtistService {
   }
 
   getArtistInformation(artistID: string) {
-    const params = new HttpParams().set('id', artistID);
+    return this.artistsCollection.doc(artistID).valueChanges();
+  }
 
-    return this.http.get<Artist>(`${this.API_ROOT}/Details/artist`, { params })
-      .pipe(
-        map((artist: Artist) => {
-          return {
-            ...artist,
-            image: artist.image || this.generateRandomAvatar(),
-            albums: artist.albums.map(album => {
-              return {
-                ...album,
-                cover: album.cover || this.generateRandomAvatar(),
-              };
-            }),
-          }
-        })
-      );
+  getArtistAlbums(albumIDs: string[]) {
+    return this.albumsCollection.snapshotChanges().pipe(
+      map((albums) => {
+        return albums
+          .map((album) => {
+            const { name, artist, cover, releaseDate } = album.payload.doc.data();
+            const id = album.payload.doc.id;
+            return { id, name, artist, cover, releaseDate } as AlbumBasicDetails;
+          })
+          .filter((album) => albumIDs.includes(album.id));
+      })
+    );
   }
 
   getAlbumDetails(albumID: string) {
-    const params = new HttpParams().set('id', albumID);
+    return this.albumsCollection.doc(albumID).snapshotChanges().pipe(
+      map((album) => {
+        const { name, artist, cover, releaseDate, duration, description, genre, rating, tracks } = album.payload.data() || {};
+        const id = album.payload.id;
 
-    return this.http.get<AlbumDetails>(`${this.API_ROOT}/Details/album`, { params }).pipe(
-      map((album: AlbumDetails) => {
         return {
-          ...album,
-          cover: album.cover || this.generateRandomCover(),
-        }
+          id,
+          name,
+          artist,
+          cover: cover || this.generateRandomCover(),
+          releaseDate,
+          duration,
+          description,
+          genre,
+          rating,
+          tracks,
+        } as AlbumDetails;
       })
     );
   }
